@@ -1,0 +1,772 @@
+<!DOCTYPE html> <html class="v2 hb-loaded" dir=ltr lang=en style><!--
+ Page saved with SingleFile 
+ url: https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html 
+ saved date: Tue Jul 06 2021 17:04:58 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<style>:root{--sf-img-6:url("data:image/png;base64,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");--sf-img-2:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA3klEQVQ4y2P4l8YUCsT/ycT6DBRoBmNMA5IZ/v+LB+IYKI5lgIgRZUACUOH2jv//3j/5/+//fwj+8/P/vyNz/v8rliRgQDJUM0jTv39oGCh2ceP/f0kMeAwAORtkM0gDyJBzqyEYZiCILpXCYwDIvzDF1/YAFUtCMIgNM2BVyf9/hWJEGPD3LyIMQGx0sRgGEgxAN4goA2BeqJCDYHSvYDUAWyCCQh6EkQPz08v//+IYSI3GfwiD58cTSEggBSBb0MMAJAaSS2AgkJRBOA4pKcNwHAOReYGMzKRPgQEGAIvy2M2lOZIeAAAAAElFTkSuQmCC")}body{margin:0}.content-outer,.header-outer,.tabs-outer,.main-outer,.main-inner,.footer-outer,.post,.comments,.widget,.date-header{position:relative;min-height:0}.footer-outer{margin-bottom:-1px}.tabs-inner{padding:0 15px}.main-inner{padding:30px 0}.main-inner .column-left-inner,.main-inner .column-right-inner{padding:0 15px}.footer-inner{padding:30px 15px}.section{margin:0 15px}.widget{margin:30px 0}.section:first-child .widget:first-child{margin-top:0}.section:last-child .widget:last-child{margin-bottom:0}body .navbar{height:30px;padding:0;margin:0}body .navbar .Navbar{position:absolute;z-index:10;left:0;width:100%;margin:0;padding:0;background:0;border:0}.header-inner .section{margin:0}.header-inner .widget{margin-left:30px;margin-right:30px}.header-inner .Header{margin:0}.header-inner .Header #header-inner{overflow:hidden}.header-inner .Header .descriptionwrapper{margin-bottom:25px}.Header .description{margin:.5em 0 10px;padding:0 2px}a img{border:0;position:relative}h2,h3,h4{margin:0;position:relative}.widget{line-height:1.4}.widget ul{padding:0 0 0 1.25em;margin:0;line-height:1.2}.widget li{padding:.25em 0;margin:0;text-indent:0}.widget .post-body ul{padding:0 2.5em;margin:.5em 0;line-height:1.4}.widget .post-body li{margin-bottom:.25em;padding-top:0;padding-bottom:0}.widget-item-control{float:right;height:20px;margin-top:-20px;position:relative;z-index:10}.post-body{width:100%}.post-footer-line>*{margin-right:1em}.post-footer-line>*:last-child{margin-right:0}.post-timestamp{margin-left:-1em}.post-footer-line>*:first-child{margin-left:0}.comment-footer{margin:.5em 25px 1.5em}table.section-columns td.first.columns-cell{border-left:0}html{height:100%}body{min-height:100%;position:relative}.content{position:relative;word-wrap:break-word}.content-outer,.region-inner{min-height:0;margin:0 auto}.columns{zoom:1}.columns-inner{min-height:0}.column-center-outer,.column-left-outer,.column-right-outer{position:relative;float:left}.column-center-outer{width:100%}.fauxcolumns{position:relative}.fauxcolumn-outer{position:absolute;top:0;bottom:0;overflow:hidden}.fauxcolumn-outer .fauxborder-left,.fauxcolumn-outer .fauxborder-right,.fauxcolumn-inner{height:100%}.fauxcolumn-left-outer{left:0}.fauxcolumn-right-outer{right:0}.cap-top,.cap-bottom{position:relative;height:0;background-repeat:repeat-x}.cap-top .cap-left,.cap-top .cap-right,.cap-bottom .cap-left,.cap-bottom .cap-right{height:100%;background-repeat:no-repeat}.cap-top,.cap-top .cap-left{background-position:top left}.cap-bottom,.cap-bottom .cap-left{background-position:bottom left}.cap-top .cap-left,.cap-bottom .cap-left{float:left}.cap-top .cap-right{background-position:top right;float:right}.cap-bottom .cap-right{background-position:bottom right;float:right}.fauxborder-left{background-position:top left;background-repeat:repeat-y;position:relative}.fauxborder-right{background-position:top right;background-repeat:repeat-y;position:absolute;right:0;height:100%}table.section-columns{border:0;table-layout:fixed;width:100%;position:relative}table.columns-2 td.columns-cell{width:50%}table.section-columns td.columns-cell{vertical-align:top}.body-fauxcolumns,.content-fauxcolumns{position:absolute;top:0;left:0;z-index:-1;height:100%;width:100%;overflow:hidden}.body-fauxcolumns .fauxcolumn-outer{width:100%}.content-fauxcolumns .fauxcolumn-outer{position:relative;overflow:visible;height:100%;margin:0 auto}aside,header,footer{display:block}div.clear{clear:both}#navbar-iframe{display:block;height:30px}.profile-name-link{background:no-repeat left top;box-sizing:border-box;display:inline-block;max-width:100%;min-height:20px;padding-left:20px}body{overflow-wrap:break-word;word-break:break-word;word-wrap:break-word}#ArchiveList .toggle{cursor:pointer;font-family:Arial,sans-serif}#ArchiveList .toggle-open{line-height:.6em}#ArchiveList{text-align:left}#ArchiveList a.post-count-link,#ArchiveList a.post-count-link:link,#ArchiveList a.post-count-link:visited{text-decoration:none}#ArchiveList a.toggle,#ArchiveList a.toggle:link,#ArchiveList a.toggle:visited,#ArchiveList a.toggle:hover{color:inherit;text-decoration:none}.BlogArchive #ArchiveList ul li{background:0;list-style:none;list-style-image:none;list-style-position:outside;border-width:0;padding-left:15px;text-indent:-15px;margin:.25em 0;background-image:none}.BlogArchive #ArchiveList ul ul li{padding-left:1.2em}.BlogArchive #ArchiveList ul{margin:0;padding:0;list-style:none;list-style-image:none;border-width:0}.BlogArchive #ArchiveList ul.posts li{padding-left:1.3em}.post-footer abbr{border:0}#blog-pager-newer-link{float:left}#blog-pager-older-link{float:right}#blog-pager{margin:1em 0;text-align:center;overflow:hidden}.comment-form{clear:both}.comments{clear:both;margin-top:10px;margin-bottom:0}.comments .comments-content{margin-bottom:16px}.comments .comment .comment-actions a{padding-right:5px;padding-top:5px}.comments .comment .comment-actions a:hover{text-decoration:underline}.comments .comments-content .comment-thread ol{list-style-type:none;padding:0;text-align:left}.comments .comments-content .comment-thread{margin:8px 0}.comments .comments-content .comment-thread:empty{display:none}.comments .comments-content .comment-replies{margin-left:36px;margin-top:1em}.comments .comments-content .comment{margin-bottom:16px;padding-bottom:8px}.comments .comments-content .comment:first-child{padding-top:16px}.comments .comments-content .comment:last-child{border-bottom:0;padding-bottom:0}.comments .comments-content .user{font-style:normal;font-weight:bold}.comments .comments-content .icon.blog-author{display:inline-block;height:18px;margin:0 0 -4px 6px;width:18px}.comments .comments-content .datetime{margin-left:6px}.comments .comments-content .comment-header,.comments .comments-content .comment-content{margin:0 0 8px}.comments .comments-content .comment-content{text-align:justify}.comments .comment-replybox-single{margin-left:48px;margin-top:5px}.comments .comment-replybox-thread{margin-top:5px}.comments .avatar-image-container{float:left;max-height:36px;overflow:hidden;width:36px}.comments .avatar-image-container img{max-width:36px}.comments .comment-block{margin-left:48px;position:relative}@media screen and (max-device-width:480px){.comments .comments-content .comment-replies{margin-left:0}}.post-share-buttons{margin-top:.5em;vertical-align:middle}.share-button{width:20px;height:20px;background:url(data:image/png;base64,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) no-repeat left!important;overflow:hidden;margin-left:-1px}a:hover.share-button{text-decoration:none;z-index:1}.share-button-link-text{display:block;text-indent:-9999px}.sb-email{background-position:0 0!important}a:hover.sb-email{background-position:0 -20px!important}a:active.sb-email{background-position:0 -40px!important}.sb-blog{background-position:-20px 0!important}a:hover.sb-blog{background-position:-20px -20px!important}a:active.sb-blog{background-position:-20px -40px!important}.sb-twitter{background-position:-40px 0!important}a:hover.sb-twitter{background-position:-40px -20px!important}a:active.sb-twitter{background-position:-40px -40px!important}.sb-facebook{background-position:-60px 0!important}a:hover.sb-facebook{background-position:-60px -20px!important}a:active.sb-facebook{background-position:-60px -40px!important}.sb-pinterest{background-position:-100px 0!important}a:hover.sb-pinterest{background-position:-100px -20px!important}a:active.sb-pinterest{background-position:-100px -40px!important}.goog-inline-block{display:-moz-inline-box}</style>
+<meta content="width=1100" name=viewport>
+<meta content=blogger name=generator>
+<link href=http://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html rel=canonical>
+<link rel=alternate type=application/atom+xml title="bitsquid: development blog - Atom" href=https://bitsquid.blogspot.com/feeds/posts/default>
+<link rel=alternate type=application/rss+xml title="bitsquid: development blog - RSS" href="https://bitsquid.blogspot.com/feeds/posts/default?alt=rss">
+<link rel=service.post type=application/atom+xml title="bitsquid: development blog - Atom" href=https://www.blogger.com/feeds/1994130783874175266/posts/default>
+<link rel=alternate type=application/atom+xml title="bitsquid: development blog - Atom" href=https://bitsquid.blogspot.com/feeds/263747545961142963/comments/default>
+<!--[if IE]><script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/3775400722-ieretrofit.js"></script>
+<![endif]-->
+<link href=http://3.bp.blogspot.com/_D6mTIm8lbTo/SwZnkNRCGwI/AAAAAAAAAA0/sGsng4QfTlg/s640/CodeCogsEqn.gif rel=image_src>
+<meta content=http://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html property=og:url>
+<meta content="The BitSquid low level animation system" property=og:title>
+<meta content="In the BitSquid engine we differ between the low level and the high level animation system. The low level system has a simple task: given an..." property=og:description>
+<meta content=//3.bp.blogspot.com/_D6mTIm8lbTo/SwZnkNRCGwI/AAAAAAAAAA0/sGsng4QfTlg/w1200-h630-p-k-no-nu/CodeCogsEqn.gif property=og:image>
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>bitsquid: development blog: The BitSquid low level animation system</title>
+<style id=template-skin-1><!--body{font:normal normal 12px 'Trebuchet MS',Trebuchet,Verdana,sans-serif;color:#666666;background:#ffffff none repeat scroll top left;padding:0 0 0 0}html body .region-inner{min-width:0;max-width:100%;width:auto}a:link{text-decoration:none;color:#2288bb}a:visited{text-decoration:none;color:#888888}a:hover{text-decoration:underline;color:#33aaff}.body-fauxcolumn-outer .fauxcolumn-inner{background:transparent none repeat scroll top left}.body-fauxcolumn-outer .cap-top{position:absolute;z-index:1;height:400px;width:100%}.body-fauxcolumn-outer .cap-top .cap-left{width:100%;background:transparent none repeat-x scroll top left}.content-outer{-moz-box-shadow:0 0 0 rgba(0,0,0,.15);-webkit-box-shadow:0 0 0 rgba(0,0,0,.15);-goog-ms-box-shadow:0 0 0 #333333;box-shadow:0 0 0 rgba(0,0,0,.15);margin-bottom:1px}.content-inner{padding:10px 40px}.content-inner{background-color:#ffffff}.header-outer{background:transparent none repeat-x scroll 0 -400px}.Header .description{font-size:18px;color:#000000}.header-inner .Header .descriptionwrapper{padding:0 0}.tabs-inner .section:first-child{border-top:0 solid #dddddd}.main-outer{border-top:0 solid transparent}.fauxcolumn-left-outer .fauxcolumn-inner{border-right:1px solid transparent}.fauxcolumn-right-outer .fauxcolumn-inner{border-left:1px solid transparent}div.widget>h2{margin:0 0 1em 0;font:normal bold 11px 'Trebuchet MS',Trebuchet,Verdana,sans-serif;color:#000000}.widget .zippy{color:#999999;text-shadow:2px 2px 1px rgba(0,0,0,.1)}h2.date-header{font:normal bold 11px Arial,Tahoma,Helvetica,FreeSans,sans-serif}.date-header span{background-color:#bbbbbb;color:#ffffff;padding:0.4em;letter-spacing:3px;margin:inherit}.main-inner{padding-top:35px;padding-bottom:65px}.main-inner .column-center-inner{padding:0 0}.main-inner .column-center-inner .section{margin:0 1em}.post{margin:0 0 45px 0}h3.post-title,.comments h4{font:normal normal 22px 'Trebuchet MS',Trebuchet,Verdana,sans-serif;margin:.75em 0 0}.post-body{font-size:110%;line-height:1.4;position:relative}.post-body img{background:#ffffff;border:1px solid #eeeeee;-moz-box-shadow:1px 1px 5px rgba(0,0,0,.1);-webkit-box-shadow:1px 1px 5px rgba(0,0,0,.1);box-shadow:1px 1px 5px rgba(0,0,0,.1)}.post-body img{padding:5px}.post-header{margin:0 0 1.5em;line-height:1.6;font-size:90%}.post-footer{margin:20px -2px 0;padding:5px 10px;color:#666666;background-color:#eeeeee;border-bottom:1px solid #eeeeee;line-height:1.6;font-size:90%}.avatar-image-container{margin:.2em 0 0}#comments .avatar-image-container img{border:1px solid #eeeeee}.comments .comments-content .icon.blog-author{background-repeat:no-repeat;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==)}.section-columns td.columns-cell{border-left:1px solid transparent}.blog-pager{background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAQAAADx2TabAAAAKklEQVQokWNgGAVkAw4GYQZpIOYgpBCkTBqslBG/Qmk4ZCXWRGq5cbgCAMb4Ah7FFfujAAAAAElFTkSuQmCC) repeat-x scroll top center}.blog-pager-older-link,.home-link,.blog-pager-newer-link{background-color:#ffffff;padding:5px}.footer-outer{border-top:1px dashed #bbbbbb}h2{font-size:20px;color:#666}--><!--body{min-width:1120px}.content-outer,.content-fauxcolumn-outer{min-width:1120px;max-width:1120px}.main-inner .columns{padding-left:0;padding-right:330px}.main-inner .fauxcolumn-center-outer{left:0;right:330px}.main-inner .fauxcolumn-left-outer{width:0}.main-inner .fauxcolumn-right-outer{width:330px}.main-inner .column-left-outer{width:0;right:100%;margin-left:-0}.main-inner .column-right-outer{width:330px;margin-right:-330px}--></style>
+<noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=1994130783874175266&amp;zx=0fa2959a-2022-4216-828a-f544eb422a88' rel='stylesheet'/></noscript>
+<style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style><meta content=http://3.bp.blogspot.com/_D6mTIm8lbTo/SwZnkNRCGwI/AAAAAAAAAA0/sGsng4QfTlg/s640/CodeCogsEqn.gif itemprop=image_url class=sf-hidden><meta content=1994130783874175266 itemprop=blogId class=sf-hidden><meta content=263747545961142963 itemprop=postId class=sf-hidden><meta content=https://www.blogger.com/profile/10055379994557504977 itemprop=url class=sf-hidden><meta content=http://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html itemprop=url class=sf-hidden><link href="data:image/x-icon;base64,AAABAAIAICAAAAEACACoCAAAJgAAABAQAAABAAgAaAUAAM4IAAAoAAAAIAAAAEAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAmb+AIKy/gDO4v4AWp7+AL7a/gDu9v4OInr+Dp7G/gAScv4Ajr7+AN7u/gByqv4A/v7+AAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAgwMDAwMDAwMAgcAAAAAAAAAAAAAAAAAAAAAAAAJDAwMDAwMDAwMDAwMDAwJAAAAAAAAAAAAAAAAAAAACQwMDAwMDAwMDAwMDAwMDAwJAAAAAAAAAAAAAAAAAAEMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAABwwMDAwMDAwMDAwMDAwMDAwMDAcAAAAAAAAAAAAAAAACDAwMDAwDAwMDAwMDAwwMDAwMAgAAAAAAAAAAAAAAAAwMDAwMAAAAAAAAAAAAAAwMDAwMAAAAAAAAAAAAAAAADAwMDAwMAwMDAwMDAwMMDAwMDAwAAAAAAAAAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMDAAAAAAAAAAAAAAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAAAAAAAAAAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMCgAAAAAAAAAAAAAAAAwMDAwMDAMDAwMMDAwMDAwFAQEAAAAAAAAAAAAAAAAADAwMDAwAAAAAAAAMDAwMDAEAAAAAAAAAAAAAAAAAAAACDAwMDAwDAwMDDAwMDAwMAQAAAAAAAAAAAAAAAAAAAAcMDAwMDAwMDAwMDAwMDAwIAAAAAAAAAAAAAAAAAAAAAQwMDAwMDAwMDAwMDAwMBwAAAAAAAAAAAAAAAAAAAAAACQwMDAwMDAwMDAwMDAUGAAAAAAAAAAAAAAAAAAAAAAAACQwMDAwMDAwMDAwKAQAAAAAAAAAAAAAAAAAAAAAAAAAAAQcCDAwMDAUECwgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA///AAAADgAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABwAAAAygAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAACZv4CgrL+gu72/s5env5ars7+vjKC/u4Scv4ijr7+nv7+/hJuqv6Ovtr+3gAAAHIAAAD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAcCCAgICAIHAAAAAAAAAAcICAgICAgICAcAAAAAAAACCAgDAwMDCAgCAAAAAAAACAgJAAAAAAkICAAAAAAAAAgICAgICAgICAgAAAAAAAAICAgICAgICAgIAAAAAAAACAgJAAADCAgBBQAAAAAAAAIICAMDAggIBQAAAAAAAAAHCAgICAgICgAAAAAAAAAAAAcCCAgIBAYAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAD//8ADQSCAAcADAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADgAE=" rel=icon type=image/x-icon><style>.sf-hidden{display:none!important}</style></head>
+<body class=variant-simplysimple huaban_collector_injected=true>
+<div class="navbar section" id=navbar name=Navbar><div class="widget Navbar" data-version=1 id=Navbar1>
+<div id=navbar-iframe-container><iframe ng-non-bindable frameborder=0 hspace=0 marginheight=0 marginwidth=0 scrolling=no tabindex=0 vspace=0 width=100% id=navbar-iframe name=navbar-iframe sandbox="allow-popups allow-top-navigation allow-top-navigation-by-user-activation" srcdoc='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html dir=ltr><meta charset=utf-8><style>:root{--sf-img-0:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAUCAMAAADFhv/OAAABiVBMVEUAAAD/q3L/q3L/q3L/q3L/q3JmZmZoaGhubm5wcHBycnJ0dHR4eHh6enqCgoKEhISGhoaIiIiKioqOjo6QkJCSkpKYmJiampqenp6lpaWmpqapqamqqqqrq6usrKytra2urq6vr6+zs7O0tLS1tbW2tra3t7e5ubm6urq7u7u+vr6/v7/BwcHDw8PHx8fJycnLy8vQ0NDR0dHT09PU1NTV1dXW1tbY2Njb29vc3Nzd3d3f39/g4ODh4eHi4uLj4+Pl5eXm5ubn5+fp6ent7e3u7u7v7+/x8fHz8/P19fX29vb39/f5+fn6+vr7+/v8/Pz9/f3/q3L/rnf/sHr/sXv/tIH/tYP/toT/toX/uIf/vI//wpn/w5r/xJv/xJ3/xZ3/xZ7/xp//x6D/yaT/0rT/07X/1bn/2L3/2b//2cD/28L/3cb/38r/5NH/5NL/5tX/6Nj/7+T/8OX/8ej/9Oz/9O3/9e7/9vD/9vH/9/L/+PT/+vb/+/j/+/n//Pv//fv//fz//v3///9gKGHcAAAABnRSTlMADHh53+GPUDoCAAABq0lEQVQYGXXBCVcSYRQG4Jftw4Bqsig/GpBq0qZstE0JRW0ZSgbFW9m+b7ZamZCWmt1f3p3J5hwPzvMAs2NWsVQeduHjESOTzfV7ELFEinZIJWKYO1cwrYFj2q4DYDu9x+jdq/JNAHHqEsdY4URtDq6jT3vASHp/leGZ6jADSeqShHW0BtE4pa8ARk8Vgg+pqwDtAkWrBd+ongAyBsPnqApAvoVP3zfWV94/pH9QGkDgsp4Esr0IXFDjAImFXxzYekABlMsuRMvRk0Au50GwqcYBEh+ZN9rtTeYlCmBYOzNAq1o8fgPoVyYDfCmzbx4gscx8n+gF808KwLW1PVpxSoXBOuDlVd45b2bTB5sAiTXmL4uLX5n5zWsSQP2MFkWt7RmgeUSJjFJ5BolVDv0hAcCbnqhNXRvS2roJ8HSlWrvep5TBJH5waJME/msO6ZMNbOM+dYBJdJif3xWPfvM6CYQaF12E+KwHEt+Y3z57+uTxqy1eJYFoJN5xaIkEopG4vcLb1u6RQDTy3fmw3Ol02p9f3iIfotEuEC1JXZKIFqcucUSLJVK0QyoR+wtEprA0cDOepAAAAABJRU5ErkJggg==");--sf-img-1:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAECAYAAABsgwTvAAAAPElEQVR42nXMsQ0AIAwDQe/kWbL/BqwQSIFALznSF3FxqlqdOidmu1ODJRAQQDT7xUSIGCNETA8ilsH/3xfYtbHJD+xUAAAAAElFTkSuQmCC")}body{padding:0;margin:0}#b-navbar{white-space:nowrap;color:#444;height:29px;border-bottom:1px solid #888;background:transparent;font-size:13px;font-family:Arial,Sans-serif;position:relative}#b-navbar #b-navbar-bg{position:absolute;left:0;top:0;width:100%;height:30px;background-color:#fff;opacity:0.4}#b-navbar .navbar-right{text-align:right;padding-right:5px}#b-navbar-controls{margin-left:.2em;height:29px}#b-navbar #b-navbar-logo{display:block;margin-right:8px;margin-left:8px;width:20px;height:20px;background:var(--sf-img-0) no-repeat -26px 0;cursor:pointer}#b-navbar #b-query-box{background-color:#fff;margin:0 .5em 0 0;border:1px solid #aaa;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;padding:0 .3em}#b-navbar #b-query-icon{display:block;width:13px;height:13px;cursor:pointer;background:var(--sf-img-0) no-repeat 0 0}#b-navbar #b-query-icon:hover{background:var(--sf-img-0) no-repeat -13px 0}#b-navbar #b-query{font-size:13px;color:#000;background-color:transparent;border:none;margin:0}#b-navbar .b-link{display:inline-block;font-size:13px;vertical-align:middle;padding:2px .4em}#b-navbar .b-link{color:#333;text-decoration:none;white-space:nowrap;cursor:pointer}#b-navbar .b-link:hover{color:#55e;text-decoration:underline}#b-navbar #b-more span.arrow{background:var(--sf-img-1) no-repeat -12px center;display:inline-block;width:7px;height:10px}#b-navbar #b-more:hover span.arrow{background:var(--sf-img-1) no-repeat 0 center}.sf-hidden{display:none!important}</style></head>
+<body class="lang_zh rb" marginwidth=0 marginheight=0>
+<div id=b-navbar><div id=b-navbar-bg style=z-index:-1></div>
+<div id=b-navbar-fg>
+<table id=b-navbar-controls cellpadding=0 cellspacing=0 border=0 width=100%><tbody><tr style=height:20px><td valign=middle width=24px><a href=https://www.blogger.com/ id=b-navbar-logo tabindex=1 title="转到 Blogger.com"></a>
+<div id=b-sms class="b-mobile sf-hidden"></div></td>
+<td valign=middle width=150px><form id=searchthis action=https://bitsquid.blogspot.com/search style=display:inline><div id=b-query-box><table cellpadding=0 cellspacing=0><tbody><tr><td valign=middle><input type=text id=b-query name=q tabindex=3 style=width:120px title=搜索 value></td>
+<td valign=middle style=width:15px><a id=b-query-icon title=搜索此博客></a></table></div>
+</form></td>
+<td valign=middle nowrap class=gplus>
+<a id=b-more class=b-link tabindex=4>更多
+<span class=arrow></span></a></td>
+<td class=navbar-right align=right nowrap valign=middle>
+<a class=b-link href=https://www.blogger.com/home#create id=b-getorpost tabindex=8>创建博客</a>
+<a class=b-link href=https://www.blogger.com/ tabindex=9>登录</a></table></div></div>
+'></iframe></div>
+</div></div>
+<div class=body-fauxcolumns>
+<div class="fauxcolumn-outer body-fauxcolumn-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</div>
+<div class=content>
+<div class=content-fauxcolumns>
+<div class="fauxcolumn-outer content-fauxcolumn-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</div>
+<div class=content-outer>
+<div class="content-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left content-fauxborder-left">
+<div class="fauxborder-right content-fauxborder-right"></div>
+<div class=content-inner>
+<header>
+<div class=header-outer>
+<div class="header-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left header-fauxborder-left">
+<div class="fauxborder-right header-fauxborder-right"></div>
+<div class="region-inner header-inner">
+<div class="header section" id=header name=Header><div class="widget Header" data-version=1 id=Header1>
+<div id=header-inner>
+<a href=https://bitsquid.blogspot.com/ style=display:block>
+<img alt="bitsquid: development blog" height="66px; " id=Header1_headerimg src=data:image/png;base64,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 style=display:block width="503px; ">
+</a>
+<div class=descriptionwrapper>
+<p class=description><span>
+</span></p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="header-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</header>
+<div class=tabs-outer>
+<div class="tabs-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left tabs-fauxborder-left">
+<div class="fauxborder-right tabs-fauxborder-right"></div>
+<div class="region-inner tabs-inner">
+<div class="tabs no-items section" id=crosscol name=Cross-Column></div>
+<div class="tabs no-items section" id=crosscol-overflow name="Cross-Column 2"></div>
+</div>
+</div>
+<div class="tabs-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<div class=main-outer>
+<div class="main-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left main-fauxborder-left">
+<div class="fauxborder-right main-fauxborder-right"></div>
+<div class="region-inner main-inner">
+<div class="columns fauxcolumns">
+<div class="fauxcolumn-outer fauxcolumn-center-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-left-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-right-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<div class=columns-inner>
+<div class=column-center-outer>
+<div class=column-center-inner>
+<div class="main section" id=main name=Main><div class="widget Blog" data-version=1 id=Blog1>
+<div class="blog-posts hfeed">
+ <div class=date-outer>
+ 
+<h2 class=date-header><span>Friday, November 20, 2009</span></h2>
+ <div class=date-posts>
+ 
+<div class=post-outer>
+<div class="post hentry uncustomized-post-template" itemprop=blogPost itemscope itemtype=http://schema.org/BlogPosting>
+<a name=263747545961142963></a>
+<h3 class="post-title entry-title" itemprop=name>
+The BitSquid low level animation system
+</h3>
+<div class=post-header>
+<div class=post-header-line-1></div>
+</div>
+<div class="post-body entry-content" id=post-body-263747545961142963 itemprop="description articleBody">
+In the BitSquid engine we differ between the low level and the high level animation system. The low level system has a simple task: given animation data, find the bone poses at a time <i>t</i>. The high level system is responsible for blending animations, state machines, IK, etc.<br>
+<br>
+Evaluation of animation data is a memory intensive task, so to maximize performance means:<br>
+<ul><li>Touch as little memory as possible (i.e., compress the animations as much as possible)</li>
+<li>Touch memory in a cache friendly way (i.e., linearly)</li>
+</ul><div>In the BitSquid engine we do animation compression by curve fitting and data quantization.<br>
+<br>
+There are a lot of different possible ways to do curve fitting. Since we are curve fitting for compression it doesn't really matter what method we use as long as (a) we can keep the error below a specified threshold, (b) the curve representation is small (good compression rate), (c) the curve is reasonably smooth and (d) it does not take too long to evaluate.<br>
+<br>
+In the BitSquid engine we currently use a hermite spline with implicitly computed derivatives. I.e., we represent the curve with time and data points: (t_1, D_1), (t_2, D_2), ..., (t_n, D_n) and evaluate the curve at the time T in the interval t_i ... t_i+1, with t = (T - t_i) / (t_i+1 - t_i) by<br>
+<br>
+<div class=separator style=clear:both;text-align:center><a href=https://3.bp.blogspot.com/_D6mTIm8lbTo/SwZnkNRCGwI/AAAAAAAAAA0/sGsng4QfTlg/s1600/CodeCogsEqn.gif imageanchor=1 style=margin-left:1em;margin-right:1em><img border=0 src="data:image/gif;base64,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"></a><br>
+</div><br>
+<br>
+This formulation gives pretty good compression rates, but I haven't investigate all the possible alternatives (there are a lot!). It is possible that you could achieve better rates with some other curve. An advantage of this formulation is that it only uses the original data points of the curve and scaling constants in the range 0-1, which makes it easy to understand &nbsp;the effects of quantization.<br>
+<br>
+To do the curve fitting we just check the error in all curve intervals, find the interval D_i D_i+1 with the largest error and split it in half by introducing a new data point at (t_i + t_i+1)/2. We repeat this until the error in all intervals is below a specified threshold value. Again, it is possible that more careful selection of split points could give slightly better compression rates, but we haven't bothered. Note also that we can support curve&nbsp;discontinuities&nbsp;by just inserting two different data points for the same time point.<br>
+<br>
+Animation compression can be done either in local space or in global space. The advantage of keeping the animations in global space is that there is no error propagation through the bone hierarchy, which means that you can use larger error thresholds when compressing the animations. On the other hand, the movement of a bone in global space is typically more complicated. (For a closed fist on a moving arm, the fingers will have no movement in local space, but a lot of movement in global space.) Since a more complicated movement is harder to compress, it might be that the global representation is more expensive, even though you can use a higher threshold. (I haven't actually tried this and compared - so much to do, so little time.)<br>
+<br>
+Also, if you are going to do any animation blending you will probably want to translate back to local space anyhow (unless you blend in global space). For this reason, the BitSquid engine does the compression in local space.<br>
+<br>
+For Vector3 quantization we use 16 bits per component and the range -10 m to 10 m which gives a resolution of 0.3 mm.<br>
+<br>
+For quaternions we use 2 bits to store the index of the largest component, then 10 bits each to store the value of the remaining three components. We use the knowledge that 1 = x^2 + y^2 + z^2 + w^2 to restore the largest component, so we don't actually have to store its value. Since we don't store the largest component we know that the remaining ones must be in the range (-1/sqrt(2), 1/sqrt(2)) (otherwise, one of them would be largest). So we use the 10 bits to quantize a value in that range, giving us a precision of 0.0014.<br>
+<br>
+So, to summarize, that gives us 48 bits per Vector3 curve point and 32 bits per quaternion curve point, plus 16 bits for the time stamp. Now the only thing remaining is to package all these curve points for all the bones in a cache friendly way. This will be the topic of another blog post, since this one is already long enough.<br>
+</div>
+<div style=clear:both></div>
+</div>
+<div class=post-footer>
+<div class="post-footer-line post-footer-line-1">
+<span class="post-author vcard">
+Upplagd av
+<span class=fn itemprop=author itemscope itemtype=http://schema.org/Person>
+<a class=g-profile href=https://www.blogger.com/profile/10055379994557504977 rel=author title="author profile" data-gapiscan=true data-onload=true data-gapiattached=true>
+<span itemprop=name>Niklas</span>
+</a>
+</span>
+</span>
+<span class=post-timestamp>
+kl.
+<a class=timestamp-link href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html rel=bookmark title="permanent link"><abbr class=published itemprop=datePublished title=2009-11-20T10:54:00+01:00>10:54 AM</abbr></a>
+</span>
+<span class=post-comment-link>
+</span>
+<span class=post-icons>
+<span class="item-control blog-admin pid-753325578 sf-hidden">
+</span>
+</span>
+<div class="post-share-buttons goog-inline-block">
+<a class="goog-inline-block share-button sb-email" href="https://www.blogger.com/share-post.g?blogID=1994130783874175266&amp;postID=263747545961142963&amp;target=email" target=_blank title="Email This"><span class=share-button-link-text>Email This</span></a><a class="goog-inline-block share-button sb-blog" href="https://www.blogger.com/share-post.g?blogID=1994130783874175266&amp;postID=263747545961142963&amp;target=blog" target=_blank title=BlogThis!><span class=share-button-link-text>BlogThis!</span></a><a class="goog-inline-block share-button sb-twitter" href="https://www.blogger.com/share-post.g?blogID=1994130783874175266&amp;postID=263747545961142963&amp;target=twitter" target=_blank title="Share to Twitter"><span class=share-button-link-text>Share to Twitter</span></a><a class="goog-inline-block share-button sb-facebook" href="https://www.blogger.com/share-post.g?blogID=1994130783874175266&amp;postID=263747545961142963&amp;target=facebook" target=_blank title="Share to Facebook"><span class=share-button-link-text>Share to Facebook</span></a><a class="goog-inline-block share-button sb-pinterest" href="https://www.blogger.com/share-post.g?blogID=1994130783874175266&amp;postID=263747545961142963&amp;target=pinterest" target=_blank title="Share to Pinterest"><span class=share-button-link-text>Share to Pinterest</span></a>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class=post-labels>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+<span class=post-location>
+</span>
+</div>
+</div>
+</div>
+<div class=comments id=comments>
+<a name=comments></a>
+<h4>14 comments:</h4>
+<div class=comments-content>
+<div id=comment-holder>
+<div class="comment-thread toplevel-thread"><ol id=top-ra><li class=comment id=c5396193269550047384><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/01840907377771032465 rel=nofollow>Guillaume</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1319713829078#c5396193269550047384">October 27, 2011 at 1:10 PM</a></span></div><p class=comment-content>While compressing quaternions, you don't store the sign of the largest component. How do you cope with that?</p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=5396193269550047384 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-1598646517 sf-hidden"></span></span></div><div class=comment-replies><div id=c5396193269550047384-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c5396193269550047384-ce></div><li class=comment id=c7897775828869954698><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/10055379994557504977 rel=nofollow>Niklas</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1319978883810#c7897775828869954698">October 30, 2011 at 1:48 PM</a></span></div><p class=comment-content>The quaternions (x, y, z, w) and (-x, -y, -z, -w) represent the same rotation, so I flip the signs so that the largest component is always positive.</p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=7897775828869954698 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-753325578 sf-hidden"></span></span></div><div class=comment-replies><div id=c7897775828869954698-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c7897775828869954698-ce></div><li class=comment id=c3675046738433134622><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/18382209069620378049 rel=nofollow>Unknown</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1426437132922#c3675046738433134622">March 15, 2015 at 5:32 PM</a></span></div><p class=comment-content>I might be thinking about this the wrong way, but is storing the index of the largest component really useful? To me it seems like you use 2 bits to gain log2(sqrt(2)^3) = 1.5 bits of precision?</p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=3675046738433134622 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-670643360 sf-hidden"></span></span></div><div class=comment-replies><div id=c3675046738433134622-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c3675046738433134622-ce></div><li class=comment id=c1175378578423744404><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/10055379994557504977 rel=nofollow>Niklas</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1426506031100#c1175378578423744404">March 16, 2015 at 12:40 PM</a></span></div><p class=comment-content>Yes you could use arithmetic encoding to store x, y and z using 10.67 bits per component for the range -1, 1 and this would give you slightly better precision for these values.<br><br>The problem comes when you want to reconstruct w using sqrt(1-x^2-y^2-z^2) because that function is numerically unstable for small w.<br><br>Have a look at this graph:<br><br>https://www.desmos.com/calculator/nfdbj0law4<br><br>Below w=0.5 the error starts to become bigger than the error (0.001) in the input values and as we get closer to zero the error becomes a lot bigger (0.03). </p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=1175378578423744404 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-753325578 sf-hidden"></span></span></div><div class=comment-replies><div id=c1175378578423744404-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c1175378578423744404-ce></div><li class=comment id=c1981746696890079131><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/18382209069620378049 rel=nofollow>Unknown</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1426508592879#c1981746696890079131">March 16, 2015 at 1:23 PM</a></span></div><p class=comment-content>Good point!</p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=1981746696890079131 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-670643360 sf-hidden"></span></span></div><div class=comment-replies><div id=c1981746696890079131-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c1981746696890079131-ce></div><li class=comment id=c226292677657622848><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/06219397818640775639 rel=nofollow>maan</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1586682461169#c226292677657622848">April 12, 2020 at 11:07 AM</a></span></div><p class=comment-content>From: <a href=https://apkzm.com/appvn-apk-download rel=nofollow>Appvn Apk Download</a><br><a href=https://apkzm.com/aptoide-apk-download rel=nofollow>Aptoide Apk Download</a><br>Thank you for sharing valuable information. Thanks for providing a great informatic blog</p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=226292677657622848 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-1777369690 sf-hidden"></span></span></div><div class=comment-replies><div id=c226292677657622848-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c226292677657622848-ce></div><li class=comment id=c1964657299203924910><div class=avatar-image-container><img src="data:image/png;base64,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" alt></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/07984341973136760274 rel=nofollow>kopi</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1598959300488#c1964657299203924910">September 1, 2020 at 1:21 PM</a></span></div><p class=comment-content>WOW! I Love it...<br>and i thing thats good for you &gt;&gt; <br> <br><br><a href="https://hawto4you.hatenablog.com/entry/2020/09/01/195914?_ga=2.141480113.2038199193.1598957956-36790579.1598957956" rel=nofollow>GOOD HEALTH</a> Thank you!</p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=1964657299203924910 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-657886297 sf-hidden"></span></span></div><div class=comment-replies><div id=c1964657299203924910-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c1964657299203924910-ce></div><li class=comment id=c3435187618915047329><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/04169657015356889907 rel=nofollow>chanee</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1604482056632#c3435187618915047329">November 4, 2020 at 10:27 AM</a></span></div><p class=comment-content>Welcome to My Blog<br><a href=https://maneenuy13.wixsite.com/modx/post/%E0%B8%81%E0%B8%A5-%E0%B8%9A%E0%B8%A1%E0%B8%B2%E0%B8%AD-%E0%B8%81%E0%B8%84%E0%B8%A3-%E0%B8%87-%E0%B8%81-%E0%B8%9A%E0%B8%9E-%E0%B8%92%E0%B8%99%E0%B8%B2%E0%B8%AD-%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93-%E0%B9%84%E0%B8%A3-%E0%B8%AA%E0%B8%B2%E0%B8%A2-%E0%B8%84%E0%B8%B2%E0%B8%94%E0%B8%9C%E0%B8%A5%E0%B8%9B-2021 rel=nofollow>กลับมาอีกครั้ง กับพัฒนาอุปกรณ์ไร้สาย คาดผลปี 2021</a></p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=3435187618915047329 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-1929380946 sf-hidden"></span></span></div><div class=comment-replies><div id=c3435187618915047329-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c3435187618915047329-ce></div><li class=comment id=c4647060525107453293><div class=avatar-image-container><img src=data:image/jpeg;base64,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 alt></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/07048743272464383784 rel=nofollow>มโน เอาเอง</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1604581649253#c4647060525107453293">November 5, 2020 at 2:07 PM</a></span></div><p class=comment-content>"Old movie in memory&gt;&gt; <a href=https://movieinmoment.blogspot.com/ rel=nofollow>KOPI Review! </a>"<br>"Do not miss lucky numbers.&gt;&gt; <a href=https://reviewer2424.blogspot.com/ rel=nofollow> huayfree</a>"</p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=4647060525107453293 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-302872344 sf-hidden"></span></span></div><div class=comment-replies><div id=c4647060525107453293-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c4647060525107453293-ce></div><li class=comment id=c7469883359437062211><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/08844773385471463764 rel=nofollow>edok69</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1609921310521#c7469883359437062211">January 6, 2021 at 9:21 AM</a></span></div><p class=comment-content>Suggest good information in this message, click here.<br><a href=http://trichemscotland.com/ rel=nofollow> บาคาร่า คาสิโนออนไลน์ </a><br><a href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html rel=nofollow> พนันบอลออนไลน์ UFABET </a></p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=7469883359437062211 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-756270234 sf-hidden"></span></span></div><div class=comment-replies><div id=c7469883359437062211-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c7469883359437062211-ce></div><li class=comment id=c8258099113470144894><div class=avatar-image-container><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QAqRXhpZgAASUkqAAgAAAABADEBAgAHAAAAGgAAAAAAAABHb29nbGUAAP/bAIQAAwICAwICAwMDAwQDAwQFCAUFBAQFCgcHBggMCgwMCwoLCw0OEhANDhEOCwsQFhARExQVFRUMDxcYFhQYEhQbFAEDBAQGBAUKBQYKEA0MDhQUFBIVFRAOEg0VEQ4PEA8SEBMQDQ0NEhIRDxURDQ8PDxENDg8NDQ0NDRUODQ4NEA0P/8AAEQgAIwAjAwERAAIRAQMRAf/EABkAAQADAQEAAAAAAAAAAAAAAAgGBwkFAP/EAC0QAAEDAgUDAgYDAQAAAAAAAAECAwQFEQAGBxIhCBMxQVEVM0JhcYEiMrEW/8QAGwEAAgMAAwAAAAAAAAAAAAAABAUCAwYABwj/xAAxEQABAwICBwQLAAAAAAAAAAABAAIDBBESISIxQVFxkcEUMoGxBQYTI1JhkrLR8PH/2gAMAwEAAhEDEQA/AAKilOR6s0040ptwEoUlQsQcUXBzCYBpDrFXRovoy5qHWew6hSaeCe86i3gC5SL+48q8AecJa+s7M2w7x/bpxTU/tdepSLUfUSHp/mKNS8szIEmFEHYXDgsuJY8f17nd2uG5F1FB8cjC2mpZJ2F8gOe0kX8uqlPO2JwawjgP70Vd58q0F51ufGprUB5dzIis7UC1/wCK0oSAEkjyAAm442jDmljkALXG6BklGRsuOYAWdwAUDyCPXBSnhTkR0IQ8xa1RP+wqTlFp77iVmNG2oUsC/AWbjnxwMRga5hEbghqiobJ71i913aT5Q0Sy7lTJ2QJqqQcwPuJqkISi665HQm4uoncAtZAIPCgmw4BvyppY2u7XbSGrdxz3dd65BUySN7OdR58EZqL03VOfSJE/LrTT0iMCVR3AdyuPp++A2TmU6aLdTCMaKpypMvR2aozKQTJWoKcJ4N77SPHoT+rYdYQGWCTk3fmpkYgTwOAPbAad2Wh/WezV9RmqdXGO5TmKc3Ztpl1Qvzc7iLXP+YIqmOMZwGyWUbmNkAIQPmw3M7V6EibUTAX8QShb7zny0HaCok38AXwuZiiprHMplOBNUDOwSdyNpQ7lXWma5R8xtfCgUuOqbRdYQU3CEq3WUDcXJB8EWHoKJ2tGC3jsRDY3OOLKx5879EbOsam0ela5VZNM3R1zmGnDGaaslLn1O38XNhdPr+zhjSyksI2IGrgDZAR47lxmYy0sNhZusJFzf1tiauutX8/ZXRXclvxCLrU3t/NxhiDjFis+27Ti3LKvXXLcvIuYm25UVS2krJdbUSlLyR6X9yL/AIxQ+K2jvRbZjk7ckH0/59Yz/lyc/lijSIcijtIjvioPd51ZCbp2C5sDYgG/NiLcYz88JjNibrSxzGW73Cx25AeSi+sWW6bmLWCjQZALJVRBUHHh8xby3Aq1/IITc/a+ItOFhsuwPU8tmrJIZBfRuOLXWy+pVBU84Gn1GTGS7TX0tOKSHCE3UAeL8ecUYH/Eea7RfF6NY4tdBDf5tZf7VsRDZQ/SWStO4lPk41gXj491FrrFydRZOkWZpTtPaXIYZU606b7kLHqDfDAjQPBCtPvQEWuiqpyWNZnIbbnbjTqQ6qS0lIAdLb1myfukE2/J9zjOVYAYFvhI6YSSPNziA8MJ/A5KV9US1Rdc4SmT2lfDdt08cdtzCwbVqvVJxHpWO20O8r9Ah5LUTJdJJJ3H1xcda1tU4+2dxX//2Q==" alt></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/03658474518044336751 rel=nofollow>Payal Singh</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1622909187247#c8258099113470144894">June 5, 2021 at 6:06 PM</a></span></div><p class=comment-content>Escort in Dehradun Order a girl with Dehradun Escorts strength is a fun way to spend the twilight. You realize slim escorts, busty escorts, bhabhi escorts, luxury escorts, and better.<br><br><a href=http://dehradunescort.com/ rel=nofollow><strong>Dehradun Escorts</strong></a> | <a href=https://www.missdelhiescort.com/dehradun-escorts.htm rel=nofollow><strong>Escorts in Dehradun</strong></a> | <a href=https://www.sarakaur.com/dehradun-escorts.php rel=nofollow><strong>Call girls in Dehradun</strong></a><br></p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=8258099113470144894 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-620732921 sf-hidden"></span></span></div><div class=comment-replies><div id=c8258099113470144894-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c8258099113470144894-ce></div><li class=comment id=c6347323061446137037><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/17292688837298194795 rel=nofollow>Sonam Sharma</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1623327497021#c6347323061446137037">June 10, 2021 at 2:18 PM</a></span></div><p class=comment-content>Ready To Satisfy You And Your Desire Dream With Delhi Escorts<br>Delhi Escorts Agency service has always offered so much fun as well as entertainment and it is the real Delhi Call Girls reason why several thousands of persons from around the world would consider visiting. It would be rightly available there and it is the best thing to see as well as enjoy.<br><a href=http://poojaescorts.in/ rel=nofollow>Delhi Escorts</a><br><a href=http://poojaescorts.in/ rel=nofollow>Delhi Call Girl</a></p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=6347323061446137037 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-1525554760 sf-hidden"></span></span></div><div class=comment-replies><div id=c6347323061446137037-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c6347323061446137037-ce></div><li class=comment id=c3837567077666301614><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/13328975220076167046 rel=nofollow>admin</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1623726814602#c3837567077666301614">June 15, 2021 at 5:13 AM</a></span></div><p class=comment-content><a href="http://www.linkagogo.com/go/To?url=108970819" rel=nofollow>google 1811</a><br><a href="https://king-bookmark.stream/story.php?title=desire-to-play-football-sound-advice-to-help-you-began#discuss" rel=nofollow>google 1812</a><br><a href="https://justbookmark.win/story.php?title=perform-soccer-just-like-a-expert-strategies-to-up-your-online-game#discuss" rel=nofollow>google 1813</a><br><a href="https://weheardit.stream/story.php?title=perform-soccer-such-as-a-expert-techniques-to-the-activity#discuss" rel=nofollow>google 1814</a><br><a href="https://easybookmark.win/story.php?title=wish-to-perform-baseball-great-tips-to-get-you-started-off#discuss" rel=nofollow>google 1815</a><br><a href=http://nutshellurl.com/mcdonaldmcleod4188 rel=nofollow>google 1816</a><br><a href="http://marash.xyz/story.php?title=perform-football-similar-to-a-professional-strategies-to-your-game#discuss" rel=nofollow>google 1817</a><br><a href="https://bookmarkzones.trade/story.php?title=engage-in-soccer-just-like-a-professional-solutions-to-your-game#discuss" rel=nofollow>google 1818</a></p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=3837567077666301614 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-1317687855 sf-hidden"></span></span></div><div class=comment-replies><div id=c3837567077666301614-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c3837567077666301614-ce></div><li class=comment id=c2645735779897686735><div class=avatar-image-container><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' alt style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-6)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></div><div class=comment-block><div class=comment-header><cite class=user><a href=https://www.blogger.com/profile/08395753899971091151 rel=nofollow>Divya Goal</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel=nofollow href="https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html?showComment=1623752330830#c2645735779897686735">June 15, 2021 at 12:18 PM</a></span></div><p class=comment-content>Thanks For Sharing such a nice blog<br><br><a href=https://nikithabangaloreescorts.com/ rel=nofollow>Independent Bangalore Escorts </a><br><a href=https://www.deepikarai.com/bangalore-escorts.php rel=nofollow>Bangalore Escorts Services </a><br><a href=https://www.divyagoal.com/escorts-services-in-delhi.html rel=nofollow>delhi escorts </a><br><a href=https://www.divyagoal.com/escorts-services-in-ahmedabad.html rel=nofollow>ahmedabad escorts </a><br><a href=https://www.divyagoal.com/gujarat/morbi-escorts-services.html rel=nofollow>morbi escorts </a><br><a href=https://www.divyagoal.com/uttrakhand/rudrapur-escorts-services.html rel=nofollow>escort service in rudrapur </a><br></p><span class="comment-actions secondary-text"><a class=comment-reply target=_self data-comment-id=2645735779897686735 href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>Reply</a><span class="item-control blog-admin pid-1140670414 sf-hidden"></span></span></div><div class=comment-replies><div id=c2645735779897686735-rt class="comment-thread inline-thread hidden sf-hidden"></div></div><div class=comment-replybox-single id=c2645735779897686735-ce></div></ol><div id=top-continue class="continue hidden sf-hidden"></div><div class=comment-replybox-thread id=top-ce><iframe allowtransparency=true class="blogger-iframe-colorize blogger-comment-from-post" frameborder=0 height=194px id=comment-editor name=comment-editor width=100% style=display:block data-resized=true sandbox="allow-popups allow-top-navigation allow-top-navigation-by-user-activation" srcdoc="<!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;> <html dir=ltr><meta charset=utf-8><title>Blogger: bitsquid: development blog - Post a Comment</title>
+<style>body{margin:0}@media (max-width:350px){div#commentsHolder{padding:8px 12px 4px 12px}div.dropdown{display:block;margin:0}div.dropdown select#identityMenu{width:100%}span#signoutLink{margin-bottom:7px}}body,div,input,span{font-family:arial,sans-serif;font-size:13px}input[type=&quot;button&quot;]{background-color:#f5f5f5;border:1px solid rgba(0,0,0,.1);border-radius:2px;font-size:11px;font-weight:bold;height:27px;padding-bottom:0;text-align:center;text-shadow:0 1px rgba(0,0,0,.1);vertical-align:top;width:75px;-moz-border-radius:2px;-webkit-appearance:none}input[type=&quot;button&quot;]:active,input[type=&quot;button&quot;]:focus:active{border:1px solid #4d90fe;box-shadow:inset 0 1px 2px rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}label{font-weight:bold}.postCommentButtonHolder{background-color:#f5f5f5;padding:10px 10px 4px 10px;clear:both}#postCommentSubmit{background-color:#4d90f0;border:1px solid #3079ed;color:#fff;font-weight:bold;margin:0 8px 6px 0}#postCommentPreview{color:#444;margin:0 8px 6px 0}#postCommentSubmit:hover{background-color:#357ae8;background-image:-webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));background-image:-webkit-linear-gradient(top,#4d90fe,#357ae8);background-image:-moz-linear-gradient(top,#4d90fe,#357ae8);background-image:-ms-linear-gradient(top,#4d90fe,#357ae8);background-image:-o-linear-gradient(top,#4d90fe,#357ae8);background-image:linear-gradient(top,#4d90fe,#357ae8);border-color:#2f5bb7;filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#4d90fe',EndColorStr='#357ae8')}#postCommentPreview:hover,.signoutButton:hover{background-color:#f8f8f8;background-image:-webkit-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f1f1f1));background-image:-webkit-linear-gradient(top,#f8f8f8,#f1f1f1);background-image:-moz-linear-gradient(top,#f8f8f8,#f1f1f1);background-image:-ms-linear-gradient(top,#f8f8f8,#f1f1f1);background-image:-o-linear-gradient(top,#f8f8f8,#f1f1f1);background-image:linear-gradient(top,#f8f8f8,#f1f1f1);border:1px solid #c6c6c6;box-shadow:0 1px 1px rgba(0,0,0,.1);color:#222;filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#f8f8f8',EndColorStr='#f1f1f1');transition:all;-webkit-transition:all;-moz-transition:all;-o-transition:all;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.1);-moz-box-shadow:0 1px 1px rgba(0,0,0,.1)}#id-error,#empty-error{margin-left:10px;color:#f30}#commentBodyField{background-color:#fff;border:1px solid #e5e5e5;box-sizing:border-box;color:#222;display:inline-block;font-size:13px;padding:5px 2px 2px 5px;vertical-align:top;width:100%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-webkit-border-radius:1px;-webkit-appearance:none}#commentBodyField:focus{border:1px solid #4d90f0!important;outline:0;-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.2);-ms-box-shadow:inset 0 1px 2px rgba(0,0,0,.2);-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.2)}#editButton,#settingsButton{margin-left:5px}#anonymousWarning{background:#f9edbe;color:#333;padding:6px}#allHolder{background-color:#fff;border:1px solid #e5e5e5;border-bottom:1px solid #eee}#subscribeButtonHolder{color:#444;float:right;padding-right:6px}#commentSelectorLabel{color:#666}#signoutLink{float:right;margin-top:7px;vertical-align:middle}#identityControlsHolder{padding-top:8px}#identityControlsHolder .genericAvatar{background-image:url(data:image/png;base64,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)}#identityControlsHolder.enableAvatar .genericAvatar{display:block;float:left;height:36px;margin-right:8px;width:36px}#commentsHolder{padding:18px 22px 10px 22px}.dropdown{background-color:#f5f5f5;border:1px solid rgba(0,0,0,.1);border-radius:2px 2px 2px 2px;display:inline-block;height:30px;margin:4px;outline:medium none;overflow:hidden;vertical-align:middle}#identityMenu{background:none repeat scroll 0 0 transparent;border:medium none;border-radius:2px;font-size:13px;height:30px;margin:0;outline:medium none;padding:6px;width:120px}.dropdown:hover{border-color:#b8b8b8;box-shadow:0 1px 1px rgba(0,0,0,.1)}body{color:rgb(102,102,102);font-family:&quot;Trebuchet MS&quot;,Trebuchet,Verdana,sans-serif}.sf-hidden{display:none!important}</style></head>
+<body class=&quot;lang_en rb&quot;>
+<div id=allHolder class=compact><div id=main-error-holder class=sf-hidden></div>
+<div id=main-status-holder class=sf-hidden></div>
+<div id=anonymousWarning style=display:none>Comment with your Google account if you’d like to be able to manage your comments in the future. If you comment anonymously, you won’t be able to edit or delete your comment.
+</div>
+<form action=/comment-iframe.do method=POST name=commentForm id=commentForm accept-charset=utf-8 target=_self>
+<div id=commentsHolder><div id=identityHolder style=display:none></div>
+<div class=commentBodyContainer><textarea name=commentBody rows=4 cols=50 id=commentBodyField placeholder=&quot;Enter your comment...&quot;></textarea><br></div>
+<div id=identityControlsHolder class=&quot;enableAvatar identity-type-GOOGLE&quot;><div class=genericAvatar></div>
+<div class=identitySelectorContainer><label id=commentSelectorLabel for=identityMenu>Comment as:</label>
+<div class=dropdown><select id=identityMenu name=identityMenu dir=ltr style=display:inline><option value=NONE disabled>Select profile...<option value=GOOGLE selected>Google Account</select></div>
+<span id=editButton style=display:none></span>
+<span id=settingsButton style=display:none></span>
+<span id=signoutLink style=display:none>
+</span></div>
+<div id=id-error style=display:none></div></div></div>
+<div id=postCommentButtonHolder class=postCommentButtonHolder><div id=subscribeButtonHolder class=container style=display:none>
+</div>
+<input type=button id=postCommentSubmit name=postCommentSubmit value=Publish disabled>
+<input type=button id=postCommentPreview name=postCommentPreview value=Preview disabled>
+<span id=empty-error></span><span id=body-error></span></div>
+</form>
+</div>
+"></iframe></div><div class="loadmore hidden sf-hidden" data-post-id=263747545961142963></div></div>
+</div>
+</div>
+<p class=comment-footer>
+<div class=comment-form>
+<a name=comment-form></a>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=1994130783874175266&amp;postID=263747545961142963&amp;blogspotRpcToken=5897288" id=comment-editor-src></a>
+</div>
+<p></p>
+<div id=backlinks-container>
+<div id=Blog1_backlinks-container>
+</div>
+</div>
+</div>
+</div>
+ </div></div>
+ 
+</div>
+<div class=blog-pager id=blog-pager>
+<span id=blog-pager-newer-link>
+<a class=blog-pager-newer-link href=https://bitsquid.blogspot.com/2009/12/events.html id=Blog1_blog-pager-newer-link title="Newer Post">Newer Post</a>
+</span>
+<span id=blog-pager-older-link>
+<a class=blog-pager-older-link href=https://bitsquid.blogspot.com/2009/10/picking-scripting-language.html id=Blog1_blog-pager-older-link title="Older Post">Older Post</a>
+</span>
+<a class=home-link href=https://bitsquid.blogspot.com/>Home</a>
+</div>
+<div class=clear></div>
+<div class=post-feeds>
+<div class=feed-links>
+Subscribe to:
+<a class=feed-link href=https://bitsquid.blogspot.com/feeds/263747545961142963/comments/default target=_blank type=application/atom+xml>Post Comments (Atom)</a>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class=column-left-outer>
+<div class=column-left-inner>
+<aside>
+</aside>
+</div>
+</div>
+<div class=column-right-outer>
+<div class=column-right-inner>
+<aside>
+<div class="sidebar section" id=sidebar-right-1><div class="widget BlogArchive" data-version=1 id=BlogArchive1>
+<h2>Blog Archive</h2>
+<div class=widget-content>
+<div id=ArchiveList>
+<div id=BlogArchive1_ArchiveList>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2017/>
+2017
+</a>
+<span class=post-count dir=ltr>(15)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2016/>
+2016
+</a>
+<span class=post-count dir=ltr>(9)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2015/>
+2015
+</a>
+<span class=post-count dir=ltr>(8)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2014/>
+2014
+</a>
+<span class=post-count dir=ltr>(6)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2013/>
+2013
+</a>
+<span class=post-count dir=ltr>(8)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2012/>
+2012
+</a>
+<span class=post-count dir=ltr>(22)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2011/>
+2011
+</a>
+<span class=post-count dir=ltr>(23)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2010/>
+2010
+</a>
+<span class=post-count dir=ltr>(18)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate expanded">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class="zippy toggle-open">
+ ▼&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2009/>
+2009
+</a>
+<span class=post-count dir=ltr>(11)</span>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2009/12/>
+December
+</a>
+<span class=post-count dir=ltr>(1)</span>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate expanded">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class="zippy toggle-open">
+ ▼&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2009/11/>
+November
+</a>
+<span class=post-count dir=ltr>(1)</span>
+<ul class=posts>
+<li><a href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>The BitSquid low level animation system</a></li>
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2009/10/>
+October
+</a>
+<span class=post-count dir=ltr>(6)</span>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://bitsquid.blogspot.com/2009/11/bitsquid-low-level-animation-system.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://bitsquid.blogspot.com/2009/09/>
+September
+</a>
+<span class=post-count dir=ltr>(3)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class=clear></div>
+<span class=widget-item-control>
+<span class="item-control blog-admin sf-hidden">
+</span>
+</span>
+<div class=clear></div>
+</div>
+</div></div>
+<table border=0 cellpadding=0 cellspacing=0 class="section-columns columns-2">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="sidebar section" id=sidebar-right-2-1><div class="widget Profile" data-version=1 id=Profile1>
+<h2>Contributors</h2>
+<div class=widget-content>
+<ul>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/09782217395838102885 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Anders Elfgren</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/07360893562204949248 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Andreas Asplund</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/12579246590295341299 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Ben Mowery</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/12177635194073845370 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Dan Engelbrecht</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/10369030018183046728 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Dave Cook</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/09637484103636420407 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Jp</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/10055379994557504977 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Niklas</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/11071912954876828306 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Philippe Sawicki</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/16240529312060411542 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Tobias</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/02745555817482590720 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Unknown</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/07390177896116873905 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Unknown</a></li>
+<li><a class="profile-name-link g-profile" href=https://www.blogger.com/profile/07591556737927082834 style=background-image:var(--sf-img-2) data-gapiscan=true data-onload=true data-gapiattached=true>Unknown</a></li>
+</ul>
+<div class=clear></div>
+<span class=widget-item-control>
+<span class="item-control blog-admin sf-hidden">
+</span>
+</span>
+<div class=clear></div>
+</div>
+</div></div>
+</td>
+<td class=columns-cell>
+<div class="sidebar no-items section" id=sidebar-right-2-2></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sidebar no-items section" id=sidebar-right-3></div>
+</aside>
+</div>
+</div>
+</div>
+<div style=clear:both></div>
+</div>
+</div>
+</div>
+<div class="main-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<footer>
+<div class=footer-outer>
+<div class="footer-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left footer-fauxborder-left">
+<div class="fauxborder-right footer-fauxborder-right"></div>
+<div class="region-inner footer-inner">
+<div class="foot no-items section" id=footer-1></div>
+<table border=0 cellpadding=0 cellspacing=0 class="section-columns columns-2">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="foot no-items section" id=footer-2-1></div>
+</td>
+<td class=columns-cell>
+<div class="foot no-items section" id=footer-2-2></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="foot section" id=footer-3 name=Footer><div class="widget Attribution" data-version=1 id=Attribution1>
+<div class=widget-content style=text-align:center>
+Simple theme. Powered by <a href=https://www.blogger.com/ target=_blank>Blogger</a>.
+</div>
+<div class=clear></div>
+<span class=widget-item-control>
+<span class="item-control blog-admin sf-hidden">
+</span>
+</span>
+<div class=clear></div>
+</div></div>
+</div>
+</div>
+<div class="footer-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</footer>
+</div>
+</div>
+<div class="content-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</div>
+<div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div><style>.goog-inline-block{position:relative;display:-moz-inline-box;display:inline-block}</style>
