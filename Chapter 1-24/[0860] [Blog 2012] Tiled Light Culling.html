@@ -1,0 +1,1359 @@
+<!DOCTYPE html> <html class="v2 hb-loaded" dir=ltr lang=en style><!--
+ Page saved with SingleFile 
+ url: https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html 
+ saved date: Sat Jul 10 2021 23:03:19 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<style>:root{--sf-img-3:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAABb2lDQ1BpY2MAACiRdZE/S8NQFMVPW0tFKx10cHAIUhykBamLo3+GgpRSagWrLkmatELShqRFxNHBtUMXFRer+A10E7+AIAjqJILODgoiSInnNYUWaW9I7o+Te957OQH8GUM1naE5wCxX7WxyWdrIb0qhVwQRALCAaVl1rKVMJoWB9f0In+gPcbHW4Lm+NVrQHBXwDYvdVMuukhfJ6d2qJbhOnlBLcoF8To7ZPCD5XuiKx++Cix7/CLZz2RXAHyZLxR5Welgt2SY5Ro6aRk3tnEd8SVgrr6+xT7VvB1kksQwJCmrYgYEq4uxlZtbfl2j70qjQo/JpYQ82HUWU6I1RrXFVjV2nrvEyOMES2f/P1NHnE94O4VUg+Oa6X7NA6ARoHbru75nrtppA4Bm4bXT9lQbj/KBe72rRUyByAFzddDXlArhmxpMvlmzLbUn8d7+uA5+XwFgeGGfWI1teXp33aD4BuX0gdQccHQMznI9s/wEe4Whc04cNXAAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA9hAAAPYQGoP6dpAAAAB3RJTUUH5AsZAiEUjgHPwAAABuxJREFUWMOVmEuMHFcVhr9zq7pn2jN+ycYzMhPiOMSWFUjQSBAcCLHDijhE2SGbBWCi8Y7HAgFShEBINkuQQHFMEkQWBhYsHF4hKIp5RICFHR6KHNtJxpaJ36+ZsWd6uqvuz+Le6qrp7rFNSSVVdd2657///59zbrVxG4deGAVwwFrgY0hbMRvHkjvBLQdq4Fv4fArlp5A/jHEQ6TWks5h5+8KVW8ax2wSxCdgBfBq4BxhEqgwUoPLaBNBEOo70IrAfdAzwtvPa/wcmggAYBXYBTwJj/RF3ASnBlPfoNLAPaR9mF0DYzqlbg6kA2Qx8D3jopgx2AhJAFWBUuS9upIOYvgG1Q9DGdk4vDiYCMeBx4PvAupvJ2AHRT6ZugOWzd5C+jPQbzGRfnOkFU2HkCeDpKNHNj34BUe99FWy4PxPl/zVAAcj6SLO/HyOSQL4yacn+QnYMzABhPV5aAO5tQlIcCoCuk1bijQJ7+gPxYCn5so34lfejxgiYY0FG+XlsZhK7dASbO4OrGKC8XLCQu4HdoB3ABQCr+ORbwLd7gHiPb4zQ3jBBNrYNDawGS6rTxoAC38Km38Ed/wnJyV+S0uyAsm4vBXYEPEW9vptWqwPmA8BvgTu6GfGDI8yP7yYf3RqkWuCHbkQG5rCsib3xQ5KjP6JubZxTZKevl04iHsU46uKT7b1AhCylfc8E2chWJI/JY4CZ9T8B8zkkA/hNu5hb/QitzEfLdBXJEtM6jM9AqK5jwGM9q5THL30/2dijwYxSKY0lwTOWdJ0OzALw+jLyu7cz3R4m9xUQ/fyDHgetTYGPAxt6ORf5yvvQ4HvCi3Hl7dkrTB17Cc1dDbErbzTWjtO446OYGchTW30vV9P3Ups7wYolCklGzCpVrmEjaHMKPAwMdgMB0OAaZA5THjxuCTPHf8/lV79LLclJnHAWU1g57dUfZOCJn5I0VgU268MwsILrM6KWwPBAkfUqw4RqvQR4OAXG+zgRyRBJTDTrgBxctZ6h0U0k+RS1RDiLmYJIx8ZxtSWdxVitweBdnyRvX2ROs1jrPEvqeZyxR7Jx0wuj54E13ZrK5zQ3fYX2vV+NzJS6582rkDcX9hIzbGAllg4ixewxQ3kbNa9A6xqtv3+HwQuvMjQAju4iyLsp0rL+eao+XTR4J8jQ/x2k4Jk43pIaNjQKS8fQ6g9z4/RBEgeNWiFvZ+7lKVK9S6E+bi9Xv+iznjFd4+VDgxC0ciNxUE8KuQRQd6BWp7kVlHXqQFfQjox2Gye9xTFWYZPIciPzlQhGKwWm6JtN/ZmRRD57Gd/tmeqwdICksaqUq0KUKwgzyHLDJBIHhqZSpJPASK9U/cA4Zk/9hct/3oPLZkgMzEL9MIQp0j4wzNIHn2LgfQ/FTl+dWhFU8EweW5YzJlNMR4AHeiMLfFZhKSwnuzYJV96glnjSRCSmACjWDEOoaTD9NvCJhUwrC8AL8BaSRAIPh1PEQeDzoEaPvnPnwOelEZUzvOFTpE5Y60qkt1IzrGBmJcld2yqsGPI5un4uMhLBEJlFs4g/pqDXgOPA/Qs9Y9jlf0HzIjRGYjZA0ljF0H2f45aHfOhRUV4/e5784uukVkplpkKuN4G/OfDvIv2q3KkVqzTczAns5IthDbE3gZDPbnl26pQFDuZPHICpEySJhRZSmDkUvwOYnXUxhX8GOlWmdQCUqE16bC86/QeEC105ZsOi2wizsryYQzjmJ1+m/e+nqVuLmhPO0elpZkwa+oWFCMCDW44Cz3YKjIqBRm3+LMmhr9P6zz6y6+fDvqRn69B7SiK7cY7Z1/fS/NPXqM+foV6zYPq4JbHQ1J6Rd8cKM6PnlhPTez/GI4VvitqX56KZ1Zge2EC+8kO44VHMJQuaXSGhRaP7G2fxF/+Jmz5O3VrUa0Y98aQu+iR86L1sps8Cl2wii+8+32lPDxC+DtYXGVUUYi+Yb4vpOaOVW5meZUaU10UdMUgSo+bUKQMVICfMtAP4Bxg20a50oueXggzQY8AzhI/8iEmdHMs9zM47Mh/TugOqzJDqb86CR5LOGAH810wTwO8KICW7RdBnh4vftgE/ANaXWxl1Sl/uodl25L5kpfhcKirrgvSNe54I5C0zfQnZSxgqgPSACf4ZBjIg/QjSHmAL4MoBIbAXNNuG92EWZ5ViZqVkrpTPA6+Y6ZvA4Soji4IJgIaKcrMGeBJpArizfCM89IJWZuSesPq+QIQZJ4G9ZnoOuNQPyKJgOqB+vCQUC9MG0HbCHwIbEY0qoCw3vCpeCXLNGnoT44Chn5vjLYS3iWzReDcFU3qpEa2qUdBmxBbBuPes82KFF7Xc03LGVGKaNNMRg4OG/uosPy+c3K7slnH+B2xnwwtFByBAAAAAFHRFWHRhdXRob3IATHVrZSBCamVycmluZz03IsMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjAtMTEtMjVUMDI6MjU6NTgrMDA6MDC1ahfwAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIwLTExLTI1VDAyOjI1OjU4KzAwOjAwxDevTAAAACZ0RVh0aWNjOmNvcHlyaWdodABObyBjb3B5cmlnaHQsIHVzZSBmcmVlbHmnmvCCAAAAHXRFWHRpY2M6ZGVzY3JpcHRpb24Ac1JHQiBidWlsdC1pbuOFycUAAAAASUVORK5CYII=")}body{margin:0;padding:0 0 1px}.content-outer,.header-outer,.tabs-outer,.main-outer,.main-inner,.footer-outer,.post,.comments,.widget,.date-header{position:relative;min-height:0}.footer-outer{margin-bottom:-1px}.tabs-inner{padding:0 15px}.main-inner{padding:30px 0}.footer-inner{padding:30px 15px}.section{margin:0 15px}.widget{margin:30px 0}.section:first-child .widget:first-child{margin-top:0}.section:last-child .widget:last-child{margin-bottom:0}body .navbar{height:30px;padding:0;margin:0}body .navbar .Navbar{position:absolute;z-index:10;left:0;width:100%;margin:0;padding:0;background:0;border:0}.header-inner .widget{margin-left:30px;margin-right:30px}.header-inner .Header{margin:0}.header-inner .Header #header-inner{overflow:hidden}.header-inner .Header .titlewrapper{padding:22px 30px 0}.header-inner .Header .descriptionwrapper{padding:0 30px}.Header h1{margin-bottom:10px}.Header .description{margin:.5em 0 10px;padding:0 2px}a img{position:relative}h1,h2,h3,h4{margin:0;position:relative}h1 a:hover{text-decoration:none}.widget{line-height:1.4}.widget ul{line-height:1.2}.BlogList li .blog-content{position:relative}.widget li{margin:0}.widget-item-control{float:right;height:20px;margin-top:-20px;position:relative;z-index:10}.post-body{width:100%}.post-header,.post-footer{line-height:1.6}.post-footer-line>*{margin-right:1em}.post-footer-line>*:last-child{margin-right:0}.post-timestamp{margin-left:-1em}.post-footer-line>*:first-child{margin-left:0}.comment-body{margin:.5em 25px}.comment-footer{margin:.5em 25px 1.5em}.comment-body p{margin:0}#comments .avatar-comment-indent .comment-author{margin-left:-45px;padding-left:45px}.Profile .profile-datablock{margin:0 0 .5em}dt{font-weight:bold}table.section-columns td.first.columns-cell{border-left:0}html{height:100%}body{min-height:100%;position:relative}.content{position:relative;word-wrap:break-word}.content-outer,.region-inner{min-height:0;margin:0 auto}.columns{zoom:1}.columns-inner{min-height:0}.column-center-outer,.column-left-outer,.column-right-outer{position:relative;float:left}.column-center-outer{width:100%}.fauxcolumns{position:relative}.fauxcolumn-outer{position:absolute;top:0;bottom:0;overflow:hidden}.fauxcolumn-outer .fauxborder-left,.fauxcolumn-outer .fauxborder-right,.fauxcolumn-inner{height:100%}.fauxcolumn-left-outer{left:0}.fauxcolumn-right-outer{right:0}.cap-top,.cap-bottom{position:relative;height:0;background-repeat:repeat-x}.cap-top .cap-left,.cap-top .cap-right,.cap-bottom .cap-left,.cap-bottom .cap-right{height:100%;background-repeat:no-repeat}.cap-top,.cap-top .cap-left{background-position:top left}.cap-bottom,.cap-bottom .cap-left{background-position:bottom left}.cap-top .cap-left,.cap-bottom .cap-left{float:left}.cap-top .cap-right{background-position:top right;float:right}.cap-bottom .cap-right{background-position:bottom right;float:right}.fauxborder-left{background-position:top left;background-repeat:repeat-y;position:relative}.fauxborder-right{background-position:top right;background-repeat:repeat-y;position:absolute;right:0;height:100%}table.section-columns{border:0;table-layout:fixed;width:100%;position:relative}table.columns-2 td.columns-cell{width:50%}table.section-columns td.columns-cell{vertical-align:top}.body-fauxcolumns,.content-fauxcolumns{position:absolute;top:0;left:0;z-index:-1;height:100%;width:100%;overflow:hidden}.body-fauxcolumns .fauxcolumn-outer{width:100%}.content-fauxcolumns .fauxcolumn-outer{position:relative;overflow:visible;height:100%;margin:0 auto}aside,header,footer{display:block}.blog-list-container ul{padding-left:0}.blog-list-container ul li{padding-left:0;list-style:none;list-style-image:none;clear:left}.blog-list-container a{text-decoration:none}.blog-list-container a:hover{text-decoration:underline}.blog-list-container .blog-content{float:left;margin:0 0 5px 5px;text-indent:0;width:85%}.blog-list-container .blog-title{font-weight:bold;line-height:16px;margin:2px 0 0 0}.blog-list-container .blog-icon{float:left;margin-top:2px;vertical-align:top;text-indent:0;width:16px}.blog-list-container .item-content{font-size:95%;line-height:1.3em}div.clear{clear:both}#navbar-iframe{display:block;height:30px}.profile-data{margin:0}.profile-name-link{background:no-repeat left top;box-sizing:border-box;display:inline-block;max-width:100%;min-height:20px;padding-left:20px}.profile-textblock{margin:.5em 0}body{overflow-wrap:break-word;word-break:break-word;word-wrap:break-word}#ArchiveList .toggle{cursor:pointer;font-family:Arial,sans-serif}#ArchiveList .toggle-open{line-height:.6em}#ArchiveList{text-align:left}#ArchiveList a.post-count-link,#ArchiveList a.post-count-link:link,#ArchiveList a.post-count-link:visited{text-decoration:none}#ArchiveList a.toggle,#ArchiveList a.toggle:link,#ArchiveList a.toggle:visited,#ArchiveList a.toggle:hover{color:inherit;text-decoration:none}.BlogArchive #ArchiveList ul li{background:0;list-style:none;list-style-image:none;list-style-position:outside;border-width:0;padding-left:15px;text-indent:-15px;margin:.25em 0;background-image:none}.BlogArchive #ArchiveList ul ul li{padding-left:1.2em}.BlogArchive #ArchiveList ul{margin:0;padding:0;list-style:none;list-style-image:none;border-width:0}.BlogArchive #ArchiveList ul.posts li{padding-left:1.3em}.post-footer abbr{border:0}#blog-pager-newer-link{float:left}#blog-pager-older-link{float:right}#blog-pager{margin:1em 0;text-align:center;overflow:hidden}#comments-block .avatar-image-container img{-ms-interpolation-mode:bicubic;border:1px solid #ccc;float:right}#comments-block .avatar-image-container.avatar-stock img{border-width:0;padding:1px}#comments-block .avatar-image-container{height:37px;left:-45px;position:absolute;width:37px}#comments-block.avatar-comment-indent{margin-left:45px;position:relative}#comments-block.avatar-comment-indent dd{margin-left:0}.comments{clear:both;margin-bottom:0}.comments .avatar-image-container{float:left;max-height:36px;overflow:hidden}.comments .avatar-image-container img{max-width:36px}.post-share-buttons{margin-top:.5em;vertical-align:middle}.goog-inline-block{position:relative;display:-moz-inline-box;display:inline-block}</style>
+<meta content="width=1100" name=viewport>
+<meta content=blogger name=generator>
+<link href=http://graphicrants.blogspot.com/2012/04/tiled-light-culling.html rel=canonical>
+<link rel=alternate type=application/atom+xml title="Graphic Rants - Atom" href=https://graphicrants.blogspot.com/feeds/posts/default>
+<link rel=alternate type=application/rss+xml title="Graphic Rants - RSS" href="https://graphicrants.blogspot.com/feeds/posts/default?alt=rss">
+<link rel=service.post type=application/atom+xml title="Graphic Rants - Atom" href=https://www.blogger.com/feeds/3460906122833508895/posts/default>
+<link rel=alternate type=application/atom+xml title="Graphic Rants - Atom" href=https://graphicrants.blogspot.com/feeds/3382592314898548992/comments/default>
+<!--[if IE]><script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/3775400722-ieretrofit.js"></script>
+<![endif]-->
+<meta content=http://graphicrants.blogspot.com/2012/04/tiled-light-culling.html property=og:url>
+<meta content="Tiled Light Culling" property=og:title>
+<meta content="   First off I'm sorry that I haven't updated this blog in so long. Much of what I have wanted to talk about on this blog, but couldn't, was..." property=og:description>
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Graphic Rants: Tiled Light Culling</title>
+<style id=template-skin-1><!--body{font:normal normal 13px Arial,Tahoma,Helvetica,FreeSans,sans-serif;color:#444444;background:#eeeeee none repeat scroll top left}html body .content-outer{min-width:0;max-width:100%;width:100%}a:link{text-decoration:none;color:#3778cd}a:visited{text-decoration:none;color:#4d469c}a:hover{text-decoration:underline;color:#3778cd}.body-fauxcolumn-outer .cap-top{position:absolute;z-index:1;height:276px;width:100%;background:transparent none repeat-x scroll top left}.content-inner{padding:0}.header-inner .section{margin:0 16px}.tabs-inner .section{margin:0 16px}.main-inner{padding-top:30px}.main-inner .column-center-inner,.main-inner .column-left-inner,.main-inner .column-right-inner{padding:0 5px}.header-outer{margin:0 0 0 0;background:transparent none repeat scroll 0 0}.Header h1{font:normal bold 40px Arial,Tahoma,Helvetica,FreeSans,sans-serif;color:#444444}.Header h1 a{color:#444444}.Header .description{font:normal normal 14px Arial,Tahoma,Helvetica,FreeSans,sans-serif;color:#444444}.header-inner .Header .titlewrapper,.header-inner .Header .descriptionwrapper{padding-left:0;padding-right:0;margin-bottom:0}.header-inner .Header .titlewrapper{padding-top:22px}.tabs-outer{overflow:hidden;position:relative;background:#eeeeee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAADICAYAAADodcFZAAAAfUlEQVRo3u3ZSxGAMBBEwQXiXxDmFhHMIZ+OgK56Q05hVPiMJcArDd7Tg5IlS5YsWbJkyZIlS5b8EywgEAgEAoFAIBAIBAKBQGACfKNgd8//shQHn/OSbeijSHZtbOja2NCGNrTh4RvG/9EXEAgEAoFAIBAIBAKBQCBwf/ADhgYHe9B6osQAAAAASUVORK5CYII=) repeat scroll 0 0}.tabs-cap-top,.tabs-cap-bottom{position:absolute;width:100%;border-top:1px solid #999999}.tabs-cap-bottom{bottom:0}h2{font:normal bold 14px Arial,Tahoma,Helvetica,FreeSans,sans-serif;color:#444444}.main-inner .section{margin:0 27px;padding:0}.main-inner .column-left-outer,.main-inner .column-right-outer{margin-top:0}.main-inner .column-left-inner,.main-inner .column-right-inner{background:transparent none repeat 0 0;-moz-box-shadow:0 0 0 rgba(0,0,0,.2);-webkit-box-shadow:0 0 0 rgba(0,0,0,.2);-goog-ms-box-shadow:0 0 0 rgba(0,0,0,.2);box-shadow:0 0 0 rgba(0,0,0,.2);-moz-border-radius:0;-webkit-border-radius:0;-goog-ms-border-radius:0;border-radius:0}.sidebar .widget{font:normal normal 14px Arial,Tahoma,Helvetica,FreeSans,sans-serif;color:#444444}.sidebar .widget a:link{color:#3778cd}.sidebar .widget a:visited{color:#4d469c}.sidebar .widget a:hover{color:#3778cd}.main-inner .widget{background-color:#ffffff;border:1px solid #eeeeee;padding:0 15px 15px;margin:20px -16px;-moz-box-shadow:0 0 20px rgba(0,0,0,.2);-webkit-box-shadow:0 0 20px rgba(0,0,0,.2);-goog-ms-box-shadow:0 0 20px rgba(0,0,0,.2);box-shadow:0 0 20px rgba(0,0,0,.2);-moz-border-radius:0;-webkit-border-radius:0;-goog-ms-border-radius:0;border-radius:0}.main-inner .widget h2{margin:0 -15px;padding:.6em 15px .5em;border-bottom:1px solid transparent}.main-inner .widget h2+div{border-top:1px solid #eeeeee;padding-top:8px}.main-inner .widget .widget-content{margin:0 -15px;padding:7px 15px 0}.main-inner .widget ul{margin:-8px -15px 0;padding:0;list-style:none}.main-inner .widget #ArchiveList{margin:-8px 0 0}.main-inner .widget ul li{padding:.5em 15px;text-indent:0;color:#666666;border-top:1px solid #eeeeee;border-bottom:1px solid transparent}.main-inner .widget #ArchiveList ul li{padding-top:.25em;padding-bottom:.25em}.main-inner .widget ul li:first-child,.main-inner .widget #ArchiveList ul.flat li:first-child{border-top:none}.main-inner .widget ul li:last-child,.main-inner .widget #ArchiveList ul.flat li:last-child{border-bottom:none}.widget .zippy{color:#666666}body .main-inner .Blog{padding:0;margin-bottom:1em;background-color:transparent;border:none;-moz-box-shadow:0 0 0 rgba(0,0,0,0);-webkit-box-shadow:0 0 0 rgba(0,0,0,0);-goog-ms-box-shadow:0 0 0 rgba(0,0,0,0);box-shadow:0 0 0 rgba(0,0,0,0)}.main-inner .section:last-child .Blog:last-child{padding:0;margin-bottom:1em}.main-inner .widget h2.date-header{margin:0 -15px 1px;padding:0 0 0 0;font:normal normal 14px Arial,Tahoma,Helvetica,FreeSans,sans-serif;color:#444444;background:transparent none no-repeat scroll top left;border-top:0 solid #eeeeee;border-bottom:1px solid transparent;-moz-border-radius-topleft:0;-moz-border-radius-topright:0;-webkit-border-top-left-radius:0;-webkit-border-top-right-radius:0;border-top-left-radius:0;border-top-right-radius:0;position:static;bottom:100%;right:15px}.main-inner .widget h2.date-header span{font:normal normal 14px Arial,Tahoma,Helvetica,FreeSans,sans-serif;display:block;padding:.5em 15px;border-left:0 solid #eeeeee;border-right:0 solid #eeeeee}.date-outer{position:relative;margin:30px 0 20px;padding:0 15px;background-color:#ffffff;border:1px solid #eeeeee;-moz-box-shadow:0 0 20px rgba(0,0,0,.2);-webkit-box-shadow:0 0 20px rgba(0,0,0,.2);-goog-ms-box-shadow:0 0 20px rgba(0,0,0,.2);box-shadow:0 0 20px rgba(0,0,0,.2);-moz-border-radius:0;-webkit-border-radius:0;-goog-ms-border-radius:0;border-radius:0}.date-outer:first-child{margin-top:0}.date-outer:last-child{margin-bottom:20px;-moz-border-radius-bottomleft:0;-moz-border-radius-bottomright:0;-webkit-border-bottom-left-radius:0;-webkit-border-bottom-right-radius:0;-goog-ms-border-bottom-left-radius:0;-goog-ms-border-bottom-right-radius:0;border-bottom-left-radius:0;border-bottom-right-radius:0}.date-posts{margin:0 -15px;padding:0 15px;clear:both}.post-outer{border-top:1px solid #eeeeee;margin:0 -15px;padding:15px 15px}.post-outer{padding-bottom:10px}.post-outer:first-child{padding-top:0;border-top:none}.post-outer:last-child,.inline-ad:last-child{border-bottom:none}.post-body{position:relative}h3.post-title,h4{font:normal bold 22px Arial,Tahoma,Helvetica,FreeSans,sans-serif;color:#444444}.post-header{margin:0 0 1em}.post-body{line-height:1.4}.post-footer{margin:1.5em 0 0}#blog-pager{padding:15px;font-size:120%;background-color:#ffffff;border:1px solid #eeeeee;-moz-box-shadow:0 0 20px rgba(0,0,0,.2);-webkit-box-shadow:0 0 20px rgba(0,0,0,.2);-goog-ms-box-shadow:0 0 20px rgba(0,0,0,.2);box-shadow:0 0 20px rgba(0,0,0,.2);-moz-border-radius:0;-webkit-border-radius:0;-goog-ms-border-radius:0;border-radius:0;-moz-border-radius-topleft:0;-moz-border-radius-topright:0;-webkit-border-top-left-radius:0;-webkit-border-top-right-radius:0;-goog-ms-border-top-left-radius:0;-goog-ms-border-top-right-radius:0;border-top-left-radius:0;margin-top:1em}.post-feeds{margin:1em 0;text-align:center;color:#444444}.post-feeds a{color:#3778cd}.blog-feeds a:visited,.post-feeds a:visited{color:#4d469c}.blog-feeds a:hover,.post-feeds a:hover{color:#3778cd}.post-outer .comments{margin-top:2em}.footer-outer{margin:-20px 0 -1px;padding:20px 0 0;color:#444444;overflow:hidden}.footer-fauxborder-left{border-top:1px solid #eeeeee;background:#ffffff none repeat scroll 0 0;-moz-box-shadow:0 0 20px rgba(0,0,0,.2);-webkit-box-shadow:0 0 20px rgba(0,0,0,.2);-goog-ms-box-shadow:0 0 20px rgba(0,0,0,.2);box-shadow:0 0 20px rgba(0,0,0,.2);margin:0 -20px}--><!--body{min-width:1010px}.content-fauxcolumn-outer,.region-inner{min-width:1010px;max-width:1010px}.main-inner .columns{padding-left:0px;padding-right:260px}.main-inner .fauxcolumn-center-outer{left:0px;right:260px}.main-inner .fauxcolumn-left-outer{width:0px}.main-inner .fauxcolumn-right-outer{width:260px}.main-inner .column-left-outer{width:0px;right:100%;margin-left:-0px}.main-inner .column-right-outer{width:260px;margin-right:-260px}--></style>
+<noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=3460906122833508895&amp;zx=a615d185-d541-4ffe-9f98-73e8dedd35ae' rel='stylesheet'/></noscript>
+<style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.MJX_Assistive_MathML{position:absolute!important;top:0;left:0;clip:rect(1px,1px,1px,1px);padding:1px 0 0 0!important;border:0!important;height:1px!important;width:1px!important;overflow:hidden!important;display:block!important;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.MJX_Assistive_MathML.MJX_Assistive_MathML_Block{width:100%!important}#MathJax_Message{position:fixed;left:1em;bottom:1.5em;background-color:#E6E6E6;border:1px solid #959595;margin:0px;padding:2px 8px;z-index:102;color:black;font-size:80%;width:auto;white-space:nowrap}.MathJax_Display{margin:1em 0em;position:relative;display:block!important;text-indent:0;max-width:none;max-height:none;min-width:0;min-height:0;width:100%}.MathJax{display:inline;font-style:normal;font-weight:normal;line-height:normal;font-size:100%;text-indent:0;text-transform:none;letter-spacing:normal;word-spacing:normal;word-wrap:normal;white-space:nowrap;float:none;direction:ltr;max-width:none;max-height:none;min-width:0;min-height:0;border:0;padding:0;margin:0}.MathJax:focus,body :focus .MathJax{display:inline-table}.MathJax nobr{border:0;padding:0;margin:0;max-width:none;max-height:none;min-width:0;min-height:0;vertical-align:0;line-height:normal;text-decoration:none}.MathJax span{display:inline;position:static;border:0;padding:0;margin:0;vertical-align:0;line-height:normal;text-decoration:none}.MathJax nobr{white-space:nowrap!important}.MathJax *{transition:none;-webkit-transition:none;-moz-transition:none;-ms-transition:none;-o-transition:none}</style><meta content=3460906122833508895 itemprop=blogId class=sf-hidden><meta content=3382592314898548992 itemprop=postId class=sf-hidden><meta content=https://www.blogger.com/profile/03069330593380092516 itemprop=url class=sf-hidden><meta content=http://graphicrants.blogspot.com/2012/04/tiled-light-culling.html itemprop=url class=sf-hidden><link href="data:image/x-icon;base64,AAABAAIAICAAAAEACACoCAAAJgAAABAQAAABAAgAaAUAAM4IAAAoAAAAIAAAAEAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAmb+AIKy/gDO4v4AWp7+AL7a/gDu9v4OInr+Dp7G/gAScv4Ajr7+AN7u/gByqv4A/v7+AAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAgwMDAwMDAwMAgcAAAAAAAAAAAAAAAAAAAAAAAAJDAwMDAwMDAwMDAwMDAwJAAAAAAAAAAAAAAAAAAAACQwMDAwMDAwMDAwMDAwMDAwJAAAAAAAAAAAAAAAAAAEMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAABwwMDAwMDAwMDAwMDAwMDAwMDAcAAAAAAAAAAAAAAAACDAwMDAwDAwMDAwMDAwwMDAwMAgAAAAAAAAAAAAAAAAwMDAwMAAAAAAAAAAAAAAwMDAwMAAAAAAAAAAAAAAAADAwMDAwMAwMDAwMDAwMMDAwMDAwAAAAAAAAAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMDAAAAAAAAAAAAAAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAAAAAAAAAAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMCgAAAAAAAAAAAAAAAAwMDAwMDAMDAwMMDAwMDAwFAQEAAAAAAAAAAAAAAAAADAwMDAwAAAAAAAAMDAwMDAEAAAAAAAAAAAAAAAAAAAACDAwMDAwDAwMDDAwMDAwMAQAAAAAAAAAAAAAAAAAAAAcMDAwMDAwMDAwMDAwMDAwIAAAAAAAAAAAAAAAAAAAAAQwMDAwMDAwMDAwMDAwMBwAAAAAAAAAAAAAAAAAAAAAACQwMDAwMDAwMDAwMDAUGAAAAAAAAAAAAAAAAAAAAAAAACQwMDAwMDAwMDAwKAQAAAAAAAAAAAAAAAAAAAAAAAAAAAQcCDAwMDAUECwgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA///AAAADgAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABwAAAAygAAAAQAAAAIAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAACZv4CgrL+gu72/s5env5ars7+vjKC/u4Scv4ijr7+nv7+/hJuqv6Ovtr+3gAAAHIAAAD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAcCCAgICAIHAAAAAAAAAAcICAgICAgICAcAAAAAAAACCAgDAwMDCAgCAAAAAAAACAgJAAAAAAkICAAAAAAAAAgICAgICAgICAgAAAAAAAAICAgICAgICAgIAAAAAAAACAgJAAADCAgBBQAAAAAAAAIICAMDAggIBQAAAAAAAAAHCAgICAgICgAAAAAAAAAAAAcCCAgIBAYAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAAAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAD//8ADQSCAAcADAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAMADgAE=" rel=icon type=image/x-icon><style>.sf-hidden{display:none!important}</style></head>
+<body class=variant-light huaban_collector_injected=true><div style=visibility:hidden;overflow:hidden;position:absolute;top:0px;height:1px;width:auto;padding:0px;border:0px;margin:0px;text-align:left;text-indent:0px;text-transform:none;line-height:normal;letter-spacing:normal;word-spacing:normal><div id=MathJax_Hidden class=sf-hidden></div></div><div id=MathJax_Message style=display:none></div>
+<div class="navbar section" id=navbar name=Navbar><div class="widget Navbar" data-version=1 id=Navbar1>
+<div id=navbar-iframe-container><iframe ng-non-bindable frameborder=0 hspace=0 marginheight=0 marginwidth=0 scrolling=no tabindex=0 vspace=0 width=100% id=navbar-iframe name=navbar-iframe sandbox="allow-popups allow-top-navigation allow-top-navigation-by-user-activation" srcdoc='<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html dir=ltr><meta charset=utf-8><style>:root{--sf-img-0:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAUCAMAAADFhv/OAAABiVBMVEUAAAD/q3L/q3L/q3L/q3L/q3JmZmZoaGhubm5wcHBycnJ0dHR4eHh6enqCgoKEhISGhoaIiIiKioqOjo6QkJCSkpKYmJiampqenp6lpaWmpqapqamqqqqrq6usrKytra2urq6vr6+zs7O0tLS1tbW2tra3t7e5ubm6urq7u7u+vr6/v7/BwcHDw8PHx8fJycnLy8vQ0NDR0dHT09PU1NTV1dXW1tbY2Njb29vc3Nzd3d3f39/g4ODh4eHi4uLj4+Pl5eXm5ubn5+fp6ent7e3u7u7v7+/x8fHz8/P19fX29vb39/f5+fn6+vr7+/v8/Pz9/f3/q3L/rnf/sHr/sXv/tIH/tYP/toT/toX/uIf/vI//wpn/w5r/xJv/xJ3/xZ3/xZ7/xp//x6D/yaT/0rT/07X/1bn/2L3/2b//2cD/28L/3cb/38r/5NH/5NL/5tX/6Nj/7+T/8OX/8ej/9Oz/9O3/9e7/9vD/9vH/9/L/+PT/+vb/+/j/+/n//Pv//fv//fz//v3///9gKGHcAAAABnRSTlMADHh53+GPUDoCAAABq0lEQVQYGXXBCVcSYRQG4Jftw4Bqsig/GpBq0qZstE0JRW0ZSgbFW9m+b7ZamZCWmt1f3p3J5hwPzvMAs2NWsVQeduHjESOTzfV7ELFEinZIJWKYO1cwrYFj2q4DYDu9x+jdq/JNAHHqEsdY4URtDq6jT3vASHp/leGZ6jADSeqShHW0BtE4pa8ARk8Vgg+pqwDtAkWrBd+ongAyBsPnqApAvoVP3zfWV94/pH9QGkDgsp4Esr0IXFDjAImFXxzYekABlMsuRMvRk0Au50GwqcYBEh+ZN9rtTeYlCmBYOzNAq1o8fgPoVyYDfCmzbx4gscx8n+gF808KwLW1PVpxSoXBOuDlVd45b2bTB5sAiTXmL4uLX5n5zWsSQP2MFkWt7RmgeUSJjFJ5BolVDv0hAcCbnqhNXRvS2roJ8HSlWrvep5TBJH5waJME/msO6ZMNbOM+dYBJdJif3xWPfvM6CYQaF12E+KwHEt+Y3z57+uTxqy1eJYFoJN5xaIkEopG4vcLb1u6RQDTy3fmw3Ol02p9f3iIfotEuEC1JXZKIFqcucUSLJVK0QyoR+wtEprA0cDOepAAAAABJRU5ErkJggg==");--sf-img-1:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAECAYAAABsgwTvAAAAPElEQVR42nXMsQ0AIAwDQe/kWbL/BqwQSIFALznSF3FxqlqdOidmu1ODJRAQQDT7xUSIGCNETA8ilsH/3xfYtbHJD+xUAAAAAElFTkSuQmCC")}body{padding:0;margin:0}#b-navbar{white-space:nowrap;color:#444;height:29px;border-bottom:1px solid #888;background:transparent;font-size:13px;font-family:Arial,Sans-serif;position:relative}#b-navbar #b-navbar-bg{position:absolute;left:0;top:0;width:100%;height:30px;background-color:#fff;opacity:0.4}#b-navbar .navbar-right{text-align:right;padding-right:5px}#b-navbar-controls{margin-left:.2em;height:29px}#b-navbar #b-navbar-logo{display:block;margin-right:8px;margin-left:8px;width:20px;height:20px;background:var(--sf-img-0) no-repeat -26px 0;cursor:pointer}#b-navbar #b-query-box{background-color:#fff;margin:0 .5em 0 0;border:1px solid #aaa;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;padding:0 .3em}#b-navbar #b-query-icon{display:block;width:13px;height:13px;cursor:pointer;background:var(--sf-img-0) no-repeat 0 0}#b-navbar #b-query-icon:hover{background:var(--sf-img-0) no-repeat -13px 0}#b-navbar #b-query{font-size:13px;color:#000;background-color:transparent;border:none;margin:0}#b-navbar .b-link{display:inline-block;font-size:13px;vertical-align:middle;padding:2px .4em}#b-navbar .b-link{color:#333;text-decoration:none;white-space:nowrap;cursor:pointer}#b-navbar .b-link:hover{color:#55e;text-decoration:underline}#b-navbar #b-more span.arrow{background:var(--sf-img-1) no-repeat -12px center;display:inline-block;width:7px;height:10px}#b-navbar #b-more:hover span.arrow{background:var(--sf-img-1) no-repeat 0 center}.sf-hidden{display:none!important}</style></head>
+<body class="lang_zh rb" marginwidth=0 marginheight=0>
+<div id=b-navbar><div id=b-navbar-bg style=z-index:-1></div>
+<div id=b-navbar-fg>
+<table id=b-navbar-controls cellpadding=0 cellspacing=0 border=0 width=100%><tbody><tr style=height:20px><td valign=middle width=24px><a href=https://www.blogger.com/ id=b-navbar-logo tabindex=1 title="转到 Blogger.com"></a>
+<div id=b-sms class="b-mobile sf-hidden"></div></td>
+<td valign=middle width=150px><form id=searchthis action=https://graphicrants.blogspot.com/search style=display:inline><div id=b-query-box><table cellpadding=0 cellspacing=0><tbody><tr><td valign=middle><input type=text id=b-query name=q tabindex=3 style=width:120px title=搜索 value></td>
+<td valign=middle style=width:15px><a id=b-query-icon title=搜索此博客></a></table></div>
+</form></td>
+<td valign=middle nowrap class=gplus>
+<a id=b-more class=b-link tabindex=4>更多
+<span class=arrow></span></a></td>
+<td class=navbar-right align=right nowrap valign=middle>
+<a class=b-link href=https://www.blogger.com/home#create id=b-getorpost tabindex=8>创建博客</a>
+<a class=b-link href=https://www.blogger.com/ tabindex=9>登录</a></table></div></div>
+'></iframe></div>
+</div></div>
+<div class=body-fauxcolumns>
+<div class="fauxcolumn-outer body-fauxcolumn-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</div>
+<div class=content>
+<div class=content-fauxcolumns>
+<div class="fauxcolumn-outer content-fauxcolumn-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</div>
+<div class=content-outer>
+<div class="content-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left content-fauxborder-left">
+<div class="fauxborder-right content-fauxborder-right"></div>
+<div class=content-inner>
+<header>
+<div class=header-outer>
+<div class="header-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left header-fauxborder-left">
+<div class="fauxborder-right header-fauxborder-right"></div>
+<div class="region-inner header-inner">
+<div class="header section" id=header name=Header><div class="widget Header" data-version=1 id=Header1>
+<div id=header-inner>
+<div class=titlewrapper>
+<h1 class=title>
+<a href=https://graphicrants.blogspot.com/>
+Graphic Rants
+</a>
+</h1>
+</div>
+<div class=descriptionwrapper>
+<p class=description><span>Graphical, textual ramblings of a coder.</span></p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="header-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</header>
+<div class=tabs-outer>
+<div class="tabs-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left tabs-fauxborder-left">
+<div class="fauxborder-right tabs-fauxborder-right"></div>
+<div class="region-inner tabs-inner">
+<div class="tabs no-items section" id=crosscol name=Cross-Column></div>
+<div class="tabs no-items section" id=crosscol-overflow name="Cross-Column 2"></div>
+</div>
+</div>
+<div class="tabs-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<div class=main-outer>
+<div class="main-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left main-fauxborder-left">
+<div class="fauxborder-right main-fauxborder-right"></div>
+<div class="region-inner main-inner">
+<div class="columns fauxcolumns">
+<div class="fauxcolumn-outer fauxcolumn-center-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-left-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-right-outer">
+<div class=cap-top>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class=fauxborder-left>
+<div class=fauxborder-right></div>
+<div class=fauxcolumn-inner>
+</div>
+</div>
+<div class=cap-bottom>
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<div class=columns-inner>
+<div class=column-center-outer>
+<div class=column-center-inner>
+<div class="main section" id=main name=Main><div class="widget Blog" data-version=1 id=Blog1>
+<div class="blog-posts hfeed">
+ <div class=date-outer>
+ 
+<h2 class=date-header><span>Sunday, April 29, 2012</span></h2>
+ <div class=date-posts>
+ 
+<div class=post-outer>
+<div class="post hentry uncustomized-post-template" itemprop=blogPost itemscope itemtype=http://schema.org/BlogPosting>
+<a name=3382592314898548992></a>
+<h3 class="post-title entry-title" itemprop=name>
+Tiled Light Culling
+</h3>
+<div class=post-header>
+<div class=post-header-line-1></div>
+</div>
+<div class="post-body entry-content" id=post-body-3382592314898548992 itemprop="description articleBody">
+First off I'm sorry that I haven't updated this blog in so long. Much of what I have wanted to talk about on this blog, but couldn't, was going to be covered in my <a href=http://schedule.gdconf.com/session/6704/Rendering_Technology_of_Prey_2>GDC talk</a> but that was cancelled due to forces outside my control. If you follow me on twitter (<a href=https://twitter.com/#!/BrianKaris/>@BrianKaris</a>) you probably heard all about it. My comments were picked up by the press and quoted in every story about Prey 2 since. That was not my intention but oh, well. So, I will go back to what I was doing which is to talk here about things I am not directly working on.<br>
+<div>
+<br>
+<h3>
+ Tiled lighting</h3>
+There has been a lot of talk and excitement recently concerning tiled deferred [1][2] and tiled forward [3] rendering.<br>
+<br>
+I’d like to talk about an idea I’ve had on how to do tile culled lighting a little differently.<br>
+<br>
+The core behind either tiled forward or tiled deferred is to cull lights per tile. In other words for each tile, calculate which of the lights on screen affect it. The base level of culling is done by calculating a min and max depth for the tile and using this to construct a frustum. This frustum is intersected with a sphere from the light to determine which lights hit solid geometry in that tile. More complex culling can be done in addition to this such as back faced culling using a normal cone.<br>
+<br>
+This very basic level of culling, sphere vs frustum, only works with the addition of an artificial construct which is the radius of the light. Physically correct light falloff is inverse squared.<br>
+<div>
+<br>
+<h3>
+Light falloff</h3>
+<div>
+Small tangent I've been meaning to talk about for a while. To calculate the correct falloff from a sphere or disk light you should use these two equations [4]: <br>
+<br>
+Falloff:<br>
+<span style=font-size:large><span class=MathJax_Preview style=color:inherit;display:none></span><div class=MathJax_Display style=text-align:center><span class=MathJax id=MathJax-Element-1-Frame tabindex=0 style=text-align:center;position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>S</mi><mi>p</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mo>=</mo><mfrac><msup><mi>r</mi><mn>2</mn></msup><msup><mi>d</mi><mn>2</mn></msup></mfrac></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-1 style=width:6.623em;display:inline-block><span style=display:inline-block;position:relative;width:5.512em;height:0px;font-size:120%><span style=position:absolute;clip:rect(0.882em,1005.51em,3.428em,-999.998em);top:-2.544em;left:0em><span class=mrow id=MathJax-Span-2><span class=mi id=MathJax-Span-3 style=font-family:STIXGeneral-Italic>S<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-4 style=font-family:STIXGeneral-Italic>p</span><span class=mi id=MathJax-Span-5 style=font-family:STIXGeneral-Italic>h</span><span class=mi id=MathJax-Span-6 style=font-family:STIXGeneral-Italic>e</span><span class=mi id=MathJax-Span-7 style=font-family:STIXGeneral-Italic>r<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-8 style=font-family:STIXGeneral-Italic>e</span><span class=mo id=MathJax-Span-9 style=font-family:STIXGeneral-Regular;padding-left:.326em>=</span><span class=mfrac id=MathJax-Span-10 style=padding-left:.326em><span style=display:inline-block;position:relative;width:1.113em;height:0px;margin-right:.141em;margin-left:.141em><span style=position:absolute;clip:rect(3.012em,1000.88em,4.123em,-999.998em);top:-4.674em;left:50%;margin-left:-0.461em><span class=msubsup id=MathJax-Span-11><span style=display:inline-block;position:relative;width:.882em;height:0px><span style=position:absolute;clip:rect(3.382em,1000.42em,4.123em,-999.998em);top:-3.979em;left:0em><span class=mi id=MathJax-Span-12 style=font-family:STIXGeneral-Italic>r<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;top:-4.35em;left:.465em><span class=mn id=MathJax-Span-13 style=font-size:70.7%;font-family:STIXGeneral-Regular>2</span><span style=display:inline-block;width:0px;height:3.984em></span></span></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(3.058em,1001.02em,4.123em,-999.998em);top:-3.238em;left:50%;margin-left:-0.507em><span class=msubsup id=MathJax-Span-14><span style=display:inline-block;position:relative;width:1.021em;height:0px><span style=position:absolute;clip:rect(3.15em,1000.51em,4.123em,-999.998em);top:-3.979em;left:0em><span class=mi id=MathJax-Span-15 style=font-family:STIXGeneral-Italic>d<span style=display:inline-block;overflow:hidden;height:1px;width:.049em></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;top:-4.257em;left:.604em><span class=mn id=MathJax-Span-16 style=font-size:70.7%;font-family:STIXGeneral-Regular>2</span><span style=display:inline-block;width:0px;height:3.984em></span></span></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(0.882em,1001.11em,1.206em,-999.998em);top:-1.294em;left:0em><span style="display:inline-block;overflow:hidden;vertical-align:0em;border-top:1.3px solid;width:1.113em;height:0px"></span><span style=display:inline-block;width:0px;height:1.067em></span></span></span></span></span><span style=display:inline-block;width:0px;height:2.549em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.942em;border-left:0px solid;width:0px;height:2.836em"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML display=block><mi>S</mi><mi>p</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mo>=</mo><mfrac><msup><mi>r</mi><mn>2</mn></msup><msup><mi>d</mi><mn>2</mn></msup></mfrac></math></span></span></div></span><br>
+<span style=font-size:large><span class=MathJax_Preview style=color:inherit;display:none></span><div class=MathJax_Display style=text-align:center><span class=MathJax id=MathJax-Element-2-Frame tabindex=0 style=text-align:center;position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>D</mi><mi>i</mi><mi>s</mi><mi>k</mi><mo>=</mo><mfrac><msup><mi>r</mi><mn>2</mn></msup><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><msup><mi>d</mi><mn>2</mn></msup></mrow></mfrac></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-17 style=width:8.012em;display:inline-block><span style=display:inline-block;position:relative;width:6.669em;height:0px;font-size:120%><span style=position:absolute;clip:rect(0.882em,1006.67em,3.428em,-999.998em);top:-2.544em;left:0em><span class=mrow id=MathJax-Span-18><span class=mi id=MathJax-Span-19 style=font-family:STIXGeneral-Italic>D</span><span class=mi id=MathJax-Span-20 style=font-family:STIXGeneral-Italic>i</span><span class=mi id=MathJax-Span-21 style=font-family:STIXGeneral-Italic>s</span><span class=mi id=MathJax-Span-22 style=font-family:STIXGeneral-Italic>k<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mo id=MathJax-Span-23 style=font-family:STIXGeneral-Regular;padding-left:.326em>=</span><span class=mfrac id=MathJax-Span-24 style=padding-left:.326em><span style=display:inline-block;position:relative;width:3.197em;height:0px;margin-right:.141em;margin-left:.141em><span style=position:absolute;clip:rect(3.012em,1000.88em,4.123em,-999.998em);top:-4.674em;left:50%;margin-left:-0.461em><span class=msubsup id=MathJax-Span-25><span style=display:inline-block;position:relative;width:.882em;height:0px><span style=position:absolute;clip:rect(3.382em,1000.42em,4.123em,-999.998em);top:-3.979em;left:0em><span class=mi id=MathJax-Span-26 style=font-family:STIXGeneral-Italic>r<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;top:-4.35em;left:.465em><span class=mn id=MathJax-Span-27 style=font-size:70.7%;font-family:STIXGeneral-Regular>2</span><span style=display:inline-block;width:0px;height:3.984em></span></span></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(3.058em,1003.06em,4.169em,-999.998em);top:-3.238em;left:50%;margin-left:-1.525em><span class=mrow id=MathJax-Span-28><span class=msubsup id=MathJax-Span-29><span style=display:inline-block;position:relative;width:.882em;height:0px><span style=position:absolute;clip:rect(3.382em,1000.42em,4.123em,-999.998em);top:-3.979em;left:0em><span class=mi id=MathJax-Span-30 style=font-family:STIXGeneral-Italic>r<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;top:-4.257em;left:.465em><span class=mn id=MathJax-Span-31 style=font-size:70.7%;font-family:STIXGeneral-Regular>2</span><span style=display:inline-block;width:0px;height:3.984em></span></span></span></span><span class=mo id=MathJax-Span-32 style=font-family:STIXGeneral-Regular;padding-left:.234em>+</span><span class=msubsup id=MathJax-Span-33 style=padding-left:.234em><span style=display:inline-block;position:relative;width:1.021em;height:0px><span style=position:absolute;clip:rect(3.15em,1000.51em,4.123em,-999.998em);top:-3.979em;left:0em><span class=mi id=MathJax-Span-34 style=font-family:STIXGeneral-Italic>d<span style=display:inline-block;overflow:hidden;height:1px;width:.049em></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;top:-4.257em;left:.604em><span class=mn id=MathJax-Span-35 style=font-size:70.7%;font-family:STIXGeneral-Regular>2</span><span style=display:inline-block;width:0px;height:3.984em></span></span></span></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(0.882em,1003.2em,1.206em,-999.998em);top:-1.294em;left:0em><span style="display:inline-block;overflow:hidden;vertical-align:0em;border-top:1.3px solid;width:3.197em;height:0px"></span><span style=display:inline-block;width:0px;height:1.067em></span></span></span></span></span><span style=display:inline-block;width:0px;height:2.549em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.942em;border-left:0px solid;width:0px;height:2.836em"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML display=block><mi>D</mi><mi>i</mi><mi>s</mi><mi>k</mi><mo>=</mo><mfrac><msup><mi>r</mi><mn>2</mn></msup><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><msup><mi>d</mi><mn>2</mn></msup></mrow></mfrac></math></span></span></div></span><br>
+<br>
+If you are dealing with light values in lumens you can replace the r^2 factor with 1. For a sphere light this gives you 1/d^2 which is what you expected. The reason I bring this up is I found it very helpful in understanding why the radiance appears to approach infinity when the distance to the light approaches zero. Put a light bulb on the ground and this obviously isn’t true. The truth from the above equation is the falloff approaches 1 when the distance to the sphere approaches zero. This gets hidden when the units change from lux to lumens and the surface area gets factored out. The moral of the story is don’t allow surfaces to penetrate the shape of a light because the math will not be correct anymore.<br>
+<br>
+<h3>
+Culling inverse squared falloff</h3>
+</div>
+<div>
+Back to tiled culling. Inverse squared falloff means there is no distance in which the light contributes zero illumination. This is very inconvenient for a game world filled with lights. Two possibilities, first is to subtract a constant term from the falloff but max with 0. The second is windowing the falloff with something like (1-d^2/a^2)^2. The first loses energy over the entire influence of the light. The second loses energy only away from the source. I should note the tolerance should be proportional to the lights intensity. For simplicity I will use the following for this post:<br>
+<span style=font-size:large><span class=MathJax_Preview style=color:inherit;display:none></span><div class=MathJax_Display style=text-align:center><span class=MathJax id=MathJax-Element-3-Frame tabindex=0 style=text-align:center;position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>F</mi><mi>a</mi><mi>l</mi><mi>l</mi><mi>o</mi><mi>f</mi><mi>f</mi><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mfrac><mn>1</mn><msup><mi>d</mi><mn>2</mn></msup></mfrac><mo>&amp;#x2212;</mo><mi>t</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo stretchy="false">)</mo></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-36 style=width:16.808em;display:inline-block><span style=display:inline-block;position:relative;width:13.984em;height:0px;font-size:120%><span style=position:absolute;clip:rect(1.067em,1013.94em,3.428em,-999.998em);top:-2.544em;left:0em><span class=mrow id=MathJax-Span-37><span class=mi id=MathJax-Span-38 style=font-family:STIXGeneral-Italic>F<span style=display:inline-block;overflow:hidden;height:1px;width:.049em></span></span><span class=mi id=MathJax-Span-39 style=font-family:STIXGeneral-Italic>a</span><span class=mi id=MathJax-Span-40 style=font-family:STIXGeneral-Italic>l<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-41 style=font-family:STIXGeneral-Italic>l<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-42 style=font-family:STIXGeneral-Italic>o</span><span class=mi id=MathJax-Span-43 style=font-family:STIXGeneral-Italic>f<span style=display:inline-block;overflow:hidden;height:1px;width:.141em></span></span><span class=mi id=MathJax-Span-44 style=font-family:STIXGeneral-Italic>f<span style=display:inline-block;overflow:hidden;height:1px;width:.141em></span></span><span class=mo id=MathJax-Span-45 style=font-family:STIXGeneral-Regular;padding-left:.326em>=</span><span class=mi id=MathJax-Span-46 style=font-family:STIXGeneral-Italic;padding-left:.326em>m</span><span class=mi id=MathJax-Span-47 style=font-family:STIXGeneral-Italic>a</span><span class=mi id=MathJax-Span-48 style=font-family:STIXGeneral-Italic>x<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mo id=MathJax-Span-49 style=font-family:STIXGeneral-Regular>(</span><span class=mn id=MathJax-Span-50 style=font-family:STIXGeneral-Regular>0</span><span class=mo id=MathJax-Span-51 style=font-family:STIXGeneral-Regular>,</span><span class=mfrac id=MathJax-Span-52 style=padding-left:.188em><span style=display:inline-block;position:relative;width:1.113em;height:0px;margin-right:.141em;margin-left:.141em><span style=position:absolute;clip:rect(3.15em,1000.42em,4.123em,-999.998em);top:-4.674em;left:50%;margin-left:-0.229em><span class=mn id=MathJax-Span-53 style=font-family:STIXGeneral-Regular>1</span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(3.058em,1001.02em,4.123em,-999.998em);top:-3.238em;left:50%;margin-left:-0.507em><span class=msubsup id=MathJax-Span-54><span style=display:inline-block;position:relative;width:1.021em;height:0px><span style=position:absolute;clip:rect(3.15em,1000.51em,4.123em,-999.998em);top:-3.979em;left:0em><span class=mi id=MathJax-Span-55 style=font-family:STIXGeneral-Italic>d<span style=display:inline-block;overflow:hidden;height:1px;width:.049em></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;top:-4.257em;left:.604em><span class=mn id=MathJax-Span-56 style=font-size:70.7%;font-family:STIXGeneral-Regular>2</span><span style=display:inline-block;width:0px;height:3.984em></span></span></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(0.882em,1001.11em,1.206em,-999.998em);top:-1.294em;left:0em><span style="display:inline-block;overflow:hidden;vertical-align:0em;border-top:1.3px solid;width:1.113em;height:0px"></span><span style=display:inline-block;width:0px;height:1.067em></span></span></span></span><span class=mo id=MathJax-Span-57 style=font-family:STIXGeneral-Regular;padding-left:.234em>−</span><span class=mi id=MathJax-Span-58 style=font-family:STIXGeneral-Italic;padding-left:.234em>t<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-59 style=font-family:STIXGeneral-Italic>o</span><span class=mi id=MathJax-Span-60 style=font-family:STIXGeneral-Italic>l<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-61 style=font-family:STIXGeneral-Italic>e</span><span class=mi id=MathJax-Span-62 style=font-family:STIXGeneral-Italic>r<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-63 style=font-family:STIXGeneral-Italic>a</span><span class=mi id=MathJax-Span-64 style=font-family:STIXGeneral-Italic>n</span><span class=mi id=MathJax-Span-65 style=font-family:STIXGeneral-Italic>c</span><span class=mi id=MathJax-Span-66 style=font-family:STIXGeneral-Italic>e</span><span class=mo id=MathJax-Span-67 style=font-family:STIXGeneral-Regular>)</span></span><span style=display:inline-block;width:0px;height:2.549em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.942em;border-left:0px solid;width:0px;height:2.614em"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML display=block><mi>F</mi><mi>a</mi><mi>l</mi><mi>l</mi><mi>o</mi><mi>f</mi><mi>f</mi><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy=false>(</mo><mn>0</mn><mo>,</mo><mfrac><mn>1</mn><msup><mi>d</mi><mn>2</mn></msup></mfrac><mo>−</mo><mi>t</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo stretchy=false>)</mo></math></span></span></div></span><br>
+<br>
+The distance cutoff can be thought of as an error tolerance per light. Unfortunately glossy specular doesn’t work well in this framework at all. The intensity of a glossy, energy conserving specular highlight, even for a dielectric, will be WAY higher than the lambert diffuse. This spoils that idea of the distance falloff working as an error tolerance for both diffuse and specular because they are at completely different scales. In other words, for glossy specular, the distance will have to be very large for even a moderate tolerance, compared to diffuse.<br>
+<br>
+This points to there being two different tolerances, one for diffuse the other for specular. If these both just affect the radius of influence we might as well just set the radius of both as the maximum because diffuse doesn’t take anything more to calculate than specular. Fortunately, maximum intensity of the specular inversely scales with the size of the highlight. This of course is the entire point of energy conservation but energy conservation helps us in culling. The higher the gloss, the larger the radius of influence the tighter the cone of influencing normals.<br>
+<br>
+If it isn’t clear what I mean, think of a chrome ball. With a mirror finish, a light source, even as dim as a candle, is visible at really large distances. The important area on the ball is very small, just the size of the candle flame’s reflection. The less glossy the ball, the less distance the light source is visible but the more area on the ball the specular highlight covers.<br>
+<br>
+Before we can cull using this information we need specular to go to zero past a tolerance just like distance falloff. The easiest is to subtract the tolerance from the specular distribution and max it with zero. For simplicity I will use phong for this post:<br>
+<span style=font-size:large><span class=MathJax_Preview style=color:inherit;display:none></span><div class=MathJax_Display style=text-align:center><span class=MathJax id=MathJax-Element-4-Frame tabindex=0 style=text-align:center;position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>P</mi><mi>h</mi><mi>o</mi><mi>n</mi><mi>g</mi><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mn>2</mn></mfrac><mi>d</mi><mi>o</mi><mi>t</mi><mo stretchy="false">(</mo><mi>L</mi><mo>,</mo><mi>R</mi><msup><mo stretchy="false">)</mo><mi>n</mi></msup><mo>&amp;#x2212;</mo><mi>t</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo stretchy="false">)</mo></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-68 style=width:22.456em;display:inline-block><span style=display:inline-block;position:relative;width:18.706em;height:0px;font-size:120%><span style=position:absolute;clip:rect(1.067em,1018.66em,3.382em,-999.998em);top:-2.544em;left:0em><span class=mrow id=MathJax-Span-69><span class=mi id=MathJax-Span-70 style=font-family:STIXGeneral-Italic>P</span><span class=mi id=MathJax-Span-71 style=font-family:STIXGeneral-Italic>h</span><span class=mi id=MathJax-Span-72 style=font-family:STIXGeneral-Italic>o</span><span class=mi id=MathJax-Span-73 style=font-family:STIXGeneral-Italic>n</span><span class=mi id=MathJax-Span-74 style=font-family:STIXGeneral-Italic>g</span><span class=mo id=MathJax-Span-75 style=font-family:STIXGeneral-Regular;padding-left:.326em>=</span><span class=mi id=MathJax-Span-76 style=font-family:STIXGeneral-Italic;padding-left:.326em>m</span><span class=mi id=MathJax-Span-77 style=font-family:STIXGeneral-Italic>a</span><span class=mi id=MathJax-Span-78 style=font-family:STIXGeneral-Italic>x<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mo id=MathJax-Span-79 style=font-family:STIXGeneral-Regular>(</span><span class=mn id=MathJax-Span-80 style=font-family:STIXGeneral-Regular>0</span><span class=mo id=MathJax-Span-81 style=font-family:STIXGeneral-Regular>,</span><span class=mfrac id=MathJax-Span-82 style=padding-left:.188em><span style=display:inline-block;position:relative;width:2.271em;height:0px;margin-right:.141em;margin-left:.141em><span style=position:absolute;clip:rect(3.15em,1002.13em,4.169em,-999.998em);top:-4.674em;left:50%;margin-left:-1.063em><span class=mrow id=MathJax-Span-83><span class=mi id=MathJax-Span-84 style=font-family:STIXGeneral-Italic>n</span><span class=mo id=MathJax-Span-85 style=font-family:STIXGeneral-Regular;padding-left:.234em>+</span><span class=mn id=MathJax-Span-86 style=font-family:STIXGeneral-Regular;padding-left:.234em>2</span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(3.15em,1000.47em,4.123em,-999.998em);top:-3.285em;left:50%;margin-left:-0.229em><span class=mn id=MathJax-Span-87 style=font-family:STIXGeneral-Regular>2</span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(0.882em,1002.27em,1.206em,-999.998em);top:-1.294em;left:0em><span style="display:inline-block;overflow:hidden;vertical-align:0em;border-top:1.3px solid;width:2.271em;height:0px"></span><span style=display:inline-block;width:0px;height:1.067em></span></span></span></span><span class=mi id=MathJax-Span-88 style=font-family:STIXGeneral-Italic>d<span style=display:inline-block;overflow:hidden;height:1px;width:.049em></span></span><span class=mi id=MathJax-Span-89 style=font-family:STIXGeneral-Italic>o</span><span class=mi id=MathJax-Span-90 style=font-family:STIXGeneral-Italic>t<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mo id=MathJax-Span-91 style=font-family:STIXGeneral-Regular>(</span><span class=mi id=MathJax-Span-92 style=font-family:STIXGeneral-Italic>L<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mo id=MathJax-Span-93 style=font-family:STIXGeneral-Regular>,</span><span class=mi id=MathJax-Span-94 style=font-family:STIXGeneral-Italic;padding-left:.188em>R</span><span class=msubsup id=MathJax-Span-95><span style=display:inline-block;position:relative;width:.743em;height:0px><span style=position:absolute;clip:rect(3.15em,1000.28em,4.308em,-999.998em);top:-3.979em;left:0em><span class=mo id=MathJax-Span-96 style=font-family:STIXGeneral-Regular>)</span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;top:-4.396em;left:.326em><span class=mi id=MathJax-Span-97 style=font-size:70.7%;font-family:STIXGeneral-Italic>n</span><span style=display:inline-block;width:0px;height:3.984em></span></span></span></span><span class=mo id=MathJax-Span-98 style=font-family:STIXGeneral-Regular;padding-left:.234em>−</span><span class=mi id=MathJax-Span-99 style=font-family:STIXGeneral-Italic;padding-left:.234em>t<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-100 style=font-family:STIXGeneral-Italic>o</span><span class=mi id=MathJax-Span-101 style=font-family:STIXGeneral-Italic>l<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-102 style=font-family:STIXGeneral-Italic>e</span><span class=mi id=MathJax-Span-103 style=font-family:STIXGeneral-Italic>r<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-104 style=font-family:STIXGeneral-Italic>a</span><span class=mi id=MathJax-Span-105 style=font-family:STIXGeneral-Italic>n</span><span class=mi id=MathJax-Span-106 style=font-family:STIXGeneral-Italic>c</span><span class=mi id=MathJax-Span-107 style=font-family:STIXGeneral-Italic>e</span><span class=mo id=MathJax-Span-108 style=font-family:STIXGeneral-Regular>)</span></span><span style=display:inline-block;width:0px;height:2.549em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.886em;border-left:0px solid;width:0px;height:2.558em"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML display=block><mi>P</mi><mi>h</mi><mi>o</mi><mi>n</mi><mi>g</mi><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy=false>(</mo><mn>0</mn><mo>,</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mn>2</mn></mfrac><mi>d</mi><mi>o</mi><mi>t</mi><mo stretchy=false>(</mo><mi>L</mi><mo>,</mo><mi>R</mi><msup><mo stretchy=false>)</mo><mi>n</mi></msup><mo>−</mo><mi>t</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo stretchy=false>)</mo></math></span></span></div></span><br>
+<br>
+<h3>
+Specular cone culling</h3>
+</div>
+<div>
+This nicely maps to a cone of L vectors per pixel that will give a non-zero specular highlight.<br>
+<br>
+Cone axis:<br>
+<span style=font-size:large><span class=MathJax_Preview style=color:inherit;display:none></span><div class=MathJax_Display style=text-align:center><span class=MathJax id=MathJax-Element-5-Frame tabindex=0 style=text-align:center;position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>R</mi><mo>=</mo><mn>2</mn><mi>N</mi><mi>d</mi><mi>o</mi><mi>t</mi><mo stretchy="false">(</mo><mi>N</mi><mo>,</mo><mi>V</mi><mo stretchy="false">)</mo><mo>&amp;#x2212;</mo><mi>V</mi></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-109 style=width:10.697em;display:inline-block><span style=display:inline-block;position:relative;width:8.891em;height:0px;font-size:120%><span style=position:absolute;clip:rect(1.715em,1008.89em,2.873em,-999.998em);top:-2.544em;left:0em><span class=mrow id=MathJax-Span-110><span class=mi id=MathJax-Span-111 style=font-family:STIXGeneral-Italic>R</span><span class=mo id=MathJax-Span-112 style=font-family:STIXGeneral-Regular;padding-left:.326em>=</span><span class=mn id=MathJax-Span-113 style=font-family:STIXGeneral-Regular;padding-left:.326em>2</span><span class=mi id=MathJax-Span-114 style=font-family:STIXGeneral-Italic>N<span style=display:inline-block;overflow:hidden;height:1px;width:.049em></span></span><span class=mi id=MathJax-Span-115 style=font-family:STIXGeneral-Italic>d<span style=display:inline-block;overflow:hidden;height:1px;width:.049em></span></span><span class=mi id=MathJax-Span-116 style=font-family:STIXGeneral-Italic>o</span><span class=mi id=MathJax-Span-117 style=font-family:STIXGeneral-Italic>t<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mo id=MathJax-Span-118 style=font-family:STIXGeneral-Regular>(</span><span class=mi id=MathJax-Span-119 style=font-family:STIXGeneral-Italic>N<span style=display:inline-block;overflow:hidden;height:1px;width:.049em></span></span><span class=mo id=MathJax-Span-120 style=font-family:STIXGeneral-Regular>,</span><span class=mi id=MathJax-Span-121 style=font-family:STIXGeneral-Italic;padding-left:.188em>V<span style=display:inline-block;overflow:hidden;height:1px;width:.095em></span></span><span class=mo id=MathJax-Span-122 style=font-family:STIXGeneral-Regular>)</span><span class=mo id=MathJax-Span-123 style=font-family:STIXGeneral-Regular;padding-left:.234em>−</span><span class=mi id=MathJax-Span-124 style=font-family:STIXGeneral-Italic;padding-left:.234em>V<span style=display:inline-block;overflow:hidden;height:1px;width:.095em></span></span></span><span style=display:inline-block;width:0px;height:2.549em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.275em;border-left:0px solid;width:0px;height:1.169em"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML display=block><mi>R</mi><mo>=</mo><mn>2</mn><mi>N</mi><mi>d</mi><mi>o</mi><mi>t</mi><mo stretchy=false>(</mo><mi>N</mi><mo>,</mo><mi>V</mi><mo stretchy=false>)</mo><mo>−</mo><mi>V</mi></math></span></span></div></span><br>
+<br>
+Cone angle:<br>
+<span style=font-size:large><span class=MathJax_Preview style=color:inherit;display:none></span><div class=MathJax_Display style=text-align:center><span class=MathJax id=MathJax-Element-6-Frame tabindex=0 style=text-align:center;position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>A</mi><mi>n</mi><mi>g</mi><mi>l</mi><mi>e</mi><mo>=</mo><mi>a</mi><mi>c</mi><mi>o</mi><mi>s</mi><mrow><mo>(</mo><mroot><mfrac><mrow><mn>2</mn><mi>t</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mi>n</mi></mroot><mo>)</mo></mrow></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-125 style=width:15.604em;display:inline-block><span style=display:inline-block;position:relative;width:13.012em;height:0px;font-size:120%><span style=position:absolute;clip:rect(2.456em,1012.83em,5.234em,-999.998em);top:-4.118em;left:0em><span class=mrow id=MathJax-Span-126><span class=mi id=MathJax-Span-127 style=font-family:STIXGeneral-Italic>A</span><span class=mi id=MathJax-Span-128 style=font-family:STIXGeneral-Italic>n</span><span class=mi id=MathJax-Span-129 style=font-family:STIXGeneral-Italic>g</span><span class=mi id=MathJax-Span-130 style=font-family:STIXGeneral-Italic>l<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-131 style=font-family:STIXGeneral-Italic>e</span><span class=mo id=MathJax-Span-132 style=font-family:STIXGeneral-Regular;padding-left:.326em>=</span><span class=mi id=MathJax-Span-133 style=font-family:STIXGeneral-Italic;padding-left:.326em>a</span><span class=mi id=MathJax-Span-134 style=font-family:STIXGeneral-Italic>c</span><span class=mi id=MathJax-Span-135 style=font-family:STIXGeneral-Italic>o</span><span class=mi id=MathJax-Span-136 style=font-family:STIXGeneral-Italic>s</span><span class=mrow id=MathJax-Span-137 style=padding-left:.188em><span class=mo id=MathJax-Span-138 style=vertical-align:-0.6em><span style=font-family:STIXSizeThreeSym>(</span></span><span class=mroot id=MathJax-Span-139><span style=display:inline-block;position:relative;width:5.836em;height:0px><span style=position:absolute;clip:rect(2.502em,1004.68em,4.863em,-999.998em);top:-3.979em;left:1.113em><span class=mfrac id=MathJax-Span-140><span style=display:inline-block;position:relative;width:4.447em;height:0px;margin-right:.141em;margin-left:.141em><span style=position:absolute;clip:rect(3.15em,1004.31em,4.123em,-999.998em);top:-4.674em;left:50%;margin-left:-2.174em><span class=mrow id=MathJax-Span-141><span class=mn id=MathJax-Span-142 style=font-family:STIXGeneral-Regular>2</span><span class=mi id=MathJax-Span-143 style=font-family:STIXGeneral-Italic>t<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-144 style=font-family:STIXGeneral-Italic>o</span><span class=mi id=MathJax-Span-145 style=font-family:STIXGeneral-Italic>l<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-146 style=font-family:STIXGeneral-Italic>e</span><span class=mi id=MathJax-Span-147 style=font-family:STIXGeneral-Italic>r<span style=display:inline-block;overflow:hidden;height:1px;width:.002em></span></span><span class=mi id=MathJax-Span-148 style=font-family:STIXGeneral-Italic>a</span><span class=mi id=MathJax-Span-149 style=font-family:STIXGeneral-Italic>n</span><span class=mi id=MathJax-Span-150 style=font-family:STIXGeneral-Italic>c</span><span class=mi id=MathJax-Span-151 style=font-family:STIXGeneral-Italic>e</span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(3.15em,1002.13em,4.169em,-999.998em);top:-3.285em;left:50%;margin-left:-1.063em><span class=mrow id=MathJax-Span-152><span class=mi id=MathJax-Span-153 style=font-family:STIXGeneral-Italic>n</span><span class=mo id=MathJax-Span-154 style=font-family:STIXGeneral-Regular;padding-left:.234em>+</span><span class=mn id=MathJax-Span-155 style=font-family:STIXGeneral-Regular;padding-left:.234em>2</span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(0.882em,1004.45em,1.206em,-999.998em);top:-1.294em;left:0em><span style="display:inline-block;overflow:hidden;vertical-align:0em;border-top:1.3px solid;width:4.447em;height:0px"></span><span style=display:inline-block;width:0px;height:1.067em></span></span></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(3.012em,1004.73em,3.336em,-999.998em);top:-4.674em;left:1.113em><span style=display:inline-block;position:relative;width:4.725em;height:0px><span style=position:absolute;font-family:STIXGeneral-Regular;top:-3.979em;left:0em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;font-family:STIXGeneral-Regular;top:-3.979em;left:4.215em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:.419em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:.836em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:1.252em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:1.669em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:2.086em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:2.502em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:2.919em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:3.382em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span><span style=font-family:STIXGeneral-Regular;position:absolute;top:-3.979em;left:3.799em>‾<span style=display:inline-block;width:0px;height:3.984em></span></span></span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(1.808em,1001.16em,4.539em,-999.998em);top:-3.424em;left:0em><span style=font-family:STIXSizeTwoSym>√</span><span style=display:inline-block;width:0px;height:3.984em></span></span><span style=position:absolute;clip:rect(3.613em,1000.23em,4.123em,-999.998em);top:-4.35em;left:.512em><span class=mi id=MathJax-Span-156 style=font-size:50%;font-family:STIXGeneral-Italic>n</span><span style=display:inline-block;width:0px;height:3.984em></span></span></span></span><span class=mo id=MathJax-Span-157 style=vertical-align:-0.6em><span style=font-family:STIXSizeThreeSym>)</span></span></span></span><span style=display:inline-block;width:0px;height:4.123em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-1.219em;border-left:0px solid;width:0px;height:3.114em"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML display=block><mi>A</mi><mi>n</mi><mi>g</mi><mi>l</mi><mi>e</mi><mo>=</mo><mi>a</mi><mi>c</mi><mi>o</mi><mi>s</mi><mrow><mo>(</mo><mroot><mfrac><mrow><mn>2</mn><mi>t</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>e</mi></mrow><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mfrac><mi>n</mi></mroot><mo>)</mo></mrow></math></span></span></div></span><br>
+<br>
+Just like how a normal cone can be generated for the means of back face culling, these specular cones can be unioned for the tile and used to cull. We can now cull specular on a per tile basis which is what is exciting about tiled light culling.<br>
+<br>
+I should mention the two culling factors need to actually be combined for specular. The sphere for falloff culling needs to expand based on gloss. The (n+2)/2 should be rolled into the distance falloff which leaves angle as just acos(tolerance^(1/n)). I’ve leave these details as an exercise for the reader.&nbsp;Now, to be clear I'm not&nbsp;advocating&nbsp;having diffuse and specular light lists. I'm suggesting culling the light if diffuse is below tolerance AND spec is below tolerance.</div>
+<div>
+<br>
+This leaves us with a scheme much like biased importance sampling. I haven’t tried this so I can’t comment on how practical it is but it has the potential to produce much more lively reflective surfaces due to having more specular highlights for minimal increase in cost. It also is nice to know your image is off by a known error tolerance from ground truth (per light in respect to shading).<br>
+<br>
+The way I handle this light falloff business for current gen in P2 is by having all lighting beyond the artist set bounds of the deferred light get precalculated. For diffuse falloff I take what was truncated from the deferred light and add it to the lightmap (and SH probes). For specular I add it to the environment map. This means I can maintain the inverse squared light falloff and not lose any energy. I just split it into runtime and precalculated portions. Probably most important, light sources that are distant still show up in glossy reflections. This new culling idea may get that without the slop that comes from baking it into fixed representations.<br>
+<br>
+I intended to also talk about how to add shadows but this is getting long. I'll save it for the next post.<br>
+<br>
+References:<br>
+[1]&nbsp;<a href=http://visual-computing.intel-research.net/art/publications/deferred_rendering/>http://visual-computing.intel-research.net/art/publications/deferred_rendering/</a><br>
+[2]&nbsp;<a href=http://www.slideshare.net/DICEStudio/spubased-deferred-shading-in-battlefield-3-for-playstation-3>http://www.slideshare.net/DICEStudio/spubased-deferred-shading-in-battlefield-3-for-playstation-3</a><br>
+[3]&nbsp;<a href=http://aras-p.info/blog/2012/03/27/tiled-forward-shading-links/>http://aras-p.info/blog/2012/03/27/tiled-forward-shading-links/</a><br>
+[4] <a href=http://www.iquilezles.org/www/articles/sphereao/sphereao.htm>http://www.iquilezles.org/www/articles/sphereao/sphereao.htm</a></div>
+</div>
+</div>
+<div style=clear:both></div>
+</div>
+<div class=post-footer>
+<div class="post-footer-line post-footer-line-1">
+<span class="post-author vcard">
+Posted by
+<span class=fn itemprop=author itemscope itemtype=http://schema.org/Person>
+<a class=g-profile href=https://www.blogger.com/profile/03069330593380092516 rel=author title="author profile" data-gapiscan=true data-onload=true data-gapiattached=true>
+<span itemprop=name>Brian Karis</span>
+</a>
+</span>
+</span>
+<span class=post-timestamp>
+at
+<a class=timestamp-link href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html rel=bookmark title="permanent link"><abbr class=published itemprop=datePublished title=2012-04-29T20:29:00-05:00>8:29 PM</abbr></a>
+</span>
+<span class=post-comment-link>
+</span>
+<span class=post-icons>
+<span class="item-control blog-admin pid-2045827375 sf-hidden">
+</span>
+</span>
+<div class="post-share-buttons goog-inline-block">
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class=post-labels>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+<span class=post-location>
+</span>
+</div>
+</div>
+</div>
+<div class=comments id=comments>
+<a name=comments></a>
+<h4>2 comments:</h4>
+<div id=Blog1_comments-block-wrapper>
+<dl class=avatar-comment-indent id=comments-block>
+<dt class=comment-author id=c1019202399265658781>
+<a name=c1019202399265658781></a>
+<div class="avatar-image-container avatar-stock"><span dir=ltr><a href=https://www.blogger.com/profile/11170507314218400784 target rel=nofollow class=avatar-hovercard id=av-1019202399265658781-11170507314218400784><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' width=35 height=35 alt title="Sébastien Lagarde" style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important">
+</a></span></div>
+<a href=https://www.blogger.com/profile/11170507314218400784 rel=nofollow>Sébastien Lagarde</a>
+said...
+</dt>
+<dd class=comment-body id=Blog1_cmt-1019202399265658781>
+<p>
+Hi, i dont get the statement " you are dealing with light values in lumens you can replace the r^2 factor with 1". Is it possible that you explain it more ? Thank you
+</p>
+</dd>
+<dd class=comment-footer>
+<span class=comment-timestamp>
+<a href="https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html?showComment=1337742108899#c1019202399265658781" title="comment permalink">
+May 22, 2012 at 10:01 PM
+</a>
+<span class="item-control blog-admin pid-1388578417 sf-hidden">
+</span>
+</span>
+</dd>
+<dt class="comment-author blog-author" id=c871189539949245109>
+<a name=c871189539949245109></a>
+<div class="avatar-image-container avatar-stock"><span dir=ltr><a href=https://www.blogger.com/profile/03069330593380092516 target rel=nofollow class=avatar-hovercard id=av-871189539949245109-03069330593380092516><img src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"><rect fill-opacity="0"/></svg>' width=35 height=35 alt title="Brian Karis" style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important">
+</a></span></div>
+<a href=https://www.blogger.com/profile/03069330593380092516 rel=nofollow>Brian Karis</a>
+said...
+</dt>
+<dd class=comment-body id=Blog1_cmt-871189539949245109>
+<p>
+A lumen (lm) is a unit of the amount of light emitted in any direction from a light source. It is independent from surface area or distance. The r^2/d^2 formula makes sense if the units of the light source were in lux, which is lm/m^2. Perhaps a more accurate thing to say is replace the r^2 with a constant but unless you have a camera model that you are trying to exactly match to the settings of a real world camera there will always be an exposure fudge factor which can nicely eat up any arbitrary constants. Maybe I should write a post about this concept as it simplifies so many physically based rendering formulas for us game guys that the FX guys can't necessarily take advantage of.
+</p>
+</dd>
+<dd class=comment-footer>
+<span class=comment-timestamp>
+<a href="https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html?showComment=1338145798710#c871189539949245109" title="comment permalink">
+May 27, 2012 at 2:09 PM
+</a>
+<span class="item-control blog-admin pid-2045827375 sf-hidden">
+</span>
+</span>
+</dd>
+</dl>
+</div>
+<p class=comment-footer>
+<a href="https://www.blogger.com/comment.g?blogID=3460906122833508895&amp;postID=3382592314898548992">Post a Comment</a>
+</p>
+</div>
+</div>
+ </div></div>
+ 
+</div>
+<div class=blog-pager id=blog-pager>
+<span id=blog-pager-newer-link>
+<a class=blog-pager-newer-link href=https://graphicrants.blogspot.com/2012/05/sparse-shadows-through-tracing.html id=Blog1_blog-pager-newer-link title="Newer Post">Newer Post</a>
+</span>
+<span id=blog-pager-older-link>
+<a class=blog-pager-older-link href=https://graphicrants.blogspot.com/2011/08/new-prey-2-screenshot.html id=Blog1_blog-pager-older-link title="Older Post">Older Post</a>
+</span>
+<a class=home-link href=https://graphicrants.blogspot.com/>Home</a>
+</div>
+<div class=clear></div>
+<div class=post-feeds>
+<div class=feed-links>
+Subscribe to:
+<a class=feed-link href=https://graphicrants.blogspot.com/feeds/3382592314898548992/comments/default target=_blank type=application/atom+xml>Post Comments (Atom)</a>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class=column-left-outer>
+<div class=column-left-inner>
+<aside>
+</aside>
+</div>
+</div>
+<div class=column-right-outer>
+<div class=column-right-inner>
+<aside>
+<div class="sidebar section" id=sidebar-right-1><div class="widget Profile" data-version=1 id=Profile1>
+<h2>About Me</h2>
+<div class=widget-content>
+<dl class=profile-datablock>
+<dt class=profile-data>
+<a class="profile-name-link g-profile" href=https://www.blogger.com/profile/03069330593380092516 rel=author style=background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA3klEQVQ4y2P4l8YUCsT/ycT6DBRoBmNMA5IZ/v+LB+IYKI5lgIgRZUACUOH2jv//3j/5/+//fwj+8/P/vyNz/v8rliRgQDJUM0jTv39oGCh2ceP/f0kMeAwAORtkM0gDyJBzqyEYZiCILpXCYwDIvzDF1/YAFUtCMIgNM2BVyf9/hWJEGPD3LyIMQGx0sRgGEgxAN4goA2BeqJCDYHSvYDUAWyCCQh6EkQPz08v//+IYSI3GfwiD58cTSEggBSBb0MMAJAaSS2AgkJRBOA4pKcNwHAOReYGMzKRPgQEGAIvy2M2lOZIeAAAAAElFTkSuQmCC) data-gapiscan=true data-onload=true data-gapiattached=true>
+Brian Karis
+</a>
+</dt>
+<dd class=profile-data>San Francisco, CA</dd>
+<dd class=profile-textblock>I am a Senior Graphics Programmer at Epic Games. This blog is a place for me to dump game and graphics related thoughts and share with the greater graphics community.</dd>
+</dl>
+<a class=profile-link href=https://www.blogger.com/profile/03069330593380092516 rel=author>View my complete profile</a>
+<div class=clear></div>
+<span class=widget-item-control>
+<span class="item-control blog-admin sf-hidden">
+</span>
+</span>
+<div class=clear></div>
+</div>
+</div><div class="widget BlogList" data-version=1 id=BlogList1>
+<h2 class=title>Blogs</h2>
+<div class=widget-content>
+<div class=blog-list-container id=BlogList1_container>
+<ul id=BlogList1_blogs>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://www.altdevblogaday.com/feed/ target=_blank>
+#AltDevBlogADay</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://msinilo.pl/blog target=_blank>
+.mischief.mayhem.soap.</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://bitsquid.blogspot.com/ target=_blank>
+Bitsquid</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://c0de517e.blogspot.com/ target=_blank>
+C0DE517E</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://cbloomrants.blogspot.com/ target=_blank>
+cbloom rants</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://chrishecker.com/Special:WikiFeeds/atom/recentarticlechanges target=_blank>
+Chris Hecker</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://codefortress.blogspot.com/ target=_blank>
+Code Fortress</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://www.codercorner.com/blog target=_blank>
+Coder Corner</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://theforge.dev/ target=_blank>
+Confetti Special FX</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://copypastepixel.blogspot.com/ target=_blank>
+copypastepixel</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://deadvoxels.blogspot.com/ target=_blank>
+Dead Voxels</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://diaryofagraphicsprogrammer.blogspot.com/ target=_blank>
+Diary of a Graphics Programmer</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://directtovideo.wordpress.com/ target=_blank>
+direct to video</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://entland.homelinux.com/blog target=_blank>
+EntBlog</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://enterthesingularity.blogspot.com/ target=_blank>
+EnterTheSingularity</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://filmicgames.com/ target=_blank>
+Filmic Games</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://gpu-fun.spaces.live.com/feed.rss target=_blank>
+Fun with GPUs</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://gates381.blogspot.com/ target=_blank>
+Gates 381</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://graphicsrunner.blogspot.com/ target=_blank>
+Graphics Runner</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://www.ludicon.com/castano/blog target=_blank>
+Ignacio Castaño</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://industrialarithmetic.blogspot.com/ target=_blank>
+Industrial Arithmetic</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://insomniac.games/ target=_blank>
+Insomniac Games » Research &amp; Development</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://codesuppository.blogspot.com/ target=_blank>
+John Ratcliff's Code Suppository</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href="http://www.jshopf.com/blog/?feed=rss2" target=_blank>
+level of detail</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href="http://meshula.net/wordpress/?feed=rss2" target=_blank>
+meshula.net</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://www.cellperformance.com/mike_acton/atom.xml target=_blank>
+Mike Acton</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://mmikkelsen3d.blogspot.com/ target=_blank>
+Mikkelsen and 3D Graphics</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://mmack.wordpress.com/feed/ target=_blank>
+Miles Macklin</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://olickspulpit.blogspot.com/ target=_blank>
+Olick's Pulpit</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://overbyte.com.au/feed/ target=_blank>
+overbyte.com.au</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://psgraphics.blogspot.com/ target=_blank>
+Pete Shirley's Graphics Blog</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://pixelstoomany.wordpress.com/ target=_blank>
+Pixels, Too Many..</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://procworld.blogspot.com/ target=_blank>
+Procedural World</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://raytracey.blogspot.com/ target=_blank>
+Ray Tracey's blog</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://www.realtimerendering.com/blog target=_blank>
+Real-Time Rendering</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://realtimecollisiondetection.net/blog target=_blank>
+realtimecollisiondetection.net</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://renderwonk.com/blog target=_blank>
+RenderWonk</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://repi.blogspot.com/ target=_blank>
+repilogue</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://sandervanrossen.blogspot.com/ target=_blank>
+Sanders' blog</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://blog.selfshadow.com/ target=_blank>
+Self Shadow</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://solid-angle.blogspot.com/ target=_blank>
+Solid Angle</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://www.chrisevans3d.com/pub_blog target=_blank>
+Stumbling Toward 'Awesomeness'</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://seblagarde.wordpress.com/ target=_blank>
+Sébastien Lagarde</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://assen.shtrak.com/ target=_blank>
+The Daily DIP Count</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://mynameismjp.wordpress.com/ target=_blank>
+The Danger Zone</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://xyzw.r3.nu/feeds/posts/default target=_blank>
+The Hypothetical Third Dimension</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=https://fgiesen.wordpress.com/ target=_blank>
+The ryg blog</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://timothylottes.blogspot.com/ target=_blank>
+Timothy Lottes</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://home.comcast.net/~tom_forsyth/blog.wiki.xml target=_blank>
+TomF's Tech Blog</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href="http://www.wolfgang-engel.info/blogs/?feed=rss2" target=_blank>
+Treatise on Graphics Programming</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://zeuxcg.blogspot.com/ target=_blank>
+What your mother never told you about graphics development</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+<li style=display:block>
+<div class=blog-icon>
+</div>
+<div class=blog-content>
+<div class=blog-title>
+<a href=http://blog.wolfire.com/ target=_blank>
+Wolfire Blog</a>
+</div>
+<div class=item-content>
+</div>
+</div>
+<div style=clear:both></div>
+</li>
+</ul>
+<div class=clear></div>
+<span class=widget-item-control>
+<span class="item-control blog-admin sf-hidden">
+</span>
+</span>
+<div class=clear></div>
+</div>
+</div>
+</div><div class="widget BlogArchive" data-version=1 id=BlogArchive1>
+<h2>Blog Archive</h2>
+<div class=widget-content>
+<div id=ArchiveList>
+<div id=BlogArchive1_ArchiveList>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2018/>
+2018
+</a>
+<span class=post-count dir=ltr>(4)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2014/>
+2014
+</a>
+<span class=post-count dir=ltr>(1)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2013/>
+2013
+</a>
+<span class=post-count dir=ltr>(3)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate expanded">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class="zippy toggle-open">
+ ▼&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2012/>
+2012
+</a>
+<span class=post-count dir=ltr>(2)</span>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2012/05/>
+May
+</a>
+<span class=post-count dir=ltr>(1)</span>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate expanded">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class="zippy toggle-open">
+ ▼&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2012/04/>
+April
+</a>
+<span class=post-count dir=ltr>(1)</span>
+<ul class=posts>
+<li><a href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>Tiled Light Culling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2011/>
+2011
+</a>
+<span class=post-count dir=ltr>(2)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2010/>
+2010
+</a>
+<span class=post-count dir=ltr>(1)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2009/>
+2009
+</a>
+<span class=post-count dir=ltr>(6)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+<ul class=hierarchy>
+<li class="archivedate collapsed">
+<a class=toggle href=https://graphicrants.blogspot.com/2012/04/tiled-light-culling.html>
+<span class=zippy>
+ ►&nbsp;
+ 
+</span>
+</a>
+<a class=post-count-link href=https://graphicrants.blogspot.com/2008/>
+2008
+</a>
+<span class=post-count dir=ltr>(8)</span>
+<ul class="hierarchy sf-hidden">
+</ul>
+<ul class="hierarchy sf-hidden">
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class=clear></div>
+<span class=widget-item-control>
+<span class="item-control blog-admin sf-hidden">
+</span>
+</span>
+<div class=clear></div>
+</div>
+</div></div>
+</aside>
+</div>
+</div>
+</div>
+<div style=clear:both></div>
+</div>
+</div>
+</div>
+<div class="main-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+<footer>
+<div class=footer-outer>
+<div class="footer-cap-top cap-top">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+<div class="fauxborder-left footer-fauxborder-left">
+<div class="fauxborder-right footer-fauxborder-right"></div>
+<div class="region-inner footer-inner">
+<div class="foot no-items section" id=footer-1></div>
+<table border=0 cellpadding=0 cellspacing=0 class="section-columns columns-2">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="foot no-items section" id=footer-2-1></div>
+</td>
+<td class=columns-cell>
+<div class="foot no-items section" id=footer-2-2></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="foot section" id=footer-3 name=Footer><div class="widget Attribution" data-version=1 id=Attribution1>
+<div class=widget-content style=text-align:center>
+Awesome Inc. theme. Powered by <a href=https://www.blogger.com/ target=_blank>Blogger</a>.
+</div>
+<div class=clear></div>
+<span class=widget-item-control>
+<span class="item-control blog-admin sf-hidden">
+</span>
+</span>
+<div class=clear></div>
+</div></div>
+</div>
+</div>
+<div class="footer-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</footer>
+</div>
+</div>
+<div class="content-cap-bottom cap-bottom">
+<div class=cap-left></div>
+<div class=cap-right></div>
+</div>
+</div>
+</div>
+<div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div><div style=position:absolute;width:0px;height:0px;overflow:hidden;padding:0px;border:0px;margin:0px><div id=MathJax_Font_Test style=position:absolute;visibility:hidden;top:0px;left:0px;width:auto;padding:0px;border:0px;margin:0px;white-space:nowrap;text-align:left;text-indent:0px;text-transform:none;line-height:normal;letter-spacing:normal;word-spacing:normal;font-size:40px;font-weight:normal;font-style:normal;font-family:STIXSizeOneSym,sans-serif class=sf-hidden></div></div>
