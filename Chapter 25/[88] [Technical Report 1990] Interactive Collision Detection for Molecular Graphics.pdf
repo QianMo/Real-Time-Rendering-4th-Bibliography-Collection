@@ -1,0 +1,6239 @@
+%PDF-1.3
+%âãÏÓ
+2 0 obj
+<<
+/Length 1041
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 117.5 647.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0002 Tw
+(Interactive Collision Detection for Molecular Graphics)Tj
+12 0 0 12 309 567.5 Tm
+0 Tw
+(by)Tj
+-1.5833 -1.3333 TD
+0.001 Tw
+[(Greg T)27.5(urk)]TJ
+-10.6667 -9.3333 TD
+0.1183 Tw
+[(A)55.5( )35(Thesis submitted to the faculty of The University of North)]TJ
+0 -1.3333 TD
+-0.03 Tw
+(Carolina at Chapel Hill in partial fulfillment of the requirements)Tj
+T*
+0.0211 Tw
+(for the degree of Master of Science in the Department of Com-)Tj
+T*
+-0.0016 Tw
+(puter Science.)Tj
+10.4167 -2.6667 TD
+-0.0007 Tw
+(Chapel Hill)Tj
+1.3333 -1.3333 TD
+0 Tw
+(1989)Tj
+0.25 -10.6667 TD
+0.001 Tw
+(Approved by)Tj
+0 -2.6667 TD
+0 Tw
+(___________________________________)Tj
+0 -1.3333 TD
+0.0003 Tw
+(Advisor:  Professor Henry Fuchs)Tj
+0 -2.6667 TD
+0 Tw
+(___________________________________)Tj
+0 -1.3333 TD
+0.0001 Tw
+[(Reader:  Professor Frederick P)108.3(.)0( Brooks, Jr)70(.)]TJ
+0 -2.6667 TD
+0 Tw
+(___________________________________)Tj
+0 -1.3333 TD
+0.0001 Tc
+0.0001 Tw
+(Reader:  Professor J. Nievergelt)Tj
+ET
+endstream
+endobj
+3 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+8 0 obj
+<<
+/Length 1386
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 108.5 679.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0002 Tw
+(Interactive Collision Detection for Molecular Graphics)Tj
+14 0 0 14 282.5 615.5 Tm
+0.0002 Tc
+0 Tw
+(Abstract)Tj
+12 0 0 12 72 583.5 Tm
+0 Tc
+-0.0365 Tw
+(Collision detection between hard-sphere representations of molecules can be performed in interac-)Tj
+0 -1.3333 TD
+-0.0071 Tw
+[(tive times on existing graphics hardware.  )15.4(This thesis presents a system that allows a user to inter)22.4(-)]TJ
+T*
+-0.0255 Tw
+[(actively move a small drug molecule near a lar)10(ger receptor molecule and have the system immedi-)]TJ
+T*
+-0.0309 Tw
+[(ately inform the user when a collision between the two molecules has occurred.  )28.7(The system uses a)]TJ
+T*
+-0.057 Tw
+[(3-D grid data structure to speed up the search for collisions.  )17.3(The collision detection and the genera-)]TJ
+T*
+-0.0141 Tw
+[(tion of images of the molecules are performed by the Pixel-Planes 4 graphics engine.  Preliminary)]TJ
+T*
+-0.0567 Tw
+(trials of the system had users perform a simple geometric task, and the results indicate that stopping)Tj
+T*
+0.1144 Tw
+[(an object’)42.9(s motion completely as the response to collisions is a hindrance to such tasks.  )43.8(This)]TJ
+T*
+0.0126 Tw
+(suggests that a better behavior for collision response must be found before collision response can)Tj
+T*
+0.0003 Tw
+(aid in performing similar geometric tasks.)Tj
+ET
+endstream
+endobj
+9 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+11 0 obj
+<<
+/Length 2415
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 234 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0 Tw
+(Acknowledgements)Tj
+12 0 0 12 90 679.5 Tm
+0.0087 Tw
+[(I would like to thank my thesis chair Professor Henry Fuchs, who has supplied ideas and encour)20.1(-)]TJ
+0 -1.3333 TD
+-0.0092 Tc
+-0.0625 Tw
+[(agement throughout this project.  I also thank Professor Frederick Brooks and Professor J. Niever)13.5(gelt,)]TJ
+T*
+0 Tc
+0.0157 Tw
+(the other members of my thesis committee, for the insightful suggestions and the encouragement)Tj
+T*
+0.0003 Tw
+(that they both gave to this project.)Tj
+0 -2.6667 TD
+0.0369 Tw
+(Ming Ouh-young spent a good deal of time teaching me about many of the issues involved with)Tj
+0 -1.3333 TD
+-0.033 Tw
+[(molecular docking.  I am grateful for the time he has spent with me and for the many good sugges-)]TJ
+T*
+-0.0004 Tw
+(tions that he gave me.)Tj
+0 -2.6667 TD
+-0.002 Tw
+[(Brice T)69.2(ebbs gave me a good deal of help in dealing with the intricacies of PPHIGS.  He also took)]TJ
+0 -1.3333 TD
+-0.0351 Tw
+(the time to talk with me about many of the issues involved with collision detection and put up with)Tj
+T*
+0.0002 Tw
+[(the annoyance of a friend and of)23.2(fice mate who had taken on too many projects at once.  For these)]TJ
+T*
+-0.0003 Tw
+(things I thank him.)Tj
+0 -2.6667 TD
+-0.0374 Tw
+(I would like to thank all the members of the Pixel-Planes team for the help that they have given me)Tj
+0 -1.3333 TD
+-0.0459 Tw
+(and for the excellent combination of software and hardware that they have created that is the Pixel-)Tj
+T*
+-0.0012 Tw
+(Planes system.)Tj
+0 -2.6667 TD
+-0.0384 Tw
+(Thanks to all the “graphics lab regulars” who have made the g-lab such an enjoyable place to work)Tj
+0 -1.3333 TD
+-0.0615 Tw
+[(through their friendship, enthusiasm and good music.  Many of these people agreed to be part of the)]TJ
+T*
+0 Tw
+[(user study)83(.  David Banks was kind enough to take the photos for this project.)]TJ
+0 -2.6667 TD
+-0.039 Tw
+[(My mom and dad have given me love and encouragement throughout my education.  )27.8(W)68.8(atching the)]TJ
+0 -1.3333 TD
+-0.0211 Tw
+[(enjoyment they found in their work influenced me in my discovery of the joys of learning.  For all)]TJ
+T*
+-0.0001 Tw
+(of this I give them my love and gratitude.)Tj
+0 -2.6667 TD
+0.0136 Tw
+[(Last, I would like to thank )52.2(Anne for the patience and love she has shown me all through the time)]TJ
+0 -1.3333 TD
+0.0002 Tw
+(that I have worked on this project.)Tj
+ET
+endstream
+endobj
+12 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+14 0 obj
+<<
+/Length 2807
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 223.5 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0004 Tw
+[(T)55.3(able of Contents)]TJ
+/TT4 1 Tf
+12 0 0 12 72 679.5 Tm
+0 Tw
+[(1  Intr)13.9(oduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1)]TJ
+0 -2.6667 TD
+-0.0005 Tw
+(2  Molecular Docking . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2)Tj
+/TT2 1 Tf
+1.5 -1.3333 TD
+0 Tw
+[(2.1  The Docking )40.3(T)69.2(ask)]TJ
+T*
+0.0006 Tw
+[(2.2  )42.9(Atomic Forces)]TJ
+1.8333 -1.3333 TD
+0.0001 Tw
+[(2.2.1  T)69.2(rade-of)11.7(fs Between Force )40(Approximations)]TJ
+T*
+-0.0003 Tw
+[(2.2.2  Non-bonded )39.7(Atomic Forces)]TJ
+T*
+0.0003 Tw
+[(2.2.3  Bond Motion and Internal V)97.2(ibration)]TJ
+-1.8333 -1.3333 TD
+(2.3  Previous Docking Systems)Tj
+/TT4 1 Tf
+-1.5 -2.6667 TD
+0.0001 Tw
+[(3  Collision Detection )41.1(Algorithms . . . . . . . . . . . . . . . . . . . . . . . . . 5)]TJ
+/TT2 1 Tf
+1.5 -1.3333 TD
+0.0003 Tw
+[(3.1  Categories of Collision Detection )40.9(Algorithms)]TJ
+T*
+(3.2  Grids and Octrees)Tj
+T*
+-0.0002 Tw
+[(3.3  BSP-trees and Bounding )12.7(V)138.8(olume Hierarchies)]TJ
+T*
+0 Tw
+[(3.4  Sweep )41(Algorithms)]TJ
+T*
+0.0002 Tw
+[(3.5  Relation Between Collision Detection and Ray )39.2(T)27.5(racing)]TJ
+/TT4 1 Tf
+-1.5 -2.6667 TD
+0 Tw
+(4  The )Tj
+/TT6 1 Tf
+2.9167 0 TD
+(Bump)Tj
+/TT4 1 Tf
+2.5 0 TD
+( System . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8)Tj
+/TT2 1 Tf
+-3.9167 -1.3333 TD
+0.0004 Tw
+(4.1  User Interface)Tj
+T*
+-0.0002 Tw
+[(4.2  )41.3(A)55.5( Hypothetical User Session)]TJ
+T*
+0.001 Tw
+(4.3 Depth Cues)Tj
+1.8333 -1.3333 TD
+-0.0006 Tw
+(4.3.1  Rocking)Tj
+T*
+(4.3.2  Stereo display)Tj
+T*
+[(4.3.3  )40.5(T)27.5(ransparency)]TJ
+T*
+0.0006 Tw
+(4.3.4  Shadows)Tj
+T*
+0 Tw
+(4.3.5  Other Depth Cues)Tj
+/TT4 1 Tf
+-3.3333 -2.6667 TD
+(5  Collision Detection in )Tj
+/TT6 1 Tf
+10.4167 0 TD
+(Bump)Tj
+/TT4 1 Tf
+2.5 0 TD
+( . . . . . . . . . . . . . . . . . . . . . . . . . . 12)Tj
+/TT2 1 Tf
+-11.4167 -1.3333 TD
+-0.0001 Tc
+0.0001 Tw
+(5.1  The )Tj
+/TT8 1 Tf
+3.5417 0 TD
+0 Tc
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+0.0001 Tc
+0.0004 Tw
+( System)Tj
+-5.875 -1.3333 TD
+0 Tc
+0 Tw
+(5.2  Uniform Spatial Subdivision)Tj
+T*
+-0.0003 Tw
+[(5.3  Collision )41.7(Along Path of Motion)]TJ
+T*
+0.0003 Tw
+[(5.4  )42.3(Algorithm Performance)]TJ
+/TT4 1 Tf
+-1.5 -2.6667 TD
+0 Tw
+[(6   )41.7(A)55.5( User)40.7( Study . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18)]TJ
+/TT2 1 Tf
+1.5 -1.3333 TD
+-0.0001 Tw
+[(6.1  )41.5(A)55.5( Simple )41.7(T)69.2(ask of Geometric Fit)]TJ
+T*
+-0.0003 Tw
+(6.2  User Comments)Tj
+/TT4 1 Tf
+-1.5 -2.6667 TD
+0 Tw
+[(7  Future )27.2(W)83.3(ork . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22)]TJ
+/TT2 1 Tf
+1.5 -1.3333 TD
+-0.0001 Tw
+(7.1  Enhancements for Molecular Docking)Tj
+T*
+0.0004 Tw
+(7.2  Interactive Physical Simulation)Tj
+ET
+endstream
+endobj
+15 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT6 17 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+20 0 obj
+<<
+/Length 2055
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 230.5 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0003 Tw
+(Chapter 1: Introduction)Tj
+12 0 0 12 90 679.5 Tm
+0.0032 Tw
+(A researcher using computer graphics to explore the interaction between molecules may wish not)Tj
+0 -1.3333 TD
+0.0163 Tw
+(only for a visual representation of the molecules, but also that the behavior of the simulated mol-)Tj
+T*
+0.0053 Tw
+[(ecules reflect their physical properties.  Highest in importance among the properties of molecules)]TJ
+T*
+0.0247 Tw
+[(are the forces that their constituent atoms exert on the atoms of other molecules.  The most basic)]TJ
+T*
+0.0298 Tw
+[(result of these inter)31.3(-atomic forces is that two atoms cannot occupy the same location at the same)]TJ
+T*
+-0.0158 Tw
+[(time.  This means that it is necessary to forbid spatial overlap of the two molecules in the world of)]TJ
+T*
+0.0594 Tw
+[(molecular interaction.  Detecting whether two objects overlap in space is known as )]TJ
+/TT8 1 Tf
+34.2083 0 TD
+0 Tw
+[(interfer)41.2(ence)]TJ
+-34.2083 -1.3333 TD
+(checking)Tj
+/TT2 1 Tf
+3.5417 0 TD
+(, and when at least one of the objects is moving this is called )Tj
+/TT8 1 Tf
+24.5 0 TD
+(collision detection)Tj
+/TT2 1 Tf
+7.3333 0 TD
+(.)Tj
+-35.375 -2.6667 TD
+0.0386 Tw
+[(This thesis presents a system showing that collision detection between a lar)14.8(ge receptor molecule)]TJ
+0 -1.3333 TD
+0.0546 Tw
+(and a small drug molecule can be performed in interactive times on existing graphics hardware.)Tj
+T*
+-0.0601 Tw
+(This system is called )Tj
+/TT8 1 Tf
+8.375 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0601 Tw
+[(, and it runs on the Pixel-Planes 4 graphics engine and its host microV)116.9(ax.)]TJ
+/TT8 1 Tf
+-10.5833 -1.3333 TD
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+-0.0614 Tw
+[( displays sphere models of molecules on a raster monitor at interactive rates.  )46.9(A)55.5( user can move)]TJ
+-2.3333 -1.3333 TD
+-0.0505 Tw
+(the position of the drug molecule with a pair of joysticks, and the system forbids motion of the drug)Tj
+T*
+0.0001 Tc
+0 Tw
+(that would cause a collision with the larger molecule.)Tj
+ET
+endstream
+endobj
+21 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+23 0 obj
+<<
+/Length 4117
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 177.5 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0002 Tw
+(Chapter 2: Molecular Docking)Tj
+/TT4 1 Tf
+14 0 0 14 72 679.5 Tm
+-0.0002 Tw
+[(2.1  )35.3(The Docking )8.4(T)95.6(ask)]TJ
+/TT2 1 Tf
+12 0 0 12 72 647.5 Tm
+0.1113 Tw
+[(Chemists and molecular biologists have need to study the interaction between a lar)20.7(ge receptor)]TJ
+0 -1.3333 TD
+-0.049 Tw
+(molecule and specific small molecules sometimes referred to as probes that can fit into the receptor)Tj
+T*
+-0.0552 Tw
+[(cavity of the lar)12.2(ger molecule.  Some researchers have found that using computer graphics represen-)]TJ
+T*
+0.1018 Tw
+[(tations of these models helps their understanding of these interactions [Janssen 85].  Often the)]TJ
+T*
+-0.0224 Tw
+[(structure of the lar)40.6(ger molecule is known from crystallographic techniques and the task is to find a)]TJ
+T*
+-0.0293 Tw
+[(small molecule that will fit into the active site of the lar)32.5(ger molecule to block its normal enzymatic)]TJ
+T*
+-0.0369 Tw
+[(action.  )36.3(When the probe molecule is artificially synthesized it is sometimes called a drug molecule.)]TJ
+T*
+-0.0519 Tw
+[(Finding an ef)20.5(fective drug molecule requires that a candidate probe be maneuvered within the lar)30(ger)]TJ
+T*
+-0.0249 Tw
+[(molecule’)39.7(s cavity to find the best fit.  )34.6(This means finding a position so that the forces acting on the)]TJ
+T*
+-0.0001 Tc
+0.0511 Tw
+[(drug molecule are at a global minimum.  )14.6(The configuration of the energy space within the lar)48.5(ge)]TJ
+T*
+0 Tc
+0.1006 Tw
+[(molecule’)39.7(s cavity is typically quite complex and may have many local minima.  Human aid is)]TJ
+T*
+0.0404 Tw
+(helpful in finding this global minimum because current computers are not fast enough to always)Tj
+T*
+0.0002 Tw
+[(find the minimum in the lar)26.8(ge space of forces.)]TJ
+/TT4 1 Tf
+14 0 0 14 72 423.5 Tm
+-0.0003 Tw
+[(2.2  )70.9(Atomic For)21.4(ces)]TJ
+/TT2 1 Tf
+12 0 0 12 72 391.5 Tm
+0.0001 Tw
+[(2.2.1  T)69.2(rade-of)11.7(fs Between Force )40(Approximations)]TJ
+0 -2.6667 TD
+0.105 Tw
+(It is beyond the speed of current computers to accurately simulate all of the forces within and)Tj
+0 -1.3333 TD
+-0.0001 Tc
+0.0394 Tw
+[(between molecules in anything close to real-time.  )44.2(Approximations to molecular forces and con-)]TJ
+T*
+0 Tc
+0.0084 Tw
+[(figurations are necessary to simulate molecular interactions at interactive rates.  )24.1(There is a choice)]TJ
+T*
+-0.0221 Tw
+[(that must be made between fidelity of modelling and system speed.  )61.8(As algorithms improve and as)]TJ
+T*
+-0.0308 Tw
+(computers become faster it will be possible to have simulations agree more with the actual physics)Tj
+T*
+-0.0002 Tw
+(as we understand it.)Tj
+0 -2.6667 TD
+-0.0003 Tw
+[(2.2.2  Non-bonded )39.7(Atomic Forces)]TJ
+T*
+-0.046 Tw
+(A common simplifying assumption for some docking problems it is that the two molecules will not)Tj
+0 -1.3333 TD
+0.0023 Tw
+(alter their bond structure and in particular that no new bonds will form between the probe and the)Tj
+T*
+0.0149 Tw
+[(lar)13(ger molecule.  Given this assumption, all the force interactions between atoms of the two mol-)]TJ
+T*
+-0.0362 Tw
+[(ecules are non-bonded interactions, and there are two such non-bonded forces.  )25.8(The first of these is)]TJ
+T*
+0.0237 Tw
+[(the )37(V)97.2(an der )18.1(W)68.8(aals force, which has two components between atoms separated by a distance r: an)]TJ
+T*
+0.1094 Tw
+(attractive force proportional to r )Tj
+5.8 0 0 5.8 235.5 138.5 Tm
+0 Tw
+(-12)Tj
+12 0 0 12 243 135.5 Tm
+0.1094 Tw
+(, and a repulsive force proportional to r)Tj
+7 0 0 7 440.5 139.5 Tm
+0 Tw
+( )Tj
+5.8 0 0 5.8 443 138.5 Tm
+(-6)Tj
+12 0 0 12 447.5 135.5 Tm
+0.1094 Tw
+[(.   )-5.2(The other force)]TJ
+-31.2917 -1.3333 TD
+-0.0506 Tw
+[(between a pair of atoms is due to electrostatic \(Coulomb\) interaction and is proportional to 1/r)77.6(.  )-17.9(The)]TJ
+T*
+-0.0195 Tw
+(Coulomb force between a pair of atoms is repulsive or attractive depending on whether the atoms’)Tj
+T*
+0.0289 Tw
+[(char)12.4(ges are like or opposite.  Ideally a docking system should take into account both the )37.4(V)97.2(an der)]TJ
+T*
+0.0004 Tw
+[(W)68.8(aals and Coulomb forces.)]TJ
+ET
+endstream
+endobj
+24 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+26 0 obj
+<<
+/Length 4402
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 90 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0003 Tw
+[(2.2.3  Bond Motion and Internal V)55.5(ibration)]TJ
+0 -2.6667 TD
+0.1183 Tw
+[(There are factors in addition to the )30.5(V)97.2(an der W)110.5(aals and Coulomb forces that play a part in the)]TJ
+0 -1.3333 TD
+0.0108 Tw
+[(dynamics of molecular interaction.  )35.3(W)27.2(ithin one of these molecules the relative positions of atoms)]TJ
+T*
+0.0961 Tw
+[(does not remain fixed during docking.  One way in which the atoms’ relative positions can be)]TJ
+T*
+0.0156 Tw
+(altered is that the angle between two bonds that share a common atom can change because of the)Tj
+T*
+0.0331 Tw
+[(forces resulting from the docking maneuver)62.3(.  For the most part, however)43.3(, the dihedral angles are)]TJ
+T*
+-0.005 Tw
+[(nearly rigid.  )38.9(A)55.5( second change in shape happens more freely)82.9(, and this is change in the dihedral \(or)]TJ
+T*
+-0.0569 Tw
+[(torsion\) angle about a bond.  )17(This is the freedom that atoms have to rotate around the axis of a bond.)]TJ
+T*
+-0.0297 Tw
+[(T)69.2(aking into account these changes is at the limit of the state-of-the-art in interactive docking simu-)]TJ
+T*
+0.0353 Tw
+[(lations [Karfunkel 86].  In addition to these changes, a molecule in solution has some amount of)]TJ
+T*
+0.0094 Tw
+[(internal vibrations that are not due to interactions with other molecules.  It is well beyond current)]TJ
+T*
+0.1161 Tw
+[(computer technology to simulate these vibrations in an interactive system.  Currently the only)]TJ
+T*
+0.0884 Tw
+(programs that attempt to take into account such phenomena are quantum level simulations that)Tj
+T*
+-0.0191 Tw
+[(require hours or days on a supercomputer to complete a simple simulation.  It should be noted that)]TJ
+T*
+0.0427 Tw
+[(systems that measure forces in terms of )30.6(V)97.2(an der )14.4(W)68.8(aals and Coulomb forces and bond angles are)]TJ
+T*
+0.0937 Tw
+(actually using approximate values, taken from theoretical and empirical results, to estimate the)Tj
+T*
+0.0507 Tw
+(overall forces, and that quantum models are necessary to better take into account the interaction)Tj
+T*
+-0.0001 Tw
+(between all factors involved in molecular interactions.)Tj
+/TT4 1 Tf
+14 0 0 14 90 391.5 Tm
+-0.0002 Tw
+[(2.3  Pr)18.6(evious Docking Systems)]TJ
+/TT2 1 Tf
+12 0 0 12 90 359.5 Tm
+0.0106 Tw
+(Several researchers have sought to provide chemists with interactive tools to use in studying mo-)Tj
+T*
+-0.0096 Tw
+[(lecular docking.  Palmer built a system that allows a user to interactively move a stick representa-)]TJ
+T*
+0.0642 Tw
+[(tion of a drug within the receptor cavity of a macromolecule [Palmer 87].  The program allows)]TJ
+T*
+-0.0251 Tw
+(interactive motion of the drug, gives a real-time shaded raster image while holding the view fixed,)Tj
+T*
+-0.0004 Tw
+[(reports collisions between drug and receptor)33.9(, and allows arbitrary positioning of a clipping plane.)]TJ
+T*
+0.0122 Tw
+[(Collisions are detected using a method developed by Barry [Barry 80].  )27.3(The method uses a depth)]TJ
+T*
+0.1036 Tw
+(buffer containing spheres from the receptor molecule that have had their radii enhanced by an)Tj
+T*
+0.031 Tw
+[(“average” atomic radius.  )35.2(This allows collisions to be detected with one frame buf)-17.9(fer lookup per)]TJ
+T*
+0.0389 Tw
+[(atom in the drug, and with results that differ little from using the exact )34.7(V)97.2(an der )48.5(W)68.8(aals radius for)]TJ
+T*
+-0.0019 Tw
+(each atom.)Tj
+0 -2.6667 TD
+-0.0016 Tc
+-0.0625 Tw
+(The first steps towards interactive collision detection using the Pixel-Planes graphics engine [Fuchs)Tj
+0 -1.3333 TD
+0 Tc
+-0.0518 Tw
+[(85] were taken by Srinivasan [Srinivasan 86].  Based on an idea by Brooks [Brooks 85], the system)]TJ
+T*
+0.087 Tw
+[(uses the smart frame buf)11.5(fer of Pixel-Planes to help with a sweep algorithm to detect collisions)]TJ
+T*
+0.0671 Tw
+[(between collections of spheres.  The method examines many slices of the space to determine if)]TJ
+T*
+0.0915 Tw
+(spheres intersect, and when a collision occurs the display highlights the area of overlap with a)Tj
+T*
+0.0813 Tw
+[(specially designated color)47.9(.  )37.6(The system cannot be programmed to give other forms of collision)]TJ
+T*
+-0.0043 Tw
+[(response, however)21(, because there is no way on Pixel-Planes 4 to move data from the frame buf)51.8(fer)]TJ
+T*
+-0.0443 Tw
+[(back to the host.  Hardware has been designed and partially built to provide such readback capabil-)]TJ
+ET
+endstream
+endobj
+27 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+29 0 obj
+<<
+/Length 1878
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 72 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0002 Tw
+(ity for Pixel-Planes 4, but it remains untested [Fuchs and Neumann 89].)Tj
+0 -2.6667 TD
+-0.0314 Tw
+(Ming Ouh-young and co-workers [Ouh-young 88a,88b] are exploring the use of force-feedback to)Tj
+0 -1.3333 TD
+0.0001 Tw
+[(aid in molecular docking tasks.  )11.4(The display is generated in real-time on a vector display with the)]TJ
+T*
+-0.0208 Tw
+[(choice of stick models or Connolly surfaces [Connolly 83] and allows the use of stereo glasses.  )41.1(A)]TJ
+T*
+-0.035 Tw
+(user controls the position of the drug molecule with six degrees of freedom by holding the end of a)Tj
+T*
+0.0002 Tw
+[(master arm of a master/slave remote manipulator pair of mechanical arms.  )32.1(The arm is not just an)]TJ
+T*
+-0.0547 Tw
+[(input device but also provides force output by pushing back on the user)-22.3(’)41.3(s)0( hand.  The system applies)]TJ
+T*
+0.0518 Tw
+[(forces to the user)-27.7(’)41.3(s)0( hand resulting from the simulated interaction between the drug and receptor)]TJ
+T*
+0.0147 Tw
+[(molecules.  These forces are calculated in )]TJ
+/TT8 1 Tf
+17 0 TD
+0 Tw
+(O)Tj
+/TT2 1 Tf
+0.75 0 TD
+(\()Tj
+/TT8 1 Tf
+0.3333 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+0.0148 Tw
+(\) time for a drug with )Tj
+/TT8 1 Tf
+8.9167 0 TD
+0 Tw
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+0.0148 Tw
+[( atoms using a 3-D table of)]TJ
+-28 -1.3333 TD
+0.1221 Tw
+[(pre-computed receptor force values [Pattabiraman 85].  )25.6(This research is not yet complete, but)]TJ
+T*
+-0.0486 Tw
+(preliminary results indicate that force-feedback may indeed be useful to chemists who are trying to)Tj
+T*
+0.015 Tw
+[(understand the interaction between a given drug and receptor)54.5(.  )30(The path towards this current sys-)]TJ
+T*
+0.0367 Tw
+(tem was paved by earlier work that used the same master arm to allow interaction with a simple)Tj
+T*
+0 Tw
+(virtual world of blocks [Kirkpatrick 76].)Tj
+ET
+endstream
+endobj
+30 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+32 0 obj
+<<
+/Length 4419
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 152.5 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0003 Tw
+[(Chapter 3: Collision Detection )54.8(Algorithms)]TJ
+12 0 0 12 90 679.5 Tm
+0.0288 Tw
+(The most straightforward algorithm for interference checking between two complex objects is to)Tj
+0 -1.3333 TD
+-0.0434 Tw
+[(make comparisons between all pairs of simple parts of the two objects.  For example, if each object)]TJ
+T*
+0.0352 Tw
+[(is a collection of spheres then we can check each sphere from object )70.7(A)55.5( against each sphere from)]TJ
+T*
+0.0879 Tw
+[(object B, and we know that objects )56.6(A)55.5( and B intersect if and only if one or more of these pairs)]TJ
+T*
+0.0724 Tw
+[(intersect.  For two objects with )]TJ
+/TT8 1 Tf
+13.0833 0 TD
+0 Tw
+(M)Tj
+/TT2 1 Tf
+0.8333 0 TD
+0.0724 Tw
+[( and )]TJ
+/TT8 1 Tf
+2.0833 0 TD
+0 Tw
+(N)Tj
+/TT2 1 Tf
+0.6667 0 TD
+0.0724 Tw
+[( parts this algorithm requires )]TJ
+/TT8 1 Tf
+12.125 0 TD
+0 Tw
+(O)Tj
+/TT2 1 Tf
+0.7083 0 TD
+(\()Tj
+/TT8 1 Tf
+0.3333 0 TD
+(MN)Tj
+/TT2 1 Tf
+1.5 0 TD
+0.0724 Tw
+(\) time to check for)Tj
+-31.3333 -1.3333 TD
+0.1008 Tw
+[(interference.  It would be better to find an algorithm whose speed grows more gracefully with)]TJ
+T*
+-0.0021 Tw
+[(lar)13(ger problems.)]TJ
+/TT4 1 Tf
+14 0 0 14 90 551.5 Tm
+-0.0001 Tw
+[(3.1  Categories of Collision Detection )39.8(Algorithms)]TJ
+/TT2 1 Tf
+12 0 0 12 90 519.5 Tm
+-0.0149 Tw
+(Several categories of geometric algorithms have been used to speed up collision detection in three)Tj
+T*
+-0.0108 Tw
+[(dimensions.  )34.1(The first category contains those algorithms that partition space into sub-regions and)]TJ
+T*
+-0.008 Tw
+[(then compares parts from the dif)25(ferent objects only if the two parts lie in the same space partition.)]TJ
+T*
+0.039 Tw
+(The second type of algorithms are those that partition the objects based on the geometry of each)Tj
+T*
+0.121 Tw
+(object and then use these divisions to prune the tree of all possible part comparisons between)Tj
+T*
+0.0002 Tw
+[(objects.  Collision detection by spatial sweep is the final category)64.9(.)]TJ
+/TT4 1 Tf
+14 0 0 14 90 407.5 Tm
+-0.0001 Tw
+[(3.2  Grids and Octr)19.5(ees)]TJ
+/TT2 1 Tf
+12 0 0 12 90 375.5 Tm
+0.0858 Tw
+(One common space partition method is that of 3-D grids or uniform spatial subdivision, where)Tj
+T*
+-0.0576 Tw
+[(space is divided up into cubical cells all of one size [Bentley and Friedman 79].  T)69.2(o)0( detect collisions)]TJ
+T*
+-0.008 Tw
+[(the algorithm places each part from each object into the cell or cells in which that part lies.  Every)]TJ
+T*
+-0.0215 Tw
+(time a part is placed into a cell the part is checked against all the parts from other objects that have)Tj
+T*
+0.0526 Tw
+[(already been placed into the same cell.  )10.6(The method of 3-D grids was used by [Levinthal 66] to)]TJ
+T*
+0.0271 Tw
+[(limit the number of inter)22.6(-atom comparisons necessary to find minimum ener)18.2(gy configurations of)]TJ
+T*
+-0.0143 Tw
+[(lar)13(ge molecules.  )38.4(The need to know bounds on the locations of the objects and the need to allocate)]TJ
+T*
+0.0056 Tw
+(memory for cells that cover these bounds can be removed by using a hashing scheme based on 3-)Tj
+T*
+0.0001 Tw
+(space coordinates [Bentley and Friedman 79].)Tj
+0 -2.6667 TD
+0.0929 Tw
+(The octree approach to collision detection is a method halfway between space partitioning and)Tj
+0 -1.3333 TD
+-0.0477 Tw
+[(object partitioning.  Here again space is divided up into cubes, but in this case the sizes of the cubes)]TJ
+T*
+-0.0533 Tw
+[(vary based on how many object parts are in a given region of space.  Sparsely populated regions are)]TJ
+T*
+0.0662 Tw
+[(covered by lar)18.3(ge cubes, and regions of space that contain many object parts are divided up into)]TJ
+T*
+0.0034 Tw
+[(smaller cubes that cover the region.  )32.3(The name octree refers to the data structure that holds all the)]TJ
+T*
+0.0348 Tw
+(cubes: a tree where each node is either a cube or contains pointers to eight other nodes that each)Tj
+T*
+0.0269 Tw
+[(have information about one-eighth of the parent cube’)69(s region.  Octrees have been used to detect)]TJ
+T*
+-0.0573 Tw
+(intersections between polygonal objects in systems based on constructive solid geometry [Carlbom)Tj
+T*
+-0.0304 Tw
+[(87].  )22.2(T)69.2(o)0( compute the intersection between two polyhedra each polygon from object )30.5(A)55.5( must be split)]TJ
+T*
+-0.0564 Tw
+[(by every polygon of object B that the polygon from )70.4(A)55.5( intersects.  )-17.9(W)68.8(ith the octree approach, boolean)]TJ
+ET
+endstream
+endobj
+33 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+35 0 obj
+<<
+/Length 4825
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 72 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.1119 Tw
+(combinations of polyhedra can be computed without having to make all pairwise comparisons)Tj
+0 -1.3333 TD
+0.0003 Tw
+[(between polygons from objects )67.8(A)55.5( and B.)]TJ
+/TT4 1 Tf
+14 0 0 14 72 679.5 Tm
+0.0002 Tw
+[(3.3  BSP-tr)15.6(ees and Bounding )23.4(V)79.3(olume Hierar)33.9(chies)]TJ
+/TT2 1 Tf
+12 0 0 12 72 647.5 Tm
+0.0885 Tw
+(An object partitioning algorithm called the binary space partition tree \(BSP-tree\) has also been)Tj
+T*
+-0.0023 Tc
+-0.0625 Tw
+[(used to speed up intersection calculations for constructive solid geometry [Bloomber)36.9(g 86] [Thibault)]TJ
+T*
+0 Tc
+-0.0602 Tw
+[(and Naylor 87].  )21.2(This approach uses a tree with separating planes at each internal node that partition)]TJ
+T*
+0.0595 Tw
+(an object so that groups of parts that are close to each other in space are also collected together)Tj
+T*
+-0.009 Tw
+[(within the tree.  If the separating planes are only allowed to be aligned with the natural coordinate)]TJ
+T*
+-0.0035 Tw
+(planes then a BSP tree becomes very much like an octree.)Tj
+0 -2.6667 TD
+-0.0131 Tw
+[(Another object partition algorithm is the method of hierarchical bounding volumes.  Here the idea)]TJ
+0 -1.3333 TD
+-0.0522 Tw
+(is to use a collection of one kind of simple geometric primitive, such as a cube or a sphere, to bound)Tj
+T*
+-0.0583 Tw
+[(groups of parts of an object that are near each other in space.  )20.2(These bounding volumes are arranged)]TJ
+T*
+0.0007 Tw
+(in a tree in which each internal node is a bounding volume that encompasses all object that are its)Tj
+T*
+-0.0442 Tw
+[(descendants in the tree.  )25.3(The leaves of the tree contain those parts of an object that are all within the)]TJ
+T*
+-0.0011 Tc
+-0.0625 Tw
+(bounding volume of the parent node. Bounding hierarchies made of cubes have been used by [Segal)Tj
+T*
+0 Tc
+0.0126 Tw
+(and Sequin 88] to limit the number of pairwise polygon intersection tests needed for constructive)Tj
+T*
+0.1069 Tw
+[(solid geometry)78.1(.  Hierarchical bounding areas have been given the name “strip trees” when the)]TJ
+T*
+0.0563 Tw
+[(domain is two dimensional and the bounding areas are rectangles [Ballard 81].  Strip trees have)]TJ
+T*
+-0.0069 Tw
+(been used to compute intersections between geographical objects such as roads and rivers that are)Tj
+T*
+0.0003 Tw
+(stored in an on-line map.)Tj
+/TT4 1 Tf
+14 0 0 14 72 343.5 Tm
+-0.0001 Tw
+[(3.4  Sweep )43.3(Algorithms)]TJ
+/TT2 1 Tf
+12 0 0 12 72 311.5 Tm
+-0.0033 Tw
+(A sweep algorithm for finding object intersections in N dimensions proceeds by sweeping an N-1)Tj
+T*
+0.0751 Tw
+(dimensional subspace through the space and makes comparisons between objects each time the)Tj
+T*
+-0.0048 Tw
+[(subspace passes over a new object.  )44.6(As a two-dimensional example, consider the problem of find-)]TJ
+T*
+0.0489 Tw
+[(ing intersections between pairs of line segments that lie in a plane.  )17.4(T)69.2(o)0( solve this a line is swept)]TJ
+T*
+0.0496 Tw
+[(through the plane and a sorted list is maintained of those segments that intersect this line.  Each)]TJ
+T*
+-0.0189 Tw
+(time the line passes over an end-point of a segment, checks can be made against other segments in)Tj
+T*
+0.024 Tw
+[(the sorted list to determine whether this segment intersects another [Shamos and Hoey 76].  )31.7(This)]TJ
+T*
+-0.0139 Tw
+(algorithm will find all intersections in )Tj
+/TT8 1 Tf
+15.2917 0 TD
+0 Tw
+(O)Tj
+/TT2 1 Tf
+0.75 0 TD
+(\(log )Tj
+/TT8 1 Tf
+1.8333 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0139 Tw
+[( + )]TJ
+/TT8 1 Tf
+1.0417 0 TD
+0 Tw
+(k)Tj
+/TT2 1 Tf
+0.4167 0 TD
+-0.0139 Tw
+(\) where )Tj
+/TT8 1 Tf
+3.25 0 TD
+0 Tw
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0139 Tw
+[( is the number of segments and )]TJ
+/TT8 1 Tf
+12.625 0 TD
+0 Tw
+(k)Tj
+/TT2 1 Tf
+0.4167 0 TD
+-0.0139 Tw
+[( is the)]TJ
+-36.625 -1.3333 TD
+-0.0521 Tw
+[(total number of intersections.  The success of a sweep method depends on sorting objects along one)]TJ
+T*
+0.0039 Tw
+(axis, thereby reducing the problem to one fewer dimension, and also depends on the efficiency of)Tj
+T*
+-0.012 Tw
+(the data structure that keeps track of what objects are currently intersected with the sweeping sub-)Tj
+T*
+0 Tw
+(space.)Tj
+0 -2.6667 TD
+-0.0437 Tw
+(A sweep algorithm for three dimensions has been given by [Hopcroft, Schwartz and Sharir 83] that)Tj
+0 -1.3333 TD
+-0.034 Tw
+(determines in )Tj
+/TT8 1 Tf
+5.5833 0 TD
+0 Tw
+(O)Tj
+/TT2 1 Tf
+0.75 0 TD
+(\()Tj
+/TT8 1 Tf
+0.3333 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.034 Tw
+[( log)]TJ
+7 0 0 7 175.5 91.5 Tm
+0 Tw
+(2)Tj
+12 0 0 12 179 87.5 Tm
+( )Tj
+/TT8 1 Tf
+0.25 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.034 Tw
+(\) time whether there exists a pair of spheres that intersect in a collection of)Tj
+/TT8 1 Tf
+-9.6667 -1.3333 TD
+0 Tw
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0424 Tw
+[( spheres.  )38.5(The algorithm does not report all such intersections, but will report at least one intersec-)]TJ
+ET
+endstream
+endobj
+36 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+38 0 obj
+<<
+/Length 2332
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 88 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0311 Tw
+[(tion if any exist.  )29.5(This algorithm does not appear to be adaptable to seeing whether spheres from)]TJ
+0 -1.3333 TD
+0.0462 Tw
+[(one set intersect with spheres from another set.  )20.9(The algorithm proposed by Brooks [Brooks 85])]TJ
+T*
+0.0917 Tw
+[([Srinivasan 86] for collision detection on Pixel-Planes is a sweep algorithm, although it dif)18.9(fers)]TJ
+T*
+0.0307 Tw
+[(from most in that the sweep plane is moved through space in fixed distance jumps.  )26.1(This kind of)]TJ
+T*
+0.047 Tw
+(sweep algorithm might be called a )Tj
+/TT8 1 Tf
+14.25 0 TD
+0 Tw
+[(discr)41.7(ete)]TJ
+/TT2 1 Tf
+3.125 0 TD
+0.047 Tw
+[( sweep algorithm and exact solution methods may be)]TJ
+-17.375 -1.3333 TD
+0 Tw
+(called )Tj
+/TT8 1 Tf
+2.625 0 TD
+(analytic)Tj
+/TT2 1 Tf
+3.2083 0 TD
+-0.014 Tw
+[( sweep algorithms.  I have not found any analytic space sweep algorithms that have)]TJ
+-5.8333 -1.3333 TD
+-0.0001 Tw
+(been used to determine whether two complex objects intersect.)Tj
+/TT4 1 Tf
+14 0 0 14 88 599.5 Tm
+-0.0002 Tw
+(3.5  Relation between collision detection and ray tracing)Tj
+/TT2 1 Tf
+12 0 0 12 88 567.5 Tm
+-0.0083 Tw
+(Several of the techniques described above have been used successfully to speed up the ray tracing)Tj
+T*
+0.0278 Tw
+[(rendering technique.  )52.3(This should not be surprising since ray tracing is an intersection check: the)]TJ
+T*
+-0.0234 Tw
+[(basic computation is a test to see if a ray intersects any one of a collection of objects in a scene.  3-)]TJ
+T*
+-0.0194 Tw
+(D grids were used for ray tracing by [Fujimoto and Iwata 85], in which they describe a method for)Tj
+T*
+-0.0172 Tw
+[(following a ray’)74.7(s path through the cells of the grid.  )36.7(A)55.5( method of following a ray’)63.9(s path through an)]TJ
+T*
+0.0184 Tw
+[(octree was given by [Glassner 84].  Rays were checked against bounding volumes by [W)94.3(eghorst,)]TJ
+T*
+0.0452 Tw
+[(Hooper and Greenber)44.8(g 84], and they give a method for determining which of a set of primitives)]TJ
+T*
+-0.0324 Tw
+[(should be used to bound a complex object.  )94.1(A)13.8( method for automatically constructing a hierarchy of)]TJ
+T*
+-0.0055 Tw
+(bounding volumes was given by [Goldsmith and Salmon 87], and they also propose a “goodness”)Tj
+T*
+-0.0003 Tw
+[(measure for a given bounding hierarchy)89.9(.)]TJ
+ET
+endstream
+endobj
+39 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+43 0 obj
+<<
+/Length 4793
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 181.5 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0005 Tw
+(Chapter 4: The )Tj
+/TT8 1 Tf
+6.25 0 TD
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+0.0001 Tw
+( System)Tj
+12 0 0 12 72 679.5 Tm
+0.0301 Tw
+(The focus of this thesis is on a system called )Tj
+/TT8 1 Tf
+18.3333 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+0.0301 Tw
+[( that performs real-time collision detection of)]TJ
+-20.5833 -1.3333 TD
+-0.0568 Tw
+(molecular models on the Pixel-Planes 4 graphics engine.  )Tj
+/TT8 1 Tf
+22.6667 0 TD
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+-0.0568 Tw
+[( is a working program that provides)]TJ
+-25 -1.3333 TD
+0.0395 Tw
+(an existence proof that collision detection between non-trivial models can be done in interactive)Tj
+T*
+[(times on existing hardware.  It is my hope that other authors of interactive graphics applications)]TJ
+T*
+0.035 Tw
+(will recognize that graphics workstations now have the power to perform collision detection on-)Tj
+T*
+0.0227 Tw
+(the-fly and that they will consider adding collision detection to their system when this would aid)Tj
+T*
+-0.0004 Tw
+(their application.)Tj
+/TT4 1 Tf
+14 0 0 14 72 551.5 Tm
+-0.006 Tw
+[(4.1  User Interface)]TJ
+/TT8 1 Tf
+12 0 0 12 72 519.5 Tm
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+0.0568 Tw
+[( was written expressly for interactive docking of hard-sphere representations of molecular)]TJ
+-2.3333 -1.3333 TD
+0.0414 Tw
+(models.  )Tj
+/TT8 1 Tf
+3.7083 0 TD
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+0.0414 Tw
+[( allows a user to view molecular models on a monitor and to move one molecule)]TJ
+-6.0417 -1.3333 TD
+-0.0565 Tw
+[(relative to another molecule using joysticks.  Spheres are used to represent the atoms in a molecule.)]TJ
+T*
+-0.0619 Tw
+(When collision detection is enabled, )Tj
+/TT8 1 Tf
+14.4583 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0619 Tw
+[( prevents any motion of a molecule that would cause it to)]TJ
+-16.6667 -1.3333 TD
+0.002 Tw
+(interpenetrate another molecule.  When a collision has occurred, )Tj
+/TT8 1 Tf
+26 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+0.0001 Tc
+0.0023 Tw
+( indicates this by changing)Tj
+-28.25 -1.3333 TD
+0 Tc
+-0.048 Tw
+(the colors of the spheres participating in the collision, and in addition )Tj
+/TT8 1 Tf
+27.375 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.048 Tw
+[( may be instructed beep)]TJ
+-29.625 -1.3333 TD
+-0.0513 Tw
+[(or cause the background to flash.  )25.2(The intent of the collision cues is to provide the user with a better)]TJ
+T*
+0.0416 Tw
+(feel for the interaction between a pair of molecules by giving the molecular models a simplified)Tj
+T*
+-0.0002 Tw
+[(physical behavior)39.2(, that of )40.3(V)97.2(an der )12(W)68.8(aals repulsion between atoms.)]TJ
+0 -2.6667 TD
+-0.0035 Tw
+(In its full-blown configuration, )Tj
+/TT8 1 Tf
+12.625 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0001 Tc
+-0.0034 Tw
+( allows the user to manipulate both the viewing position and)Tj
+-14.8333 -1.3333 TD
+0 Tc
+-0.0347 Tw
+[(a single molecule’)52.7(s position and orientation by using a pair of joysticks boxes, each box consisting)]TJ
+T*
+-0.0123 Tw
+[(of two three-axis joysticks.  Images of the molecules are displayed on the Pixel-Planes monitor as)]TJ
+T*
+-0.0182 Tw
+[(the user moves the joysticks.  One joystick box is used to vary the viewing position by having one)]TJ
+T*
+0.0856 Tw
+(joystick for translation and the other for rotation of the collection of all models that are on the)Tj
+T*
+-0.02 Tw
+[(screen.  )13.7(The other joystick box is used to translate and rotate one particular molecular model.  )8.8(The)]TJ
+T*
+-0.0365 Tw
+[(user may change which molecule is being moved by a keyboard toggle.  If only one joystick box is)]TJ
+T*
+-0.0427 Tw
+(available then the user may toggle between changing the view and moving a model by pressing the)Tj
+T*
+0.0007 Tw
+(space-bar on the keyboard.)Tj
+/TT4 1 Tf
+14 0 0 14 72 183.5 Tm
+0.0001 Tc
+-0.0004 Tw
+[(4.2  )70.8(A)43.7( Hypothetical User Session)]TJ
+/TT2 1 Tf
+12 0 0 12 72 151.5 Tm
+0 Tc
+0.0284 Tw
+(Let me describe a hypothetical session with )Tj
+/TT8 1 Tf
+17.875 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+0.0284 Tw
+[(.  )56.8(A)55.5( user specifies that two molecules are to be)]TJ
+-20.125 -1.3333 TD
+0.0171 Tw
+(displayed and manipulated by )Tj
+/TT8 1 Tf
+12.2917 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0171 Tw
+[(.  One of these is a lar)5.9(ge receptor molecule and the other is a)]TJ
+-14.5 -1.3333 TD
+-0.0141 Tw
+[(smaller drug molecule.  Figure 1 shows such a pair of molecules, with dihydrofolate reductase for)]TJ
+T*
+0.0489 Tw
+[(the receptor molecule and trimethoprim as the smaller drug molecule.  First, the user moves the)]TJ
+T*
+-0.0146 Tw
+[(viewing position by rotating all objects in the scene so that the receptor site of the lar)7.2(ger molecule)]TJ
+T*
+-0.0594 Tw
+[(is visible, and then uses the view translation joystick so that the site is filling most of the screen.  By)]TJ
+ET
+endstream
+endobj
+44 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+46 0 obj
+<<
+/Length 3095
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 90 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0029 Tw
+(a keystroke the user specifies that one joystick box will control the position of the drug molecule,)Tj
+0 -1.3333 TD
+-0.0122 Tw
+(and then proceeds to move the drug molecule away from the receptor molecule and in front of the)Tj
+T*
+-0.0277 Tw
+[(receptor site.  Now with a keystroke collision detection is turned on.  )21.8(The user maneuvers the drug)]TJ
+T*
+-0.0115 Tw
+[(molecule towards the receptor site of the larger molecule and attempts to find a fit into the site.  If)]TJ
+T*
+-0.0195 Tw
+(the user moves the drug molecule so that it hits the large molecule, the spheres that collide change)Tj
+T*
+-0.0442 Tw
+[(color and a beep is heard.  Using the graphics display and the collision detection as guides, the user)]TJ
+T*
+-0.0037 Tw
+(gets a “feel” for the shapes of the receptor site and drug molecule, and is able to position the drug)Tj
+T*
+0 Tw
+[(molecule where it is meant to rest on the receptor)34.1(.)]TJ
+ET
+q
+1 i 
+191 375 265 199 re
+W n
+0 G
+0 J 0 j 0.917 w 10 M []0 d
+/GS1 gs
+191.458 573.541 264.083 -198.083 re
+S
+Q
+BT
+/TT4 1 Tf
+12 0 0 12 132 328.5 Tm
+-0.0003 Tw
+[(Figur)13.7(e 1:)]TJ
+/TT2 1 Tf
+3.9167 0 TD
+[(  Dihydrofolate Reductase and )35.9(T)27.5(rimethoprim on Pixel-Planes Monitor)]TJ
+/TT4 1 Tf
+14 0 0 14 90 296.5 Tm
+(4.3  Depth Cues)Tj
+/TT2 1 Tf
+12 0 0 12 90 264.5 Tm
+0.0385 Tw
+(Docking a molecule is a task that requires understanding of the spatial relationship between two)Tj
+0 -1.3333 TD
+-0.0017 Tw
+[(molecules.  )9.1(The importance of depth cues to spatial understanding becomes apparent when a user)]TJ
+T*
+-0.0376 Tw
+(tries to dock a drug molecule using )Tj
+/TT8 1 Tf
+14.0417 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0376 Tw
+[(.  )8.2(The only depth cue that is always present in )]TJ
+/TT8 1 Tf
+18.125 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.0376 Tw
+[( is the)]TJ
+-36.625 -1.3333 TD
+0.0045 Tw
+(cue given by surface obscuration, that is, that the hidden surface display algorithm for spheres on)Tj
+T*
+0.0223 Tw
+[(Pixel-Planes hides the surface of spheres that are behind other spheres.  )22.3(When )]TJ
+/TT8 1 Tf
+31.7083 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0223 Tw
+[( uses hidden)]TJ
+-33.9167 -1.3333 TD
+-0.0158 Tw
+[(surface obscuration alone it is dif)14.1(ficult to understand the relative depths between atoms within the)]TJ
+T*
+0.056 Tw
+[(molecules.  Using a joystick to move the view position can give a very strong understanding of)]TJ
+T*
+-0.022 Tw
+[(depth relationships, but when the motion is stopped the image becomes flat.  Obscuration can be a)]TJ
+T*
+0.026 Tw
+(powerful depth cue when coupled with additional cues, but alone it is insufficient to give a good)Tj
+T*
+0.0636 Tw
+[(feeling for depth.  In addition to surface obscuration, )]TJ
+/TT8 1 Tf
+21.9167 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+0.0636 Tw
+[( provides rocking of the models and)]TJ
+-24.1667 -1.3333 TD
+0.0139 Tw
+[(stereo display to enhance depth perception.  Both of these depth cues have advantages and draw-)]TJ
+T*
+-0.0002 Tw
+(backs when used in )Tj
+/TT8 1 Tf
+8.0417 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+(.)Tj
+ET
+endstream
+endobj
+47 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS1 48 0 R
+/GS2 5 0 R
+>>
+>>
+endobj
+50 0 obj
+<<
+/Length 3970
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 72 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0006 Tw
+(4.3.1  Rocking)Tj
+0 -2.6667 TD
+-0.0348 Tw
+(A user can turn on the automatic rocking of the molecules and can also adjust the magnitude of the)Tj
+0 -1.3333 TD
+0.0186 Tw
+[(rocking by keyboard commands.  )34.2(When rocking is turned on the molecules gently rock back and)]TJ
+T*
+-0.0441 Tw
+[(forth about the vertical axis.  )23.2(The rocking is continuous, except that all rocking stops when the user)]TJ
+T*
+-0.0211 Tw
+[(is moving the joysticks.  If rocking were to continue when a molecule is moved a user would have)]TJ
+T*
+0.0527 Tw
+(to synchronize his or her hand motions with that of the rocking to perform fine positioning of a)Tj
+T*
+0.015 Tw
+[(molecule.  )28.4(This is far too difficult when the axes are decoupled as they are with the joystick con-)]TJ
+T*
+0.1165 Tw
+[(trols.  Even when the rocking is stopped during joystick motion a user can find that the view)]TJ
+T*
+0.0001 Tw
+(position that the rocking has caused can be less than ideal.)Tj
+0 -2.6667 TD
+0.0004 Tw
+(4.3.2  Stereo Display)Tj
+T*
+-0.0375 Tw
+[(The second optional depth cue is stereo display)65.8(, where )]TJ
+/TT8 1 Tf
+21.7083 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0375 Tw
+[( generates two views of the molecules)]TJ
+-23.9167 -1.3333 TD
+-0.0299 Tw
+[(and a shuttered screen and glasses are used to have one of these images presented to each eye.  For)]TJ
+T*
+0.0359 Tw
+[(people who can perceive stereo this can be a powerful depth cue.  )39.3(There are a few drawbacks to)]TJ
+T*
+0.058 Tw
+[(using stereo, however)71.8(.  First, the update rate of the display is halved because Pixel-Planes must)]TJ
+T*
+-0.0056 Tw
+[(create a separate image for the left and right eyes.  )24.8(This means that the motion of the molecules is)]TJ
+T*
+0.0022 Tw
+(not as smooth, and this can be quite an annoyance.  In addition, wearing stereo glasses cuts down)Tj
+T*
+0.0304 Tw
+(on the brightness of the display and the shuttering action can cause fatigue and sometimes head-)Tj
+T*
+0 Tw
+[(aches for a user)38.3(.)]TJ
+0 -2.6667 TD
+-0.0006 Tw
+[(4.3.3  )40.5(T)27.5(ransparency)]TJ
+T*
+-0.0246 Tw
+(Using partially transparent surfaces is another technique sometimes used to give additional spatial)Tj
+0 -1.3333 TD
+-0.0504 Tw
+[(information.  )37(When portions of an object are translucent, detail can be seen of the object that would)]TJ
+T*
+0.0075 Tw
+[(normally be obscured by the partially transparent surface.  )30.9(T)27.5(ransparency can make more surfaces)]TJ
+T*
+-0.02 Tw
+(visible at one time, but having too many transparent surfaces may lead to a cluttered and confused)Tj
+T*
+0.1045 Tw
+[(image.  In molecular graphics, one form of transparency that has enjoyed much success is the)]TJ
+T*
+-0.0619 Tw
+[(Connolly surface [Connolly 83].  )63.5(A)55.5( Connolly surface is where portions of a surface are displayed as)]TJ
+T*
+-0.027 Tw
+[(points that are fairly evenly distributed over the active surface of a molecule.  Since the points of a)]TJ
+T*
+-0.0088 Tw
+[(far surface can be seen between the points of a closer surface this gives the ef)35.3(fect of transparency)47.4(.)]TJ
+T*
+-0.0445 Tw
+[(Usually a vector display is used to draw such representations.  Just now raster graphics hardware is)]TJ
+T*
+-0.0007 Tc
+-0.0625 Tw
+[(becoming available that can display transparent surfaces in real-time.  It remains to be seen whether)]TJ
+T*
+0 Tc
+0.0001 Tw
+(this capability will be useful for molecular graphics.)Tj
+0 -2.6667 TD
+0.0006 Tw
+(4.3.4  Shadows)Tj
+T*
+-0.0116 Tw
+[(Shadows can provide information about spatial relationships between objects.  )15.5(When one object’)43.1(s)]TJ
+0 -1.3333 TD
+-0.001 Tw
+(shadow drapes over a second object we know the relative position of the two objects with respect)Tj
+T*
+-0.0319 Tw
+[(to the light source.  )33.2(The depth information given here is indirect, but it is a depth cue none the less.)]TJ
+T*
+-0.0254 Tw
+(Kirkpatrick found that the drop shadow of a virtual manipulator was a powerful cue for the task of)Tj
+ET
+endstream
+endobj
+51 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+53 0 obj
+<<
+/Length 1851
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 90 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0435 Tw
+[(positioning the manipulator around a block [Kirkpatrick 76].  )5.8(While the use of shadows has not yet)]TJ
+0 -1.3333 TD
+-0.0002 Tw
+(been proven helpful for molecular graphics, it is another technique worth exploring.)Tj
+0 -2.6667 TD
+0 Tw
+(4.3.5  Other Depth Cues)Tj
+T*
+-0.0051 Tw
+[(There are additional depth cues that have been found to be ef)17(fective for some interactive graphics)]TJ
+0 -1.3333 TD
+-0.029 Tw
+(applications, and some of these techniques may be incorporated in future versions of )Tj
+/TT8 1 Tf
+33.7083 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.029 Tw
+[(.  Some)]TJ
+-35.9583 -1.3333 TD
+0.0147 Tw
+(of the possibilities include intensity depth cueing, head-motion parallax and a head-mounted dis-)Tj
+T*
+0.0353 Tw
+[(play)55(.  Intensity depth cueing is where the brightness of an object is diminished based on the dis-)]TJ
+T*
+-0.0096 Tw
+[(tance of the object from the observer)33.4(.  I expect that intensity depth cueing will give a user a rough)]TJ
+T*
+-0.0482 Tw
+(notion of depth but that it will not let a user distinguish the relative depth of two atoms that are near)Tj
+T*
+-0.0139 Tw
+[(one another)53.5(.  Head-motion parallax is where the motion of the head is tracked and where the view)]TJ
+T*
+0.0119 Tw
+[(of the image is calculated based on the head position.  This has been found to be a very powerful)]TJ
+T*
+-0.0228 Tw
+[(depth cue.  )41(A)55.5( head-mounted display is where the user wears a pair of displays, one in front of each)]TJ
+T*
+-0.0001 Tc
+0.0394 Tw
+[(eye, and where the images presented to each eye is based on the tracked head position.  )44.3(A)55.4( head-)]TJ
+T*
+0 Tc
+-0.0231 Tw
+(mounted display can enjoy the benefits of stereo display and head-motion parallax, and thus holds)Tj
+T*
+-0.0002 Tw
+(promise for excellent depth perception.)Tj
+ET
+endstream
+endobj
+54 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+56 0 obj
+<<
+/Length 5532
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 145 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0001 Tw
+(Chapter 5: Collision Detection in )Tj
+/TT8 1 Tf
+13.5 0 TD
+0 Tw
+(Bump)Tj
+/TT4 1 Tf
+14 0 0 14 72 679.5 Tm
+-0.0004 Tw
+[(5.1  )34.9(The )]TJ
+/TT6 1 Tf
+3.6429 0 TD
+0 Tw
+(Bump)Tj
+/TT4 1 Tf
+2.5 0 TD
+-0.0001 Tc
+-0.0003 Tw
+( System)Tj
+/TT8 1 Tf
+12 0 0 12 72 647.5 Tm
+0 Tc
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+0.0709 Tw
+[( was was built by enhancing an existing program called )]TJ
+/TT8 1 Tf
+23.125 0 TD
+0 Tw
+[(pphr)14.2(ont)]TJ
+/TT2 1 Tf
+3.1667 0 TD
+0.0709 Tw
+[( \(“pee-front”\), which is a)]TJ
+-28.625 -1.3333 TD
+-0.0036 Tw
+(model viewing program for Pixel-Planes that was written by several members of the Pixel-Planes)Tj
+T*
+0.0162 Tw
+(team.  )Tj
+/TT8 1 Tf
+2.7083 0 TD
+0 Tw
+[(Pphr)41.7(ont)]TJ
+/TT2 1 Tf
+3.25 0 TD
+0.0162 Tw
+[( gets its odd name from being a )]TJ
+/TT8 1 Tf
+12.9583 0 TD
+0 Tw
+[(fr)42(ont-end)]TJ
+/TT2 1 Tf
+3.7083 0 TD
+0.0162 Tw
+[( to Pixel-Planes and because it is written)]TJ
+-22.625 -1.3333 TD
+0.0414 Tw
+(using a graphics library called )Tj
+/TT8 1 Tf
+12.5 0 TD
+0 Tw
+(PPHIGS)Tj
+/TT2 1 Tf
+3.5 0 TD
+0.0414 Tw
+[( [Ellsworth 88].  Dif)11.7(ferences between )]TJ
+/TT8 1 Tf
+15.5417 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0414 Tw
+[( and )]TJ
+/TT8 1 Tf
+2.0417 0 TD
+0 Tw
+[(pphr)55.8(ont)]TJ
+/TT2 1 Tf
+-35.7917 -1.3333 TD
+[(are described in the user)-32.4(’)41.3(s)0( manual for )]TJ
+/TT8 1 Tf
+15.2917 0 TD
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+( at the end of this thesis.)Tj
+-17.5 -2.6667 TD
+-0.0235 Tw
+[(The Pixel-Planes graphics system is composed of a host processor)47.5(, a graphics processor)51.4(, an SIMD)]TJ
+0 -1.3333 TD
+0.1163 Tw
+[(array of processor)34.7(-enhanced memories and a video display unit [Fuchs 85].  )-9.4(The code for the)]TJ
+T*
+0.0252 Tw
+[(PPHIGS graphics library is distributed between the host processor)30.6(, which is a microV)126.9(ax, and the)]TJ
+T*
+0.033 Tw
+[(graphics processor)44.4(, which is a )20(W)68.9(eitek chip set with fast floating point capabilities.  )14.3(The code for)]TJ
+/TT8 1 Tf
+T*
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0606 Tw
+[( proper resides only on the host, but PPHIGS has been enhanced to include collision detection)]TJ
+-2.2083 -1.3333 TD
+0 Tw
+[(for this project, and most of this code runs on the graphics processor)63.3(.)]TJ
+0 -2.6667 TD
+0.0429 Tc
+0.125 Tw
+[(T)70.4(wo new routines were added to PPHIGS, one for static interference checking called)]TJ
+0 -1.3333 TD
+0 Tc
+0.1159 Tw
+(pg_collision_check\(\) and second routine called pg_move_to_touch\(\) that determines collisions)Tj
+T*
+-0.0413 Tw
+[(between a moving object and a fixed object.  )38.2(The pg_collision_check\(\) routine accepts two param-)]TJ
+T*
+-0.0325 Tw
+(eters, the names of two graphics structures, and returns a boolean value saying whether the objects)Tj
+T*
+-0.0181 Tw
+[(intersect.  Unfortunately)85.5(, static interference detection was found unsuitable for molecular docking)]TJ
+T*
+-0.0293 Tw
+[(for reasons that will be discussed below)57(.  )24.8(The collision detection routine pg_move_to_touch\(\) was)]TJ
+T*
+0.0259 Tw
+[(then written to remedy the problem with static checking.  )16.7(The collision detection routine accepts)]TJ
+T*
+0.07 Tw
+(the name of two graphics structures and information about how one object is to move, and this)Tj
+T*
+-0.0511 Tw
+(routine returns whether a collision occurred and where the moving object should be stopped so that)Tj
+T*
+0 Tw
+(it just touches the fixed object.)Tj
+/TT4 1 Tf
+14 0 0 14 72 263.5 Tm
+0.0003 Tw
+(5.2  Uniform Spatial Subdivision)Tj
+/TT2 1 Tf
+12 0 0 12 72 231.5 Tm
+0.0001 Tw
+[(A)55.5( number of algorithms for collision detection have been described in the literature.  )31.8(This section)]TJ
+T*
+0.0662 Tw
+(describes the method that )Tj
+/TT8 1 Tf
+10.7083 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0662 Tw
+[( uses to check for collisions between collections of spheres that)]TJ
+-12.9167 -1.3333 TD
+0.0001 Tw
+(represent molecules.  Chapter 6 presents a taxonomy of collision detection algorithms.)Tj
+0 -2.6667 TD
+0.0877 Tw
+(The method )Tj
+/TT8 1 Tf
+5.2083 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+0.0877 Tw
+[( uses to perform collision detection is )]TJ
+/TT8 1 Tf
+15.8333 0 TD
+(uniform spatial subdivision)Tj
+/TT2 1 Tf
+11.125 0 TD
+[(.  For each)]TJ
+-34.4167 -1.3333 TD
+-0.0455 Tw
+(collection of spheres that represents a molecule, the modeling space of the molecule is divided into)Tj
+T*
+0.0045 Tw
+(a three dimensional grid of cells.  Each of the cells in the grid is a cube with side lengths equal to)Tj
+T*
+-0.0068 Tw
+[(the diameter of the lar)10.2(gest sphere in the model.  Every cell has a list of spheres that fall within the)]TJ
+T*
+0.0747 Tw
+[(volume of the cell.  In order to test whether a sphere )]TJ
+/TT8 1 Tf
+22.0417 0 TD
+0 Tw
+(S)Tj
+/TT2 1 Tf
+0.5 0 TD
+0.0747 Tw
+[( from another model intersects with this)]TJ
+-22.5417 -1.3333 TD
+-0.0567 Tw
+[(model, it suf)39(fices to find if )]TJ
+/TT8 1 Tf
+10.5417 0 TD
+0 Tw
+(S)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0567 Tw
+[( intersects any spheres in the cells that )]TJ
+/TT8 1 Tf
+15.125 0 TD
+0 Tw
+(S)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0567 Tw
+[( falls within.  )50.6(T)69.2(o)0( check whether)]TJ
+-26.6667 -1.3333 TD
+0.1004 Tw
+(molecular models )Tj
+/TT8 1 Tf
+7.5833 0 TD
+0 Tw
+(A)Tj
+/TT2 1 Tf
+0.625 0 TD
+0.1004 Tw
+[( and )]TJ
+/TT8 1 Tf
+2.125 0 TD
+0 Tw
+(B)Tj
+/TT2 1 Tf
+0.625 0 TD
+0.1004 Tw
+[( intersect, each of the spheres from model )]TJ
+/TT8 1 Tf
+17.75 0 TD
+0 Tw
+(B)Tj
+/TT2 1 Tf
+0.625 0 TD
+0.1004 Tw
+[( is checked in this way)]TJ
+-29.3333 -1.3333 TD
+-0.0041 Tw
+(against the spheres in model )Tj
+/TT8 1 Tf
+11.5417 0 TD
+0 Tw
+(A)Tj
+/TT2 1 Tf
+0.625 0 TD
+(.)Tj
+ET
+endstream
+endobj
+57 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT6 17 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+59 0 obj
+<<
+/Length 6831
+>>
+stream
+BT
+/TT2 1 Tf
+14.2154 0 0 14.0886 406.8 461.5633 Tm
+0 g
+/GS1 gs
+0 Tc
+0 Tw
+(Sphere from drug is)Tj
+0 -1.0714 TD
+(tested against spheres)Tj
+T*
+(in four cells of rece)Tj
+ET
+q
+1 i 
+405.785 428.354 146.215 45.285 re
+W n
+BT
+14.2154 0 0 14.0886 517.3093 431.3735 Tm
+(p)Tj
+ET
+Q
+BT
+14.2154 0 0 14.0886 524.417 431.3735 Tm
+(tor.)Tj
+ET
+q
+1.0045 0 0 -0.9955 0 0 cm
+0 0 0 0.5 K
+0 J 0 j 2.022 w 10 M []0 d
+1 i 
+333.23 -407.541 m
+333.23 -394.987 323.041 -384.797 310.486 -384.797 c
+297.931 -384.797 287.742 -394.987 287.742 -407.541 c
+287.742 -420.096 297.931 -430.285 310.486 -430.285 c
+323.041 -430.285 333.23 -420.096 333.23 -407.541 c
+s
+Q
+0 0 0 1 k
+1 i 
+394.615 446.468 m
+381.415 435.399 l
+379.385 439.424 l
+377.354 442.443 l
+394.615 446.468 l
+f*
+378.369 440.43 m
+380.4 440.43 l
+380.4 438.418 l
+334.708 414.266 l
+332.677 414.266 l
+332.677 416.279 l
+f
+q
+90 372 462 318 re
+W n
+q
+1.0045 0 0 -0.9955 0 0 cm
+0 0 0 1 K
+0 J 0 j 2.022 w 10 M []0 d
+305.873 -479.322 m
+305.873 -466.767 295.684 -456.578 283.129 -456.578 c
+270.574 -456.578 260.385 -466.767 260.385 -479.322 c
+260.385 -491.877 270.574 -502.066 283.129 -502.066 c
+295.684 -502.066 305.873 -491.877 305.873 -479.322 c
+h
+324.151 -444.969 m
+324.151 -432.414 313.962 -422.225 301.407 -422.225 c
+288.852 -422.225 278.663 -432.414 278.663 -444.969 c
+278.663 -457.523 288.852 -467.713 301.407 -467.713 c
+313.962 -467.713 324.151 -457.523 324.151 -444.969 c
+h
+284.728 -456.058 m
+284.728 -443.503 274.539 -433.314 261.984 -433.314 c
+249.429 -433.314 239.24 -443.503 239.24 -456.058 c
+239.24 -468.613 249.429 -478.802 261.984 -478.802 c
+274.539 -478.802 284.728 -468.613 284.728 -456.058 c
+h
+250.322 -445.933 m
+250.322 -433.378 240.133 -423.189 227.578 -423.189 c
+215.024 -423.189 204.834 -433.378 204.834 -445.933 c
+204.834 -458.488 215.024 -468.677 227.578 -468.677 c
+240.133 -468.677 250.322 -458.488 250.322 -445.933 c
+h
+253.309 -407.541 m
+253.309 -394.987 243.12 -384.797 230.565 -384.797 c
+218.01 -384.797 207.821 -394.987 207.821 -407.541 c
+207.821 -420.096 218.01 -430.285 230.565 -430.285 c
+243.12 -430.285 253.309 -420.096 253.309 -407.541 c
+h
+219.023 -416.642 m
+219.023 -404.087 208.834 -393.898 196.279 -393.898 c
+183.724 -393.898 173.535 -404.087 173.535 -416.642 c
+173.535 -429.197 183.724 -439.386 196.279 -439.386 c
+208.834 -439.386 219.023 -429.197 219.023 -416.642 c
+s
+1.011 w 
+160.862 -519.737 181.952 145.562 re
+160.357 -483.347 m
+343.32 -483.347 l
+160.357 -446.956 m
+343.32 -446.956 l
+160.357 -410.566 m
+343.32 -410.566 l
+306.424 -520.243 m
+306.424 -373.67 l
+270.034 -520.243 m
+270.034 -373.67 l
+233.643 -520.243 m
+233.643 -373.67 l
+197.253 -520.243 m
+197.253 -373.67 l
+S
+Q
+Q
+BT
+14.2154 0 0 14.0886 399.6923 635.6583 Tm
+(Cell contains pointers)Tj
+T*
+(to s)Tj
+ET
+q
+398.677 617.544 135.046 30.19 re
+W n
+BT
+14.2154 0 0 14.0886 419.8354 620.5634 Tm
+(p)Tj
+ET
+Q
+BT
+14.2154 0 0 14.0886 426.9431 620.5634 Tm
+(heres 4, 5 and 6.)Tj
+ET
+q
+90 372 462 318 re
+W n
+q
+1.0045 0 0 -0.9955 0 0 cm
+0 0 0 1 K
+0 J 0 j 2.022 w 10 M []0 d
+305.873 -652.175 m
+305.873 -639.62 295.684 -629.431 283.129 -629.431 c
+270.574 -629.431 260.385 -639.62 260.385 -652.175 c
+260.385 -664.729 270.574 -674.919 283.129 -674.919 c
+295.684 -674.919 305.873 -664.729 305.873 -652.175 c
+h
+324.151 -617.821 m
+324.151 -605.266 313.962 -595.077 301.407 -595.077 c
+288.852 -595.077 278.663 -605.266 278.663 -617.821 c
+278.663 -630.376 288.852 -640.565 301.407 -640.565 c
+313.962 -640.565 324.151 -630.376 324.151 -617.821 c
+h
+284.728 -628.911 m
+284.728 -616.356 274.539 -606.167 261.984 -606.167 c
+249.429 -606.167 239.24 -616.356 239.24 -628.911 c
+239.24 -641.465 249.429 -651.655 261.984 -651.655 c
+274.539 -651.655 284.728 -641.465 284.728 -628.911 c
+h
+250.322 -618.785 m
+250.322 -606.231 240.133 -596.041 227.578 -596.041 c
+215.024 -596.041 204.834 -606.231 204.834 -618.785 c
+204.834 -631.34 215.024 -641.529 227.578 -641.529 c
+240.133 -641.529 250.322 -631.34 250.322 -618.785 c
+h
+253.309 -580.394 m
+253.309 -567.839 243.12 -557.65 230.565 -557.65 c
+218.01 -557.65 207.821 -567.839 207.821 -580.394 c
+207.821 -592.949 218.01 -603.138 230.565 -603.138 c
+243.12 -603.138 253.309 -592.949 253.309 -580.394 c
+h
+219.023 -589.495 m
+219.023 -576.94 208.834 -566.75 196.279 -566.75 c
+183.724 -566.75 173.535 -576.94 173.535 -589.495 c
+173.535 -602.049 183.724 -612.239 196.279 -612.239 c
+208.834 -612.239 219.023 -602.049 219.023 -589.495 c
+s
+1.011 w 
+160.862 -692.592 181.952 145.562 re
+160.357 -656.202 m
+343.32 -656.202 l
+160.357 -619.811 m
+343.32 -619.811 l
+160.357 -583.421 m
+343.32 -583.421 l
+306.424 -693.098 m
+306.424 -546.525 l
+270.034 -693.098 m
+270.034 -546.525 l
+233.643 -693.098 m
+233.643 -546.525 l
+197.253 -693.098 m
+197.253 -546.525 l
+S
+Q
+Q
+q
+1.0045 0 0 -0.9955 0 0 cm
+0 0 0 0.5 K
+0 J 0 j 4.043 w 10 M []0 d
+269.528 -656.707 36.39 36.39 re
+S
+Q
+389.538 635.658 m
+372.277 633.646 l
+372.277 637.671 l
+373.292 642.703 l
+389.538 635.658 l
+f*
+306.277 645.722 m
+308.308 645.722 l
+373.292 638.677 l
+373.292 636.665 l
+371.262 636.665 l
+306.277 643.709 l
+f
+BT
+14.2154 0 0 14.0886 90 631.6329 Tm
+(Grid for)Tj
+T*
+(Receptor)Tj
+T*
+(Molecule)Tj
+12.1846 0 0 12.0759 186.4615 590.3735 Tm
+(1)Tj
+2.8333 2.8333 TD
+(2)Tj
+1.5 -4.5833 TD
+(3)Tj
+1.1667 5.1667 TD
+(4)Tj
+2.3333 2.3333 TD
+(5)Tj
+2.5 -4.5833 TD
+(6)Tj
+/TT4 1 Tf
+12 0 0 12 150.5 313.5 Tm
+/GS2 gs
+-0.0006 Tw
+[(Figur)13.7(e 2:)]TJ
+/TT2 1 Tf
+3.9167 0 TD
+-0.0004 Tw
+[(  T)69.2(wo-dimensional Illustration of Uniform Subdivision)]TJ
+-8.9583 -2.6667 TD
+0.0107 Tw
+[(T)69.2(wo variations of uniform subdivision were implemented for )]TJ
+/TT8 1 Tf
+24.7917 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0107 Tw
+[(.  One method was to find the)]TJ
+-27 -1.3333 TD
+-0.0611 Tw
+(smallest bounding box that encloses a given molecule, and then to create a full 3-D grid of cells that)Tj
+T*
+0.0032 Tw
+[(extends over this range.  )12.9(This requires two passes through the data: one pass to find the bounding)]TJ
+T*
+0.0488 Tw
+[(box and a second pass to place the spheres in the appropriate cells.  )62.6(A)55.5( variation of this was also)]TJ
+T*
+-0.0065 Tw
+(implemented, and this was to create a linear array of cells and to use a hash function to translate a)Tj
+T*
+-0.0473 Tw
+[(3-space location to an index in this array)80.3(.  )-11.3(The disadvantage of this method is that the hash function)]TJ
+T*
+0.0056 Tw
+(may cause any given cell to contain spheres from widely separated parts of the model, so that the)Tj
+T*
+0.0118 Tw
+[(average number of spheres per cell is likely to be higher than when using a full grid.  )22.2(The advan-)]TJ
+T*
+-0.0199 Tw
+(tages of the method are that only one pass is required to place the spheres into cells and no bound-)Tj
+T*
+0.0245 Tw
+[(ary checks are necessary when testing a sphere from the drug against the receptor)-28.9(’)41.3(s)0( collection of)]TJ
+T*
+0 Tw
+(cells.  I found the hash variant to be shorter and easier to debug than the full-grid method.)Tj
+ET
+endstream
+endobj
+60 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS1 48 0 R
+/GS2 5 0 R
+>>
+>>
+endobj
+62 0 obj
+<<
+/Length 4749
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 274 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0002 Tw
+[(average atoms per cell)-1200(average atoms per cell)]TJ
+ET
+0 0 0 1 K
+0 J 0 j 0.592 w 10 M []0 d
+1 i 
+117.5 694.592 m
+72 694.592 l
+S
+BT
+12 0 0 12 72 695.5 Tm
+-0.0002 Tc
+0 Tw
+(Molecule)Tj
+ET
+261.5 694.592 m
+180 694.592 l
+S
+BT
+12 0 0 12 180 695.5 Tm
+0 Tc
+-0.0007 Tw
+(number of atoms)Tj
+ET
+375.5 694.592 m
+279 694.592 l
+S
+BT
+12 0 0 12 279 695.5 Tm
+-0.0002 Tw
+(\(hashed, 4096 cells\))Tj
+ET
+494 694.592 m
+409 694.592 l
+S
+BT
+12 0 0 12 409 695.5 Tm
+-0.0006 Tw
+(\(full grid of cells\))Tj
+-28.0833 -1.3333 TD
+0 Tw
+[(cytochrome)-6779.2(3204)-6833.3(14.38)-7958.3(1)41.7(1.01)]TJ
+T*
+[(dihydrofolate reductase #1)-837.5(1294)-6833.3(10.31)-8416.7(9.73)]TJ
+T*
+[(dihydrofolate reductase #2)-837.5(2544)-6833.3(10.86)-7916.7(10.14)]TJ
+T*
+[(DNA)-9833.3(322)-7333.3(8.24)-8416.7(8.76)]TJ
+T*
+0.0001 Tc
+[(hexokinase)-6999.9(3298)-6833.2(15.34)-7958.2(1)41.8(1.23)]TJ
+T*
+0 Tc
+0.0003 Tw
+[(superoxide dismutase)-2862.5(4380)-6875(1)41.7(1.98)-7917.1(10.44)]TJ
+T*
+0.0016 Tw
+[(transfer RNA)-6083.3(1613)-7333.3(9.37)-8416.7(9.56)]TJ
+T*
+0 Tw
+[(trypsin)-8720.8(2083)-6875(1)41.7(1.60)-7917.1(10.82)]TJ
+/TT4 1 Tf
+1.9167 -2.6667 TD
+[(T)83.7(able 1:)]TJ
+/TT2 1 Tf
+3.4583 0 TD
+[(  )83.3(A)55.5(verage atom density for the two forms of uniform spatial subdivision)]TJ
+-5.375 -2.6667 TD
+0.015 Tw
+[(Uniform subdivision is particularly well suited to molecular models.  )6.9(The )28(V)97.2(an der )42.4(W)68.8(aals radii do)]TJ
+0 -1.3333 TD
+-0.0388 Tw
+[(not dif)16.5(fer substantially between the atoms found in or)29.1(ganic molecules:  the radius of carbon is 1.74)]TJ
+T*
+-0.0277 Tw
+[(angstroms, oxygen is 1.4 angstroms, nitrogen is 1.54 angstroms and sulfur is 1.8 angstroms.  )40.7(Also,)]TJ
+T*
+-0.0179 Tw
+(the forces between atoms in a molecule put an upper bound on the density of atoms in a molecule.)Tj
+T*
+-0.0316 Tw
+(These two facts mean that there is a small upper bound on the number of atoms can that fall within)Tj
+T*
+0.0783 Tw
+[(any one cell of the uniform subdivision for a model.  )23.5(Thus the time complexity of the uniform)]TJ
+T*
+-0.0238 Tw
+(spatial subdivision technique for collision detection is )Tj
+/TT8 1 Tf
+21.625 0 TD
+0 Tw
+(O)Tj
+/TT2 1 Tf
+0.75 0 TD
+(\()Tj
+/TT8 1 Tf
+0.3333 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0238 Tw
+(\), where )Tj
+/TT8 1 Tf
+3.4583 0 TD
+0 Tw
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0238 Tw
+[( is the number of atoms in the)]TJ
+-27.1667 -1.3333 TD
+0.0139 Tw
+[(smaller of the two molecules, which in our application is the drug molecule.  )6.7(The right-hand col-)]TJ
+T*
+0.0442 Tw
+[(umn of )32.6(T)69.2(able 1 shows that over a variety of molecules the average number of atoms per cell re-)]TJ
+T*
+-0.0058 Tw
+[(mains fairly constant at about 10 atoms per cell.  )6.1(The table also shows that there are not too many)]TJ
+T*
+0 Tw
+(more spheres per cell when using a hash table of 4096 entries instead of a full grid of cells.)Tj
+/TT4 1 Tf
+14 0 0 14 72 311.5 Tm
+0.0002 Tw
+[(5.3  Collision )65.1(Along Path of Motion)]TJ
+/TT2 1 Tf
+12 0 0 12 72 279.5 Tm
+0.0282 Tw
+(When collision detection is turned on in )Tj
+/TT8 1 Tf
+16.4583 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0282 Tw
+(, the program forbids any motion of the drug mol-)Tj
+-18.6667 -1.3333 TD
+-0.0234 Tw
+[(ecule that will cause it to interpenetrate the receptor molecule.  Originally what the program did at)]TJ
+T*
+0.0806 Tw
+(a detailed level was to read the positions of the joysticks, compute a new position for the drug)Tj
+T*
+0.0871 Tw
+[(molecule based on this and test to see if this new position would cause interpenetration.  If no)]TJ
+T*
+0.0561 Tw
+(collision occurred then the drug was moved to this new position, but if a collision was detected)Tj
+T*
+-0.0175 Tw
+(then the program would signal this to the user and keep the drug molecule at its previous position.)Tj
+T*
+0.0317 Tw
+[(In this way the program guaranteed that the drug molecule would never intersect the lar)28.9(ger mol-)]TJ
+T*
+-0.0578 Tw
+[(ecule.  For slow movement this was found to be satisfactory)70.4(, but when the drug molecule was being)]TJ
+T*
+0.0404 Tw
+(moved rapidly this method would cause the drug to stop moving a good distance away from the)Tj
+T*
+-0.0385 Tw
+[(point of collision.  )12.3(When a user eased up on the joystick the drug molecule would then take several)]TJ
+T*
+0.019 Tw
+(small jumps towards the collision point before coming to rest because the joysticks would give a)Tj
+T*
+0.0298 Tw
+[(sequence of progressively smaller motion increments.  )8(The problem was that when the drug was)]TJ
+T*
+0.0185 Tw
+(being moved rapidly the distance between consecutive positions of the drug was easily visible to)Tj
+T*
+-0.0139 Tw
+[(the user)40.5(, and a collision could cause the drug to stop far from the receptor molecule.  )17.4(This was my)]TJ
+ET
+endstream
+endobj
+63 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+65 0 obj
+<<
+/Length 5817
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 90 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0001 Tw
+(first encounter with the perils of static interference checking.)Tj
+12.0557 0 0 12.0774 90 587.4387 Tm
+0 g
+/GS1 gs
+0 Tw
+(Motion of Drug)Tj
+0.25 -11.9167 TD
+(position 0)Tj
+10.0833 0.0833 TD
+(position 1)Tj
+3.5833 -3.4167 TD
+(desired position 2)Tj
+0.9167 -2 TD
+(drug touches )Tj
+-0.5 -1 TD
+(macromolecule)Tj
+9.1667 3 TD
+(proposed position)Tj
+0.6667 -2 TD
+(drug intersects)Tj
+-0.1667 -1 TD
+(macromolecule)Tj
+ET
+1 i 
+298.965 459.619 m
+299.97 447.542 l
+296.956 447.542 l
+293.942 448.548 l
+298.965 459.619 l
+f*
+296.956 447.542 m
+297.961 447.542 l
+297.961 446.535 l
+292.937 420.368 l
+291.933 420.368 l
+291.933 421.374 l
+f
+370.295 458.613 m
+380.341 451.568 l
+376.323 447.542 l
+370.295 458.613 l
+f*
+378.332 449.555 m
+379.336 449.555 l
+404.452 421.374 l
+404.452 420.368 l
+403.448 420.368 l
+378.332 448.548 l
+f
+BT
+12.0557 0 0 12.0774 389.3828 625.6838 Tm
+(Macromolecule)Tj
+ET
+q
+90 675 433 -312 re
+W n
+q
+0.9991 0 0 -1.0009 0 0 cm
+0 G
+0 J 0 j 2.011 w 10 M []0 d
+323.87 -633.668 m
+326.883 -621.266 330.57 -613.223 334.931 -609.535 c
+339.285 -605.848 344.983 -603.837 352.026 -603.501 c
+359.06 -603.168 366.937 -601.827 375.656 -599.479 c
+384.366 -597.134 390.567 -592.944 394.259 -586.91 c
+397.941 -580.878 400.12 -575.18 400.795 -569.816 c
+401.46 -564.454 398.612 -558.589 392.247 -552.219 c
+385.874 -545.852 377.663 -543.171 367.612 -544.174 c
+357.552 -545.182 347.497 -543.674 337.445 -539.649 c
+327.386 -535.629 322.023 -529.093 321.357 -520.041 c
+320.683 -510.993 327.218 -502.614 340.965 -494.903 c
+354.703 -487.196 370.791 -482.839 389.231 -481.83 c
+407.662 -480.828 424.084 -476.303 438.503 -468.256 c
+452.91 -460.214 464.473 -460.885 473.194 -470.267 c
+481.903 -479.655 492.125 -489.039 503.863 -498.422 c
+515.588 -507.81 515.253 -517.362 502.857 -527.08 c
+490.449 -536.803 479.892 -546.187 471.183 -555.235 c
+462.462 -564.287 462.295 -571.828 470.68 -577.86 c
+479.054 -583.895 486.595 -589.593 493.305 -594.954 c
+500.003 -600.319 504.192 -607.19 505.874 -615.568 c
+507.543 -623.948 505.532 -632.998 499.841 -642.718 c
+494.136 -652.438 486.763 -658.304 477.719 -660.315 c
+468.663 -662.326 458.943 -665.175 448.558 -668.862 c
+438.162 -672.549 430.453 -673.89 425.431 -672.884 c
+420.398 -671.879 415.203 -669.7 409.845 -666.348 c
+404.477 -662.997 398.946 -658.807 393.253 -653.779 c
+387.551 -648.751 378.669 -649.924 366.606 -657.298 c
+354.536 -664.673 343.642 -665.678 333.926 -660.315 c
+324.202 -654.952 320.85 -646.07 323.87 -633.668 c
+s
+Q
+Q
+166.353 569.323 m
+149.274 565.297 l
+149.274 573.348 l
+166.353 569.323 l
+f*
+q
+90 675 433 -312 re
+W n
+q
+0.9991 0 0 -1.0009 0 0 cm
+0 G
+0 J 0 j 2.011 w 10 M []0 d
+93.098 -568.81 m
+150.414 -568.81 l
+116.225 -549.705 m
+122.928 -553.729 129.129 -552.723 134.828 -546.688 c
+140.525 -540.657 139.52 -532.613 131.811 -522.555 c
+124.102 -512.502 122.593 -501.944 127.286 -490.88 c
+131.978 -479.822 130.135 -472.784 121.756 -469.764 c
+113.376 -466.75 106.338 -469.767 100.639 -478.814 c
+94.941 -487.867 94.438 -500.938 99.131 -518.03 c
+103.824 -535.127 109.521 -545.685 116.225 -549.705 c
+h
+235.382 -549.705 m
+241.749 -553.729 247.782 -552.723 253.482 -546.688 c
+259.178 -540.657 258.34 -532.613 250.968 -522.555 c
+243.592 -512.502 242.251 -501.944 246.946 -490.88 c
+251.636 -479.822 249.625 -472.784 240.913 -469.764 c
+232.196 -466.75 225.157 -469.767 219.796 -478.814 c
+214.432 -487.867 214.096 -500.938 218.791 -518.03 c
+223.482 -535.127 229.011 -545.685 235.382 -549.705 c
+s
+Q
+Q
+q
+0.9991 0 0 -1.0009 0 0 cm
+0 0 0 0.5 K
+0 J 0 j 2.011 w 10 M []0 d
+354.54 -549.705 m
+361.239 -553.729 367.44 -552.723 373.142 -546.688 c
+378.836 -540.657 377.83 -532.613 370.126 -522.555 c
+362.412 -512.502 360.904 -501.944 365.601 -490.88 c
+370.289 -479.822 368.445 -472.784 360.07 -469.764 c
+351.686 -466.75 344.648 -469.767 338.954 -478.814 c
+333.251 -487.867 332.749 -500.938 337.445 -518.03 c
+342.134 -535.127 347.832 -545.685 354.54 -549.705 c
+s
+Q
+q
+0.9991 0 0 -1.0009 0 0 cm
+0 0 0 1 K
+0 J 0 j 2.011 w 10 M []0 d
+303.257 -549.705 m
+309.957 -553.729 316.158 -552.723 321.859 -546.688 c
+327.554 -540.657 326.548 -532.613 318.843 -522.555 c
+311.13 -512.502 309.79 -501.944 314.82 -490.88 c
+319.845 -479.822 318.001 -472.784 309.29 -469.764 c
+300.572 -466.75 293.366 -469.767 287.671 -478.814 c
+281.969 -487.867 281.467 -500.938 286.162 -518.03 c
+290.852 -535.127 296.55 -545.685 303.257 -549.705 c
+s
+Q
+BT
+/TT4 1 Tf
+12 0 0 12 180 305 Tm
+0 0 0 1 k
+/GS2 gs
+-0.0002 Tw
+[(Figur)13.7(e 3:)]TJ
+/TT2 1 Tf
+3.9167 0 TD
+[(  )41.3(The Problem with Static Bump Checking)]TJ
+-11.4167 -2.6667 TD
+-0.0407 Tw
+[(T)69.2(o)0( remedy the problem with static interference checking, )]TJ
+/TT8 1 Tf
+22.7917 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0407 Tw
+[( now uses a binary search along the)]TJ
+-25 -1.3333 TD
+0.0596 Tw
+[(path of the drug’)37.8(s trajectory to find the position where the collision occurs.  Instead of multiple)]TJ
+T*
+-0.0417 Tw
+(invocations of the full-blown interference checking method described above, information from the)Tj
+T*
+-0.0576 Tw
+[(check that found the collision is used to make this search more rapid.  Specifically)58.6(, when a collision)]TJ
+T*
+-0.0381 Tw
+(is found using spatial subdivision, each pair of spheres that participate in the collision are recorded)Tj
+T*
+-0.0098 Tw
+[(in a list.  )30.2(This short list of sphere pairs is checked for each proposed position along the path of the)]TJ
+T*
+-0.0413 Tw
+(drug, and the new position of the drug is taken to be the position farthest along the path that did not)Tj
+T*
+-0.0443 Tw
+[(cause an intersection between pairs of spheres in the list.  )46.4(Although this use of trajectory coherence)]TJ
+T*
+-0.0116 Tw
+(is not guarantee to give a correct answer for extremely rapid motion, it has proved to be a suitable)Tj
+T*
+0.0001 Tw
+(method for the given problem domain.)Tj
+ET
+endstream
+endobj
+66 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS1 48 0 R
+/GS2 5 0 R
+>>
+>>
+endobj
+68 0 obj
+<<
+/Length 3620
+>>
+stream
+BT
+/TT4 1 Tf
+14 0 0 14 72 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0006 Tw
+[(5.4  )72.6(Algorithm Performance)]TJ
+/TT2 1 Tf
+12 0 0 12 72 679.5 Tm
+0 Tw
+(The )Tj
+/TT8 1 Tf
+1.7917 0 TD
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0256 Tw
+[( program keeps track of how many times collision detection is invoked in a run and uses)]TJ
+-4 -1.3333 TD
+0.0657 Tw
+[(the system function gettimeofday\(\) to time each invocation.  )14.6(These values are printed when the)]TJ
+T*
+0.0423 Tw
+[(program is exited.  T)69.2(o)0( time the collision detection algorithm, a recording of a )]TJ
+/TT8 1 Tf
+31.6667 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0425 Tw
+[( session was)]TJ
+-33.875 -1.3333 TD
+-0.0048 Tc
+-0.0625 Tw
+[(saved in a file.  During the session a model of trimethoprim was moved into a cavity of dihydrofolate)]TJ
+T*
+0 Tc
+0.018 Tw
+[(reductase while collision detection was turned on.  )27.2(This recording was played back several times)]TJ
+T*
+0.0267 Tw
+(on an unloaded system to get an average time for invocations of the two variants of the collision)Tj
+T*
+-0.0342 Tw
+[(detection routine.  )20(The average time for a call to collision detection was 0.057 seconds for both the)]TJ
+T*
+-0.0514 Tw
+[(hash table and full grid methods.  )40(T)69.2(ogether with the times gathered by hand \(below\) this means that)]TJ
+T*
+0.0001 Tw
+(roughly 73% of the time is spent displaying the models and 27% is spent checking for collisions.)Tj
+ET
+0 0 0 1 K
+0 J 0 j 0.592 w 10 M []0 d
+1 i 
+181.5 518.592 m
+144 518.592 l
+S
+BT
+12 0 0 12 144 519.5 Tm
+0.0003 Tc
+0 Tw
+(Method)Tj
+ET
+411.5 518.592 m
+324 518.592 l
+S
+BT
+12 0 0 12 324 519.5 Tm
+0 Tc
+0.0003 Tw
+(seconds per frame)Tj
+-15 -1.3333 TD
+-0.0005 Tw
+[(no collision detection)-8891.7(0.155)]TJ
+T*
+0.0007 Tw
+[(collision detection, hashed cells)-4779.2(0.193)]TJ
+T*
+0.0002 Tw
+[(collision detection, full-grid of cells)-3141.7(0.189)]TJ
+/TT4 1 Tf
+1.875 -2.6667 TD
+0.0004 Tw
+[(T)83.7(able 2:)]TJ
+/TT2 1 Tf
+3.4583 0 TD
+[(  )42.5(T)27.5(iming Statistics for Collision Detection)]TJ
+-11.3333 -2.6667 TD
+0.0522 Tw
+(Performance of the collision detection algorithm was also measured by timing the frame update)Tj
+0 -1.3333 TD
+0.0042 Tw
+[(rate while displaying models of dihydrofolate reductase and trimethoprim.  )33.7(This timing was done)]TJ
+T*
+(on an unloaded system using a stopwatch and displaying 100 frames while rotating the model for)Tj
+T*
+0.0233 Tw
+[(trimethoprim continuously)50(.  )46.6(T)69.2(able 2 shows the times for both collision detection variants and the)]TJ
+T*
+0.0332 Tw
+[(time without collision detection.  )25(The table shows that )]TJ
+/TT8 1 Tf
+22.2083 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+0.0332 Tw
+[( displays about 5 frames per second)]TJ
+-24.4583 -1.3333 TD
+-0.0465 Tw
+[(with collision detection turned on and roughly 6.5 frames per second without collisions.  )9.7(The times)]TJ
+T*
+-0.0348 Tw
+[(indicate that there is little dif)16.6(ference between using a hash table and using a full grid of cells.  )17.6(W)27.2(ith)]TJ
+T*
+0.1137 Tw
+(collision detection turned on )Tj
+/TT8 1 Tf
+12.125 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.1136 Tw
+[( spent roughly 80% of its time generating images and 20%)]TJ
+-14.3333 -1.3333 TD
+0.0882 Tw
+[(checking for collisions during these timings.  Since the model for trimethoprim was somewhat)]TJ
+T*
+0.0248 Tw
+(removed from the dihydrofolate reductase, fewer cells in its neighborhood were filled than if the)Tj
+T*
+-0.0156 Tw
+[(models were being bumped against one another)39.3(.  )52.1(This is probably the reason for the slightly faster)]TJ
+T*
+0.0001 Tw
+(times for calls to the collision detection routines than the times clocked by gettimeofday\(\).)Tj
+ET
+endstream
+endobj
+69 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+71 0 obj
+<<
+/Length 2050
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 217.5 708 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0 Tw
+[(Chapter 6: )54.5(A)55.5( User Study)]TJ
+/TT4 1 Tf
+14 0 0 14 90 676 Tm
+-0.0001 Tw
+[(6.1  )35.5(A)79.3( Simple )16(T)95.6(ask of Geometric Fit)]TJ
+/TT2 1 Tf
+12 0 0 12 90 644 Tm
+-0.0513 Tw
+(A small pilot study was performed aimed at evoking comments from the users about the usefulness)Tj
+0 -1.3333 TD
+-0.0058 Tw
+[(of collision detection and response in a geometric fit task.  For this first study I judged the system)]TJ
+T*
+0.0268 Tw
+[(not yet ready for a full-blown docking task.  Instead, users were asked to fit two abstract models)]TJ
+T*
+-0.0503 Tw
+[(together in a particular configuration.  Figure 4 shows a photo of the two objects, a green triple ring)]TJ
+T*
+0 Tw
+(and a red E-shape, in their “docked” configuration.)Tj
+ET
+q
+1 i 
+196 348.5 255 191 re
+W n
+q
+1.0012 0 0 -0.9988 0 0 cm
+0 G
+0 J 0 j 0.881 w 10 M []0 d
+/GS1 gs
+196.2 -539.724 253.805 190.354 re
+S
+Q
+Q
+BT
+/TT4 1 Tf
+12 0 0 12 185.5 302.5 Tm
+[(Figur)13.7(e 4:)]TJ
+/TT2 1 Tf
+3.9167 0 TD
+[(  )41.6(T)69.2(wo objects in final position of geometric task)]TJ
+-11.875 -2.6667 TD
+0.0062 Tw
+(Each user was asked to perform the same positioning task twice, once with no collision detection)Tj
+0 -1.3333 TD
+0.0988 Tw
+[(and once with collision detection turned on.  )22.3(The initial positions of the two objects had them)]TJ
+T*
+0.0806 Tw
+[(separated from each other and were the same for both trials.  During the trial without collision)]TJ
+T*
+-0.0255 Tw
+(detection the user was asked to say when they thought that the objects were docked and not touch-)Tj
+T*
+0.0839 Tw
+[(ing, and at that point collision detection was turned on.  If the objects were touching, collision)]TJ
+T*
+0.062 Tw
+[(detection was turned off again and the user was asked to make adjustments.  )23.4(This was repeated)]TJ
+T*
+0.0766 Tw
+[(until a valid position was reached.  Both tasks were performed with the user wearing shuttered)]TJ
+T*
+0.0001 Tw
+[(glasses for stereo and both joystick boxes were available for object motion and change of view)73.3(.)]TJ
+ET
+endstream
+endobj
+72 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+>>
+/ExtGState <<
+/GS1 48 0 R
+/GS2 5 0 R
+>>
+>>
+endobj
+75 0 obj
+<<
+/Length 2347
+>>
+stream
+q
+1 i 
+151 483 309 232 re
+W n
+0 G
+0 J 0 j 1.069 w 10 M []0 d
+/GS1 gs
+151.535 714.465 307.931 -230.931 re
+S
+Q
+BT
+/TT4 1 Tf
+12 0 0 12 188.5 433 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0004 Tw
+[(Figur)13.7(e 5:)]TJ
+/TT2 1 Tf
+3.9167 0 TD
+(  User with Glasses and Stereo Display)Tj
+-13.625 -2.6667 TD
+0.0087 Tw
+(The emphasis of this study was on the impressions of the users, so the speed of task performance)Tj
+0 -1.3333 TD
+-0.0312 Tw
+[(was not stressed to the users.  Even so, times for each task were recorded.  )6(T)69.2(able 3 lists the ranking)]TJ
+T*
+-0.0453 Tw
+[(of ease or dif)28.4(ficulty of the tasks by the users, and also gives the times required to perform the tasks.)]TJ
+T*
+-0.0623 Tw
+[(The users were asked to place a mark on a horizontal scale to rate the dif)11.8(ficulty of the two tasks, and)]TJ
+T*
+-0.0293 Tw
+[(this is the origin of the difficulty ratings in the table.  Note that almost all users required more time)]TJ
+T*
+0.0527 Tw
+[(to perform the task when collision detection was turned on.  Reasons for the failure of collision)]TJ
+T*
+0.0002 Tw
+[(detection to aid in performing the positioning task are discussed below)64.9(.)]TJ
+8.25 -2.6667 TD
+0 Tw
+[(T)27.5(imes \(minutes:seconds\))-2000.9(Difficulty \(0 = easy)75.1(, 1 = dif)7.4(ficult\))]TJ
+ET
+0 0 0 1 K
+0 J 0 j 0.592 w 10 M []0 d
+1 i 
+134.5 256.092 m
+72 256.092 l
+S
+BT
+12 0 0 12 72 257 Tm
+-0.0012 Tw
+(User number)Tj
+ET
+221 256.092 m
+162 256.092 l
+S
+BT
+12 0 0 12 162 257 Tm
+0.0016 Tw
+(no detection)Tj
+ET
+304 256.092 m
+243 256.092 l
+S
+BT
+12 0 0 12 243 257 Tm
+-0.0002 Tw
+(collisions on)Tj
+ET
+383 256.092 m
+324 256.092 l
+S
+BT
+12 0 0 12 324 257 Tm
+0.0016 Tw
+(no detection)Tj
+ET
+466 256.092 m
+405 256.092 l
+S
+BT
+12 0 0 12 405 257 Tm
+-0.0002 Tw
+(collisions on)Tj
+-25.5 -1.3333 TD
+0.0002 Tc
+0 Tw
+[(1)-5958.1(3:30)-4970.6(3:34)-5262.3(.42)-5499.8(.30)]TJ
+T*
+[(2)-5958.1(4:38)-4970.6(6:53)-5262.3(.32)-5499.8(.80)]TJ
+T*
+[(3)-5958.1(4:49)-4970.6(8:45)-5262.3(.26)-5499.8(.82)]TJ
+T*
+[(4)-5958.1(3:58)-4470.6(10:17)-5262.3(.53)-5499.8(.78)]TJ
+T*
+[(5)-5958.1(1:54)-4970.6(2:29)-5262.3(.38)-5499.8(.42)]TJ
+T*
+[(6)-5958.1(2:21)-4970.6(2:44)-5262.3(.23)-5499.8(.50)]TJ
+T*
+[(7)-5958.1(3:48)-4970.6(1:44)-5262.3(.58)-5499.8(.33)]TJ
+/TT4 1 Tf
+4.25 -2.6667 TD
+0 Tc
+0.0001 Tw
+[(T)83.7(able 3:)]TJ
+/TT2 1 Tf
+3.4583 0 TD
+[(  )41.9(T)69.2(ask dif)-14.4(ficulty with and without collision detection)]TJ
+ET
+endstream
+endobj
+76 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+>>
+/ExtGState <<
+/GS1 48 0 R
+/GS2 5 0 R
+>>
+>>
+endobj
+78 0 obj
+<<
+/Length 11260
+>>
+stream
+q
+1 i 
+117.5 714.5 412 -232 re
+W n
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 G
+0 J 0 j 1.01 w 10 M []0 d
+/GS1 gs
+177.45 -717.5 m
+177.45 -534.717 l
+176.945 -535.222 m
+359.728 -535.222 l
+S
+Q
+Q
+0 g
+/GS1 gs
+1 i 
+362.252 710.5 m
+363.272 710.5 l
+363.272 709.5 l
+179.708 529.5 l
+178.688 529.5 l
+178.688 530.5 l
+f
+0 0 0 0 k
+261.269 583.98 m
+261.269 582.048 259.67 580.48 257.7 580.48 c
+255.73 580.48 254.131 582.048 254.131 583.98 c
+254.131 585.912 255.73 587.48 257.7 587.48 c
+259.67 587.48 261.269 585.912 261.269 583.98 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.01 w 10 M []0 d
+258.275 -589.794 m
+258.275 -588.122 256.918 -586.765 255.245 -586.765 c
+253.573 -586.765 252.216 -588.122 252.216 -589.794 c
+252.216 -591.467 253.573 -592.824 255.245 -592.824 c
+256.918 -592.824 258.275 -591.467 258.275 -589.794 c
+s
+Q
+226.649 619.98 m
+226.649 618.048 225.05 616.48 223.08 616.48 c
+221.11 616.48 219.511 618.048 219.511 619.98 c
+219.511 621.912 221.11 623.48 223.08 623.48 c
+225.05 623.48 226.649 621.912 226.649 619.98 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.01 w 10 M []0 d
+223.933 -626.149 m
+223.933 -624.477 222.576 -623.119 220.904 -623.119 c
+219.231 -623.119 217.874 -624.477 217.874 -626.149 c
+217.874 -627.821 219.231 -629.178 220.904 -629.178 c
+222.576 -629.178 223.933 -627.821 223.933 -626.149 c
+s
+Q
+241.889 673.98 m
+241.889 672.048 240.29 670.48 238.32 670.48 c
+236.35 670.48 234.751 672.048 234.751 673.98 c
+234.751 675.912 236.35 677.48 238.32 677.48 c
+240.29 677.48 241.889 675.912 241.889 673.98 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.01 w 10 M []0 d
+239.024 -680.681 m
+239.024 -679.009 237.667 -677.651 235.995 -677.651 c
+234.323 -677.651 232.965 -679.009 232.965 -680.681 c
+232.965 -682.353 234.323 -683.711 235.995 -683.711 c
+237.667 -683.711 239.024 -682.353 239.024 -680.681 c
+s
+Q
+230.669 678 m
+230.669 676.068 229.07 674.5 227.1 674.5 c
+225.13 674.5 223.531 676.068 223.531 678 c
+223.531 679.932 225.13 681.5 227.1 681.5 c
+229.07 681.5 230.669 679.932 230.669 678 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.01 w 10 M []0 d
+227.973 -684.68 m
+227.973 -683.008 226.616 -681.65 224.944 -681.65 c
+223.271 -681.65 221.914 -683.008 221.914 -684.68 c
+221.914 -686.352 223.271 -687.71 224.944 -687.71 c
+226.616 -687.71 227.973 -686.352 227.973 -684.68 c
+s
+Q
+0 0 0 1 k
+252.089 624 m
+252.089 622.068 250.49 620.5 248.52 620.5 c
+246.55 620.5 244.951 622.068 244.951 624 c
+244.951 625.932 246.55 627.5 248.52 627.5 c
+250.49 627.5 252.089 625.932 252.089 624 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.01 w 10 M []0 d
+249.125 -630.148 m
+249.125 -628.476 247.768 -627.118 246.095 -627.118 c
+244.423 -627.118 243.066 -628.476 243.066 -630.148 c
+243.066 -631.82 244.423 -633.177 246.095 -633.177 c
+247.768 -633.177 249.125 -631.82 249.125 -630.148 c
+s
+Q
+289.829 592.98 m
+289.829 591.048 288.23 589.48 286.26 589.48 c
+284.29 589.48 282.691 591.048 282.691 592.98 c
+282.691 594.912 284.29 596.48 286.26 596.48 c
+288.23 596.48 289.829 594.912 289.829 592.98 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.01 w 10 M []0 d
+286.556 -598.883 m
+286.556 -597.211 285.199 -595.853 283.527 -595.853 c
+281.854 -595.853 280.497 -597.211 280.497 -598.883 c
+280.497 -600.555 281.854 -601.912 283.527 -601.912 c
+285.199 -601.912 286.556 -600.555 286.556 -598.883 c
+s
+Q
+280.649 669.96 m
+280.649 668.028 279.05 666.46 277.08 666.46 c
+275.11 666.46 273.511 668.028 273.511 669.96 c
+273.511 671.892 275.11 673.46 277.08 673.46 c
+279.05 673.46 280.649 671.892 280.649 669.96 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.01 w 10 M []0 d
+277.406 -676.561 m
+277.406 -674.888 276.049 -673.531 274.377 -673.531 c
+272.704 -673.531 271.347 -674.888 271.347 -676.561 c
+271.347 -678.233 272.704 -679.59 274.377 -679.59 c
+276.049 -679.59 277.406 -678.233 277.406 -676.561 c
+s
+Q
+BT
+/TT2 1 Tf
+12.2376 0 0 12 169.5099 507.5 Tm
+0 Tc
+0 Tw
+(Easy)Tj
+0 g
+14.1667 0.0833 TD
+(Difficult)Tj
+-17.75 16.4167 TD
+(Difficult)Tj
+1.3333 -14.75 TD
+(Easy)Tj
+6.1667 -3.5 TD
+(No Collision Detection)Tj
+-8.1667 12.5833 TD
+(With)Tj
+0 -1 TD
+(Collision)Tj
+T*
+(Detection)Tj
+ET
+392.849 651.96 m
+392.849 650.028 391.25 648.46 389.28 648.46 c
+387.31 648.46 385.711 650.028 385.711 651.96 c
+385.711 653.892 387.31 655.46 389.28 655.46 c
+391.25 655.46 392.849 653.892 392.849 651.96 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 G
+0 J 0 j 1.01 w 10 M []0 d
+388.512 -658.383 m
+388.512 -656.711 387.154 -655.354 385.482 -655.354 c
+383.81 -655.354 382.452 -656.711 382.452 -658.383 c
+382.452 -660.056 383.81 -661.413 385.482 -661.413 c
+387.154 -661.413 388.512 -660.056 388.512 -658.383 c
+s
+Q
+0 0 0 0 k
+392.849 687.96 m
+392.849 686.028 391.25 684.46 389.28 684.46 c
+387.31 684.46 385.711 686.028 385.711 687.96 c
+385.711 689.892 387.31 691.46 389.28 691.46 c
+391.25 691.46 392.849 689.892 392.849 687.96 c
+f
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.01 w 10 M []0 d
+388.512 -694.738 m
+388.512 -693.066 387.154 -691.709 385.482 -691.709 c
+383.81 -691.709 382.452 -693.066 382.452 -694.738 c
+382.452 -696.41 383.81 -697.768 385.482 -697.768 c
+387.154 -697.768 388.512 -696.41 388.512 -694.738 c
+s
+Q
+BT
+12.2376 0 0 12 406.1039 683.5 Tm
+0 0 0 1 k
+(Users first tried with)Tj
+T*
+(collision detection)Tj
+0 g
+0 -2.0833 TD
+(Users first tried without)Tj
+0 -1 TD
+(collision detection)Tj
+ET
+q
+117.5 714.5 412 -232 re
+W n
+q
+1.0099 0 0 -0.9902 0 0 cm
+0 G
+0 J 0 j 1.01 w 10 M []0 d
+377.4 -703.867 145.419 72.709 re
+S
+Q
+Q
+BT
+/TT4 1 Tf
+12 0 0 12 192 432 Tm
+0 0 0 1 k
+/GS2 gs
+[(Figur)13.7(e 6:)]TJ
+/TT2 1 Tf
+3.875 0 TD
+[(  Graph of User Rated Dif)10.6(ficulty of )26.7(T)69.2(asks)]TJ
+ET
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 G
+0 J 0 j 1.016 w 10 M []0 d
+/GS1 gs
+184.92 -350.026 m
+184.92 -166.081 l
+184.412 -166.589 m
+368.357 -166.589 l
+S
+Q
+0 g
+/GS1 gs
+370.086 347.43 m
+371.11 347.43 l
+371.11 346.421 l
+186.814 164.849 l
+185.79 164.849 l
+185.79 165.858 l
+f
+0 0 0 0 k
+232.904 215.82 m
+232.904 213.871 231.298 212.289 229.32 212.289 c
+227.342 212.289 225.736 213.871 225.736 215.82 c
+225.736 217.769 227.342 219.351 229.32 219.351 c
+231.298 219.351 232.904 217.769 232.904 215.82 c
+f
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.016 w 10 M []0 d
+230.668 -217.372 m
+230.668 -215.689 229.302 -214.324 227.619 -214.324 c
+225.936 -214.324 224.57 -215.689 224.57 -217.372 c
+224.57 -219.055 225.936 -220.421 227.619 -220.421 c
+229.302 -220.421 230.668 -219.055 230.668 -217.372 c
+s
+Q
+274.844 291.42 m
+274.844 289.471 273.238 287.889 271.26 287.889 c
+269.282 287.889 267.676 289.471 267.676 291.42 c
+267.676 293.369 269.282 294.951 271.26 294.951 c
+273.238 294.951 274.844 293.369 274.844 291.42 c
+f
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.016 w 10 M []0 d
+272.356 -293.598 m
+272.356 -291.915 270.99 -290.549 269.307 -290.549 c
+267.624 -290.549 266.259 -291.915 266.259 -293.598 c
+266.259 -295.281 267.624 -296.647 269.307 -296.647 c
+270.99 -296.647 272.356 -295.281 272.356 -293.598 c
+s
+Q
+254.384 229.92 m
+254.384 227.971 252.778 226.389 250.8 226.389 c
+248.822 226.389 247.216 227.971 247.216 229.92 c
+247.216 231.869 248.822 233.451 250.8 233.451 c
+252.778 233.451 254.384 231.869 254.384 229.92 c
+f
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.016 w 10 M []0 d
+251.988 -231.638 m
+251.988 -229.955 250.623 -228.589 248.94 -228.589 c
+247.257 -228.589 245.891 -229.955 245.891 -231.638 c
+245.891 -233.321 247.257 -234.687 248.94 -234.687 c
+250.623 -234.687 251.988 -233.321 251.988 -231.638 c
+s
+Q
+278.924 324.78 m
+278.924 322.831 277.318 321.249 275.34 321.249 c
+273.362 321.249 271.756 322.831 271.756 324.78 c
+271.756 326.729 273.362 328.311 275.34 328.311 c
+277.318 328.311 278.924 326.729 278.924 324.78 c
+f
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.016 w 10 M []0 d
+276.406 -327.147 m
+276.406 -325.464 275.04 -324.098 273.357 -324.098 c
+271.674 -324.098 270.308 -325.464 270.308 -327.147 c
+270.308 -328.83 271.674 -330.195 273.357 -330.195 c
+275.04 -330.195 276.406 -328.83 276.406 -327.147 c
+s
+Q
+0 0 0 1 k
+225.764 211.74 m
+225.764 209.791 224.158 208.209 222.18 208.209 c
+220.202 208.209 218.596 209.791 218.596 211.74 c
+218.596 213.689 220.202 215.271 222.18 215.271 c
+224.158 215.271 225.764 213.689 225.764 211.74 c
+f
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.016 w 10 M []0 d
+223.521 -213.322 m
+223.521 -211.639 222.155 -210.274 220.472 -210.274 c
+218.789 -210.274 217.424 -211.639 217.424 -213.322 c
+217.424 -215.005 218.789 -216.371 220.472 -216.371 c
+222.155 -216.371 223.521 -215.005 223.521 -213.322 c
+s
+Q
+260.564 196.62 m
+260.564 194.671 258.958 193.089 256.98 193.089 c
+255.002 193.089 253.396 194.671 253.396 196.62 c
+253.396 198.569 255.002 200.151 256.98 200.151 c
+258.958 200.151 260.564 198.569 260.564 196.62 c
+f
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.016 w 10 M []0 d
+258.063 -198.089 m
+258.063 -196.406 256.697 -195.041 255.014 -195.041 c
+253.331 -195.041 251.965 -196.406 251.965 -198.089 c
+251.965 -199.772 253.331 -201.138 255.014 -201.138 c
+256.697 -201.138 258.063 -199.772 258.063 -198.089 c
+s
+Q
+263.564 351.96 m
+263.564 350.011 261.958 348.429 259.98 348.429 c
+258.002 348.429 256.396 350.011 256.396 351.96 c
+256.396 353.909 258.002 355.491 259.98 355.491 c
+261.958 355.491 263.564 353.909 263.564 351.96 c
+f
+q
+109 355.5 429 -231 re
+W n
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.016 w 10 M []0 d
+261.16 -354.59 m
+261.16 -352.907 259.794 -351.541 258.111 -351.541 c
+256.428 -351.541 255.062 -352.907 255.062 -354.59 c
+255.062 -356.273 256.428 -357.639 258.111 -357.639 c
+259.794 -357.639 261.16 -356.273 261.16 -354.59 c
+s
+Q
+Q
+BT
+12.2864 0 0 12.1048 276.9141 153.7533 Tm
+(5)Tj
+0 g
+7.1667 0 TD
+(10)Tj
+-14.6667 0.0833 TD
+(0)Tj
+-0.75 0.6667 TD
+(0)Tj
+0.0833 7.5 TD
+(5)Tj
+-0.4167 7.4167 TD
+(10)Tj
+4.3333 -17.75 TD
+(No Collision Detection)Tj
+-9.4167 11.5833 TD
+(With)Tj
+0 -1 TD
+(Collision)Tj
+T*
+(Detection)Tj
+ET
+401.804 285.42 m
+401.804 283.471 400.198 281.889 398.22 281.889 c
+396.242 281.889 394.636 283.471 394.636 285.42 c
+394.636 287.369 396.242 288.951 398.22 288.951 c
+400.198 288.951 401.804 287.369 401.804 285.42 c
+f
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 G
+0 J 0 j 1.016 w 10 M []0 d
+398.374 -287.492 m
+398.374 -285.81 397.009 -284.444 395.326 -284.444 c
+393.643 -284.444 392.277 -285.81 392.277 -287.492 c
+392.277 -289.175 393.643 -290.541 395.326 -290.541 c
+397.009 -290.541 398.374 -289.175 398.374 -287.492 c
+s
+Q
+0 0 0 0 k
+401.804 321.66 m
+401.804 319.711 400.198 318.129 398.22 318.129 c
+396.242 318.129 394.636 319.711 394.636 321.66 c
+394.636 323.609 396.242 325.191 398.22 325.191 c
+400.198 325.191 401.804 323.609 401.804 321.66 c
+f
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 0 0 1 K
+0 J 0 j 1.016 w 10 M []0 d
+398.374 -324.124 m
+398.374 -322.441 397.009 -321.075 395.326 -321.075 c
+393.643 -321.075 392.277 -322.441 392.277 -324.124 c
+392.277 -325.807 393.643 -327.173 395.326 -327.173 c
+397.009 -327.173 398.374 -325.807 398.374 -324.124 c
+s
+Q
+BT
+12.2864 0 0 12.1048 416.1599 317.1681 Tm
+0 0 0 1 k
+(Users first tried with)Tj
+T*
+(collision detection)Tj
+0 g
+0 -2.0833 TD
+(Users first tried without)Tj
+0 -1 TD
+(collision detection)Tj
+ET
+q
+109 355.5 429 -231 re
+W n
+q
+1.0075 0 0 -0.9926 0 0 cm
+0 G
+0 J 0 j 1.016 w 10 M []0 d
+386.142 -335.29 146.343 73.172 re
+S
+Q
+Q
+BT
+/TT4 1 Tf
+12 0 0 12 173.5 74.5 Tm
+0 0 0 1 k
+/GS2 gs
+-0.0003 Tw
+[(Figur)13.7(e 7:)]TJ
+/TT2 1 Tf
+3.9167 0 TD
+[(  Graph of )39(T)27.5(imes for User )25.2(T)69.2(asks \(time in minute\))]TJ
+ET
+endstream
+endobj
+79 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+>>
+/ExtGState <<
+/GS1 48 0 R
+/GS2 5 0 R
+>>
+>>
+endobj
+81 0 obj
+<<
+/Length 3440
+>>
+stream
+BT
+/TT4 1 Tf
+14 0 0 14 72 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0055 Tw
+[(6.2  User Comments)]TJ
+/TT2 1 Tf
+12 0 0 12 72 695.5 Tm
+-0.0621 Tw
+[(In addition to ranking the dif)6.7(ficulty of the two tasks, the users were asked for written comments and)]TJ
+0 -1.3333 TD
+-0.0113 Tw
+[(suggestions about the system.  )40.1(The most common suggestion was to have a mode where interpen-)]TJ
+T*
+-0.0564 Tw
+(etration is detected and indicated by changing the sphere colors but where all objects are allowed to)Tj
+T*
+0.0636 Tw
+[(move freely)75.4(.  The users found that the visual cue for collisions was helpful but said that the re-)]TJ
+T*
+0.0958 Tw
+[(sponse to collisions was a hindrance.  Sometimes when collision detection was turned on they)]TJ
+T*
+-0.0325 Tw
+[(knew where they wanted to go but the system would not allow the motion.  )7.2(The failure of collision)]TJ
+T*
+0 Tw
+(response to aid in the tasks is serious, and this issue is discussed in the chapter on future work.)Tj
+0 -2.6667 TD
+0.0938 Tw
+(Another commonly voiced objection was to the way the joysticks controlled the motion of the)Tj
+0 -1.3333 TD
+0.0037 Tw
+[(objects.  Some users found the assignment of rotation axes to the joysticks to be counter)20.4(-intuitive)]TJ
+T*
+0.0545 Tw
+(and suggested swapping the joystick controls for the )Tj
+/TT8 1 Tf
+21.6667 0 TD
+0 Tw
+(y)Tj
+/TT2 1 Tf
+0.4167 0 TD
+0.0545 Tw
+[( and )]TJ
+/TT8 1 Tf
+2.0833 0 TD
+0 Tw
+(z)Tj
+/TT2 1 Tf
+0.375 0 TD
+0.0545 Tw
+[( axes.  In the current configuration,)]TJ
+-24.5417 -1.3333 TD
+-0.0272 Tw
+(rotation about the )Tj
+/TT8 1 Tf
+7.2083 0 TD
+0 Tw
+(x)Tj
+/TT2 1 Tf
+0.4583 0 TD
+-0.0272 Tw
+[( \(horizontal\) axis is controlled by moving a joystick left or right, rotation about)]TJ
+/TT8 1 Tf
+-7.6667 -1.3333 TD
+0 Tw
+(y)Tj
+/TT2 1 Tf
+0.4583 0 TD
+-0.0471 Tw
+[( \(vertical\) is achieved by moving a joystick forward or back and rotation about )]TJ
+/TT8 1 Tf
+31.0417 0 TD
+0 Tw
+(z)Tj
+/TT2 1 Tf
+0.375 0 TD
+-0.0471 Tw
+[( \(depth\) is a result)]TJ
+-31.875 -1.3333 TD
+0.0303 Tw
+[(of twisting the joystick.   T)69.2(ranslation in )]TJ
+/TT8 1 Tf
+16.2083 0 TD
+0 Tw
+(x)Tj
+/TT2 1 Tf
+0.4583 0 TD
+(, )Tj
+/TT8 1 Tf
+0.5417 0 TD
+(y)Tj
+/TT2 1 Tf
+0.4167 0 TD
+0.0309 Tw
+[( and )]TJ
+/TT8 1 Tf
+2 0 TD
+0 Tw
+(z)Tj
+/TT2 1 Tf
+0.4167 0 TD
+0.0309 Tw
+[( matches the )]TJ
+/TT8 1 Tf
+5.3333 0 TD
+0 Tw
+(x)Tj
+/TT2 1 Tf
+0.4583 0 TD
+(, )Tj
+/TT8 1 Tf
+0.5 0 TD
+(y)Tj
+/TT2 1 Tf
+0.4583 0 TD
+0.0309 Tw
+[( and )]TJ
+/TT8 1 Tf
+2 0 TD
+0 Tw
+(z)Tj
+/TT2 1 Tf
+0.375 0 TD
+0.0309 Tw
+[( movements for rotation)]TJ
+-29.1667 -1.3333 TD
+-0.049 Tw
+[(using joysticks.  Users suggested that it would be more natural to twist a joystick to rotate an object)]TJ
+T*
+-0.0271 Tw
+(about the )Tj
+/TT8 1 Tf
+3.875 0 TD
+0 Tw
+(y)Tj
+/TT2 1 Tf
+0.4583 0 TD
+-0.0271 Tw
+[( \(vertical\) axis, and to move a joystick forward and back to perform rotation about the )]TJ
+/TT8 1 Tf
+34.2083 0 TD
+0 Tw
+(z)Tj
+/TT2 1 Tf
+-38.5417 -1.3333 TD
+0.0015 Tw
+(\(depth\) axis.)Tj
+0 -2.6667 TD
+0.0081 Tw
+(Another suggestion was to have the joysticks control motion in object space rather than in screen)Tj
+0 -1.3333 TD
+0.0001 Tw
+[(space.  )12.6(These users said they found it annoying that a change of viewpoint also changed the map-)]TJ
+T*
+-0.0569 Tw
+[(ping between joysticks and object motion.  I have tried object space positioning using joysticks and)]TJ
+T*
+-0.0581 Tw
+(found it to be non-intuitive, but a user study would be a better way to determine whether others find)Tj
+T*
+-0.0004 Tw
+(this to be more natural.)Tj
+ET
+endstream
+endobj
+82 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+84 0 obj
+<<
+/Length 4551
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 220 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0004 Tw
+[(Chapter 7: Future W)82.7(ork)]TJ
+12 0 0 12 90 679.5 Tm
+0.0693 Tw
+(Most interactive graphics applications to date have restricted themselves to the rapid display of)Tj
+0 -1.3333 TD
+-0.0432 Tw
+[(objects and have paid scant attention to the physical properties of the objects as they interact.  )16.4(W)27.2(ith)]TJ
+T*
+-0.0428 Tw
+(the new generation of graphics workstations, researchers will now find the power to simulate more)Tj
+T*
+-0.0157 Tw
+[(physical properties of the objects in interactive times.  )32.5(The )]TJ
+/TT8 1 Tf
+23.5 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.0157 Tw
+[( system described in this thesis is)]TJ
+-25.75 -1.3333 TD
+0.041 Tw
+[(a small step towards adding physical properties to graphical models.  )27.5(There are two clear exten-)]TJ
+T*
+0.0805 Tw
+[(sions to this work.  One direction is to further explore the needs of chemists and biologists for)]TJ
+T*
+0.0235 Tw
+(molecular docking, since the )Tj
+/TT8 1 Tf
+11.8333 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+0.0235 Tw
+[( system is still a crude tool.  )62.2(Another path to future work is to)]TJ
+-14.0833 -1.3333 TD
+0.0305 Tw
+(add to the array of physical properties that can be simulated interactively on a graphics worksta-)Tj
+T*
+-0.0004 Tc
+0 Tw
+(tion.)Tj
+/TT4 1 Tf
+14 0 0 14 90 519.5 Tm
+-0.0001 Tc
+-0.0037 Tw
+(7.1  Enhancements to Molecular Docking)Tj
+/TT2 1 Tf
+12 0 0 12 90 487.5 Tm
+0 Tc
+-0.0536 Tw
+(It is clear from the small user study that the collision response of )Tj
+/TT8 1 Tf
+25.4583 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0536 Tw
+[( needs to be re-thought.  One)]TJ
+-27.6667 -1.3333 TD
+-0.0615 Tw
+[(possibility)42.5(, suggested by the users, is to remove all response to collisions, and only have visual cues)]TJ
+T*
+0.0055 Tw
+[(from collision detection.  )33.7(Another possibility is to try other forms of collision response.  One that)]TJ
+T*
+0.0358 Tw
+[(comes to mind is to have an object’)66.7(s motion stopped only in the direction of the collision and to)]TJ
+T*
+0.0679 Tw
+[(allow the object to slide along the surface of the object that it is colliding with.  I feel that it is)]TJ
+T*
+-0.0514 Tw
+(important to explore these and other alternatives to the collision response given in )Tj
+/TT8 1 Tf
+32.3333 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.0514 Tw
+(, and I plan)Tj
+-34.5833 -1.3333 TD
+0 Tw
+(to do so in the near future.)Tj
+0 -2.6667 TD
+0.1116 Tw
+(For the task of molecular docking, )Tj
+/TT8 1 Tf
+14.7083 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.1116 Tw
+[( is probably most deficient in its model of the forces)]TJ
+-16.9167 -1.3333 TD
+-0.0149 Tw
+[(between molecules.  Modeling the interaction between molecules as if atoms were hard spheres is)]TJ
+T*
+-0.0603 Tw
+[(just an approximation to the V)138.8(an der )17(W)68.8(aals force.  )11.2(This model totally ignores electrostatic forces.  )45.6(A)]TJ
+T*
+0.0489 Tw
+(logical next step would be to incorporate the hard-sphere collision detection in a system that al-)Tj
+T*
+-0.0288 Tw
+[(ready models both )8.5(V)138.8(an der W)68.8(aals and Coulomb forces by the technique of [Pattabiraman 85].  )19.7(The)]TJ
+T*
+0.0236 Tw
+(method described by Pattabiraman is a fast technique that uses a table to store forces of atoms at)Tj
+T*
+0.0561 Tw
+[(positions on a grid.  Using hard-sphere collision detection would help overcome the problem in)]TJ
+T*
+-0.0001 Tw
+[(their technique of undersampling the strong force given by )34(V)97.2(an der )12.2(W)68.8(aals forces.)]TJ
+0 -2.6667 TD
+-0.0066 Tw
+(Another restriction in )Tj
+/TT8 1 Tf
+8.8333 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.0066 Tw
+[( is that all bonds of the molecules remain fixed.  )47.7(The torsion angles of)]TJ
+-11.0833 -1.3333 TD
+-0.0466 Tw
+[(bonds in a drug can rotate quite freely when the molecule is moved into a receptor site.  It would be)]TJ
+T*
+0.0381 Tw
+[(possible to extend bump to allow changing of these angles as the molecule is being docked.  In-)]TJ
+T*
+-0.0372 Tw
+(deed, the entire conformation of the drug molecule could be altered as rapidly as necessary and the)Tj
+T*
+0.0001 Tw
+(collision detection routine would perform just as well.)Tj
+/TT4 1 Tf
+14 0 0 14 90 119.5 Tm
+0.0003 Tw
+(7.2  Interactive Physical Simulation)Tj
+/TT2 1 Tf
+12 0 0 12 90 87.5 Tm
+-0.0211 Tw
+(The domain of molecular models is just one domain where interactive physical simulation may be)Tj
+T*
+0.0076 Tw
+[(helpful in understanding a problem.  )14.4(The hard-sphere models that )]TJ
+/TT8 1 Tf
+26.5417 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0076 Tw
+[( uses are a very restricted)]TJ
+ET
+endstream
+endobj
+85 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+87 0 obj
+<<
+/Length 3148
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 72 724 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0481 Tw
+[(class of models.  )24.5(The range of models that the collision detection routines understand should be)]TJ
+0 -1.3333 TD
+0.0807 Tw
+[(expanded.  In particular)29.3(, many graphics applications choose polygons as the building blocks to)]TJ
+T*
+-0.0565 Tw
+(make polyhedral models, and several techniques have been described in the literature for determin-)Tj
+T*
+0.0423 Tw
+[(ing collisions between polyhedra [Boyse 79] [Maruyama 72] [Dobkin and Kirkpatrick 82].  The)]TJ
+T*
+-0.0383 Tw
+(collision detection routine in )Tj
+/TT8 1 Tf
+11.5833 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0383 Tw
+[( could be extended to handle polygons.  Polygons can be placed)]TJ
+-13.7917 -1.3333 TD
+0.0247 Tw
+(in 3-D cells as easily as spheres, and with the addition of a polygon-polygon intersection routine)Tj
+/TT8 1 Tf
+T*
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.05 Tw
+[( could then understand collisions between polyhedral models.  )-13.7(This addition is straightfor)37.8(-)]TJ
+-2.2083 -1.3333 TD
+0.0874 Tw
+(ward, and I plan in the near future to extend the current PPHIGS collision detection routine to)Tj
+T*
+0.0984 Tw
+[(recognize collisions between polyhedral models.  )14.9(This should open the way toward more real-)]TJ
+T*
+0 Tw
+[(world fidelity for other applications that use the PPHIGS graphics library)77.4(.)]TJ
+0 -2.6667 TD
+0.0043 Tw
+(The method of 3-D grids is only suitable for collision detection among objects that are composed)Tj
+0 -1.3333 TD
+0.0632 Tw
+[(of many elements that are evenly distributed in space and roughly uniform in size.  Other tech-)]TJ
+T*
+0.0084 Tw
+(niques will prove to be faster for detecting collisions when there is a wide range in level of detail)Tj
+T*
+0.0041 Tw
+(within the objects.  I expect that most of the collision detection techniques outlined in earlier will)Tj
+T*
+0.0074 Tw
+[(be useful for interactive collision detection under certain conditions.  I am especially enthusiastic)]TJ
+T*
+-0.0002 Tw
+(about the automatic building of bounding hierarchies for the purposes of collision detection.)Tj
+0 -2.6667 TD
+-0.0336 Tw
+(Collision detection is just one step towards bringing more physical fidelity to interactive computer)Tj
+0 -1.3333 TD
+-0.0014 Tw
+(graphics.  Future graphics systems should incorporate many more physical properties into the be-)Tj
+T*
+0.0146 Tw
+(havior of virtual objects.  )Tj
+/TT8 1 Tf
+10.4167 0 TD
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+0.0146 Tw
+[( completely deadens the motion of an object that participates in a)]TJ
+-12.75 -1.3333 TD
+0.0177 Tw
+[(collision.  )21.4(When two real-world objects collide, however)53.9(, there is an exchange of both linear and)]TJ
+T*
+-0.0454 Tw
+[(angular momentum, and the object’)63.9(s material properties such as elasticity and friction plays a lar)23.3(ge)]TJ
+T*
+0.0527 Tw
+[(part in the resulting behavior)54.7(.  Recent work in computer graphics has been taking the first steps)]TJ
+T*
+0.1075 Tw
+[(towards simulating the interaction between rigid objects [Hahn 88] [Moore and )20.7(W)27.2(ilhelms 88].)]TJ
+T*
+0 Tw
+(These techniques should be moved into the realm of interactive computer graphics.)Tj
+ET
+endstream
+endobj
+88 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+90 0 obj
+<<
+/Length 3552
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 188 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0001 Tw
+[(Appendix: Bump User)-28.4(’)55.2(s)0( Manual)]TJ
+/TT4 1 Tf
+14 0 0 14 90 679.5 Tm
+0 Tw
+[(A.1  Star)-16.3(ting and Exiting the Pr)28.7(ogram)]TJ
+/TT8 1 Tf
+12 0 0 12 90 647.5 Tm
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+-0.0564 Tw
+[( must be executed on the Pixel-Planes 4 microV)100(ax host, currently called )]TJ
+/TT8 1 Tf
+28.2917 0 TD
+0 Tw
+(pxpl4)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0564 Tw
+[(.  )12.2(T)69.2(ext informa-)]TJ
+-32.8333 -1.3333 TD
+0.0023 Tw
+(tion from the program will be displayed in the window from which the program was invoked and)Tj
+T*
+-0.0481 Tw
+[(the graphical images of molecules will be displayed on the Pixel-Planes 4 monitor)54.1(.  )28.8(The executable)]TJ
+T*
+0 Tw
+(file )Tj
+/TT8 1 Tf
+1.5417 0 TD
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0521 Tw
+[( can be found in the directory ~turk/pphront.  )]TJ
+/TT8 1 Tf
+17.8333 0 TD
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+-0.0521 Tw
+[( is invoked with command parameters)]TJ
+-23.9167 -1.3333 TD
+-0.0579 Tw
+[(that are the names of pphigs archive files that contain the geometry for molecules.  Here is a sample)]TJ
+T*
+0 Tw
+(invocation of )Tj
+/TT8 1 Tf
+5.5417 0 TD
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+(:)Tj
+/TT10 1 Tf
+-5.2917 -2.6667 TD
+-0.0006 Tw
+(bump trm dhfr)Tj
+/TT2 1 Tf
+-2.5 -2.6667 TD
+0.1161 Tw
+(The above line specifies that the molecules contained in the two archive files trm.archive and)Tj
+0 -1.3333 TD
+-0.0351 Tw
+[(dhfr)41(.archive are to be displayed by )]TJ
+/TT8 1 Tf
+13.875 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0351 Tw
+[(.  )13.1(The PPHIGS archive description of each molecule must)]TJ
+-16.0833 -1.3333 TD
+-0.045 Tw
+[(be a collection of spheres.  Once the program has been invoked, the molecules will be displayed on)]TJ
+T*
+-0.0042 Tw
+[(the Pixel-Planes 4 monitor and can be moved around by using the joysticks.  )5.5(T)69.2(o)0( exit the program,)]TJ
+T*
+0.0644 Tw
+[(type the letter “q” at the keyboard.  If )]TJ
+/TT8 1 Tf
+15.7917 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0643 Tw
+[( is terminated abnormally  by typing control-C you)]TJ
+-18 -1.3333 TD
+0.0001 Tw
+(should execute the “reset” command to have commands echo normally on the screen.)Tj
+/TT4 1 Tf
+14 0 0 14 90 391.5 Tm
+0.0002 Tw
+[(A.2  Pr)27.3(ogram Basics)]TJ
+/TT2 1 Tf
+12 0 0 12 90 359.5 Tm
+0 Tw
+(When )Tj
+/TT8 1 Tf
+2.5833 0 TD
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.0447 Tw
+[( is first run the text screen should look like figure 8.  )53(The mode “V)61.3(iew” at the top of the)]TJ
+-4.8333 -1.3333 TD
+-0.0348 Tw
+(screen indicates that the joysticks control the location from which the molecules are being viewed.)Tj
+T*
+0.0613 Tw
+[(This means that joystick motions will cause all objects in the scene to move as a unit.  )27.6(The left)]TJ
+T*
+-0.0391 Tw
+[(joystick controls translation of the molecules and the right joystick rotates them.  )12.4(T)69.2(o)0( select just one)]TJ
+T*
+-0.009 Tw
+[(object to be moved, press the space bar once.  This should cause the mode indicated on the screen)]TJ
+T*
+0.0511 Tw
+(to be “Object”, and now the two joysticks control the position and orientation of just one of the)Tj
+T*
+-0.0602 Tw
+[(molecules.  )17.1(The name of the object currently being manipulated is indicated at the top of the screen.)]TJ
+T*
+0.0147 Tw
+[(T)69.2(o)0( change which object you can move, press “j” until the name of the correct object is indicated.)]TJ
+T*
+-0.0497 Tw
+[(Using the space bar)42.7(, the return key and the joysticks you should be able to view the molecules from)]TJ
+T*
+-0.0002 Tw
+(any angle and position them in any arbitrary configuration.)Tj
+ET
+endstream
+endobj
+91 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+/TT10 92 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+94 0 obj
+<<
+/Length 2980
+>>
+stream
+q
+1 i 
+175.5 523.5 260 195 re
+W n
+q
+1.0006 0 0 -0.9994 0 0 cm
+0 G
+0 J 0 j 0.899 w 10 M []0 d
+/GS1 gs
+175.848 -718.465 258.951 194.213 re
+S
+Q
+Q
+BT
+/TT4 1 Tf
+12 0 0 12 209 477.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0003 Tw
+[(Figur)13.7(e 8:)]TJ
+/TT2 1 Tf
+3.875 0 TD
+-0.0001 Tw
+[(  T)69.2(ext Screen of )]TJ
+/TT8 1 Tf
+6.5833 0 TD
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+2.3333 0 TD
+-0.0003 Tw
+( Session)Tj
+-24.2083 -2.6667 TD
+0.1092 Tw
+[(By default, collision detection is turned of)12.7(f, so the molecules are allowed to pass through one)]TJ
+0 -1.3333 TD
+-0.0545 Tw
+[(another)40.2(.  )16(T)69.2(o)0( switch collision detection on, first make sure that the molecules are separated from one)]TJ
+T*
+0.0267 Tw
+[(another and then type “c”.  Now motion of one molecule through another molecule is forbidden.)]TJ
+T*
+-0.0478 Tw
+[(When two molecules collide the colors of the spheres that touched change color)68.3(.  If collision detec-)]TJ
+T*
+-0.0325 Tw
+(tion is turned on when two molecules are interpenetrating then neither molecule will be allowed to)Tj
+T*
+0.0354 Tw
+[(move with respect to the other)62.2(.  If this happens, turn collisions off by typing “c”, move the mol-)]TJ
+T*
+-0.0002 Tw
+(ecules apart and then turn collisions on again.)Tj
+/TT4 1 Tf
+14 0 0 14 72 317.5 Tm
+-0.0003 Tw
+[(A.3  Ster)34.1(eo )]TJ
+/TT6 1 Tf
+4.9286 0 TD
+0 Tw
+(Bump)Tj
+/TT2 1 Tf
+12 0 0 12 72 285.5 Tm
+0.0892 Tw
+(By default, )Tj
+/TT8 1 Tf
+4.875 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0892 Tw
+[( displays just one view of the molecules.  Stereo images can be generated by)]TJ
+-7.0833 -1.3333 TD
+0.0201 Tw
+[(typing “S”.  )18.2(This will cause two images, one for each eye, to be displayed on the screen simulta-)]TJ
+T*
+0.0563 Tw
+[(neously)69.2(.  )29.2(The image for the left eye is displayed on even-numbered scan lines and the right eye)]TJ
+T*
+0.025 Tw
+[(image is displayed on odd-numbered scan lines.  )15.1(The inter)37.2(-ocular distance can be made lar)-6.9(ger or)]TJ
+T*
+0.0109 Tw
+[(smaller by typing “[” and “]”.  T)69.2(o)0( view such an image, the user should place a polarizing plate in)]TJ
+T*
+0.0453 Tw
+(front of the monitor and wear circularly polarized glasses that are made to view objects through)Tj
+T*
+0.0686 Tw
+[(this plate.  )10.7(This arrangement lets light through the glasses to the left eye during the first \(even-)]TJ
+T*
+0.0007 Tw
+(numbered\) scan of the image, and then let light through to the right eye during the odd-numbered)Tj
+T*
+0.0233 Tw
+[(scan.  )31.8(The polarizing plate used at UNC requires that the display driving the plate to have a scan)]TJ
+T*
+-0.0432 Tw
+[(rate of 30 hertz.  )30.7(T)69.2(o)0( set Pixel-Planes for display on a 30 hertz monitor)10.1(, set the environment variable)]TJ
+T*
+-0.0082 Tw
+(PXSCAN to 30 before executing )Tj
+/TT8 1 Tf
+13.375 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0082 Tw
+[(.  Setting up the stereo plate is not straightforward, and the)]TJ
+-15.5833 -1.3333 TD
+-0.0001 Tw
+(easiest thing to do is have an experienced user show you the necessary steps.)Tj
+ET
+endstream
+endobj
+95 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT6 17 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS1 48 0 R
+/GS2 5 0 R
+>>
+>>
+endobj
+97 0 obj
+<<
+/Length 3433
+>>
+stream
+BT
+/TT4 1 Tf
+14 0 0 14 90 714.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0003 Tw
+[(A.4  Dif)-16.8(fer)42.1(ences Between )]TJ
+/TT6 1 Tf
+10.8929 0 TD
+0 Tw
+(Bump)Tj
+/TT4 1 Tf
+2.5 0 TD
+-0.0001 Tc
+-0.0002 Tw
+( and )Tj
+/TT6 1 Tf
+2.1071 0 TD
+0 Tc
+0 Tw
+(Pphront)Tj
+/TT2 1 Tf
+12 0 0 12 90 682.5 Tm
+(The )Tj
+/TT8 1 Tf
+1.7917 0 TD
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.0002 Tc
+-0.0046 Tw
+( program is an extension of the )Tj
+/TT8 1 Tf
+12.5833 0 TD
+0 Tc
+0 Tw
+[(pphr)55.8(ont)]TJ
+/TT2 1 Tf
+3.125 0 TD
+-0.0003 Tc
+-0.0045 Tw
+[( program.  )40(A)55.2( user of )]TJ
+/TT8 1 Tf
+8.2083 0 TD
+0 Tc
+0 Tw
+[(pphr)14.2(ont)]TJ
+/TT2 1 Tf
+3.1667 0 TD
+-0.0003 Tc
+-0.0045 Tw
+( should be aware of)Tj
+-31.125 -1.3333 TD
+0.0001 Tc
+-0.0452 Tw
+[(the differences between the two programs.  By default, )]TJ
+/TT8 1 Tf
+21.75 0 TD
+0 Tc
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.0451 Tw
+[( assumes both the use of joysticks and)]TJ
+-24 -1.3333 TD
+0.0078 Tw
+(sphere mode, so the “-j” and “-s” options of )Tj
+/TT8 1 Tf
+17.8333 0 TD
+0 Tw
+[(pphr)14.2(ont)]TJ
+/TT2 1 Tf
+3.125 0 TD
+0.0078 Tw
+[( are not necessary)33.7(.  )57.3(All of the keyboard com-)]TJ
+-20.9583 -1.3333 TD
+0.0318 Tw
+(mands that )Tj
+/TT8 1 Tf
+4.6667 0 TD
+0 Tw
+[(pphr)14.2(ont)]TJ
+/TT2 1 Tf
+3.125 0 TD
+0.0318 Tw
+[( uses to move objects have been removed from )]TJ
+/TT8 1 Tf
+19.3333 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0318 Tw
+[(.  )21.9(The space bar toggles)]TJ
+-29.3333 -1.3333 TD
+-0.0427 Tw
+[(between Fruit and Object mode.  Fly mode has been omitted and Light mode is specified by the “l”)]TJ
+T*
+-0.0131 Tw
+[(key)68.8(.  )15.1(This change was made because switching between V)97.2(iew and Object mode is a very common)]TJ
+T*
+-0.0622 Tw
+[(event when docking a molecule.  Finally)80.6(, the user need not hold down the shift key when typing “q”)]TJ
+T*
+0.0003 Tw
+(to exit the program.)Tj
+/TT4 1 Tf
+14 0 0 14 90 538.5 Tm
+-0.0001 Tw
+(A.5  Command Line Options)Tj
+/TT2 1 Tf
+12 0 0 12 90 506.5 Tm
+0 Tw
+(The )Tj
+/TT8 1 Tf
+1.875 0 TD
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+0.0522 Tw
+[( program can be invoked with several command line options that control its behavior)59.2(.)]TJ
+-4.0833 -1.3333 TD
+0.1198 Tw
+[(Among these options are the use of two joystick boxes, the recording or playback of a user)-37.3(’)41.3(s)]TJ
+T*
+-0.003 Tw
+(session and the selection of collision detection algorithm.  Here is a list of command line options:)Tj
+1.0833 -2.6667 TD
+-0.0308 Tw
+[(-J)-4195.8(Specifies that two joystick boxes are to be used.  One box controls the view and the)]TJ
+4.9167 -1.3333 TD
+0 Tw
+(second box controls motion of a single molecule.)Tj
+-4.9167 -2.6667 TD
+0.0001 Tc
+[(-b)-4083.2(Has )]TJ
+/TT8 1 Tf
+6.7083 0 TD
+0 Tc
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0303 Tw
+[( use the brute-force collision detection algorithm.  This is used for timing)]TJ
+-4 -1.3333 TD
+0.0002 Tw
+(comparisons, and is not of much interest to most users.)Tj
+-4.9167 -2.6667 TD
+0.1249 Tw
+[(-l )125.1( )125.1(logfile)-1195.8(Records a user)-30.1(’)41.3(s)0( actions in a file for later playback.  Both joystick motion and)]TJ
+4.9167 -1.3333 TD
+0 Tw
+(keystrokes are recorded in the file “logfile”.)Tj
+-4.9167 -2.6667 TD
+-0.0411 Tw
+[(-p )-39.4(logfile)-1225(Plays back a file that was recorded using the “-l” option.  )41.5(All control of the program)]TJ
+4.9167 -1.3333 TD
+-0.0322 Tw
+[(is from the file and a user)-57.8(’)83(s)0( keystrokes and joystick motions are ignored.  )16.8(When the)]TJ
+T*
+0.0001 Tw
+(playback is finished, the program execution is ended.)Tj
+ET
+endstream
+endobj
+98 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT6 17 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+100 0 obj
+<<
+/Length 1786
+>>
+stream
+BT
+/TT4 1 Tf
+14 0 0 14 72 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0001 Tw
+[(A.6  Keyboard )35.4(T)59.8(oggles)]TJ
+/TT2 1 Tf
+12 0 0 12 72 679.5 Tm
+-0.0365 Tw
+(Below is a list of keystrokes that change settings of various parameters of )Tj
+/TT8 1 Tf
+29.2083 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.2083 0 TD
+-0.0365 Tw
+[(.  Most of these are)]TJ
+-31.4167 -1.3333 TD
+-0.0001 Tw
+(indicated on the text screen when )Tj
+/TT8 1 Tf
+13.5833 0 TD
+0 Tw
+(bump)Tj
+/TT2 1 Tf
+2.25 0 TD
+-0.0001 Tw
+( is being run \(see figure 8\).)Tj
+-15.8333 -2.6667 TD
+0.0003 Tw
+[(space)-1529.2(T)69.2(oggles between )26.3(V)55.5(iew and Object mode.)]TJ
+T*
+0.0002 Tw
+[(l)-3472.2(Changes joysticks to and from Light mode.)]TJ
+T*
+-0.0001 Tw
+[(j)-3472.2(Changes which object’)38.8(s motion is controlled by the joysticks.)]TJ
+T*
+0.0001 Tw
+[(c)-3306.2(T)27.5(urns on and of)41(f collision detection.)]TJ
+T*
+-0.0002 Tw
+[(t)-3472.2(T)27.5(urns on/of)41.2(f screen door transparency and select the object to be transparent.)]TJ
+T*
+[(f)-3417(T)69.2(oggles whether the background flashes when a collision occurs.)]TJ
+T*
+-0.0001 Tw
+[(b)-3250(T)69.2(oggles whether a beep is made when a collision occurs.)]TJ
+T*
+0 Tw
+[(v)-3250(Executes a video load.  Use this when the program begins with a bad video load.)]TJ
+T*
+-0.0001 Tw
+[(\))-3417(T)27.5(urn on or increase amount of rocking.)]TJ
+T*
+-0.0005 Tw
+[(\()-3417(Decrease or turn of)22.3(f rocking.)]TJ
+T*
+-0.0002 Tw
+[(.)-3500(Increase the radii of the spheres in the models.)]TJ
+T*
+0 Tw
+[(,)-3500(Decrease the radii of spheres.)]TJ
+T*
+-0.0009 Tw
+[(S)-3193.8(T)27.5(urn stereo on/of)38.1(f.)]TJ
+T*
+-0.0001 Tw
+[([)-3417(Decrease inter)37.7(-ocular distance for stereo.)]TJ
+T*
+-0.0002 Tw
+[(])-3417(Increase inter)37.9(-ocular distance for stereo.)]TJ
+T*
+[(q or Q)-1195.8(Quit the program.)]TJ
+ET
+endstream
+endobj
+101 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT4 16 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+103 0 obj
+<<
+/Length 4033
+>>
+stream
+BT
+/TT2 1 Tf
+18 0 0 18 216 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0012 Tw
+(Annotated Bibliography)Tj
+12 0 0 12 90 679.5 Tm
+-0.0027 Tw
+[([Ballard 81] Ballard, Dana H., “Strip )7.1(T)27.5(rees: )51.7(A)55.5( Hierarchical Representation for Curves,” )]TJ
+/TT8 1 Tf
+35.1667 0 TD
+0 Tw
+(Commu-)Tj
+-32.9167 -1.3333 TD
+-0.0177 Tw
+[(nications of the )29.6(ACM)]TJ
+/TT2 1 Tf
+8.4583 0 TD
+[(, )24(V)138.8(ol. 24, No. 5, \(May 1981\).  \(Rectangles are used to create hierarchi-)]TJ
+-8.4583 -1.3333 TD
+0.0049 Tw
+(cal bounding areas for efficient queries of planar features in maps such as roads, rivers and)Tj
+T*
+-0.0002 Tc
+0 Tw
+(cities.\))Tj
+-2.25 -2.6667 TD
+0 Tc
+0.0002 Tw
+[([Barry 80] Barry)53.6(, C. D., MMS-X Newsletter)69.7(, 2 pages.)]TJ
+T*
+0.1093 Tw
+[([Bentley and Friedman 79] Bentley)58.8(, Jon Louis and Jerome H. Friedman, “Data Structures for)]TJ
+2.25 -1.3333 TD
+-0.0429 Tw
+(Range Searching,” )Tj
+/TT8 1 Tf
+7.6667 0 TD
+(Computing Surveys)Tj
+/TT2 1 Tf
+7.75 0 TD
+-0.0427 Tw
+[(, V)138.8(ol. 1)26.6(1, No. 4, \(December 1979\).  \(Excellent survey)]TJ
+-15.4167 -1.3333 TD
+0.1198 Tw
+(article describing projection, cells, )Tj
+/TT8 1 Tf
+14.5417 0 TD
+0 Tw
+(k)Tj
+/TT2 1 Tf
+0.4167 0 TD
+0.1198 Tw
+(-d trees, range trees and a few other data structures)Tj
+-14.9583 -1.3333 TD
+-0.0004 Tw
+(useful for )Tj
+/TT8 1 Tf
+4.125 0 TD
+0 Tw
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0004 Tw
+(-dimensional range queries.\))Tj
+-6.875 -2.6667 TD
+-0.0301 Tw
+[([Bloomberg 86] Bloomber)22.4(g, Sandra H., “A)74.9( Representation of Solid Objects for Performing Bool-)]TJ
+2.25 -1.3333 TD
+-0.0374 Tw
+(ean Operations,” University of North Carolina at Chapel Hill, Department of Computer Sci-)Tj
+T*
+0.0751 Tw
+[(ence )31.6(T)69.2(echnical Report )-5.4(TR86-006.  \(Use of BSP-trees for performing regularized boolean)]TJ
+T*
+0.0001 Tw
+(operations on polyhedra.  See [Thibault and Naylor 87].\))Tj
+-2.25 -2.6667 TD
+0.0348 Tw
+[([Boyse 79] Boyse, John )27.7(W)68.8(., “Interference Detection )56.2(Among Solids and Surfaces,” )]TJ
+/TT8 1 Tf
+33.4583 0 TD
+0 Tw
+(Communica-)Tj
+-31.2083 -1.3333 TD
+0.0717 Tw
+[(tions of the )34.4(ACM)]TJ
+/TT2 1 Tf
+7 0 TD
+[(, )30(V)97.2(ol. 22, No. 1, \(January 1979\).  \(A)83( brute-force algorithm for detecting)]TJ
+-7 -1.3333 TD
+0.0847 Tw
+(collisions between stationary polyhedra and a polyhedron undergoing linear or rotational)Tj
+T*
+0 Tw
+(motion.\))Tj
+-2.25 -2.6667 TD
+-0.0014 Tc
+-0.0625 Tw
+([Brooks et al 83] Brooks, Bernard R., R. E. Bruccoleri, B. D. Olafson, D. J. States, S. Swaminathan)Tj
+2.25 -1.3333 TD
+0 Tc
+0.0575 Tw
+[(and M. Karplus, “CHARMM: )49(A)55.5( Program for Macromolecular Energy)83.3(, Minimization, and)]TJ
+T*
+0.0426 Tw
+(Dynamics Calculations,” )Tj
+/TT8 1 Tf
+10.3333 0 TD
+[(Journal of Computational Chemistr)17.4(y)]TJ
+/TT2 1 Tf
+14.875 0 TD
+0.0424 Tw
+[(, V)138.8(ol. 4, No. 2, pp. 187-217)]TJ
+-25.2083 -1.3333 TD
+0.0112 Tw
+[(\(1983\).  \(This is an often referenced program that allows the user many trade-of)36.3(fs between)]TJ
+T*
+-0.0604 Tw
+[(accuracy and speed for energy calculations.  )53(The appendices of this paper contain a wealth of)]TJ
+T*
+-0.0003 Tw
+(information about atom and bond parameters.\))Tj
+-2.25 -2.6667 TD
+0.0037 Tw
+[([Brooks 85] Brooks, Frederick P)97(., Jr)59.2(., Pixel-Planes spheres memo.  \(Describes how the quadratic)]TJ
+2.25 -1.3333 TD
+0.0251 Tw
+[(terms for scan conversion and z-buf)22.9(fering of spheres can be factored out of the expression)]TJ
+T*
+0.0757 Tw
+[(and saved at each pixel of a frame buf)29.1(fer)26.5(.  )68.1(Also describes a discrete sweep algorithm for)]TJ
+T*
+-0.0001 Tw
+(collision detection between collections of spheres.\))Tj
+-2.25 -2.6667 TD
+-0.0075 Tw
+[([Carlbom 87] Carlbom, Ingrid, “An )70.5(Algorithm for Geometric Set Operations using Cellular Sub-)]TJ
+2.25 -1.3333 TD
+-0.0143 Tw
+[(division T)69.2(echniques,” )]TJ
+/TT8 1 Tf
+8.9583 0 TD
+0.0086 Tw
+[(IEEE Computer Graphics and )5.4(Applications)]TJ
+/TT2 1 Tf
+17.4583 0 TD
+[(, )8.6(V)138.8(ol. 7, No. 5, pp. 44-55)]TJ
+-26.4167 -1.3333 TD
+0 Tw
+(\(May 1987\).  \(Uses octrees to speed up boolean operations on polyhedra.\))Tj
+ET
+endstream
+endobj
+104 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+107 0 obj
+<<
+/Length 4666
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 72 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0615 Tw
+[([Connolly 83] Connolly)71.7(, Michael L., “Solvent-Accessible Surfaces of Proteins and Nucleic )63(Acids,”)]TJ
+/TT8 1 Tf
+2.25 -1.3333 TD
+0 Tw
+(Science)Tj
+/TT2 1 Tf
+3.0417 0 TD
+-0.0482 Tw
+[(, )-6.5(V)138.8(ol. 221, No. 4612, pp. 709-713 \(August 1983\).  \(A)51.5( probe sphere is rolled on the van)]TJ
+-3.0417 -1.3333 TD
+-0.0606 Tw
+[(der )7.9(W)110.5(aals surface of molecule to describe the surface as a set of points for calligraphic display)]TJ
+T*
+0.0002 Tw
+(or as parts of spheres and tori for display on raster devices.\))Tj
+-2.25 -2.6667 TD
+-0.0233 Tw
+[([Dobkin and Kirkpatrick 82] Dobkin, David P)121.3(.)0( and David G. Kirkpatrick, “Fast Detection of Poly-)]TJ
+2.25 -1.3333 TD
+0.0391 Tw
+[(hedral Intersections,” )46.6(Automata, Languages and Programming \(Ninth Colloquium, )50.2(Aarhus,)]TJ
+T*
+-0.0092 Tw
+[(Denmark\), Lecture Notes in Computer Science 140, Springer)39.5(-V)96.8(erlag, July 1982.  \(A)58.9( method)]TJ
+T*
+-0.0002 Tw
+(for determining intersection between )Tj
+ET
+0 0 0 1 K
+0 J 0 j 0.592 w 10 M []0 d
+1 i 
+313.5 598.592 m
+279 598.592 l
+S
+BT
+12 0 0 12 279 599.5 Tm
+[(convex)12.7( polyhedra in )]TJ
+/TT8 1 Tf
+8.4167 0 TD
+0 Tw
+(O)Tj
+/TT2 1 Tf
+0.7083 0 TD
+(\(log)Tj
+7 0 0 7 408 603.5 Tm
+(2)Tj
+12 0 0 12 411.5 599.5 Tm
+( )Tj
+/TT8 1 Tf
+0.25 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0002 Tw
+(\) time.\))Tj
+-29.0417 -2.6667 TD
+0.0244 Tc
+0.125 Tw
+([Ellsworth 88] Ellsworth, David, “Pixel-Planes Hierarchical Interactive Graphics System:)Tj
+2.25 -1.3333 TD
+0 Tc
+0.0334 Tw
+[(Programmer)-43.1(’)83(s)0( Manual,” Department of Computer Science, University of North Carolina at)]TJ
+T*
+-0.0244 Tw
+[(Chapel Hill, )47.7(April 1988, 38 pages.  \(Description of UNC variant of the PPHIGS+ display list)]TJ
+T*
+-0.0005 Tw
+[(graphics library)52.8(.\))]TJ
+-2.25 -2.6667 TD
+-0.0158 Tw
+[([Fuchs 85] Fuchs, Henry)62.5(, Jack Goldfeather)62.3(, Jef)-16.5(f P)123.3(.)0( Hultquist, Susan Spach, John )74(Austin, Frederick)]TJ
+2.25 -1.3333 TD
+0.0096 Tw
+[(P)97.8(.)0( Brooks, Jr)88.9(., John Eyles and John Poulton, “Fast Spheres, Shadows, )-11.1(T)69.2(extures, )22.3(T)27.5(ransparen-)]TJ
+T*
+-0.006 Tc
+-0.0625 Tw
+(cies, and Image Enhancements in Pixel-Planes,” )Tj
+/TT8 1 Tf
+18.875 0 TD
+(Computer Graphics)Tj
+/TT2 1 Tf
+7.8333 0 TD
+[(, )8.8(V)132.8(ol. 19, No. 3, \(Siggraph)]TJ
+-26.7083 -1.3333 TD
+0 Tc
+0.101 Tw
+[(85\), pp. 1)35(1)41.7(1-120.  \(Gives an overview of Pixel-Planes 4 and describes SIMD versions of)]TJ
+T*
+-0.0003 Tw
+(several commonly used techniques for image generation.\))Tj
+-2.25 -2.6667 TD
+0.09 Tw
+[([Fuchs 89] Fuchs, Henry and Ulrich Neumann, personal communication.  \(A board to read the)]TJ
+2.25 -1.3333 TD
+-0.0002 Tw
+(video stream from Pixel-Planes 4 has been built but remains untested.\))Tj
+-2.25 -2.6667 TD
+-0.0442 Tw
+[([Fujimoto and Iwata 85] Fujimoto, )69.7(Akira and K. Iwata, “Accelerated Ray )18.9(T)27.5(racing,” Proceedings of)]TJ
+2.25 -1.3333 TD
+-0.0247 Tw
+[(Computer Graphics )18.3(T)69.2(okyo ’85 \(April 1985\).  \(Uniform spatial subdivision for rapid ray trac-)]TJ
+T*
+0.0004 Tw
+(ing of large data sets.\))Tj
+-2.25 -2.6667 TD
+-0.0123 Tc
+-0.0625 Tw
+[([Glassner 84] Glassner)60.2(, )37.9(Andrew)64.1(, “Space Subdivision for Fast Ray )11.2(T)56.9(racing,” )]TJ
+/TT8 1 Tf
+29 0 TD
+(IEEE Computer Graphics)Tj
+-26.75 -1.3333 TD
+0 Tc
+-0.0417 Tw
+(and Applications)Tj
+/TT2 1 Tf
+6.75 0 TD
+-0.0164 Tw
+[(, )-16.4(V)138.8(ol. 4, No. 10, pp. 15-22 \(October 1984\).  \(Octree subdivision to speed up)]TJ
+-6.75 -1.3333 TD
+0.0013 Tw
+(ray tracing.\))Tj
+-2.25 -2.6667 TD
+0.1155 Tw
+[([Goldsmith and Salmon 87] Goldsmith, Jef)20.8(frey and J. Salmon, “Automatic Creation of Object)]TJ
+2.25 -1.3333 TD
+0.028 Tw
+[(Hierarchies for Ray )10.9(T)27.5(racing,” )]TJ
+/TT8 1 Tf
+12.25 0 TD
+[(IEEE Computer Graphics and )41.3(Applications)]TJ
+/TT2 1 Tf
+17.5417 0 TD
+[(, )28(V)138.8(ol. 7, No. 5, p.)]TJ
+-29.7917 -1.3333 TD
+-0.0033 Tw
+(14-20 \(May 1987\).  \(Presents a method for measuring the goodness of a bounding hierarchy)Tj
+T*
+-0.0361 Tw
+(and says that generating a few random hierarchies and picking the best will give a reasonable)Tj
+T*
+0.0001 Tc
+0 Tw
+(hierarchies.\))Tj
+-2.25 -2.6667 TD
+0 Tc
+0.0245 Tw
+[([Hahn 88] Hahn, James K., “Realistic )45.4(Animation of Rigid Bodies,” )]TJ
+/TT8 1 Tf
+27.3333 0 TD
+(Computer Graphics)Tj
+/TT2 1 Tf
+8 0 TD
+0 Tw
+[(, V)97.2(ol. )-24.5(22,)]TJ
+-33.0833 -1.3333 TD
+0.0515 Tw
+[(No. 4 \(Siggraph ’88\).  \(Rapid method of simulating collisions between polyhedral objects,)]TJ
+T*
+0.0249 Tw
+[(taking into account friction and elasticity)77.9(.  )49.8(Also gives method of controlling articulated fig-)]TJ
+T*
+-0.0004 Tw
+(ures within simulation framework.\))Tj
+ET
+endstream
+endobj
+108 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+110 0 obj
+<<
+/Length 4465
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 90 727.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+-0.0299 Tw
+[([Hopcroft, Schwartz and Sharir 83] Hopcroft, J. E., J. )30.7(T)69.2(.)0( Schwartz and M. Sharir)44.6(, “Ef)-17.2(ficient Detec-)]TJ
+2.25 -1.3333 TD
+0.088 Tw
+(tion of Intersections among Spheres,” )Tj
+/TT8 1 Tf
+15.7917 0 TD
+[(International Journal of Robotics Resear)44.3(ch)]TJ
+/TT2 1 Tf
+17.6667 0 TD
+0.0856 Tw
+[(, V)138.8(ol. 2,)]TJ
+-33.4583 -1.3333 TD
+-0.0354 Tw
+[(No. 4, \(W)53.3(inter 1983\).  \(Gives a rather involved sweep algorithm to check for sphere intersec-)]TJ
+T*
+-0.0006 Tw
+(tions in )Tj
+/TT8 1 Tf
+3.2083 0 TD
+0 Tw
+(O)Tj
+/TT2 1 Tf
+0.75 0 TD
+(\()Tj
+/TT8 1 Tf
+0.3333 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0002 Tc
+-0.0004 Tw
+( log)Tj
+7 0 0 7 192.5 683.5 Tm
+0 Tc
+0 Tw
+(2)Tj
+12 0 0 12 196 679.5 Tm
+( )Tj
+/TT8 1 Tf
+0.25 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+-0.0006 Tw
+(\) time.\))Tj
+-9.5833 -2.6667 TD
+0.0471 Tw
+[([Janssen 85] Janssen, P)98.8(.)0( )47.1(A. J., “Strategies in Pharmaceutical Research,” )]TJ
+/TT8 1 Tf
+29.2083 0 TD
+0 Tw
+(Endeavour)Tj
+/TT2 1 Tf
+4.375 0 TD
+0.0471 Tw
+(, New Series,)Tj
+-31.3333 -1.3333 TD
+0.0242 Tw
+[(V)138.8(ol. 9, No. 1, p. 28-33 \(1985\).  \(Explains why the author believes that computers and com-)]TJ
+T*
+0 Tw
+(puter graphics will be essential for future research in synthetic drug research.\))Tj
+-2.25 -2.6667 TD
+0.0584 Tw
+[([Karfunkel 86] Karfunkel, H. R., “A)37.5( Fast )75.5(Algorithm for the Interactive Docking Maneuver with)]TJ
+2.25 -1.3333 TD
+0.0339 Tw
+(Flexible Macromolecules and Probes,” )Tj
+/TT8 1 Tf
+15.9583 0 TD
+[(Journal of Computational Chemistr)33(y)]TJ
+/TT2 1 Tf
+14.8333 0 TD
+[(, )33.9(V)97.2(ol. 7, No. 2,)]TJ
+-30.7917 -1.3333 TD
+0.042 Tw
+[(pp. 1)42(13-128 \(1986\).  \(A)55.1( number of approximations are proposed to rapidly compute forces)]TJ
+T*
+-0.0525 Tw
+[(where the both macromolecule and probe are allowed flexible motion.  No implementation of)]TJ
+T*
+0.0005 Tw
+(the method is presented.\))Tj
+-2.25 -2.6667 TD
+-0.0353 Tw
+([Kirkpatrick 76] Kirkpatrick, Paul Jerome, “The Use of a Kinesthetic Supplement in an Interactive)Tj
+2.25 -1.3333 TD
+0.1202 Tw
+(Graphics System,” Ph.D. Dissertation, Department of Computer Science at University of)Tj
+T*
+-0.0547 Tw
+[(North Carolina at Chapel Hill \(1976\).  \(Shows that force-feedback by using a mechanical arm)]TJ
+T*
+-0.0001 Tw
+(can help to understand a simple virtual world of blocks.\))Tj
+-2.25 -2.6667 TD
+0.0044 Tw
+[([Levinthal 66] Leventhal, Cyrus, “Molecular Model-building by Computer)38.1(,” )]TJ
+/TT8 1 Tf
+30.9167 0 TD
+-0.0124 Tw
+(Scientific American)Tj
+/TT2 1 Tf
+7.8333 0 TD
+0 Tw
+(,)Tj
+-36.5 -1.3333 TD
+-0.0427 Tw
+[(V)138.8(ol. 214, No. 6, \(June 1966\).  \(Describes early molecular modelling by computer)49.4(.  Notable as)]TJ
+T*
+0 Tw
+[(an early use of uniform spatial subdivision for speeding up molecular ener)33.9(gy calculations.\))]TJ
+-2.25 -2.6667 TD
+-0.0003 Tc
+-0.0625 Tw
+([Maruyama 72] Maruyama, Kiyoshi, “A Procedure to Determine Intersections Between Polyhedral)Tj
+2.25 -1.3333 TD
+0 Tc
+0 Tw
+(Objects,” )Tj
+/TT8 1 Tf
+4 0 TD
+0.0103 Tw
+(International Journal of Computer and Information Sciences)Tj
+/TT2 1 Tf
+24.4583 0 TD
+[(, )10.3(V)138.8(ol. 1, No. 3, \(Sep-)]TJ
+-28.4583 -1.3333 TD
+-0.0121 Tw
+[(tember 1972\).  \(Checks for intersection of two polyhedra by using a sequence of early rejec-)]TJ
+T*
+0.0002 Tw
+(tion tests that are progressively more time-consuming.\))Tj
+-2.25 -2.6667 TD
+-0.0545 Tw
+[([Moore and W)68.8(ilhelms 88] Moore, Matthew and Jane )16.8(W)27.2(ilhelms, “Collision Detection and Response)]TJ
+2.25 -1.3333 TD
+0.0501 Tw
+[(for Computer )57.4(Animation,” )]TJ
+/TT8 1 Tf
+11 0 TD
+(Computer Graphics)Tj
+/TT2 1 Tf
+8 0 TD
+[(, )8.4(V)138.8(ol. 22, No. 4 \(Siggraph ’88\).  \(Presents a)]TJ
+-19 -1.3333 TD
+0.0171 Tw
+(method for collision response between polyhedral objects for use in computer graphics ani-)Tj
+T*
+-0.0002 Tw
+[(mation.  )26.9(The system gives control of many-jointed figures.\))]TJ
+-2.25 -2.6667 TD
+-0.0422 Tw
+([Ouh-young 88a] Ouh-young, Ming, Michael Pique, John Hughes, Neela Srinivasan and Frederick)Tj
+2.25 -1.3333 TD
+0.0051 Tw
+[(P)97.8(.)0( Brooks, Jr)80(., “Using a Manipulator for Force Display in Molecular Docking,” Proceedings)]TJ
+T*
+-0.0309 Tw
+[(of the 1988 IEEE International Conference on Robotics and )33.9(Automation, )38.1(V)138.8(ol. 3, )49.4(April 24-29,)]TJ
+T*
+0.0579 Tw
+[(1988, pp. 1824-1829.  \(A remote manipulator arm is used to present docking forces to the)]TJ
+T*
+-0.0001 Tc
+-0.001 Tw
+[(user)-42.4(’)41.2(s)-0.1( hand.\))]TJ
+ET
+endstream
+endobj
+111 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+113 0 obj
+<<
+/Length 1147
+>>
+stream
+BT
+/TT2 1 Tf
+12 0 0 12 72 711.5 Tm
+0 0 0 1 k
+/GS2 gs
+0 Tc
+0.0669 Tw
+[([Ouh-young 88b] Ouh-young, Ming, D. V)138.8(.)0( Beard, F)77.6(.)0( P)123.1(.)0( Brooks, “Force Display Performs Better)]TJ
+2.25 -1.3333 TD
+-0.0256 Tw
+[(than )29.4(V)55.5(isual Display in a Simple 6-D Docking T)69.2(ask,” to appear)84.6(.  \(A)45.5( user moves a bar attached)]TJ
+T*
+-0.0222 Tw
+(to six virtual springs and feels their forces as they are presented to the hand by a manipulator)Tj
+T*
+0 Tw
+(arm.\))Tj
+-2.25 -2.6667 TD
+-0.0095 Tw
+[([Palmer 87] Palmer)62.1(, )-9.5(Thomas Cheek, “Docktool: )66.2(A)55.5( Dynamically Interactive Raster Graphics )15.3(V)55.5(isu-)]TJ
+2.25 -1.3333 TD
+0.0907 Tw
+[(alization for the Molecular Docking Problem,” Master)-45.9(’)83(s)0( )21.5(Thesis, Department of Computer)]TJ
+T*
+0.0426 Tw
+[(Science, University of North Carolina at Chapel Hill, )16.5(TR87-013.  \(Uses an extended depth)]TJ
+T*
+0 Tw
+(buffer to perform collision detection in )Tj
+/TT8 1 Tf
+15.7917 0 TD
+(O)Tj
+/TT2 1 Tf
+0.75 0 TD
+(\()Tj
+/TT8 1 Tf
+0.3333 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+(\) time for drug with )Tj
+/TT8 1 Tf
+8.125 0 TD
+(n)Tj
+/TT2 1 Tf
+0.5 0 TD
+( atoms.\))Tj
+ET
+endstream
+endobj
+114 0 obj
+<<
+/ProcSet [/PDF /Text ]
+/Font <<
+/TT2 4 0 R
+/TT8 18 0 R
+>>
+/ExtGState <<
+/GS2 5 0 R
+>>
+>>
+endobj
+116 0 obj
+<<
+/Length 0
+>>
+stream
+endstream
+endobj
+117 0 obj
+<<
+/ProcSet [/PDF ]
+>>
+endobj
+48 0 obj
+<<
+/Type /ExtGState
+/SA false
+/SM 0.02
+/OP false
+/op false
+/OPM 1
+/BG2 /Default
+/UCR2 /Default
+/HT /Default
+/TR2 /Default
+>>
+endobj
+5 0 obj
+<<
+/Type /ExtGState
+/SA false
+/SM 0.02
+/OP true
+/op true
+/OPM 1
+/BG2 /Default
+/UCR2 /Default
+/HT /Default
+/TR2 /Default
+>>
+endobj
+118 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 662
+/Descent -250
+/Flags 34
+/FontBBox [-168 -218 1000 898]
+/FontName /Times-Roman
+/ItalicAngle 0
+/StemV 84
+/XHeight 450
+/StemH 84
+>>
+endobj
+119 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 676
+/Descent -250
+/Flags 262178
+/FontBBox [-168 -218 1000 935]
+/FontName /Times-Bold
+/ItalicAngle 0
+/StemV 133
+/XHeight 461
+/StemH 139
+>>
+endobj
+120 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 669
+/Descent -250
+/Flags 262242
+/FontBBox [-200 -218 996 921]
+/FontName /Times-BoldItalic
+/ItalicAngle -15
+/StemV 133
+/XHeight 462
+/StemH 121
+>>
+endobj
+121 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 750
+/CapHeight 653
+/Descent -250
+/Flags 98
+/FontBBox [-169 -217 1010 883]
+/FontName /Times-Italic
+/ItalicAngle -15
+/StemV 76
+/XHeight 441
+/StemH 76
+>>
+endobj
+122 0 obj
+<<
+/Type /FontDescriptor
+/Ascent 753
+/CapHeight 562
+/Descent -246
+/Flags 35
+/FontBBox [-28 -250 628 805]
+/FontName /Courier
+/ItalicAngle 0
+/StemV 51
+/XHeight 426
+/StemH 51
+>>
+endobj
+4 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 148
+/Widths [250 0 0 500 0 833 0 0 333 333 0 564 250 333 250 278 
+500 500 500 500 500 500 500 500 500 500 278 0 0 564 0 0 
+0 722 667 667 722 611 556 722 722 333 389 722 611 889 722 722 
+556 722 667 556 611 722 722 944 722 0 0 333 0 333 0 500 
+0 444 500 444 500 444 333 500 500 278 278 500 278 778 500 500 
+500 500 333 389 278 500 500 722 500 500 444 0 0 0 541 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 333 444 444 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Roman
+/FontDescriptor 118 0 R
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 121
+/Widths [250 0 0 0 0 0 0 0 0 0 0 0 0 333 250 0 
+0 500 500 500 500 500 500 500 500 0 333 0 0 0 0 0 
+0 722 667 722 722 667 611 778 778 389 0 778 667 944 0 778 
+611 0 722 556 667 722 722 1000 0 0 0 0 0 0 0 0 
+0 500 556 444 556 444 333 500 556 278 0 556 278 833 556 500 
+556 0 444 389 333 556 500 722 500 500 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Bold
+/FontDescriptor 119 0 R
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 66
+/LastChar 117
+/Widths [667 0 0 0 0 0 0 0 0 0 0 0 0 0 611 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 556 0 0 0 0 778 556 500 500 0 
+389 0 278 556 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-BoldItalic
+/FontDescriptor 120 0 R
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 122
+/Widths [250 0 0 0 0 0 0 0 0 0 0 0 0 333 0 0 
+0 0 0 0 500 0 0 0 0 0 0 0 0 0 0 0 
+0 611 611 667 0 611 0 722 722 333 444 0 0 833 667 722 
+611 0 611 500 0 0 0 0 0 0 0 0 0 0 0 0 
+0 500 500 444 500 444 278 500 500 278 0 444 278 722 500 500 
+500 0 389 389 278 500 444 0 444 444 389 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Times-Italic
+/FontDescriptor 121 0 R
+>>
+endobj
+92 0 obj
+<<
+/Type /Font
+/Subtype /TrueType
+/FirstChar 32
+/LastChar 117
+/Widths [600 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 600 0 600 0 600 0 600 0 0 0 0 600 0 0 
+600 0 600 0 600 600 ]
+/Encoding /WinAnsiEncoding
+/BaseFont /Courier
+/FontDescriptor 122 0 R
+>>
+endobj
+1 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 3 0 R
+/Contents 2 0 R
+>>
+endobj
+7 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 9 0 R
+/Contents 8 0 R
+>>
+endobj
+10 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 12 0 R
+/Contents 11 0 R
+>>
+endobj
+13 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 15 0 R
+/Contents 14 0 R
+>>
+endobj
+19 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 21 0 R
+/Contents 20 0 R
+>>
+endobj
+22 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 24 0 R
+/Contents 23 0 R
+>>
+endobj
+25 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 27 0 R
+/Contents 26 0 R
+>>
+endobj
+28 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 30 0 R
+/Contents 29 0 R
+>>
+endobj
+31 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 33 0 R
+/Contents 32 0 R
+>>
+endobj
+34 0 obj
+<<
+/Type /Page
+/Parent 6 0 R
+/Resources 36 0 R
+/Contents 35 0 R
+>>
+endobj
+37 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 39 0 R
+/Contents 38 0 R
+>>
+endobj
+42 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 44 0 R
+/Contents 43 0 R
+>>
+endobj
+45 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 47 0 R
+/Contents 46 0 R
+>>
+endobj
+49 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 51 0 R
+/Contents 50 0 R
+>>
+endobj
+52 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 54 0 R
+/Contents 53 0 R
+>>
+endobj
+55 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 57 0 R
+/Contents 56 0 R
+>>
+endobj
+58 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 60 0 R
+/Contents 59 0 R
+>>
+endobj
+61 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 63 0 R
+/Contents 62 0 R
+>>
+endobj
+64 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 66 0 R
+/Contents 65 0 R
+>>
+endobj
+67 0 obj
+<<
+/Type /Page
+/Parent 41 0 R
+/Resources 69 0 R
+/Contents 68 0 R
+>>
+endobj
+70 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 72 0 R
+/Contents 71 0 R
+>>
+endobj
+74 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 76 0 R
+/Contents 75 0 R
+>>
+endobj
+77 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 79 0 R
+/Contents 78 0 R
+>>
+endobj
+80 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 82 0 R
+/Contents 81 0 R
+>>
+endobj
+83 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 85 0 R
+/Contents 84 0 R
+>>
+endobj
+86 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 88 0 R
+/Contents 87 0 R
+>>
+endobj
+89 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 91 0 R
+/Contents 90 0 R
+>>
+endobj
+93 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 95 0 R
+/Contents 94 0 R
+>>
+endobj
+96 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 98 0 R
+/Contents 97 0 R
+>>
+endobj
+99 0 obj
+<<
+/Type /Page
+/Parent 73 0 R
+/Resources 101 0 R
+/Contents 100 0 R
+>>
+endobj
+102 0 obj
+<<
+/Type /Page
+/Parent 105 0 R
+/Resources 104 0 R
+/Contents 103 0 R
+>>
+endobj
+106 0 obj
+<<
+/Type /Page
+/Parent 105 0 R
+/Resources 108 0 R
+/Contents 107 0 R
+>>
+endobj
+109 0 obj
+<<
+/Type /Page
+/Parent 105 0 R
+/Resources 111 0 R
+/Contents 110 0 R
+>>
+endobj
+112 0 obj
+<<
+/Type /Page
+/Parent 105 0 R
+/Resources 114 0 R
+/Contents 113 0 R
+>>
+endobj
+115 0 obj
+<<
+/Type /Page
+/Parent 105 0 R
+/Resources 117 0 R
+/Contents 116 0 R
+>>
+endobj
+123 0 obj
+<<
+/S /D
+>>
+endobj
+124 0 obj
+<<
+/Nums [0 123 0 R ]
+>>
+endobj
+6 0 obj
+<<
+/Type /Pages
+/Kids [1 0 R 7 0 R 10 0 R 13 0 R 19 0 R 22 0 R 25 0 R 28 0 R 31 0 R 34 0 R]
+/Count 10
+/Parent 40 0 R
+>>
+endobj
+41 0 obj
+<<
+/Type /Pages
+/Kids [37 0 R 42 0 R 45 0 R 49 0 R 52 0 R 55 0 R 58 0 R 61 0 R 64 0 R 67 0 R]
+/Count 10
+/Parent 40 0 R
+>>
+endobj
+73 0 obj
+<<
+/Type /Pages
+/Kids [70 0 R 74 0 R 77 0 R 80 0 R 83 0 R 86 0 R 89 0 R 93 0 R 96 0 R 99 0 R]
+/Count 10
+/Parent 40 0 R
+>>
+endobj
+105 0 obj
+<<
+/Type /Pages
+/Kids [102 0 R 106 0 R 109 0 R 112 0 R 115 0 R]
+/Count 5
+/Parent 40 0 R
+>>
+endobj
+40 0 obj
+<<
+/Type /Pages
+/Kids [6 0 R 41 0 R 73 0 R 105 0 R ]
+/Count 35
+/MediaBox [0 0 612 792]
+>>
+endobj
+125 0 obj
+<<
+/CreationDate (D:20050817144559-04'00')
+/ModDate (D:20050817144559-04'00')
+/Producer (PSNormalizer.framework)
+>>
+endobj
+126 0 obj
+<<
+/Type /Catalog
+/Pages 40 0 R
+/PageLabels 124 0 R
+>>
+endobj
+xref
+0 127
+0000000000 65535 f 
+0000134093 00000 n 
+0000000016 00000 n 
+0000001109 00000 n 
+0000131977 00000 n 
+0000130835 00000 n 
+0000137110 00000 n 
+0000134173 00000 n 
+0000001204 00000 n 
+0000002642 00000 n 
+0000134253 00000 n 
+0000002737 00000 n 
+0000005205 00000 n 
+0000134336 00000 n 
+0000005301 00000 n 
+0000008161 00000 n 
+0000132541 00000 n 
+0000133002 00000 n 
+0000133300 00000 n 
+0000134419 00000 n 
+0000008293 00000 n 
+0000010401 00000 n 
+0000134502 00000 n 
+0000010509 00000 n 
+0000014679 00000 n 
+0000134585 00000 n 
+0000014787 00000 n 
+0000019242 00000 n 
+0000134668 00000 n 
+0000019350 00000 n 
+0000021281 00000 n 
+0000134751 00000 n 
+0000021389 00000 n 
+0000025861 00000 n 
+0000134834 00000 n 
+0000025981 00000 n 
+0000030859 00000 n 
+0000134917 00000 n 
+0000030979 00000 n 
+0000033364 00000 n 
+0000137629 00000 n 
+0000137245 00000 n 
+0000135001 00000 n 
+0000033484 00000 n 
+0000038330 00000 n 
+0000135085 00000 n 
+0000038450 00000 n 
+0000041598 00000 n 
+0000130694 00000 n 
+0000135169 00000 n 
+0000041730 00000 n 
+0000045753 00000 n 
+0000135253 00000 n 
+0000045861 00000 n 
+0000047765 00000 n 
+0000135337 00000 n 
+0000047873 00000 n 
+0000053458 00000 n 
+0000135421 00000 n 
+0000053590 00000 n 
+0000060474 00000 n 
+0000135505 00000 n 
+0000060606 00000 n 
+0000065408 00000 n 
+0000135589 00000 n 
+0000065528 00000 n 
+0000071398 00000 n 
+0000135673 00000 n 
+0000071530 00000 n 
+0000075203 00000 n 
+0000135757 00000 n 
+0000075323 00000 n 
+0000077426 00000 n 
+0000137383 00000 n 
+0000135841 00000 n 
+0000077546 00000 n 
+0000079946 00000 n 
+0000135925 00000 n 
+0000080066 00000 n 
+0000091380 00000 n 
+0000136009 00000 n 
+0000091500 00000 n 
+0000094993 00000 n 
+0000136093 00000 n 
+0000095113 00000 n 
+0000099717 00000 n 
+0000136177 00000 n 
+0000099837 00000 n 
+0000103038 00000 n 
+0000136261 00000 n 
+0000103146 00000 n 
+0000106751 00000 n 
+0000133734 00000 n 
+0000136345 00000 n 
+0000106884 00000 n 
+0000109917 00000 n 
+0000136429 00000 n 
+0000110061 00000 n 
+0000113547 00000 n 
+0000136513 00000 n 
+0000113679 00000 n 
+0000115519 00000 n 
+0000136599 00000 n 
+0000115640 00000 n 
+0000119727 00000 n 
+0000137521 00000 n 
+0000136687 00000 n 
+0000119836 00000 n 
+0000124556 00000 n 
+0000136775 00000 n 
+0000124665 00000 n 
+0000129184 00000 n 
+0000136863 00000 n 
+0000129293 00000 n 
+0000130494 00000 n 
+0000136951 00000 n 
+0000130603 00000 n 
+0000130654 00000 n 
+0000130973 00000 n 
+0000131171 00000 n 
+0000131374 00000 n 
+0000131584 00000 n 
+0000131785 00000 n 
+0000137039 00000 n 
+0000137068 00000 n 
+0000137735 00000 n 
+0000137868 00000 n 
+trailer
+<<
+/Size 127
+/Root 126 0 R
+/Info 125 0 R
+/ID [<6f78c6cc4b70c528d99578da41a44aad><6f78c6cc4b70c528d99578da41a44aad>]
+>>
+startxref
+137940
+%%EOF

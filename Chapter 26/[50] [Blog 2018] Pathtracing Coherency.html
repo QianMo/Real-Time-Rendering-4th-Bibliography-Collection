@@ -1,0 +1,204 @@
+<html class=hb-loaded style><!--
+ Page saved with SingleFile 
+ url: https://www.breakin.se/learn/pathtracing-coherency.html#toc2 
+ saved date: Fri Jul 23 2021 18:18:15 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Pathtracing Coherency</title>
+<style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.MJX_Assistive_MathML{position:absolute!important;top:0;left:0;clip:rect(1px,1px,1px,1px);padding:1px 0 0 0!important;border:0!important;height:1px!important;width:1px!important;overflow:hidden!important;display:block!important;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#MathJax_Message{position:fixed;left:1em;bottom:1.5em;background-color:#E6E6E6;border:1px solid #959595;margin:0px;padding:2px 8px;z-index:102;color:black;font-size:80%;width:auto;white-space:nowrap}.MathJax{display:inline;font-style:normal;font-weight:normal;line-height:normal;font-size:100%;text-indent:0;text-align:left;text-transform:none;letter-spacing:normal;word-spacing:normal;word-wrap:normal;white-space:nowrap;float:none;direction:ltr;max-width:none;max-height:none;min-width:0;min-height:0;border:0;padding:0;margin:0}.MathJax:focus,body :focus .MathJax{display:inline-table}.MathJax nobr{border:0;padding:0;margin:0;max-width:none;max-height:none;min-width:0;min-height:0;vertical-align:0;line-height:normal;text-decoration:none}.MathJax span{display:inline;position:static;border:0;padding:0;margin:0;vertical-align:0;line-height:normal;text-decoration:none}.MathJax nobr{white-space:nowrap!important}.MathJax *{transition:none;-webkit-transition:none;-moz-transition:none;-ms-transition:none;-o-transition:none}</style><title class=sf-hidden>Pathtracing Coherency</title><link type=image/x-icon rel="shortcut icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><style>.sf-hidden{display:none!important}</style><link rel=canonical href=https://www.breakin.se/learn/pathtracing-coherency.html#toc2><body huaban_collector_injected=true><div style=visibility:hidden;overflow:hidden;position:absolute;top:0px;height:1px;width:auto;padding:0px;border:0px;margin:0px;text-align:left;text-indent:0px;text-transform:none;line-height:normal;letter-spacing:normal;word-spacing:normal><div id=MathJax_Hidden><br></div></div><div id=MathJax_Message style=display:none></div><span style=display:none>
+ </span>
+ 
+ <style>#markdeep_content{max-width:800px;margin:auto;padding:20px;text-align:justify;line-height:140%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#222;font-family:Palatino,Georgia,"Times New Roman",serif}body{counter-reset:h1 h2 h3 h4 h5 h6 paragraph}@page{margin:0;size:auto}.md div.title{font-size:26px;font-weight:800;line-height:120%;text-align:center}.md div.afterTitles{height:10px}.md div.subtitle{text-align:center}.md li{text-align:left}.md div.title,.md .tocHeader,h1,h2{font-family:Verdana,Helvetica,Arial,sans-serif;margin:13.4px 0 13.4px;padding:15px 0 3px;border-top:0;clear:both}.md h1,.md h2{page-break-after:avoid;break-after:avoid}.md a{font-family:Georgia,Palatino,'Times New Roman'}.md h1,.md .tocHeader{border-bottom:3px solid;font-size:20px;font-weight:bold}.md h1{counter-reset:h2 h3 h4 h5 h6}.md h2{counter-reset:h3 h4 h5 h6;border-bottom:2px solid #999;color:#555;font-weight:bold;font-size:18px}.md a:link,.md a:visited{color:#38A;text-decoration:none}.md a:link:hover{text-decoration:underline}.md .longTOC .level1{font-weight:600;display:block;padding-top:12px;margin:0 0 -20px}.md .admonition{position:relative;margin:1em 0;padding:.4rem 1rem;border-radius:.2rem}.md .admonition.tip{border-left:2.5rem solid rgba(50,255,90,.4);background-color:rgba(50,255,90,.15)}.md .admonition.tip::before{content:"\24d8";font-weight:bold;font-size:150%;position:relative;top:3px;color:rgba(26,128,46,.8);left:-2.95rem;display:block;width:0;height:0}.md h1::before{content:counter(h1) " ";counter-increment:h1;margin-right:10px}.md h2::before{content:counter(h1) "."counter(h2) " ";counter-increment:h2;margin-right:10px}.md h1{text-align:left}.md h2{text-align:left}</style>
+ 
+ 
+ <div style=text-align:center>
+ <a href=https://www.breakin.se/index.html>home</a>
+ <a href=https://www.breakin.se/blog/index.html>blog</a>
+ <a href=https://www.breakin.se/journal/index.html>journal</a>
+ <a href=https://www.breakin.se/learn/index.html>learn</a>
+ <a href=https://www.breakin.se/about.html>about</a>
+ </div>
+ <div id=markdeep_content>
+<span class=md><p><div class=title> Pathtracing Coherency </div>
+<div class=subtitle> Anders Lindqvist (<a href=https://twitter.com/anders_breakin>breakin</a>) </div>
+<div class=afterTitles></div>
+<p><p>
+<div class="admonition tip">This is not a blog post and it will be improved over time as I learn more about the subject. Feel free to ask questions or suggest additions! So far I has received a major addition on 2018-08-30.</div>
+<p><p>
+The problem I am looking at here is how deal with the inconvenient problem of reduced performance when shooting incoherent rays. This problem present itself in different ways depending on what you are trying to do. My focus is GPUs but I will touch CPU rendering a bit as well.
+</p>
+<div class=longTOC><div class=tocHeader>Contents</div><p><a href=#toc1 class=level1><span class=tocNumber>1&nbsp; </span>Pathtracing - the shortest overview there ever was</a><br>
+<a href=#toc2 class=level1><span class=tocNumber>2&nbsp; </span>Rendering - so many choices</a><br>
+<a href=#toc3 class=level1><span class=tocNumber>3&nbsp; </span>So what is this coherency then?</a><br>
+&nbsp;&nbsp;<a href=#toc3.1 class=level2><span class=tocNumber>3.1&nbsp; </span>Pathtracing on the CPU</a><br>
+&nbsp;&nbsp;<a href=#toc3.2 class=level2><span class=tocNumber>3.2&nbsp; </span>Pathtracing on the GPU (without DXR)</a><br>
+&nbsp;&nbsp;<a href=#toc3.3 class=level2><span class=tocNumber>3.3&nbsp; </span>Pathtracing on the GPU - with DXR</a><br>
+<a href=#toc4 class=level1><span class=tocNumber>4&nbsp; </span>Examples</a><br>
+&nbsp;&nbsp;<a href=#toc4.1 class=level2><span class=tocNumber>4.1&nbsp; </span>Progressive rendering with one bounce</a><br>
+&nbsp;&nbsp;<a href=#toc4.2 class=level2><span class=tocNumber>4.2&nbsp; </span>Offline rendering, single bounce</a><br>
+&nbsp;&nbsp;<a href=#toc4.3 class=level2><span class=tocNumber>4.3&nbsp; </span>Two bounces (and maybe three)</a><br>
+&nbsp;&nbsp;<a href=#toc4.4 class=level2><span class=tocNumber>4.4&nbsp; </span>Offline rendering</a><br>
+<a href=#toc5 class=level1><span class=tocNumber>5&nbsp; </span>Credits</a><br>
+</p></div><a class="target sf-hidden" name=pathtracing-theshortestoverviewthereeverwas>&nbsp;</a><a class="target sf-hidden" name=toc1>&nbsp;</a><h1>Pathtracing - the shortest overview there ever was</h1>
+<p>
+In pathtracing we do the following:
+<p>
+<ul>
+<li class=asterisk>Fire rays from the camera through each pixel to find where it ends up in the scene
+</li>
+<li class=asterisk>We do something with light sources here based on the material. Maybe shoot rays to one or all of them
+<ul>
+ <li class=asterisk>Yes there is a way to make it correct (if noisy) to only do one at the time
+</ul>
+<li class=asterisk>Based on material at the surface we fire ONE secondary ray
+<ul>
+ <li class=asterisk>... which sometimes makes use hit another surface and repeat the previous points
+</ul>
+<li class=asterisk>Sometimes we miss surfaces and hit the sky (“environment”)
+</li>
+<li class=asterisk>The rays that belong together (camera-&gt;surface-&gt;surface-&gt;...) is called a path which gives pathtracing its name
+</li>
+<li class=asterisk>Finally we add together all the contributions from light sources and the environment and add that to the pixel</ul>
+<p><p>
+I am not trying to teach you pathtracing here today but I want to give you the idea that there are alot of rays involved, going in all sorts of directions. When shooting secondary rays or shooting rays towards area light source we use random numbers to get an unbiased result. This is part of the monte carlo framework used in pathtracing. I've written a <a href=https://www.breakin.se/mc-intro/index.html>tutorial on the 1D-case </a> if you want to learn more.
+<p>
+When shooting rays against triangles we need an acceleration structures. Right now the main choice is boundary volume hierarchy (BVH) where all triangles are recursively subdivided into two (possibly-overlapping) axis-aligned bounding boxes in a pre-process. When triangle intersection is done the BVH-tree is visited in some way. Once leafs are found there are triangles that will be intersection tested. Once all possible leafs has been visited we know the closest intersection (if any). For shadow rays we might only care about an arbitrary intersection and BVH-traversal can quit early.
+<p>
+In this text we will use the term pass to refer to doing one sample (one path) for each pixel on the screen. This is sometimes called doing 1 SPP (one sample per pixel). Note that depending on how many bounces we do a path might have a different number of rays being traced. For paths starting outdoors has a much lower number of bounces compared to paths starting indoors.
+<p>
+Just as a side note; for now I think focusing on path-tracing for realtime is probably the wrong thing to do for most games. Fixing soft/textured shadows and having proper reflections/AO seems good enough. With denoising and more advances it can probably be done, especially once we have even faster GPUs and more knowledge, so feel free to research away on it!
+</p>
+<a class="target sf-hidden" name=rendering-somanychoices>&nbsp;</a><a class="target sf-hidden" name=toc2>&nbsp;</a><h1>Rendering - so many choices</h1>
+<p>
+There are many different ways to render. Each comes with a different “budget”. It is not all about how many samples we can afford per pixel and per frame, but also how many frames we can “average” over. If we are allowed to let the image become “good looking” we say that it is converged. dIt is important to remember when reading blog posts and papers that there are different speed/quality goals!
+<p>
+Here are some different alternatives:
+<p>
+<ol start=1>
+<li class=number>Realtime rendering with no history
+</li>
+<li class=number>Realtime rendering with TAA
+</li>
+<li class=number>Interactive rendering (same as 2 but lower framerate tolerated)
+</li>
+<li class=number>Progressive rendering (restart when camera/light/mesh change)
+</li>
+<li class=number>Offline rendering (user only see final image, no in-between images)</ol>
+<p><p>
+For 1 there is little we can do. If we want to do path tracing it will be very noisy and we need to use de-noising and hope for the best. I would go for good shadows (soft?) and reflections and forget indirect illumination here. The environment integral can maybe be handled correctly which might replace AO, but no bounces.
+<p>
+In 2-5 we have more than one frame to converge over. In 3-4 we must get something nice quick and then improve if the user doesn't change anything. In 1-3 the user expect that animated meshes work.
+<p>
+I expect that often 1-2 will use hybrid rendering so that the first hit (camera to first surface) is done using rasterization. TAA will handle anti-aliasing instead of how path-tracing usually deals with it. An exception might be for foveated rendering and adaptive rendering that might be better handled using raytracing. Also depending on budget it might be tempting to let raytraced primary samples handle anti-aliasing.
+<p>
+For lightmap baking some of these modes change (an example is that camera navigation doesn't invalidates old results for progressive rendering).
+</p>
+<a class="target sf-hidden" name=sowhatisthiscoherencythen?>&nbsp;</a><a class="target sf-hidden" name=toc3>&nbsp;</a><h1>So what is this coherency then?</h1>
+<p>
+In path tracing and raytracing we shoot a lot of rays. If we just shoot rays at random (not even from camera, just shoot them randomly) they will be extremely incoherent. If instead most rays have the same starting position and go in the same direction, they are extremely coherent. But why does it matter? It is mostly about memory but that is not the full story. Lets break it up.
+</p>
+<a class="target sf-hidden" name=pathtracingonthecpu>&nbsp;</a><a class="target sf-hidden" name=toc3.1>&nbsp;</a><h2>Pathtracing on the CPU</h2>
+<p>
+When doing pathtracing on the CPU the frame is generally processed in tiles. The idea is that the rays shot will go roughly in the same direction and end up at the same place. They will traverse the same parts of the BVH, making similar traversal choices. The same triangles will be intersected. Once at the surface they will look up the same texture with the same mipmap settings. Often textures are so large so that they are out-of-core handled with tiles being read in when needed. Rendering in tiles leads to better re-usage of both CPU caches (handled by CPU) and texture cached (handled manually by renderer).
+<p>
+When the result has been written back to the framebuffer the tile might be written to disk since the full framebuffer might not fit in memory. This is partially because there might be multiple layers, not only the finished frame but different partial results needed to compositing.
+<p>
+A nice aspect of raytracing on the CPU is that the entire scene representation is read-only so that it is trivial to have multiple threads work on it at the same time.
+<p>
+Summary; In the CPU case coherency gives better cache/memory utilization.
+</p>
+<a class="target sf-hidden" name=pathtracingonthegpu(withoutdxr)>&nbsp;</a><a class="target sf-hidden" name=toc3.2>&nbsp;</a><h2>Pathtracing on the GPU (without DXR)</h2>
+<p>
+The GPU story is similar to the CPU story (less pressure on memory systems, more cache re-usage) but there are some differences.
+<p>
+Lets first assume that each “thread” process one pixel. Now threads are grouped in wavefronts/warps composed of say 64 threads (depends on GPU). Because of the way the GPU is designed performance is much better if all 64 threads in a wavefront/warp makes similar choices. This means taking the same amount of steps in for-loops, making the same choices in if-statements etc.
+<p>
+If threads in wavefront/warp make different choices performance suffers a lot. The term used here is often thread divergence.
+<p>
+Lets give us an example of bad behavior. If each thread in a wavefront/warp start by shooting a ray from the camera into the scene. 50% of them a floor but 50% of them hit the environment. Now the 50% that hit the environment will sit idle until the other ones are done (unless we do things differently). Same things happens when paths have a different amount of rays in them (some hit the environment sooner than others).
+<p>
+With compute (and also with pixel shaders) there are many ways to structure things to avoid this (or where this description even makes sense) but this is an example why coherence could be good on the GPU.
+<p>
+Summary; Both cache/memory utilization and to avoid thread divergence.
+</p>
+<a class="target sf-hidden" name=pathtracingonthegpu-withdxr>&nbsp;</a><a class="target sf-hidden" name=toc3.3>&nbsp;</a><h2>Pathtracing on the GPU - with DXR</h2>
+<p>
+First. On DXR it seems that the standard way to do things is to use a BVH (boundary volume hierarchy) to accelerate finding triangles to intersect. That is what the hardware is for. I don't know much more than that. I have no idea how rays are submitted, what order they are executed in and if there is something like wavefront/warps on the RTCore. The only thing I can assume is that since some rays continue and some terminate, the hardware probably handles “compaction” of rays such that paths with many rays segments will not slow down paths with few path segments.
+<p>
+It will very likely be different on different graphics card vendor and from some of them we might not get much details to actually know how to best program it. Who knows.
+<p>
+What we do know is that paths are started by a ray generation shader. We can assume that pixels that are close to each other (not a very precise term!) will spawn intersection tests that are done somewhat at the same time. Thus spawning coherent rays <em class=asterisk>might</em> help performance since it would put less pressure on the caches when fetching BVH data.
+<p>
+Beyond this it is hard to say anything. With time we will know more about how it works!
+</p>
+<a class="target sf-hidden" name=examples>&nbsp;</a><a class="target sf-hidden" name=toc4>&nbsp;</a><h1>Examples</h1>
+<a class="target sf-hidden" name=progressiverenderingwithonebounce>&nbsp;</a><a class="target sf-hidden" name=toc4.1>&nbsp;</a><h2>Progressive rendering with one bounce</h2>
+<p>
+We will start with an example with ONE secondary ray since it is already hard enough.
+<p>
+Lets say we have a fully diffuse scene and we want to render it progressively. 
+<p>
+First we fire rays from the camera into the scene. If we are looking at the sky some rays might by terminated. If we are looking at the ground all will survive. The hit points are mostly coherent. With this I mean that adjacent pixels will fire similar rays that will on average end up on surfaces that are close to each other with similar normals. Here it might be needed to compact the set of paths so that we don't end up having idle threads in wavefront/warps.
+<p>
+For progressive rendering we want that if you take 5 samples it should look good for 5 samples, but as you approach say 10 samples it should look good for 10 samples. That way it will converge quickly in the beginning and then keep improving as we wait (unless we restart). For this to work we need random numbers to spawn directions over the hemisphere that has the progressive property that the samples <span class=MathJax_Preview style=color:inherit;display:none></span><span class=MathJax id=MathJax-Element-2-Frame tabindex=0 style=position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mo>.</mo><mo>.</mo><mo>,</mo><mn>4</mn><mo stretchy="false">]</mo></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-3 style=width:3.73em;display:inline-block><span style=display:inline-block;position:relative;width:3.386em;height:0px;font-size:109%><span style=position:absolute;clip:rect(1.608em,1003.27em,2.812em,-999.997em);top:-2.463em;left:0em><span class=mrow id=MathJax-Span-4><span class=mo id=MathJax-Span-5 style=font-family:STIXGeneral-Regular>[</span><span class=mn id=MathJax-Span-6 style=font-family:STIXGeneral-Regular>0</span><span class=mo id=MathJax-Span-7 style=font-family:STIXGeneral-Regular>,</span><span class=mo id=MathJax-Span-8 style=font-family:STIXGeneral-Regular;padding-left:.175em>.</span><span class=mo id=MathJax-Span-9 style=font-family:STIXGeneral-Regular;padding-left:.175em>.</span><span class=mo id=MathJax-Span-10 style=font-family:STIXGeneral-Regular;padding-left:.175em>,</span><span class=mn id=MathJax-Span-11 style=font-family:STIXGeneral-Regular;padding-left:.175em>4</span><span class=mo id=MathJax-Span-12 style=font-family:STIXGeneral-Regular>]</span></span><span style=display:inline-block;width:0px;height:2.468em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.247em;border-left:0px solid;width:0px;height:1.066em"></span></span></nobr><span class=MJX_Assistive_MathML role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML><mo stretchy=false>[</mo><mn>0</mn><mo>,</mo><mo>.</mo><mo>.</mo><mo>,</mo><mn>4</mn><mo stretchy=false>]</mo></math></span></span> gives good directions, but so should <span class=MathJax_Preview style=color:inherit;display:none></span><span class=MathJax id=MathJax-Element-3-Frame tabindex=0 style=position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mo>.</mo><mo>.</mo><mo>,</mo><mi>N</mi><mo stretchy="false">]</mo></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-13 style=width:3.959em;display:inline-block><span style=display:inline-block;position:relative;width:3.615em;height:0px;font-size:109%><span style=position:absolute;clip:rect(1.608em,1003.5em,2.812em,-999.997em);top:-2.463em;left:0em><span class=mrow id=MathJax-Span-14><span class=mo id=MathJax-Span-15 style=font-family:STIXGeneral-Regular>[</span><span class=mn id=MathJax-Span-16 style=font-family:STIXGeneral-Regular>0</span><span class=mo id=MathJax-Span-17 style=font-family:STIXGeneral-Regular>,</span><span class=mo id=MathJax-Span-18 style=font-family:STIXGeneral-Regular;padding-left:.175em>.</span><span class=mo id=MathJax-Span-19 style=font-family:STIXGeneral-Regular;padding-left:.175em>.</span><span class=mo id=MathJax-Span-20 style=font-family:STIXGeneral-Regular;padding-left:.175em>,</span><span class=mi id=MathJax-Span-21 style=font-family:STIXGeneral-Italic;padding-left:.175em>N<span style=display:inline-block;overflow:hidden;height:1px;width:.06em></span></span><span class=mo id=MathJax-Span-22 style=font-family:STIXGeneral-Regular>]</span></span><span style=display:inline-block;width:0px;height:2.468em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.247em;border-left:0px solid;width:0px;height:1.066em"></span></span></nobr><span class=MJX_Assistive_MathML role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML><mo stretchy=false>[</mo><mn>0</mn><mo>,</mo><mo>.</mo><mo>.</mo><mo>,</mo><mi>N</mi><mo stretchy=false>]</mo></math></span></span> for any <span class=MathJax_Preview style=color:inherit;display:none></span><span class=MathJax id=MathJax-Element-4-Frame tabindex=0 style=position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-23 style=width:.806em;display:inline-block><span style=display:inline-block;position:relative;width:.748em;height:0px;font-size:109%><span style=position:absolute;clip:rect(1.666em,1000.75em,2.64em,-999.997em);top:-2.463em;left:0em><span class=mrow id=MathJax-Span-24><span class=mi id=MathJax-Span-25 style=font-family:STIXGeneral-Italic>N<span style=display:inline-block;overflow:hidden;height:1px;width:.06em></span></span></span><span style=display:inline-block;width:0px;height:2.468em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.059em;border-left:0px solid;width:0px;height:.878em"></span></span></nobr><span class=MJX_Assistive_MathML role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML><mi>N</mi></math></span></span>. It is quite common that we tabulate these for say <span class=MathJax_Preview style=color:inherit;display:none></span><span class=MathJax id=MathJax-Element-5-Frame tabindex=0 style=position:relative data-mathml='<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi><mo>=</mo><mn>1024</mn></math>' role=presentation><nobr aria-hidden=true><span class=math id=MathJax-Span-26 style=width:4.418em;display:inline-block><span style=display:inline-block;position:relative;width:4.017em;height:0px;font-size:109%><span style=position:absolute;clip:rect(1.608em,1004.02em,2.64em,-999.997em);top:-2.463em;left:0em><span class=mrow id=MathJax-Span-27><span class=mi id=MathJax-Span-28 style=font-family:STIXGeneral-Italic>N<span style=display:inline-block;overflow:hidden;height:1px;width:.06em></span></span><span class=mo id=MathJax-Span-29 style=font-family:STIXGeneral-Regular;padding-left:.29em>=</span><span class=mn id=MathJax-Span-30 style=font-family:STIXGeneral-Regular;padding-left:.29em>1024</span></span><span style=display:inline-block;width:0px;height:2.468em></span></span></span><span style="display:inline-block;overflow:hidden;vertical-align:-0.059em;border-left:0px solid;width:0px;height:.878em"></span></span></nobr><span class=MJX_Assistive_MathML role=presentation><math xmlns=http://www.w3.org/1998/Math/MathML><mi>N</mi><mo>=</mo><mn>1024</mn></math></span></span> and then after that we just do random white noise instead since there is little benefit to using say blue-noise distribution or so.
+<p>
+Now we are at the surface that is visible from the camera and we want to choose a secondary direction (guided by the diffuse brdf). The issue then is that if adjacent pixels use the same random directions there will be severe banding artifacts. This is due to the fact that the error of the integrals are very correlated between the pixels. As the number of samples in the sequence goes up this correlation will mostly disappear but if we have an reasonable low amount of samples it will look really bad. It usually manifest itself as big constant areas.
+<p>
+Think of it like this. If the camera see a big plane all the diffuse sampling will be started from that plane. If all pixels use the same random sequence they will all send their first ray in the same direction (but from slightly different points). Now lets imagine that there is an area-light shining on the floor. Since all rays goes in the same direction the result from the first frame (1 SPP) will look as a rectangle on the ground. The next frame will add another such rectangle and the same for every frame. This will give areas with constant color which is not nice. If we take an infinite number of samples if will look OK in the end, but we don't have time for that today. Instead we want to trade banding for noise. Noise is something the user can accept (or it can be removed by a de-noiser). Banding is not so easy to dispense with.
+<p>
+An easy way to break up the banding is to make sure all pixels use a different random sequence. Lets say that we generate 16×16 unique random sequences. We then tile them over the frame such that after 16 pixels we reuse a random sequence. After 16 pixels the rays that go in the same direction will probably see different things so it can still look good. Or we try 32×32. A good value depends on content and resolution. The random angle should probably be based on blue-noise or something else so that pixels are different but not too different.
+<p>
+Problem solved? Not quite. Now adjacent pixels create rays going in wildly different directions. Incoherence.
+<p>
+A solution to this is introduced in the paper <a href=http://www.cs.ubc.ca/labs/imager/tr/2001/keller2001a/keller.2001a.pdf>Interleaved Sampling</a>. The general idea that I took from it is that while adjacent pixels must have different random sequences, pixels some way apart can share random sequences. If we reorder the processing of pixels in our frame we can make sure that we create a batch of rays that uses the same random sequence but are located some distance apart.
+<p>
+To make this concrete lets say that we are doing our own GPU raytracing. We use one “thread” in our warp/wave per ray. We then want to make sure that all threads in a warp corresponds to pixels that are sort of close and using same random sequence (hence going in roughly same direction). This also means that once all the rays in our wave/warp has reached the target and we want to fire even more rays, they are at least maybe close to each other. And if we are outside hopefully must of them hit the environment so we don't have to process them at all.
+<p>
+Note that this would probably also work well for “Realtime rendering with TAA”. The random sequence would be different but the general idea would work out.
+</p>
+<a class="target sf-hidden" name=offlinerendering,singlebounce>&nbsp;</a><a class="target sf-hidden" name=toc4.2>&nbsp;</a><h2>Offline rendering, single bounce</h2>
+<p>
+Here we are not concerned with being able to produce a good image after each frame. This helps us find coherency. Lets say we want to do 256. If we let all pixels have the same 256 random directions there will be banding instead of noise. If we do total randomization there will be noise but no coherency.
+<p>
+What do we really want? For a given frame we want all random directions to be roughly the same. They don't have to be exactly the same, but we want rays that are fired close to each other and end up at a surface to shoot secondary rays in roughly the same direction. Here micro-jitter is a perfect solution. It takes one random directions and perturb it just enough to make the pixels not have correlated values. No banding but noise. The idea is that we don't rotate things wildly. Sample N goes roughly in the same direction, but each pixel move it just a little bit different.
+<p>
+After frame 0 we will have a very banded image so no good for progressive rendering. But once we've gotten to 256 samples each pixel will have used different random directions. The key here is that once we've taken all 256 samples we don't remember what order we took them in. And taken as a whole the two pixels have different random directions.
+<p>
+The higher the sample count, the smaller perturbations we need.
+<p>
+To see why this work consider a hemisphere with well-placed points. Now we form voronoi-regions around each point and then we move the points randomly within their voronoi region, differently for different pixels. Then we shuffle the order of the points, differently for different pixels. Since order is forgotten (since we don't care about what happens early on for low sample count) this works out.
+<p>
+Here is the paper: <a href=http://pascal.lecocq.home.free.fr/publications/sig2016_cacheFriendlyMicroJitteredSampling.pdf>Cache-Friendly Micro-Jittered Sampling</a>.
+</p>
+<a class="target sf-hidden" name=twobounces(andmaybethree)>&nbsp;</a><a class="target sf-hidden" name=toc4.3>&nbsp;</a><h2>Two bounces (and maybe three)</h2>
+<p>
+Now lets say that we've shot our camera rays and our first level of coherent diffuse rays (using interleaved sampling or micro-jitter perhaps). Now we are at the second bounce positions. Hopefully many paths has been terminated (if we are outside) but some will live on. Maybe we should compact rays again. But can we create coherent rays yet again?
+<p>
+Not easily in my experience. Lets keep the idea of micro-jitter in mind. After the first bounce we send all rays roughly in the same direction. If we imagine 4×4 pixels all intersection a floor and all taking the same direction away from there, they might all end up at roughly the same surface. Now to give those 4×4 pixels uncorrelated values we need them to go in different directions. We need them to be incoherent. Failing to do so usually ends up with the diffuse lobe looking more like a reflection.
+<p>
+<a href=https://twitter.com/PascalLecocq>Pascal Lecocq</a>, one of the authors of the micro-jitter paper, says that their approach tend to maintain coherent rays for about 3 bounces given that the scene has reasonable geometry (think typical architectural scenes with somewhat flat surfaces). It is being used in an experimental version of the Cycles render (called “scrambling distance”). It can be tried <a href=https://t.co/REg9UC4CBw>here</a>. So I believe this it s a good viable approach. I have to convince myself it doesn't suffer from what I described above, but the problem might only be in my head so take my scepticism with a grain of salt.
+</p>
+<a class="target sf-hidden" name=offlinerendering>&nbsp;</a><a class="target sf-hidden" name=toc4.4>&nbsp;</a><h2>Offline rendering</h2>
+<p>
+Here we can maybe afford to do multi-bounce GI depending on our budget. Since we don't need to present a good image after each frame we can let the result have banding until we converge. It is important that we compact the rays so that paths that die don't consume “dead” threads in wave/warps. This is probably handled implicitly behind the scenes in DXR. If you are doing you own GPU implementation then there doesn't have to be explicit compaction; It can be handled by path restarting or persistent threads and some sort of ray queue. Important part is to not leave threads idle during computation.
+<p>
+An important factor here is that the first pass from the camera to the scene is often very coherent so you don't want to mix in too much secondary rays in wave/warps that are doing such rays. This is an argument against too naive ray-restarting.
+<p>
+In this mode we will have a massive amount of rays that we can process before we need to show anything. Latency is OK. Thus we have a situation where we can bin/sort rays and defer them until we have full coherent “buckets”. A sobering read here is <a href=http://fileadmin.cs.lth.se/graphics/research/papers/2007/deepcoh/>this paper</a> but I am not sure if it applies or not in this new GPU world.
+<p>
+The least we can do is bin on direction (positive x, negative x, ...) and maybe starting position.
+<p>
+An interesting read from the CPU-world is <a href=http://www.eng.uwaterloo.ca/~jtsakok/mbvhrs.pdf>Faster Incoherent Rays:
+Multi-BVH Ray Stream Tracing
+</a> to show you the type or ray sorting that could be done. What works depends very much on rays and the machine you are running on. In the world of DXR BVH-traversal can probably not be manipulated but it could implement something like this on the inside.
+<p>
+Before I leave I want to point out this really nice paper. It highlights what can happen if you have really expensive shading. <a href=http://www.highperformancegraphics.org/wp-content/uploads/Laine-MegakernelsConsideredHarmful.pdf>Megakernels Considered Harmful: Wavefront Path Tracing on GPUs</a>. It will be interesting so see if the key takeaways here change now that we have callable shaders in DXR.
+</p>
+<a class="target sf-hidden" name=credits>&nbsp;</a><a class="target sf-hidden" name=toc5>&nbsp;</a><h1>Credits</h1>
+<p>
+Most if the insights I got around path tracing on the GPU was when I was working on the stingray GPU light baker together with <a href=https://twitter.com/tobias_persson>Tobias Persson</a>. We had many discussions while trying to do performance optimizations. Also thanks to <a href=https://twitter.com/Atrix256>Alan Wolfe</a> for proof-reading of early drafts; your comments and questions made the text better! Thanks to <a href=https://twitter.com/PascalLecocq>Pascal Lecocq</a> for comments on micro-jittering.
+<p>
+</p></span>
+ </div>
+ 
+<div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div><div style=position:absolute;width:0px;height:0px;overflow:hidden;padding:0px;border:0px;margin:0px><div id=MathJax_Font_Test style=position:absolute;visibility:hidden;top:0px;left:0px;width:auto;padding:0px;border:0px;margin:0px;white-space:nowrap;text-align:left;text-indent:0px;text-transform:none;line-height:normal;letter-spacing:normal;word-spacing:normal;font-size:40px;font-weight:normal;font-style:normal;font-family:STIXSizeOneSym,sans-serif class=sf-hidden></div></div>
