@@ -7,6 +7,11 @@
 
 ![](RTR4-Cover.jpg)
 
+# Preview
+
+![](RTR4-Preview.gif)
+
+
 # Content
 
 - [Chapter 1-24](https://github.com/QianMo/Real-Time-Rendering-4th-Bibliography-Collection/tree/main/Chapter%201-24) : 1956+ Files
@@ -43,9 +48,6 @@
 
     <br>
 
-# Preview
-
-![](RTR4-Preview.gif)
 
 
 
