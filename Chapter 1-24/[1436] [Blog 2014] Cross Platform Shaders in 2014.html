@@ -1,0 +1,249 @@
+<!DOCTYPE html> <html lang=en-us class=hb-loaded style><!--
+ Page saved with SingleFile 
+ url: https://aras-p.info/blog/2014/03/28/cross-platform-shaders-in-2014/ 
+ saved date: Fri Jul 16 2021 15:59:06 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta property=og:title content=" Cross Platform Shaders in 2014 ·  Aras' website">
+<meta property=og:site_name content="Aras' website">
+<meta property=og:url content=https://aras-p.info/blog/2014/03/28/cross-platform-shaders-in-2014/>
+<meta property=og:type content=article>
+<meta property=og:article:published_time content=2014-03-28T00:00:00Z>
+<meta property=og:article:tag content=code>
+<meta property=og:article:tag content=compilers>
+<meta property=og:article:tag content=d3d>
+<meta property=og:article:tag content=opengl>
+<title>
+ Cross Platform Shaders in 2014 · Aras' website
+ </title>
+<style>html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,main,section{display:block}a{background-color:transparent}a:active,a:hover{outline:0}b{font-weight:bold}h1{margin:.67em 0}hr{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;height:0}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}*:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:10px;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{font-family:"Helvetica Neue","Lucida Grande","Segoe UI",sans-serif;font-size:17px}a{color:#337ab7;text-decoration:none}a:hover,a:focus{color:#23527c;text-decoration:underline}a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}hr{margin-top:26px;margin-bottom:26px;border:0;border-top:1px solid #eee}h1,h3,h5{font-family:inherit;line-height:1.1;color:inherit}h1,h3{margin-top:26px;margin-bottom:13px}h5{margin-top:13px;margin-bottom:13px}h1{font-size:44px}h3{font-size:29px}h5{font-size:17px}p{margin:0 0 13px}small,.small{font-size:88%}.text-primary{color:#337ab7}ul{margin-top:0;margin-bottom:13px}.container{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.row{margin-left:-15px;margin-right:-15px}.col-md-3,.col-md-9{position:relative;min-height:1px;padding-left:15px;padding-right:15px}@media (min-width:992px){.col-md-3,.col-md-9{float:left}.col-md-9{width:75%}.col-md-3{width:25%}}.pager{padding-left:0;margin:26px 0;list-style:none;text-align:center}.pager li{display:inline}.pager li>a{display:inline-block;padding:5px 14px;background-color:#fff;border:1px solid #ddd;border-radius:15px}.pager li>a:hover,.pager li>a:focus{text-decoration:none;background-color:#eee}.pager .next>a{float:right}.pager .previous>a{float:left}@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}.clearfix:before,.clearfix:after,.dl-horizontal dd:before,.dl-horizontal dd:after,.container:before,.container:after,.container-fluid:before,.container-fluid:after,.row:before,.row:after,.form-horizontal .form-group:before,.form-horizontal .form-group:after,.btn-toolbar:before,.btn-toolbar:after,.btn-group-vertical>.btn-group:before,.btn-group-vertical>.btn-group:after,.nav:before,.nav:after,.navbar:before,.navbar:after,.navbar-header:before,.navbar-header:after,.navbar-collapse:before,.navbar-collapse:after,.pager:before,.pager:after,.panel-body:before,.panel-body:after{content:" ";display:table}.clearfix:after,.dl-horizontal dd:after,.container:after,.container-fluid:after,.row:after,.form-horizontal .form-group:after,.btn-toolbar:after,.btn-group-vertical>.btn-group:after,.nav:after,.navbar:after,.navbar-header:after,.navbar-collapse:after,.pager:after,.panel-body:after{clear:both}.pull-right{float:right!important}.pull-left{float:left!important}@-ms-viewport{width:device-width}@media (max-width:767px){.hidden-xs{display:none!important}}body{background-color:#f8f8f8;color:#222;line-height:1.5em}main{max-width:1100px;word-wrap:break-word}.global-header{background-color:#6b80b0;background:linear-gradient(#8294bc,#6b80b0,#566da1);max-width:1100px}.header-text{position:relative;padding-top:10px;padding-bottom:10px;margin-left:1em}a.btn-header{display:inline-block;padding:.1em .8em;margin:0;border-radius:.2em;text-decoration:none;line-height:30px;color:#1f273a}a.btn-header:hover{color:#000;background-color:#8d9fc7}a.btn-header.active{background-color:#aeb9d3}a.btn-subscribe{float:right;position:absolute;right:1em}.global-footer{padding-top:10px;max-width:1100px;height:100px;border-top:1px solid rgba(0,0,0,0.1);color:rgba(0,0,0,0.4)}.global-footer .sns-links{float:right;line-height:1.2em}.global-footer .sns-links a{display:inline-block;width:24px;height:24px;border:1px solid rgba(0,0,0,0.4);border-radius:12px;color:rgba(0,0,0,0.4);vertical-align:top;text-align:center;text-decoration:none;font-size:13px;transition:color,border-color .1s linear}.global-footer .sns-links a i{vertical-align:middle}.global-footer .sns-links a:hover{border:1px solid rgba(0,0,0,0.8);color:rgba(0,0,0,0.7)}.sidebar{border-left:1px solid #d8b56e;background-color:#e7c683;font-size:.8em}.sidebar ul{list-style:none;margin:0;padding:0}.sidebar li{list-style:none;margin:0;padding:.1em 0;border-bottom:1px solid #d8b56e}.sidebar a{color:#235580}@media (min-width:992px){.row-eq-height{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}}.post-meta{margin:5px 0}.post-date{color:rgba(0,0,0,0.4)}.post-tag a{padding:0 5px;background-color:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.2);border-radius:8px;font-size:80%;color:rgba(0,0,0,0.4);text-decoration:none;transition:color,border-color,background-color .1s linear}.post-tag a:hover{background-color:rgba(0,0,0,0.2);color:rgba(0,0,0,0.8);border:1px solid rgba(0,0,0,0.3)}.feedback{margin:3em 0;color:rgba(0,0,0,0.4)}.pager li>a{transition:background-color .1s linear}h1,h3,h5{font-weight:bold}article section p{margin-top:.5em;margin-bottom:1em}@font-face{font-family:fontawesome-subset;src:url(data:font/woff2;base64,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) format('woff2');font-weight:400;font-style:normal}[class*=" icon-"]:before,[class^=icon-]:before{font-family:fontawesome-subset;font-style:normal;font-weight:400;speak:none;display:inline-block;text-decoration:inherit;width:1em;margin-right:.2em;text-align:center;font-variant:normal;text-transform:none;line-height:1em;margin-left:.2em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.icon-mail:before{content:'\e800'}.icon-twitter:before{content:'\f099'}.icon-github-circled:before{content:'\f09b'}.icon-rss:before{content:'\f09e'}</style>
+<link href=https://aras-p.info/atom.xml rel=alternate type=application/rss+xml title="Aras' website">
+<style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style><link rel="shortcut icon" href=data:image/vnd.microsoft.icon;base64,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><style>.sf-hidden{display:none!important}</style><link rel=canonical href=https://aras-p.info/blog/2014/03/28/cross-platform-shaders-in-2014/></head>
+<body huaban_collector_injected=true>
+ <header class="container global-header">
+ <section class=header-text>
+ <div class=hidden-print>
+ <a href=https://aras-p.info/atom.xml class="btn-header btn-subscribe hidden-xs">
+ <i class=icon-rss aria-hidden=true></i>
+ &nbsp;Subscribe
+ </a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a class=btn-header href=https://aras-p.info/>Home</a>
+ 
+ <a class="btn-header active" href=https://aras-p.info/blog/>Blog</a>
+ 
+ <a class=btn-header href=https://aras-p.info/texts/talks.html>Talks</a>
+ 
+ <a class=btn-header href=https://aras-p.info/texts>Papers</a>
+ 
+ <a class=btn-header href=https://aras-p.info/proj.html>Projects</a>
+ 
+ </div>
+ </section>
+ </header>
+ <main class=container>
+ <div class="row row-eq-height">
+ <div class=col-md-9>
+<article>
+ <header>
+ <h1 class=text-primary>Cross Platform Shaders in 2014</h1>
+ <div class="post-meta clearfix">
+ 
+ <div class="post-date pull-left">
+ Posted on
+ <time datetime=2014-03-28T00:00:00Z>
+ Mar 28, 2014
+ </time>
+ </div>
+ <div class=pull-right>
+ 
+ <span class=post-tag><a href=https://aras-p.info/tags/code>#code</a></span>
+ 
+ <span class=post-tag><a href=https://aras-p.info/tags/compilers>#compilers</a></span>
+ 
+ <span class=post-tag><a href=https://aras-p.info/tags/d3d>#d3d</a></span>
+ 
+ <span class=post-tag><a href=https://aras-p.info/tags/opengl>#opengl</a></span>
+ 
+ </div>
+ 
+ </div>
+ </header>
+ <section>
+ 
+<p>A while ago I wrote a <a href=https://aras-p.info/blog/2012/10/01/cross-platform-shaders-in-2012/>Cross platform shaders in 2012</a> post. What has changed since then?</p>
+<p>Short refresher on the problem: people need to do 3D things on multiple platforms, and different platforms use different shading languages (big ones are HLSL and GLSL). However, no one wants to write their shaders twice. It would be kind of stupid if one had to write <em>different</em> C++ for, say, Windows &amp; Mac. But right now we have to do it for shader code.</p>
+<p>Most of the points from my <a href=https://aras-p.info/blog/2012/10/01/cross-platform-shaders-in-2012/>previous post</a>; I’ll just link to some new tools that appeared since then:</p>
+<h3 id=1-manual-macro-approach>#1. Manual / Macro approach</h3>
+<p>Write some helper macros to abstract away HLSL &amp; GLSL differences, and make everyone aware of all the differences. Examples:
+Valve’s Source 2 (<a href="https://www.youtube.com/watch?v=45O7WTc6k2Y">DevDays talk</a>), bkaradzic’s bgfx library (<a href=https://github.com/bkaradzic/bgfx/blob/master/src/bgfx_shader.sh>shader helper macros</a>), FXAA 3.11 source etc.</p>
+<p>Pros: Simple to do.</p>
+<p>Cons: Everyone needs to be aware of that macro library and other syntax differences.</p>
+<h3 id=2-invent-your-own-language-with-hlsl-glsl-backends>#2. Invent your own language with HLSL/GLSL backends</h3>
+<p>Or generate HLSL/GLSL from some graphical shader editor, and so on.</p>
+<h3 id=3-translate-compiled-shader-bytecode-into-glsl>#3. Translate compiled shader bytecode into GLSL</h3>
+<p><em>Pros</em>: Simpler to do than full language translation. Microsoft’s HLSL compiler does some decent optimizations, so resulting GLSL would be fairly optimized.</p>
+<p><em>Cons</em>: Closed compiler toolchain (HLSL) that only runs on Windows. HLSL compiler in some cases does <em>too many</em> optimizations that don’t make much sense these days.</p>
+<p>Tools:</p>
+<ul>
+<li><a href=https://github.com/James-Jones/HLSLCrossCompiler>HLSLCrossCompiler</a> by James Jones. Supports DX10-11 bytecode and produces
+various GLSL versions as output. Under active development.</li>
+<li><a href=https://icculus.org/mojoshader/>MojoShader</a> by Ryan Gordon. Supports DX9 (shader model 1.1-3.0).</li>
+<li><a href=https://github.com/ValveSoftware/ToGL>TOGL</a> from Valve. Again DX9 only, and only partial one at that (some shader model 3.0 features
+aren’t there).</li>
+</ul>
+<h3 id=4-translate-hlsl-into-glsl-at-source-level-or-vice-versa>#4. Translate HLSL into GLSL at source level, or vice versa</h3>
+<ul>
+<li><a href=https://github.com/aras-p/hlsl2glslfork>hlsl2glslfork</a> from Unity. DX9 level HLSL in, GLSL 1.xx / OpenGL ES (including ES3) out.
+Does work (used in production at Unity and some other places), however quite bad codebase and we haven’t shoehorned DX10/11 style HLSL support into it yet.</li>
+<li><a href=https://chromium.googlesource.com/angle/angle>ANGLE</a> from Google. OpenGL ES 2.0 (and possibly 3.0?) shaders in, DX9/DX10 HLSL out.
+This is whole OpenGL ES emulation on top of Direct3D layer, that also happens to have a shader cross-compiler.</li>
+<li><a href=http://www.khronos.org/opengles/sdk/tools/Reference-Compiler/>OpenGL Reference Compiler</a> from Khronos. While itself it’s only a GLSL validator, it has a full GLSL parser (including partial support for GL4.x at this point). Should be possible to make it emit HLSL with some work. A bit weird that source is on some subversion server though - not an ideal platform for contributing changes or filing bugs.</li>
+<li><a href=https://docs.unrealengine.com/latest/INT/Programming/Rendering/ShaderDevelopment/HLSLCrossCompiler/index.html>HLSL Cross Compiler</a> from Epic. This is in Unreal Engine 4, and built upon Mesa’s GLSL stack (or maybe <a href=https://github.com/aras-p/glsl-optimizer>glsl optimizer</a>), with HLSL parser in front. <em>Note that this isn’t open source, but hey one can dream!</em></li>
+<li><a href=https://github.com/unknownworlds/hlslparser>hlslparser</a> from Unknown Worlds. Converts DX9-style HLSL (with constant buffers) into GLSL 3.1.</li>
+<li><a href=https://icculus.org/mojoshader/>MojoShader</a> by Ryan Gordon. Seems to have some code for parsing DX9-style HLSL, not quite sure how production ready.</li>
+</ul>
+<p>I thought about doing similar thing like Epic folks did for UE4: take <a href=https://github.com/aras-p/glsl-optimizer>glsl optimizer</a> and add a HLSL parser. These days Mesa’s GLSL stack already has support for compute &amp; geometry shaders, and I think tessellation shaders will be coming soon. This would be much better codebase than hlsl2glslfork. However, never had time to actually do it, besides thinking about it for a few hours :(</p>
+<h3 id=call-to-action>Call to action?</h3>
+<p>Looks like we’ll stay with two shading languages for a while now <em>(Windows and all relevant consoles use HLSL; Mac/Linux/iOS/Android use GLSL)</em>. So each and every graphics developer who does cross platform stuff is facing this problem.</p>
+<p>I don’t think IHVs will solve this problem. NVIDIA did try once with Cg (perhaps too early), but Cg is pretty much dead now.</p>
+<p>DX9-level shader translation is probably a solved problem (hlsl2glslfork, mojoshader, ANGLE). However, we need a DX10/11-level translation - with compute shaders, tessellation and all that goodness.</p>
+<p>We have really good collaboration tools in forms of github &amp; bitbucket. Let’s do this. Somehow.</p>
+ </section>
+ <footer>
+ 
+ <ul class=pager>
+ 
+ <li class=previous><a href=https://aras-p.info/blog/2014/03/13/speaking-at-i3d-and-gdc-2014/><span aria-hidden=true>←</span> Older</a></li>
+ 
+ 
+ <li class=next><a href=https://aras-p.info/blog/2014/04/05/visuals-in-some-great-games/>Newer <span aria-hidden=true>→</span></a></li>
+ 
+ </ul>
+ 
+ <hr>
+<h5>Possibly Related Posts</h5>
+<ul>
+ 
+ <li><a href=https://aras-p.info/blog/2010/05/21/compiling-hlsl-into-glsl-in-2010/>Compiling HLSL into GLSL in 2010</a>, from 2010 May</li>
+ 
+ <li><a href=https://aras-p.info/blog/2010/09/29/glsl-optimizer/>GLSL Optimizer</a>, from 2010 September</li>
+ 
+ <li><a href=https://aras-p.info/blog/2008/06/12/depth-bias-and-the-power-of-deceiving-yourself/>Depth bias and the power of deceiving yourself</a>, from 2008 June</li>
+ 
+</ul>
+ 
+ <hr>
+ <div class="feedback small">
+ Have <b>feedback on this post</b>? Let me know on <a href=mailto:aras@nesnausk.org>email</a>, <a href=https://mastodon.gamedev.place/@aras>mastodon</a> or <a href=https://twitter.com/aras_p>twitter</a>.
+ </div>
+ 
+ </footer>
+</article>
+ </div>
+ <aside class="col-md-3 sidebar">
+ <h3>Recent Posts</h3>
+<ul>
+ 
+ <li><a href=https://aras-p.info/blog/2021/01/18/Texture-Compression-on-Apple-M1/>Texture Compression on Apple M1</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/12/08/Texture-Compression-in-2020/>Texture Compression in 2020</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/07/26/Black-Hole-Demo/>Black Hole Demo</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/04/11/Various-details-about-Handles/>Various details about Handles</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/01/04/Fourteen-years-at-Unity-o_O/>Fourteen years at Unity o_O</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2019/11/18/Its-Raining-Cubes/>It's Raining Cubes</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2019/09/28/Clang-Build-Analyzer/>Clang Build Analyzer</a></li>
+ 
+</ul>
+<h5><a href=https://aras-p.info/all-posts>All Posts</a></h5>
+ <h3>Categories</h3>
+ <ul>
+ 
+ <li><a href=https://aras-p.info/tags/code>code (102)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/compilers>compilers (16)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/conferences>conferences (10)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/d3d>d3d (20)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/demos>demos (39)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/devtools>devtools (22)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/energy>energy (1)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/games>games (20)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/giving>giving (3)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/gpu>gpu (40)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/mobile>mobile (7)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/opengl>opengl (19)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/papers>papers (12)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/personal>personal (13)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/random>random (64)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/rant>rant (54)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/rendering>rendering (51)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/travel>travel (6)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/unity>unity (62)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/vulkan>vulkan (3)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/web>web (2)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/work>work (64)</a></li>
+ 
+ </ul>
+ </aside>
+ </div>
+ </main>
+ <footer class="container global-footer">
+ <div class="copyright-note pull-left">
+ <small>Text content © Aras Pranckevičius. Code snippets are public domain, unless specified otherwise.</small>
+ </div>
+ <div class="sns-links hidden-print">
+ 
+ <a href=mailto:aras@nesnausk.org>
+ <i class=icon-mail></i>
+ </a>
+ 
+ 
+ <a href=https://twitter.com/aras_p target=_blank>
+ <i class=icon-twitter></i>
+ </a>
+ 
+ 
+ <a href=https://github.com/aras-p target=_blank>
+ <i class=icon-github-circled></i>
+ </a>
+ 
+</div>
+ </footer>
+ 
+ 
+ 
+ 
+ 
+ 
+<div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div>

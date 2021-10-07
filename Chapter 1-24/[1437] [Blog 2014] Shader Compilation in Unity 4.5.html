@@ -1,0 +1,440 @@
+<!DOCTYPE html> <html lang=en-us class=hb-loaded style><!--
+ Page saved with SingleFile 
+ url: https://aras-p.info/blog/2014/05/05/shader-compilation-in-unity-4-dot-5/ 
+ saved date: Fri Jul 16 2021 11:30:43 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta property=og:title content=" Shader compilation in Unity 4.5 ·  Aras' website">
+<meta property=og:site_name content="Aras' website">
+<meta property=og:url content=https://aras-p.info/blog/2014/05/05/shader-compilation-in-unity-4-dot-5/>
+<meta property=og:type content=article>
+<meta property=og:article:published_time content=2014-05-05T00:00:00Z>
+<meta property=og:article:tag content=compilers>
+<meta property=og:article:tag content=unity>
+<meta property=og:article:tag content=work>
+<title>
+ Shader compilation in Unity 4.5 · Aras' website
+ </title>
+<style>html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,main,section{display:block}a{background-color:transparent}a:active,a:hover{outline:0}b,strong{font-weight:bold}h1{margin:.67em 0}hr{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;height:0}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}*:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:10px;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{font-family:"Helvetica Neue","Lucida Grande","Segoe UI",sans-serif;font-size:17px}a{color:#337ab7;text-decoration:none}a:hover,a:focus{color:#23527c;text-decoration:underline}a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}img{vertical-align:middle}hr{margin-top:26px;margin-bottom:26px;border:0;border-top:1px solid #eee}h1,h3,h5{font-family:inherit;line-height:1.1;color:inherit}h1,h3{margin-top:26px;margin-bottom:13px}h5{margin-top:13px;margin-bottom:13px}h1{font-size:44px}h3{font-size:29px}h5{font-size:17px}p{margin:0 0 13px}small,.small{font-size:88%}.text-primary{color:#337ab7}ul{margin-top:0;margin-bottom:13px}ul ul{margin-bottom:0}blockquote{margin:0 0 26px}blockquote p:last-child,blockquote ul:last-child,blockquote ol:last-child{margin-bottom:0}code{font-family:Menlo,Monaco,Consolas,"Courier New",monospace}code{background-color:#f9f2f4}.container{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.row{margin-left:-15px;margin-right:-15px}.col-md-3,.col-md-9{position:relative;min-height:1px;padding-left:15px;padding-right:15px}@media (min-width:992px){.col-md-3,.col-md-9{float:left}.col-md-9{width:75%}.col-md-3{width:25%}}.pager{padding-left:0;margin:26px 0;list-style:none;text-align:center}.pager li{display:inline}.pager li>a{display:inline-block;padding:5px 14px;background-color:#fff;border:1px solid #ddd;border-radius:15px}.pager li>a:hover,.pager li>a:focus{text-decoration:none;background-color:#eee}.pager .next>a{float:right}.pager .previous>a{float:left}@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}.clearfix:before,.clearfix:after,.dl-horizontal dd:before,.dl-horizontal dd:after,.container:before,.container:after,.container-fluid:before,.container-fluid:after,.row:before,.row:after,.form-horizontal .form-group:before,.form-horizontal .form-group:after,.btn-toolbar:before,.btn-toolbar:after,.btn-group-vertical>.btn-group:before,.btn-group-vertical>.btn-group:after,.nav:before,.nav:after,.navbar:before,.navbar:after,.navbar-header:before,.navbar-header:after,.navbar-collapse:before,.navbar-collapse:after,.pager:before,.pager:after,.panel-body:before,.panel-body:after{content:" ";display:table}.clearfix:after,.dl-horizontal dd:after,.container:after,.container-fluid:after,.row:after,.form-horizontal .form-group:after,.btn-toolbar:after,.btn-group-vertical>.btn-group:after,.nav:after,.navbar:after,.navbar-header:after,.navbar-collapse:after,.pager:after,.panel-body:after{clear:both}.pull-right{float:right!important}.pull-left{float:left!important}@-ms-viewport{width:device-width}@media (max-width:767px){.hidden-xs{display:none!important}}body{background-color:#f8f8f8;color:#222;line-height:1.5em}main{max-width:1100px;word-wrap:break-word}.global-header{background-color:#6b80b0;background:linear-gradient(#8294bc,#6b80b0,#566da1);max-width:1100px}.header-text{position:relative;padding-top:10px;padding-bottom:10px;margin-left:1em}a.btn-header{display:inline-block;padding:.1em .8em;margin:0;border-radius:.2em;text-decoration:none;line-height:30px;color:#1f273a}a.btn-header:hover{color:#000;background-color:#8d9fc7}a.btn-header.active{background-color:#aeb9d3}a.btn-subscribe{float:right;position:absolute;right:1em}.global-footer{padding-top:10px;max-width:1100px;height:100px;border-top:1px solid rgba(0,0,0,0.1);color:rgba(0,0,0,0.4)}.global-footer .sns-links{float:right;line-height:1.2em}.global-footer .sns-links a{display:inline-block;width:24px;height:24px;border:1px solid rgba(0,0,0,0.4);border-radius:12px;color:rgba(0,0,0,0.4);vertical-align:top;text-align:center;text-decoration:none;font-size:13px;transition:color,border-color .1s linear}.global-footer .sns-links a i{vertical-align:middle}.global-footer .sns-links a:hover{border:1px solid rgba(0,0,0,0.8);color:rgba(0,0,0,0.7)}.sidebar{border-left:1px solid #d8b56e;background-color:#e7c683;font-size:.8em}.sidebar ul{list-style:none;margin:0;padding:0}.sidebar li{list-style:none;margin:0;padding:.1em 0;border-bottom:1px solid #d8b56e}.sidebar a{color:#235580}@media (min-width:992px){.row-eq-height{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}}.post-meta{margin:5px 0}.post-date{color:rgba(0,0,0,0.4)}.post-tag a{padding:0 5px;background-color:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.2);border-radius:8px;font-size:80%;color:rgba(0,0,0,0.4);text-decoration:none;transition:color,border-color,background-color .1s linear}.post-tag a:hover{background-color:rgba(0,0,0,0.2);color:rgba(0,0,0,0.8);border:1px solid rgba(0,0,0,0.3)}.feedback{margin:3em 0;color:rgba(0,0,0,0.4)}code{padding:1px 3px;font-size:13px;color:#a71e41;border-radius:3px}.pager li>a{transition:background-color .1s linear}blockquote{font-style:italic;font-size:17px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;border-left:5px solid #ddd;padding:3px 20px 10px 20px}h1,h3,h5{font-weight:bold}article section img{max-width:100%;height:auto;margin:13px auto;border:#fff .3em solid;border-radius:.2em;box-sizing:border-box;box-shadow:rgba(0,0,0,0.15) 0 1px 4px}article section p{margin-top:.5em;margin-bottom:1em}img.right{margin-left:1em}@font-face{font-family:fontawesome-subset;src:url(data:font/woff2;base64,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) format('woff2');font-weight:400;font-style:normal}[class*=" icon-"]:before,[class^=icon-]:before{font-family:fontawesome-subset;font-style:normal;font-weight:400;speak:none;display:inline-block;text-decoration:inherit;width:1em;margin-right:.2em;text-align:center;font-variant:normal;text-transform:none;line-height:1em;margin-left:.2em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.icon-mail:before{content:'\e800'}.icon-twitter:before{content:'\f099'}.icon-github-circled:before{content:'\f09b'}.icon-rss:before{content:'\f09e'}</style>
+<link href=https://aras-p.info/atom.xml rel=alternate type=application/rss+xml title="Aras' website">
+<style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style><link rel="shortcut icon" href=data:image/vnd.microsoft.icon;base64,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><style>.sf-hidden{display:none!important}</style><link rel=canonical href=https://aras-p.info/blog/2014/05/05/shader-compilation-in-unity-4-dot-5/></head>
+<body huaban_collector_injected=true>
+ <header class="container global-header">
+ <section class=header-text>
+ <div class=hidden-print>
+ <a href=https://aras-p.info/atom.xml class="btn-header btn-subscribe hidden-xs">
+ <i class=icon-rss aria-hidden=true></i>
+ &nbsp;Subscribe
+ </a>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <a class=btn-header href=https://aras-p.info/>Home</a>
+ 
+ <a class="btn-header active" href=https://aras-p.info/blog/>Blog</a>
+ 
+ <a class=btn-header href=https://aras-p.info/texts/talks.html>Talks</a>
+ 
+ <a class=btn-header href=https://aras-p.info/texts>Papers</a>
+ 
+ <a class=btn-header href=https://aras-p.info/proj.html>Projects</a>
+ 
+ </div>
+ </section>
+ </header>
+ <main class=container>
+ <div class="row row-eq-height">
+ <div class=col-md-9>
+<article>
+ <header>
+ <h1 class=text-primary>Shader compilation in Unity 4.5</h1>
+ <div class="post-meta clearfix">
+ 
+ <div class="post-date pull-left">
+ Posted on
+ <time datetime=2014-05-05T00:00:00Z>
+ May 5, 2014
+ </time>
+ </div>
+ <div class=pull-right>
+ 
+ <span class=post-tag><a href=https://aras-p.info/tags/compilers>#compilers</a></span>
+ 
+ <span class=post-tag><a href=https://aras-p.info/tags/unity>#unity</a></span>
+ 
+ <span class=post-tag><a href=https://aras-p.info/tags/work>#work</a></span>
+ 
+ </div>
+ 
+ </div>
+ </header>
+ <section>
+ 
+<p>A story in several parts. 1) how shader compilation is done in upcoming Unity 4.5; and 2) how it was developed. First one is probably interesting to Unity users; whereas second one for the ones curious on <em>how</em> we work and develop stuff.</p>
+<p>Short summary: Unity 4.5 will have a <em>“wow, many shaders, much fast”</em> shader importing and better error reporting.</p>
+<h3 id=current-state-unity-4-3>Current state (Unity &lt;=4.3)</h3>
+<p>When you create a new shader file (.shader) in Unity or edit existing one, we launch a “shader importer”. Just like for any other changed asset. That shader importer does some parsing, and then compiles the <em>whole</em> shader into <em>all</em> platform backends we support.</p>
+<p>Typically when you create a simple <a href=https://docs.unity3d.com/Documentation/Components/SL-SurfaceShaders.html>surface shader</a>, it internally expands into 50 or so internal shader variants (classic “preprocessor driven uber-shader” approach). And typically there 7 or so platform backends to compile into <em>(d3d9, d3d11, opengl, gles, gles3, d3d11_9x, flash – more if you have console licenses)</em>. This means, <em>each</em> time you change anything in the shader, a couple hundred shaders are being compiled. And all that assuming you have a fairly simple shader - if you throw in some <a href=https://docs.unity3d.com/Documentation/Components/SL-MultipleProgramVariants.html>multi_compile directives</a>, you’ll be looking at thousands or tens of thousands shaders being compiled. Each. And. Every. Time.</p>
+<p>Does it make sense to do that? Not really.</p>
+<blockquote>
+<p>Like most of “why are we doing this?” situations, this one also evolved organically, and
+can be explained with “it sounded like a good idea at the time” and “it does not fix itself
+unless someone works on it”.</p>
+<p>A long time ago, Unity only had one or two shader platform backends (opengl and d3d9). And the amount
+of shader variants people were doing was much lower. With time, we got both more backends, and more
+variants; and it became very apparent that someone needs to solve this problem.</p>
+</blockquote>
+<p>In addition to the above, there were other problems with shader compilation, for example:</p>
+<ul>
+<li>Errors in shaders were reported, well, “in a funny way”. Sometimes the line numbers did not make any sense – which is quite confusing.</li>
+<li>Debugging generated surface shader code involved quite some voodoo tricks (<code>#pragma debug</code> etc.).</li>
+<li>Shader importer tried to multi-thread compilation of these hundreds of shaders, but some backend compilers (Cg) have internal global mutexes and do not parallelize well.</li>
+<li>Shader importer process was running out of memory for <em>really large</em> multi_compile variant counts.</li>
+</ul>
+<p>So we’re changing how shader importing works in Unity 4.5. The rest of this post will be <em>mostly</em> dumps of our internal wiki pages.</p>
+<h3 id=shader-importing-in-unity-4-5>Shader importing in Unity 4.5</h3>
+<ul>
+<li><em>No runtime/platforms changes compared to 4.¾.5 – all changes are editor only</em>.</li>
+<li><em>No shader functionality changes compared to 4.¾.5</em>.</li>
+<li><strong>Shader importing is <em>much</em> faster</strong>; especially complex surface shaders (Marmoset Skyshop etc.).
+<ul>
+<li>Reimporting all shaders in graphics tests project: 3 minutes with 4.3, 15 seconds with this.</li>
+</ul></li>
+<li><a href=https://aras-p.info/img/blog/2014-05/shaders-errors.png><img class=right style=float:right src=data:image/png;base64,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 title alt></a> <strong>Errors in shaders are reported on correct lines</strong>; errors in shader include (.cginc) files are reported with the filename &amp; line number correctly.
+<ul>
+<li>Was mostly “completely broken” before, especially when include files came into play.</li>
+<li>On d3d11 backend we were reporting error <em>column</em> as the line, hah :) At some point during d3dcompiler DLL upgrade it changed error printing syntax and we were parsing it wrong. Now added unit tests so hopefully it will never break again.</li>
+</ul></li>
+<li><a href=https://aras-p.info/img/blog/2014-05/shaders-surface.png><img class=right style=float:right src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAAB3CAIAAAD5D95hAAAMEmlDQ1BJQ0MgUHJvZmlsZQAASMetl3dcU8kWx+eWJBCSUAIRkBJ6E6RXqaEXQTrYCEkgocQQCCp2ZFHBtSBiARu6AmJbCyCLiohdUex9saCgrIsFGypvkgD6fG//eJ/Pm89n7v3m3DNnfufO3MkMAMrmbJEoC1UBIFuYJ44O8mMmJiUzSQ8BDrSAKlAH+mxOrsg3Kioc/GN5fxMg0vs1a2ks8L8VVS4vlwMAEgU5lZvLyYZ8CACcxhGJ8wAgtEO70cw8kZR7IKuLoUDIX6ScLmOiipRT5Wws84mNZkF2BUCBwmaL0wGg+UM7M5+TDuPQuJBthVyBEHI5ZC8Onw1ttOuQx2Vnz4CsLNVmnvpDnPR/i5k6GpPNTh9leS6youAvyBVlsWeD/3fJzpKM9GEAK4UvDo6W5gzfW1XmjDApUyDvF6ZOjISsBrlFwJX5S7mDLwmOG/bv4uSy4DsDDMjvuGz/MMg6AKBkSWac7zCbssWyttAf9RPkhcQOc7x4RvRwfDRDmDUxXB4HncvnhYxwGS83IGbEJ00QGAIZjhVaW8CPTZDrRJvyBfETIdMgt+dmxoQNt71awGdNHPERS6KlmuHYoj1p4sBouQ9Gyc4dyQsz5LBlfWlCdszjxwbL22LhXJ5/gLxfLJEnjBvWg/FFeX7Rw/4FoizZ/Jbay3hZQVK7IeQdufkxI21P58FJJc8du5nBDo2Sa8ZeiPKiYof1fAThgAX8ARNIYE0FM0AGEHT0NfbBX/IngYANxCAd8ID1sGWkRYLsiRBeY0AB+AsSD+SOtvOTPeWBfGj/OmqVX61BmuxpvqxFJngGORvXxr1wDzwcXn1gtcddcbeRdkzlkV6JAUR/YjAxkGgxqoMDVWfBKgaC/2ILg3cezE6qRTiSw/d4hGeETsJjwg1CF+EOiAdPZVGGvaYLCsU/KWeCCNAFowUOZ5cKY/aO+OCmULUT7od7Qv1QO87AtYE17ggz8cW9YW5O0PqjQsmotu/v8uf+pKp/zGfYTrOkOQ2rSB0dGdao189RWD+8Iy68h/3siS3FDmJnsBPYOawFawRM7DjWhF3Ejkp5dCY8lc2Ekd6iZdoyYRzBiI9tvW2v7Zf/6J09rEAsG2+Qx5uVJ/0IWDNEs8WCdH4e0xeuwjxmiJBjM45pb2vnCIB0TZcvGW8ZsrUaYZz/bstpBcCtBBrTv9vYRgAceQYA/f13m9Eb+EmtAuDoFY5EnC+34dILAZDhgqkO/zH0gBEwhznZA2fgAXxAAAgFkSAWJIFp8K3zQTZUPRPMBYtAMSgFq8BasBFsAdtBLdgDDoBG0AJOgNPgArgCboB7cG50g5egH7wHgwiCkBAqQke0EH3EBLFC7BFXxAsJQMKRaCQJSUHSESEiQeYii5FSpAzZiGxD6pDfkSPICeQc0oncQR4hvcgb5DOKoRRUHdVFTdHxqCvqi4ahsehUNB3NQQvQInQFuh6tRnejDegJ9AJ6A+1CX6IDGMCUMAZmgFljrhgLi8SSsTRMjM3HSrAKrBrbizXDsb6GdWF92CeciNNxJm4N52cwHodz8Bx8Pr4c34jX4g14O34Nf4T3498IVIIOwYrgTgghJBLSCTMJxYQKwk7CYcIp+O10E94TiUQG0YzoAr/NJGIGcQ5xOXETcR+xldhJfEIcIJFIWiQrkicpksQm5ZGKSRtIu0nHSVdJ3aSPCkoK+gr2CoEKyQpChUKFCoVdCscUrio8VxhUVFE0UXRXjFTkKs5WXKm4Q7FZ8bJit+IgWZVsRvYkx5IzyIvI68l7yafI98lvlZSUDJXclCYpCZQWKq1X2q90VumR0ieKGsWSwqJMoUgoKyg1lFbKHcpbKpVqSvWhJlPzqCuoddST1IfUjzQ6zYYWQuPSFtAqaQ20q7RXyorKJsq+ytOUC5QrlA8qX1buU1FUMVVhqbBV5qtUqhxRuaUyoEpXtVONVM1WXa66S/Wcao8aSc1ULUCNq1aktl3tpNoTOkY3orPoHPpi+g76KXq3OlHdTD1EPUO9VH2Peod6v4aahqNGvMYsjUqNoxpdDIxhyghhZDFWMg4wbjI+j9Ed4zuGN2bZmL1jro75oDlW00eTp1miuU/zhuZnLaZWgFam1mqtRq0H2ri2pfYk7Znam7VPafeNVR/rMZYztmTsgbF3dVAdS51onTk623Uu6gzo6ukG6Yp0N+ie1O3TY+j56GXolesd0+vVp+t76Qv0y/WP679gajB9mVnM9cx2Zr+BjkGwgcRgm0GHwaChmWGcYaHhPsMHRmQjV6M0o3KjNqN+Y33jCOO5xvXGd00UTVxN+CbrTM6YfDA1M00wXWLaaNpjpmkWYlZgVm9235xq7m2eY15tft2CaOFqkWmxyeKKJWrpZMm3rLS8bIVaOVsJrDZZdY4jjHMbJxxXPe6WNcXa1zrfut76kQ3DJtym0KbR5tV44/HJ41ePPzP+m62TbZbtDtt7dmp2oXaFds12b+wt7Tn2lfbXHagOgQ4LHJocXjtaOfIcNzvedqI7RTgtcWpz+urs4ix23uvc62LskuJS5XLLVd01ynW561k3gpuf2wK3FrdP7s7uee4H3P/2sPbI9Njl0TPBbAJvwo4JTzwNPdme2zy7vJheKV5bvbq8DbzZ3tXej32MfLg+O32e+1r4Zvju9n3lZ+sn9jvs94HlzprHavXH/IP8S/w7AtQC4gI2BjwMNAxMD6wP7A9yCpoT1BpMCA4LXh18K0Q3hBNSF9If6hI6L7Q9jBIWE7Yx7HG4Zbg4vDkCjQiNWBNxf6LJROHExkgQGRK5JvJBlFlUTtQfk4iToiZVTnoWbRc9N/pMDD1mesyumPexfrErY+/FmcdJ4trileOnxNfFf0jwTyhL6Eocnzgv8UKSdpIgqSmZlByfvDN5YHLA5LWTu6c4TSmecnOq2dRZU89N056WNe3odOXp7OkHUwgpCSm7Ur6wI9nV7IHUkNSq1H4Oi7OO85Lrwy3n9vI8eWW852meaWVpPeme6WvSe/ne/Ap+n4Al2Ch4nRGcsSXjQ2ZkZk3mUFZC1r5sheyU7CNCNWGmsH2G3oxZMzpFVqJiUVeOe87anH5xmHhnLpI7NbcpTx1uni9KzCW/SB7le+VX5n+cGT/z4CzVWcJZF2dbzl42+3lBYMFvc/A5nDltcw3mLpr7aJ7vvG3zkfmp89sWGC0oWtC9MGhh7SLyosxFlwptC8sK3y1OWNxcpFu0sOjJL0G/1BfTisXFt5Z4LNmyFF8qWNqxzGHZhmXfSrgl50ttSytKvyznLD//q92v638dWpG2omOl88rNq4irhKturvZeXVumWlZQ9mRNxJqGcmZ5Sfm7tdPXnqtwrNiyjrxOsq5rffj6pg3GG1Zt+LKRv/FGpV/lviqdqmVVHzZxN13d7LN57xbdLaVbPm8VbL29LWhbQ7VpdcV24vb87c92xO8485vrb3U7tXeW7vxaI6zpqo2uba9zqavbpbNrZT1aL6nv3T1l95U9/nua9lrv3baPsa90P9gv2f/i95Tfbx4IO9B20PXg3kMmh6oO0w+XNCANsxv6G/mNXU1JTZ1HQo+0NXs0H/7D5o+aFoOWyqMaR1ceIx8rOjZ0vOD4QKuote9E+oknbdPb7p1MPHm9fVJ7x6mwU2dPB54+ecb3zPGznmdbzrmfO3Le9XzjBecLDRedLh6+5HTpcIdzR8Nll8tNV9yuNHdO6Dx21fvqiWv+105fD7l+4cbEG503427evjXlVtdt7u2eO1l3Xt/Nvzt4b+F9wv2SByoPKh7qPKz+0+LPfV3OXUcf+T+6+Djm8b0nnCcvn+Y+/dJd9Iz6rOK5/vO6Hvuelt7A3isvJr/ofil6OdhX/JfqX1WvzF8d+tvn74v9if3dr8Wvh94sf6v1tuad47u2gaiBh++z3w9+KPmo9bH2k+unM58TPj8fnPmF9GX9V4uvzd/Cvt0fyh4aErHFbNlWAIMVTUsD4E0NANQkuHe4AgCZJj9zyQoiPyfKCPwTy89lsuIMQI0PAHELAQiHe5TNsJpApsC7dPsd6wNQB4fROlxy0xzs5bEo8ORC+Dg09FYXAFIzAF/FQ0ODm4aGvu6AYu8A0JojP+tJi/QMudVQSpeM5q/6+cz1L0kgai+anrHkAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gUGBgojVW7iGQAAIABJREFUeNrtfXl0VFW2997n3FtThso8QCYyMMokMglhFMGogATphnZ63epr7EG/5Wp9b61e6+s/vra77ff6db9n+/Qp7fRYbbPU7hbQRgGBMBgmGUQCIUBIQkLmpJJUperes78/TtW1rCEUmmDQ+1shVE7dM9677x7OPnvjrFmzIAyMscbGRpvNBgAejyc7O1sIASZMmLheYIzdunDhmPHjOecWzohxxhnnisK5wjnjnHOFKxwQVVVVYmnxypUr/f395sqaMHHdYLVaJedkABogJ0JA+VXwf4jIBMRExrm5ueaymjBxvRkyABHpREjEGAMAIAKAwD8AAgRAFhsZExERmctqwsR1AyIaHxkAAAgiBdFPighAoCMAkQBg5nqZMDE8QQY5IzIABZCCyFsH4gA8wLdNmDAxLBkyACLoRH5uDEQAgkjSrUIIAJIVm2RswsSwpmQGIAB0IkAEAiXAjYkBEAGCZpKxCRPDWagmABaQqIUgRKCApZoBMEQUoEBsJq6BIYTQNE3X9c+7D9jD/No4IiKyAORn8yaZ+NaxVsTi4mIAOHfuXCw2Ywxis4iADAFAJ+JAFLBVA0MxKGTs8/m2/tMvGZOSvL/LYLR7e2u722s6Gs81119ovlzf1tinexRFYYxxzjHkahNByMzM7Orq8ng811QrPT29r6+vt7fXXMBhgoSEhKysrJqamuzsbACoqakpLi5uampyuVwDk7FUjDUhgDHFT7YIgJKMDRv1IJCxpmk+kYpC0qOfKo2tagBIVNInJOUVJ9w0f4SvX/P1a3q7r7vN3dbY3fLOJ+8CvzYyzsvLmzRpUnJyMhG5XK6qqqozZ85c/xszb968/fv3a5q2YMGCpqamqqoqg/AKCgoqKyu/RJv5+fnTp093OBwul2vv3r0tLS1LlizZv3//+fPnr6md+fPnV1VVffrppyb9DBMmnJ2dnZWVJWkYAObOnSvLe3p6BmDLQorNAApjUoomAAIyPouA9UsZlIESpAEAECICyd9BlCyVc5UJjXn7waMJjypsaWpaWuroHfa9Xf0dsTPk8ePHz5s3b+/evbt27QKAjIwMznns45wyZUpTU1NTU9NXnG98fHx2dramaZL2xo4de/ny5e7ubgCIi4sbOXLkl2jT6XQuW7Zs69atra2tmZmZwUqKiRsdFy5cyMrKkuI0AEjR+sKFC1cTqklyXpK+XEQqAAL6XT8EMOYXrQeHjAXZ/ftbhIh+eg7hycjAqggCL4FHkFvzery6L9mR3ulpj5GMVVUtLS09cOCAwWd6enrkh+Li4oaGBrfbDQCFhYVXrlzp7e21WCwlJSV2u/3KlSt1dXWZmZmTJ09OSkpyOp2SgY8YMSIzM7O3t/f8+fOSJkeNGtXS0uJ0OjMzM2tra9va2goLC5OTk2tqajo7O42RFBQUXLx40fjT5XItWrTob3/7W0QGm5qaevnyZfnuKCwsbGpq6uvrA4CSkpLGxkY5haKiIsaY1+ttaGggotra2uBGsrOzs7OzGxoarly5Igk+JyfHarU2NjY2NjYG95WcnFxXVzfwGIxppqenM8ZqampMMhtSVlxSUiJpuLq6ur29XdqMSkpKZs+e3dTUVF1dHZ0hIwHoGKBSREGkGCYu5qezQXP/6AHoJeoB6AFykfEbXCAL/T9uxjTFQhYbWu1gsQnFEudIif3QRXZ2tsViiShCL1iwICkpyZBY0tLSAOCee+5JTU11u91OpxMA7HY759zhcCQlJSHi7NmzS0tLNU3Lycn57ne/a7FYAGDOnDmLFy+ePHlyYmLivffeu3DhwpKSkrS0tPLy8uB3zahRo4LJuKKiIiMjY/z48SGjmjNnzsSJE30+3+23356XlwcAY8eOHT16NAAkJycvW7Zs7NixkreXlpbW19dzzsvKyuLi4oIbmTBhwsyZM+Pj48vLy+VEpk+fbrVaiWjlypXp6enGrGfMmCGEmD59ekpKygBjkIVLly4dO3asqqompV0HSvZzOyF8Pp/P5zOe+YEZGAtIs2hYvPBzrRgAkIgTsNi58QD9IWIHEAAiESAiEBIiUoAnUzBPBsZ0xeIFEAAaYmJ8xlUnYyAuLs7n8/X394dfjwEE9cPS0tIqKyslZ0PE2tpayXjPnDmTkJBw8803v/7665IZrlixYvLkyYcPHwaA9vb2vXv3SpLr7u4+evSo1Wp95JFH4uPj5cWKoqSkpDQ3NxvGgL6+vn379s2dO/fSpUtGYUJCwqRJkzZs2ODz+QBg0qRJdXV1tbW1xcXFx48fLywsbGhoyMvLO3LkSFFR0fnz5z0ezzvvvHPbbbfdf//9+/fvP3nypJyI2+3esWMHAOTk5GRmZnZ3d8s/5dskKyurtbU1Li5u0qRJr7/+em9v78mTJ1evXi1XI+IYZN2mpqb9+/fHvvgmvjQNX7hwoa6u7pZbbhkzZowk4DFjxgDA4cOHNU0bYP31INLDzxVYwM9PR6COgIMlVLcTIQICQhRKhi9SslAs/QBeBHtCWuzc2OfzKYqiKIoUgK+irhPt3bv3jjvuuHTp0oEDBzo6OoK/TU1N7e/vN2TylpYWycAB4PLly8a7U36WIzSWOzc3t76+PqS7zz77rKSkRNqWjC4YY+vWrZOULwXpS5cuzZ8/X1GUwsLC3bt3r1q1SlXV4uLiAwcOAEBHR8dbb7110003zZ07V1GUTz75JFiD0nVdbtSlpqZOmDDB4XCkpKTIUaWmpnq9XsM0bQhpEcdgkLFJY9cHuq4XFhbKz+PGjQs21jY2Nk6ePFn+eezYsWiGa52IESAAI//dRUMOFzRoZNzh3x8OpWSIzpOFYvEi2BKzYz90IRlgbm7uwLYBY1P6xIkTNTU1s2bNKi8vf/31171er3GN1+sNto0piiL5VSwYNWpUxAF89NFHa9euNUxTHo/H5/O99tprX9A+eno6OztLSkpUVW1paWlpaSkuLk5MTDRUXCI6efKk3W4fM2aMJONwS9iKFSvef//9xsbGFStWDCwuRRyDiesJ+XhfuXIFES9dujRt2jQAOHLkSF5e3pUrV/r6+qSRoqWlJXyD0OC6DFFqyAL9rpfydutCWDg37NVfFV0A3URdRF1A3QAuom6ALqBuAhdQN4H/TwDjp4cxD7cocZmxk7HL5Tp37lxpaWlqaqossVqt0ojv8/ni4+MRcebMmVK3ZIzZbLbe3t6Kigqr1SpDIPh8PofDIdmvpmn5+fkAYLFYQnTdgZGTkxPOjQGgu7v7448/LikpMTi81+udOHFiyMultrZ29uzZ8kUQ/DkhIcFqtcprHA5HV1dXxN7T09N9Pl9TU5PFYnE4HFK5bW1tVVVVqr4FBQWGbhxtDCauM1wuV01NjaZp8t2taVpNTY3L5SKihoYGAJC/IxiPv6gnSwLWKeDgxRghAuLgcGOvQgiISNI2La3Vfp7st5BLZkFfdA1hFpZ+TUcgd+zYMX/+/DVr1nR3dwshHA7HoUOHGhsbT5w4sXjx4jlz5pw8eVJKJoqirF271uVy2e32Y8eOyd2gU6dOLViwID8//29/+9s//vGPRYsWTZ8+PS4u7syZMzEabDMyMjo6OqKx7hMnThhkrOv6e++9d9ttt910002aprnd7i1btkjSvfnmmyXp1tXVzZ49W3Y9YsSIhQsXtra2SpeYrVu3Ruyivr6eiB544AGXy3Xx4sUpU6ZcunSptbV13759d955p9frvXTpkqFBRBuDievMkIUQQghElPda13XjsXe73S0tLW63O5wQJDcWAErAZUsjUgAICAGEEFbOhbwsliA+hoUzInp7e9f9n82IiIFDVQgBa5MsBfyC3PdF8e9Pv7otxDZ7VVgslsTERJ/P53K5DNXaZrMJIYIlZ2kV83q9wVRnsVgYY4ZflMPh8Hg8sevnM2fO7OvrM+xPscBYxhjn1d/ffxXnHkSbzSZ312w2m9Ey59xiscjyLz0GE9fBZB1sv5AeypLOQ66fPnfu2PHjOecq54QInKuKonCOjCmcc65YVEVnTFWUweHGkEKE/oNViH4DOSJuf/MPn+x+r+78qbSMEd//vy/ljZ4aiSdfO/P3eltbW8P1wIivmPC6wX8GW31ifIOcOnXqmqrETjwR5xXx7W7QanDjuq5HpGGTgIeVnhxeGM3VBwOnI6Q7F0P027cABABnKLXiQTNxUQqh3+UkQMkAm5/75ZH330lJTZ0wZUpPT0/NuY/zbp1CELBd35j7HBUVFebjaGKoadv/ld9GTYIIiICIBzafOCIS6UScBNBgkXGSXys2KNnd3XHsw3cLRo26+5++P++eVW2Nl5s8/ZAkLeU3NiWbMHHdwP1cGQBBABCBTqQCCgCOyBkDZIiDRcYWDfwaMUrTWcO5T7Oysmw225h77vxM77NkJlsRfaD596Si6MkmTJgIYciAgIAIyBGZtCSj/4AE+MPuDZIzJpHL+AFyEblG5qfbbDZd19/4zTNE3V7q9oouIhdBN5ALoJvIBeAC6jZvlQkT0YCIHAARBJEgIgBGhATcOHcEIEgM0kYiddDnP+1A7QkjbAU3jVZV9eRf3//jd/+p5eIpgA6gdqIOgnagDoB2og6ADvNWmTARlYwDW8fSxKUTCQDAAC8mkEQ+OGQsqB2onfw/HUTtXtGy9IfL7fGOvLw8X7PrD6t+FEbJ7QBtRO3mrTJhIjING6IzgLHRjIiCSDpjakAaCUQWk258de956hQAzH8S0m/m8qSo63+/ftuGfyiVisVi2fXSO6v/3zp5Ftkv8QccNE3vfBMmIlCV3J4lIgKFSenaHw3TH9+HgCHTiQbJxEWuwLlHpICzR7/AOt615CfzLQ7+yY4Tlw9fIur2Ey2BNG2jGcTehIloQi4AEDFERBAAAkAeK+WIPLB1DAAcBskZUxE+ZBgI2IeSyTJAEFqj5+KIyWnHdqKFWVXyya8QEclkwyZMXIU9+h2bifjn6rA/VDX4Q/nQoOnGCQTxguIJEgniiRKIEgiqtn6SSMQ6+3Zt2q3reuHYvESCRCInQSJRIoCTKNHkxiZMRAHzH04AQCQZCUTK0oh+CzYAEIjBEqqdRAiIgpDJfDN0cv/ZF372zotP/dVqteTk5KalpS2955YkAuaPMOSP9INmaigTJgbgx1ITJv+RfQagASj+0Jj+5DBssE44JRGhFKcFAUMGkJ+Svmr10prqpoREx6SpRQsWTy6YYO3XXejPK0UIiEbMLhMmTETjyQAscLqIpF8XESEIAA4ghGCD5VMdT/4ofizAk6eOy57766lWJZ5AaHqPT+vQfN02eYwREAM8GcHkxiZMRIXB5QSRGqBkacCWxiiGqA0WGVuFtKcRIjB5xoncXu2CT/6JyBBs/mhZ0llTupWZ3NiEiaiQnlsyyzFnzC9OA0hlVAfg4I99O0gbTi4SCAwRMOgDQ4YgkKRSLpD8iSWQAEEgMn/4exMmTERixfj5uX0fkdUgbwAFkfvZNcKgkDFjjNoBWBABQyRKhkiUbEaWMWFiYB5JQADyiKJkvyqAPKWoAgAOEje2WCw/+sVfYolWGQ5FUex2u3mrTJiIqBhLrkckGDAAvyDtJVIBOKIOhESDoxsrihIXF0dfauvIzK5owkRUPhzI0sSQaUSKjBxAxBA5IgkBgUyGg6Mbm6RowsRQEDICEgERfZ6NDVEG7uGMQWAz2SQ/EyaGsViNFIgpC4GkBwTyuCIBALFBzOFkwoSJodCNAZACOZw4oj+inow1D4SAOgAOljOmCRMmBh3+fGuBbSd/uEoAHoiqR+A/PmFyYxMmhil4IMat+KL9WBAAgC6dMmM3cV1TKnATJkwMFjdm8Lk3dUDM9vswozyKDBBr2IDW1tbYM5WZMGHiq0Nm59IBGJHyRadlqS0r/mg+oMZ4wikuLi729CgmTJj46mCB/SRApCCvDAr86EQKynDRpqXahIlhi8AxY0Tk5NeKEYBJPmzEejfJ2ISJ4UvFCELuNhHoCADA0W/xIgBBIIg4AA1WfmMTJkwMAR0TQxR+UTroPwAFUZWHjYkGLWuECRMmBl89RkQARiD8Sc/8IrRUjAUQSGs2M/eNTZgYrhAACCQj17FAxHkR2CsWhADACE1nTBMmhrVQTYDS98NHwth2Yn7NmQiAQAxafmMT1xmIWFRUlJOTY7PZzNWIHR6Pp76+vqamhm6EkKwy2hZH5ESA3GC5/q0mGdyHc5OMb9R3dFFRUUpKSmNjY7RE9SYignOekpJCROfOnRv+ceD8W8R+3ZgM3Zgj6kRMhq8WBENHxna7nXPe09MTexWLxTJ9+nSHw/HJJ5+0trYO7nhmzZp19OhRr9cb4/Xx8fFjx449fPjw8CTjrKys5uZmk4avWdsUoqOjIysrq7q6+oYI58gICIiCIstbUSaRQCAiQoFEQ0HGjLHy8nKn06lpmqIoL7/8cowVFyxYwDk/ceLEl4sHNDBKS0s/++yz2Mk4ISFh5syZw5OMhRCIGOIei4hjx45NSUnp6+v75JNP4uPjp02btnv37huU3iwWy/z58z/88MNBrytXTwgx/GNdEPnj28loPjqQiqjLfOUAjDHjKPLgk/GYMWMcDoekXovFEnvF9PT0o0ePNjQ0mEzjqtA0LYQVl5SUxMXFHThwIDU1Vdd1IYSiKMOWXVsslptuuuno0aMDvKq+9PivWnco+MQQWUCYPAIBAGBkSQNBxBEAQACqjA3JeWNd15OSkpKSkjo7Ow3u98///M8bNmzQNC0vL2/q1Kl///vfAeChhx46fvz43Llzt2zZkpGRMXLkyKSkpOLi4s2bN69YsSI1NdVms1VWVh45cgQA8vPzFy1apKqqEOLVV1/VNG3UqFHz589XVfXYsWOHDh0KYeyjR48WQuzYsePChQuyMCcnZ+7cuXa7/b333quurgaA8F4KCwsXLVqk63pTU5PRWnhHwSM32r+e8Pl8IY8pY8xms3m9XvkelD7wU6ZMyc7OPnnyZG1tLQBMmjQpJSUFEY8ePdrV1TVv3ry9e/cyxpYsWfLBBx8Q0S233HLw4EGjzZtvvtnpdLpcLpvNtnfvXtmg0+ns6+s7dOiQw+GYNGmSz+cL7iL8AsZYa2trbW3tzJkzLRaLy+WqrKwcPXp0SUmJw+HYs2fP5MmTjSqyhaSkJLfbTUQhc5w4cWJmZqau6wcOHPB4PCHTiVg3eDzBq3fDaAFEHFEAEBARqVLARtSJkAiFIMb4UJw3rq6urqmpefTRR2fPnm3ILenp6fKz1WpNSkoyCkeOHPnCCy9cuHChsrKysbFx586dmzdvBoCKioo//elPb7/99vz58wEgLi7uO9/5zv79+//nf/7nT3/6k6ZpDofjrrvu2rRp0yuvvDJz5kyn0xmsls+cOfPll19++eWX5bMlMWHChDfeeGPnzp1z5syRJSG92Gy2lStXvvPOO6+88oqhnEfsKHjkX8vdlWQcjFOnTnk8npUrV2ZkZMiS5OTk6urq3bt3jxs3Ttf17Ozs5OTkHTt2VFZWzps3T9d1n8+XkZGRlZUVFxcnP/T29hoNjhgxIjExcfv27WfOnElJSZElVqt1586dqqqmpaUhYmFhYXAXES84fvz46dOnPR7P7t27t23blpubi4hVVVVdXV07d+7Mzs4OrpKZmZmYmLhjx47Tp09LlhA8ntzc3A8//HD79u29vb3h0wmvGzIeo6kb6bieETBAulJ/nkYCGCJjDAH0oRCqiWjLli2nT59etmxZcXHxxo0bBzgdVVFREXFNe3p6xo4dm5aWZrVaASA3N7e3t/fMmTMGn8nLy2OM3XrrrVL2yMzMlO9jAPB4PK2trevWrauoqAgm4w8//NDtdnd2dso2w3vJy8vr6Ohob28HgPr6+hkzZgzQUbSRf13cWNf1Xbt2ZWVlLVmy5L333tM0ra2trbW11eFwMMZ0XU9NTW1qatJ1vbOz0+FwCCEuXrw4cuRIVVX3798vPxw9etRo1rCE9/b2SuaWkpKSkZGxaNEiRVE450KIkC4iXtDR0SGXbtq0aVLclaON2GZaWtqVK1d0Xe/p6QnhxikpKfX19caah08nvG5I40ZrN9ipW/KbrOXRYgYBozWBtF/zobNU19TUbNiw4bHHHisqKpISbDSaDy90Op3r1q3bu3dvfX29oSSEvAsQ0e12y5arq6uDLdtE9Nprr02ZMmXVqlX79u0zpMSQFsJ7sdls4VpTtI6+3o1Hr9cbUcGrr6+vra1NTExsbm4mIk3TNE2TH7q6utLT0zVNs1gsmqb5fL7a2trp06d3dnaeP39+ypQpXq9XkpxEZ2dnTk6OpmmZmZmyhfb2dofDsWvXLmMBQ7qIdoGU510u14kTJ/Ly8jRNkxam8CpxcXGJiYmaptntdqOuRHt7e0lJiVESPh232x1SN6Tx4NW7MTix3wFEZmBDQWBDFERc5jNE0IVQFKYNBRk7HA6pnMhHrb+/X759bTYbEU2fPv2qLRQVFbW2tp48eTI9PV0GIqqvr09MTMzNza2rq5OkVV9fn5CQ0NPT09bWFm4q13X98OHDmqaNGzcuWNkbuJfm5uasrCy73e52u8eNG2cQRrSOvkaEc+MZM2akpaW53e74+Pjz5887HA7JkQy+V1VVVVhYuHDhwsTExD179siv+vr6GhsbfT5fb2+vZGVGg2fOnMnJyVm5cuXFixelRe3s2bMFBQW333671+utqqoyuLTRRbQLAKClpaW0tDQ1NdXj8YwfP15uASxatGj79u3BVaqqqsrLy++66y4p8gSP5+zZs4WFhXfffbfX6927d2/4dMLrhozHsJ7eKNxYJj6VfJgQFPTL0pK9EIDC/AmUcNasWRE3jRobG6WHkMfjyc7Ojj1swPTp02fPnt3U1JSUlFRbW7tt2zYAKCsrKy4u7u/vP3v2bF5e3muvvQYAP/vZz1588cXu7m5Z8f777z98+PDp06eTk5MffPDB7u7u5ubm7Ozs2traDz74YNy4ccuWLWtvb7fb7W+88UZvb++YMWOWLFnS1tZmtVr37Nlz/vx52U5SUtK6deva2tpSUlK2bdsmy42+cnNzy8rKXnzxxYi93HHHHePHj/d6vadPnx4zZswf//hHaXsP6Shk5NffTJ2bm2soEcEvUMbYwHv1FovF5/PFKEooiqJpWnFxcV5e3s6dO2WhjEoxACVEu0BVVclLOeeapiGixWKRb/mQKqqqRmvfYrHIF0e06YTXDR+P0+msq6uT4v2wBWPs1oULx44fzzkHxpBxhTOFc+BcVRTGmKqqnHPGELky+GQsjUwJCQkul8vtdhuF8fHxbrc7xi0Ezrmqqh6Ph3POOZdSECLGx8f39vYGDyYhIcHtdodImIwxeeXA3UXsxWazCSHC5a6IHX1dZJyRkSFFnqHrRVXVO++8UxqE9uzZ09fX983Yq0NEu93e3Nx8Q5Dx6HHjFEVRGGcMgXPOucIVxhnjXFVVK+eCMesQzcTtdgcTsGFPuqZdK0mBwa9eInK5XCFXhpdINTgWVhmxF4/HE/HiiB19Xejq6rLZbLHz1S+3cfj222/DNwuIqKpquCAzTHebAJiMTY3gA7D6/c78J5yISANAIs2MU30jgjHW19cnhJAer+aCXNO7qa+vz+12X5Nj0td2owObSQJA9YfD9KvKLMDYVMbMoxE3KkvhnLvd7p6eHjPU4bW+ATnniqLcEA7V/gC3iAAkP2sCrMzPpRmgjA1iiTEypolhSMaMMZOGvxwlf57+e5iDCPypmuSNBwU/zxEhgDj5A4CYZHyjUrKZU/bbgkC4DwqE9dGArACISIgEBGb0DxMmhvPLGggQkQIh5mUAPU6oEzEZdB7QTIxqwsQwlv9BBuMiSdL+YLcIhECBRMdgJkY1YWI4QwDIVMYyEjUL7DMBfH5CQjMIfoigqqrT6TTOIQwuZs2adU17BvHx8bfccov5ZJi40fRikEeOiUgEshszqSeTDJ0JIIZm3zg+Pv7OO+/MyMhoa2tzOp2KovzXf/3X4HYxRNE8bohIaya+HQRM/n9SopZ5Uv3kzBiiBqQAcQBgQ7PhtGbNmubm5ueee05SRfBh4Kviscce+8tf/nI9zyGYpGti2JIyAoAQxBgCMSKO8igEML/VGvuBbEOx4ZSbm5uenr5x40aDPAzft/BoGyFhOubNm5eUlLR69eqamprt27cbbQ5uNI/8/PwFCxYoitLd3b1t27aurq7y8vLdu3e3trYWFxfPmjXrjTfekJ1WV1cXFRUVFxcLIXbt2nXx4sXhc4vLyspqamrkGewpU6Zwzo8cOVJQUFBaWqooyokTJ+QKzJs3b3iO38RVoRPJ1KdExAmkkwAB6UQKkfTlYoBDsm+cnp7e0dEhT66EoKKior29PTMz83vf+96RI0dkmI7f/va3RnyzPXv2TJs27a233grmxuGXSchoHsXFxXPmzJFkHNK+jObx6quvtre3T58+vbCwEAAcDseqVatef/311tbWqVOnrly58qOPPpIRZ/Ly8rxe7549e/Lz8wHgwoULiqLU1tYasQdk+TDBqVOnjCHJc8L5+flEtGfPnuDRDtvxm7gqGmpqGmpq5OdbFy1KycjwCaEwxgGJQBOCcS4158EnY3mIPOJXIdE2ooXpCMFgRfOQR51zc3M7Ojrk6f+TJ08uW7YMAH7zm9+YD42JYYunn35aF0LK2EKA4ARADEAXAhCVoYjFJQ/6hmczcDqdP/jBD1RVNaJtyDAdVVVVq1atkhFzoumuES8Lj+YR0n7EaB4yqIDRgqkYm7gxIJ9VIukMgkRIwElGqx6CDaeGhobm5ualS5cah2/S09MhKNpGb2+v4Usow3R89NFHRUVFBjMP2aOKeFk4wts3onkAgBHNo6GhITU1VRbm5+cPq5geJkxEp2IhhBBEmhAkCBA5AoEABA7Ac3JywusgYk9PjzyNrGlaQkLCNXGt2traKVOmzJ8/v7Cw8NZbby0qKjqma8ABAAATGklEQVR27JjH4yktLR0/fnxycjJjLDU1tbW19fvf/35hYeHo0aN3794tFTy73T5//nzOucFUnU5n+GVz5sw5cuRIf3+/0+ksKSk5cuRIePvHjx93Op1lZWW33HJLW1tbamrqoUOHPB6P2+0uKysbNWrUuHHjtmzZwjlfsmSJ+aCYGLbYvn17dk6OzeEAxlTGLJwzxvzHtRhjjA1J9A+JhIQEu90eHAMkPNpGxDAdDocjJGTcYEXzMF5GMgSEjGRQUFAQrBt3dnb6fD4pQQDASy+9tG7duri4uG/qI9Lc3PzBBx/cd999X1cjvb29r732Wnt7+3e+852SkpIhmuaQ9nKtD8m1LtfTTz89ZdasjOxsu6qiqiqcK6qqWlTGOGdMVdUh9OJyuVzNzc3BYUB0XZexNXRdl3Qlw3SEEGdfX1+IThvxsnCEty9fQyE0TERCCEnDwVKGpmnr16+///77169fv3z5cln43HPPDau4H4OOK1euxJ6gZyga+Y//+I/Gxsa77rpLajpDhCHt5Vofki+xXLqukxA+IhDCnx5VBwAQAPxbft44RFP48MMP29raZLz73t7eG312ixcvfumll+Q223BGVVXVunXrpkyZ8g3oZeggowJLo6yQ+SI4AZGKqPmzw3z7SDeYMxtfSSu31MmDBaQjR46UlZXNnj3biA5ZWVm5evXq5cuXP/zww5cvXwaA9evXnz17FgB27NixZs0aedlvf/vb4DRFu3fvvuuuu8rLy3/5y19+//vfl4X79+9fvXr1nXfe+frrr8uS1atXb9u2LaTHiJf95S9/KS0t3bdvHwA8+eSTK1euXLhw4caNGwHgD3/4w6VLl9avX//MM89ErF5RUXH33XevWrVq06ZN4av08ccfl5eXl5WV3X333VLACZ9ytEbC+zIQ3siGDRuOHTv27LPPPvXUU8FXhkwnGL/73e/KysqWL18uJw4AS5culYM8ePDgk08+Gb4+Ib2ENx4+3wFmET6AiA9JeC8xLlfInfU/qIIEAAkhiIQQCCD8WVOB07eYG1MARokMm7xs2bKf/OQnDz/8sGFp37x588aNG3ft2vX8888vWrSovb39sccee/PNN0tKSt58882f/vSnb7311siRI3fu3Dl69OjNmzfX1NRUV1cXFhZu3br1iSeekI20tbU98cQTmzZtKikp2bhxo8z319HR8dRTT7377rsOh+P222+/7bbbRowYUV1d/de//jW4x2iXHT16dNu2bVJK/OlPf5qfn3/69On777//e9/73uOPP75x48bnn3++qKgovHp8fPwTTzzx9ttvFxQUvPrqqxUVFcEr09bW9sgjj/zbv/3b0qVLNU3jnEeccnd3d3gjEYcqm43YyA9+8IPt27c/8MADd9xxR/AYQqYTbLnYsGHD8ePHg5OtVVdXS9tNT0/PpUuXjEJjfebMmRPcS0jj4fMdYBYRBxD+kIT3EvtyhdxZv1AtdNJ14FwIAURyvkyejABiEfHNlp+jWd0ZY7/+9a+fe+65P//5z/fdd5+hn//85z9PTk7Ozc2V+s+hQ4cKCgqkmWTlypUyD9iCBQt2794tQ5yvXbu2oqLi4MGDU6dO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 title alt></a> <strong>Surface shader debugging workflow is much better</strong>.
+<ul>
+<li>No more “add #pragma debug, open compiled shader, remove tons of assembly” nonsense. Just one button in inspector, “Show generated code”.</li>
+<li>Generated surface shader code has some comments and better indentation. It is actually readable code now!</li>
+</ul></li>
+<li>Shader inspector improvements:
+<ul>
+<li>Errors list has scrollview when it’s long; can double click on errors to open correct file/line; can copy error text via context click menu; each error clearly indicates which platform it happened for.</li>
+<li>Investigating compiled shader is saner. One button to show compiled results for currently active platform; another button to show for all platforms.</li>
+</ul></li>
+<li>Misc bugfixes
+<ul>
+<li>Fixed multi_compile preprocessor directives in surface shaders sometimes producing very unexpected results.</li>
+<li>UTF8 BOM markers in .shader or .cginc files don’t produce errors.</li>
+<li>Shader include files can be at non-ASCII folders and filenames.</li>
+</ul></li>
+</ul>
+<h3 id=overview-of-how-it-works>Overview of how it works</h3>
+<ul>
+<li>Instead of compiling all shader variants for all possible platforms at import time:
+<ul>
+<li>Only do minimal processing of the shader (surface shader generation etc.).</li>
+<li>Actually compile the shader variants only when needed.</li>
+<li>Instead of typical work of compiling 100-1000 internal shaders at import time, this usually ends up compiling just a handful.</li>
+</ul></li>
+<li>At player build time, compile all the shader variants for that target platform
+<ul>
+<li>Cache identical shaders under Library/ShaderCache.</li>
+<li>So at player build time, only not-yet-ever-compiled shaders are compiled; and always only for the platforms that need them. If you never ever use Flash, for example, then none of shaders will be compiled for Flash <em>(as opposed to 4.3, where all shaders are compiled to all platforms, even if you never ever need them)</em>.</li>
+</ul></li>
+<li>Shader compiler (CgBatch) changes from being invoked for each shader import, into being run as a “service process”
+<ul>
+<li>Inter-process communication between compiler process &amp; Unity; using same infrastructure as for VersionControl plugins integration.</li>
+<li>At player build time, go wide and use all CPU cores to do shader compilation. Old compiler tried to internally multithread, but couldn’t due to some platforms not being thread-safe. Now, we just launch one compiler process per core and they can go fully parallel.</li>
+<li>Helps with out-of-memory crashes as well, since shader compiler process never needs to hold bazillion of shader variants in memory all at once - what it sees is one variant at a time.</li>
+</ul></li>
+</ul>
+<h3 id=how-it-was-developed>How it was developed</h3>
+<p>This was mostly a one-or-two person effort, and developed in several “sprints”. For this one we used our internal wiki for detailed task planning (Confluence “task lists”), but we could have just as well use Trello or something similar. Overall this
+was <em>probably</em> around two months of actual work – but spread out during much longer time. Initial sprint started in 2013 March, and landed in a “we think we can ship this tomorrow” state to 4.5 codebase just in time for 1st alpha build (2013 October). Minor tweaks and fixes were done during 4.5 alpha &amp; beta period. <em>Should ship anyday now, fingers crossed :)</em></p>
+<p>Surprisingly (or perhaps not), largest piece of work was around “how do you report errors in shaders?” area. Since now shader variants are imported only <em>on demand</em>, that means some errors can be discovered only “some time after initial import”. This is a by-design change, however - as the previous approach of “let’s compile all possible variants for all possible platforms” clearly does not scale in terms of iteration time. However, this “shader seemed like it did not have any errors, but whoops now it has” is clearly a potential downside. Oh well; as with almost everything there are upsides &amp; downsides.</p>
+<p>Most of development was done on a Unity 4.3-based branch, and after something was working we were sending off custom “4.3 + new shader importer” builds to the beta testing group. We were doing this before any 4.5 alpha even started to get early feedback. Perhaps the nicest feedback I ever got:</p>
+<blockquote>
+<p>I’ve now used the build for about a week and I’m completely blown away with how it has changed how I work with shaders.</p>
+<p>I can try out things way quicker.<br>
+I am no longer scared of making a typo in an include file.<br>
+These two combine into making me play around a LOT more when working.<br>
+Because of this I found out how to do fake HDR with filmic tonemapping [on my mobile target].</p>
+<p>The thought of going back to regular beta without this [shader compiler] really scares me ;)</p>
+</blockquote>
+<p>Anyhoo, here’s a dump of tasks from our wiki (all of them had little checkboxes that we’d tick off when done). As usual, “it basically works and is awesome!” was achieved after first week of work (1st sprint). What was left after that was “fix all the TODOs, do all the boring remaining work” etc.</p>
+<h3 id=2013-march-sprint>2013 March Sprint:</h3>
+<ul>
+<li>Make CgBatch a DLL
+<ul>
+<li>Run unit tests</li>
+<li>Import shaders from DLL</li>
+<li>Don’t use temp files all over the place</li>
+</ul></li>
+<li>Shader importer changes
+<ul>
+<li>Change surface shader part to only generate source code and not do any compilation</li>
+<li>Make a “Open surface compiler output” button</li>
+<li>At import time, do surface shader generation &amp; cache the result (serialize in Shader, editor only)</li>
+<li>Also process all CGINCLUDE blocks and actually do #includes at import time, and cache the result (after this, left with CGPROGRAM blocks, with no #include statements)</li>
+<li>ShaderLab::Pass needs to know it will have yet-uncompiled programs inside, and able to find appropriate CGPROGRAM block:
+<ul>
+<li>Add syntax to shaderlab, something like Pass { GpuProgramID int }</li>
+<li>Make CgBatch not do any compilation, just extract CGPROGRAM blocks, assign IDs to them, and replace them with “GpuProgramID xxx”</li>
+<li>“cache the result” as editor-only data in shader: map of snippet ID -&gt; CGPROGRAM block text</li>
+</ul></li>
+<li>CgBatch, add function to compile one shader variant (cg program block source + platform + keywords in, bytecode + errors out)</li>
+<li>Remove all #include handling from actual shader compilers in CgBatch</li>
+<li>Change output of single shader compilation to not be in shaderlab program/subprogram/bindings syntax, but to produce data directly. Shader code as a string, some virtual interface that would report all uniforms/textures/… for the reflection data.</li>
+</ul></li>
+<li>Compile shaders on demand
+<ul>
+<li>Data file format for gpu programs &amp; their params</li>
+<li>ShaderLab Pass has map: m_GpuProgramLookup (keywords -&gt; GPUProgram).</li>
+<li>GetMatchingSubProgram:
+<ul>
+<li>return one from m_GpuProgramLookup if found. Get from cache if found</li>
+<li>Compile program snippet if not found</li>
+<li>Write into cache</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id=2013-july-sprint>2013 July Sprint:</h3>
+<ul>
+<li>Pull and merge last 3 months of trunk</li>
+<li>Player build pipeline
+<ul>
+<li>When building player/bundle, compile all shader snippets and include them</li>
+<li>exclude_renderers/include_renderers, trickle down to shader snippet data</li>
+<li>Do that properly when building for a “no target” (everything in) platforms
+<ul>
+<li>Snippets are saved in built-in resource files (needed? not?)</li>
+</ul></li>
+<li>Make building built-in resource files work
+<ul>
+<li>DX11 9.x shaders aren’t included</li>
+<li>Make building editor resource file work</li>
+</ul></li>
+<li>Multithread the “missing combinations” compilation while building the player.
+<ul>
+<li>Ensure thread safety in snippet cache</li>
+</ul></li>
+</ul></li>
+<li>Report errors sensibly</li>
+<li>Misc
+<ul>
+<li>Each shader snippet needs to know keyword permutation possibly needed: CgBatch extracts that, serialized in snippet (like vector&lt; vector <string> &gt;)</string></li>
+<li>Fix GLSLPROGRAM snippets</li>
+<li>Separate “compiler version” from “cgbatch version”; embed compiler version into snippet data &amp; hash</li>
+<li>Fix UsePass</li>
+</ul></li>
+</ul>
+<h3 id=2013-august-sprint>2013 August Sprint:</h3>
+<ul>
+<li>Move to a 4.3-based branch</li>
+<li>Gfx test failures
+<ul>
+<li>Metro, failing shadow related tests</li>
+<li>Flash, failing custom lightmap function test</li>
+</ul></li>
+<li>Error reporting: Figure out how to deal with late-discovered errors. If there’s bad syntax, typo etc.; effectively shader is “broken”. If a backend shader compiler reports an error:
+<ul>
+<li>Return pink “error shader” for all programs ­ i.e. if any of vertex/pixel/… had an error, we need to use the pink shaders for all of them.</li>
+<li>Log the error to console.</li>
+<li>Add error to the shader, so it’s displayed in the editor. Can’t serialize shader at that time, so add shaders to some database under Library (guid­&gt;errors).
+<ul>
+<li>SQLite database with shader GUID -&gt; set of errors.</li>
+</ul></li>
+<li>Add shader to list of “shaders with errors”; after rendering loop is done go over them and make them use pink error shader. (Effectively this does not change current (4.2) behavior: if you have a syntax error, shader is pink).</li>
+</ul></li>
+<li>Misc
+<ul>
+<li>Fix shader Fallback when it pulls in shader snippets</li>
+<li>“Mesh components required by shader” part at build time - need to figure them out! Problem; needs to compile the variants to even know it.</li>
+<li>Better #include processing, now includes same files multiple times</li>
+</ul></li>
+<li>Make CgBatch again into an executable (for future 64 bit mac…)
+<ul>
+<li>Adapt ExternalProcess for all communication</li>
+<li>Make unit tests work again</li>
+<li>Remove all JobScheduler/Mutex stuff from CgBatch; spawn multiple processes instead</li>
+<li>Feels like is leaking memory, have to check</li>
+</ul></li>
+<li>Shader Inspector
+<ul>
+<li>Only show “open surface shader” button for surface shaders</li>
+<li>“open compiled shader” is useless now, doesn’t display shader asm. Need to redo it somehow.</li>
+</ul></li>
+</ul>
+<h3 id=2013-september-sprint>2013 September Sprint:</h3>
+<ul>
+<li>Make ready for 4.5 trunk
+<ul>
+<li>Merge with current trunk</li>
+<li>Make TeamCity green</li>
+<li>Land to trunk!</li>
+</ul></li>
+<li>Make 4.3-based TeamCity green
+<ul>
+<li>Build Builtin Resources, fails with shader compiler RPC errors GL-only gfx test failures (CgProps test)</li>
+<li>GLSLPROGRAM preprocessing broken, add tests</li>
+<li>Mobile gfx test failures in ToonyColors</li>
+</ul></li>
+<li>Error reporting and #include handling
+<ul>
+<li>Fixing line number reporting once and for all, with tests.</li>
+<li>Report errors on correct .cginc files and correct lines on them</li>
+<li>Solve multiple includes &amp; preprocessor affecting includes this way: at snippet extraction time, do not do include processing! Just hash include contents and feed that into the snippet hash.</li>
+<li>UTF8 BOM in included files confusing some compilers</li>
+<li>Unicode paths to files confusing some compilers</li>
+<li>After shader import, immediately compile at least one variant, so that any stupid errors are caught &amp; displayed immediately.</li>
+</ul></li>
+<li>Misc
+<ul>
+<li>Make flags like “does this shader support shadows?” work with new gpu programs coming in</li>
+<li>Check up case 550197</li>
+<li>multi_compile vs. surface shaders, fix that</li>
+</ul></li>
+<li>Shader Inspector
+<ul>
+<li>Better display of errors (lines &amp; locations)</li>
+<li>Button to “exhaustively check shader” - compiles all variants / platforms.</li>
+<li>Shader snippet / total size stats</li>
+</ul></li>
+</ul>
+<h3 id=what-s-next>What’s next?</h3>
+<p>Some more in shader compilation land will go into Unity 5.0 and 5.x. Outline of our another wiki page describing 5.x related work:</p>
+<ul>
+<li>4.5 fixes “compiling shaders is slow” problem.</li>
+<li>Need to fix “New standard shader produces very large shader files” <em>(due to lots of variants - 5000 variants, 100MB)</em> problem.</li>
+<li>Need to fix “how to do shader LOD with new standard shader” problem.</li>
+</ul>
+ </section>
+ <footer>
+ 
+ <ul class=pager>
+ 
+ <li class=previous><a href=https://aras-p.info/blog/2014/04/05/visuals-in-some-great-games/><span aria-hidden=true>←</span> Older</a></li>
+ 
+ 
+ <li class=next><a href=https://aras-p.info/blog/2014/05/31/rant-about-rants-about-opengl/>Newer <span aria-hidden=true>→</span></a></li>
+ 
+ </ul>
+ 
+ <hr>
+<h5>Possibly Related Posts</h5>
+<ul>
+ 
+ <li><a href=https://aras-p.info/blog/2020/04/11/Various-details-about-Handles/>Various details about Handles</a>, from 2020 April</li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/01/04/Fourteen-years-at-Unity-o_O/>Fourteen years at Unity o_O</a>, from 2020 January</li>
+ 
+ <li><a href=https://aras-p.info/blog/2019/06/21/Replacing-a-live-system-is-really-hard/>Replacing a live system is really hard</a>, from 2019 June</li>
+ 
+</ul>
+ 
+ <hr>
+ <div class="feedback small">
+ Have <b>feedback on this post</b>? Let me know on <a href=mailto:aras@nesnausk.org>email</a>, <a href=https://mastodon.gamedev.place/@aras>mastodon</a> or <a href=https://twitter.com/aras_p>twitter</a>.
+ </div>
+ 
+ </footer>
+</article>
+ </div>
+ <aside class="col-md-3 sidebar">
+ <h3>Recent Posts</h3>
+<ul>
+ 
+ <li><a href=https://aras-p.info/blog/2021/01/18/Texture-Compression-on-Apple-M1/>Texture Compression on Apple M1</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/12/08/Texture-Compression-in-2020/>Texture Compression in 2020</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/07/26/Black-Hole-Demo/>Black Hole Demo</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/04/11/Various-details-about-Handles/>Various details about Handles</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2020/01/04/Fourteen-years-at-Unity-o_O/>Fourteen years at Unity o_O</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2019/11/18/Its-Raining-Cubes/>It's Raining Cubes</a></li>
+ 
+ <li><a href=https://aras-p.info/blog/2019/09/28/Clang-Build-Analyzer/>Clang Build Analyzer</a></li>
+ 
+</ul>
+<h5><a href=https://aras-p.info/all-posts>All Posts</a></h5>
+ <h3>Categories</h3>
+ <ul>
+ 
+ <li><a href=https://aras-p.info/tags/code>code (102)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/compilers>compilers (16)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/conferences>conferences (10)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/d3d>d3d (20)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/demos>demos (39)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/devtools>devtools (22)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/energy>energy (1)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/games>games (20)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/giving>giving (3)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/gpu>gpu (40)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/mobile>mobile (7)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/opengl>opengl (19)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/papers>papers (12)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/personal>personal (13)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/random>random (64)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/rant>rant (54)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/rendering>rendering (51)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/travel>travel (6)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/unity>unity (62)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/vulkan>vulkan (3)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/web>web (2)</a></li>
+ 
+ <li><a href=https://aras-p.info/tags/work>work (64)</a></li>
+ 
+ </ul>
+ </aside>
+ </div>
+ </main>
+ <footer class="container global-footer">
+ <div class="copyright-note pull-left">
+ <small>Text content © Aras Pranckevičius. Code snippets are public domain, unless specified otherwise.</small>
+ </div>
+ <div class="sns-links hidden-print">
+ 
+ <a href=mailto:aras@nesnausk.org>
+ <i class=icon-mail></i>
+ </a>
+ 
+ 
+ <a href=https://twitter.com/aras_p target=_blank>
+ <i class=icon-twitter></i>
+ </a>
+ 
+ 
+ <a href=https://github.com/aras-p target=_blank>
+ <i class=icon-github-circled></i>
+ </a>
+ 
+</div>
+ </footer>
+ 
+ 
+ 
+ 
+ 
+ 
+<div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div>

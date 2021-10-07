@@ -1,0 +1,42 @@
+<html class=hb-loaded><!--
+ Page saved with SingleFile 
+ url: http://www.humus.name/temp/Linearize%20depth.txt 
+ saved date: Thu Jul 15 2021 19:06:04 GMT+0800 (中国标准时间)
+--><meta charset=utf-8><style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style><link type=image/x-icon rel="shortcut icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><style>.sf-hidden{display:none!important}</style><link rel=canonical href=http://www.humus.name/temp/Linearize%20depth.txt><body huaban_collector_injected=true><pre style=word-wrap:break-word;white-space:pre-wrap>Some math I did ... (not 100% verified, but looks like it works)
+
+n = near
+f = far
+z = depth buffer Z-value
+EZ  = eye Z value
+LZ  = depth buffer Z-value remapped to a linear [0..1] range (near plane to far plane)
+LZ2 = depth buffer Z-value remapped to a linear [0..1] range (eye to far plane)
+
+
+DX:
+EZ  = (n * f) / (f - z * (f - n))
+LZ  = (eyeZ - n) / (f - n) = z / (f - z * (f - n))
+LZ2 = eyeZ / f = n / (f - z * (f - n))
+
+
+GL:
+EZ  = (2 * n * f) / (f + n - z * (f - n))
+LZ  = (eyeZ - n) / (f - n) = n * (z + 1.0) / (f + n - z * (f - n))
+LZ2 = eyeZ / f = (2 * n) / (f + n - z * (f - n))
+
+
+
+LZ2 in two instructions:
+LZ2 = 1.0 / (c0 * z + c1)
+
+DX:
+  c1 = f / n
+  c0 = 1.0 - c1
+
+GL:
+  c0 = (1 - f / n) / 2
+  c1 = (1 + f / n) / 2
+
+
+-------------------
+http://www.humus.ca
+</pre><div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div>
