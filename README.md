@@ -7,7 +7,7 @@
 
 ![](RTR4-Cover.jpg)
 
-# Content | 目录
+# Content
 
 - [Chapter 1-24](https://github.com/QianMo/Real-Time-Rendering-4th-Bibliography-Collection/tree/main/Chapter%201-24) : 1956+ Files
     - [Chapter 1 Introduction](https://github.com/QianMo/Real-Time-Rendering-4th-Bibliography-Collection/tree/main/Chapter%201-24)
@@ -42,6 +42,12 @@
     - 14+ Files
 
     <br>
+
+# Preview
+
+![](RTR4-Preview.gif)
+
+
 
 # References
 [1] [http://www.realtimerendering.com/refs.html](http://www.realtimerendering.com/refs.html)
