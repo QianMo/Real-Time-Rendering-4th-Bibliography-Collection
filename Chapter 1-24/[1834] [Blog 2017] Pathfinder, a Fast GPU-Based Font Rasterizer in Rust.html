@@ -1,0 +1,311 @@
+<!DOCTYPE html> <html lang=en class=hb-loaded style><!--
+ Page saved with SingleFile 
+ url: https://web.archive.org/web/20210201150634/https://pcwalton.github.io/2017/02/14/pathfinder.html 
+ saved date: Thu Jul 22 2021 00:21:27 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<style>@-moz-keyframes bounce_spinningSquaresG{0%{-moz-transform:scale(1);background-color:#000}100%{-moz-transform:scale(.3) rotate(90deg);background-color:#fff}}@-webkit-keyframes bounce_spinningSquaresG{0%{-webkit-transform:scale(1);background-color:#000}100%{-webkit-transform:scale(.3) rotate(90deg);background-color:#fff}}@-ms-keyframes bounce_spinningSquaresG{0%{-ms-transform:scale(1);background-color:#000}100%{-ms-transform:scale(.3) rotate(90deg);background-color:#fff}}@-o-keyframes bounce_spinningSquaresG{0%{-o-transform:scale(1);background-color:#000}100%{-o-transform:scale(.3) rotate(90deg);background-color:#fff}}@keyframes bounce_spinningSquaresG{0%{transform:scale(1);background-color:#000}100%{transform:scale(.3) rotate(90deg);background-color:#fff}}#wm-ipp-base{min-height:65px;padding:0;margin:0;border:0;background:none transparent}#wm-ipp{z-index:2147483647}#wm-ipp{font-family:Lucida Grande,Helvetica,Arial,sans-serif;font-size:12px;line-height:1.2;letter-spacing:0;width:auto;height:auto;max-width:none;max-height:none;min-width:0!important;min-height:0;outline:0;float:none;text-align:left;border:0;color:#000;text-indent:0;background:0}#donato{transition:height .5s;height:0;margin:0;padding:0}#donato #donato-base{width:100%;height:100%;bottom:0;margin:0;padding:0;position:absolute;z-index:2147483639}</style>
+<meta http-equiv=X-UA-Compatible content="IE=edge">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<style>body,h1,h2,p,ol,ul{margin:0;padding:0}body{font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";color:#111;background-color:#fdfdfd;-webkit-text-size-adjust:100%;-webkit-font-feature-settings:"kern" 1;-moz-font-feature-settings:"kern" 1;-o-font-feature-settings:"kern" 1;font-feature-settings:"kern" 1;font-kerning:normal;display:flex;min-height:100vh;flex-direction:column}h1,h2,p,ul,ol{margin-bottom:15px}main{display:block}img{max-width:100%;vertical-align:middle}ul,ol{margin-left:30px}h1,h2{font-weight:400}a{color:#2a7ae2;text-decoration:none}a:visited{color:#1756a9}a:hover{color:#111;text-decoration:underline}.social-media-list a:hover{text-decoration:none}.social-media-list a:hover .username{text-decoration:underline}code{font-size:15px;border:1px solid #e8e8e8;border-radius:3px;background-color:#eef}code{padding:1px 5px}.wrapper{max-width:-webkit-calc(800px - (30px * 2));max-width:calc(800px - (30px * 2));margin-right:auto;margin-left:auto;padding-right:30px;padding-left:30px}@media screen and (max-width:800px){.wrapper{max-width:-webkit-calc(800px - (30px));max-width:calc(800px - (30px));padding-right:15px;padding-left:15px}}.wrapper:after,.footer-col-wrapper:after{content:"";display:table;clear:both}.svg-icon{width:16px;height:16px;display:inline-block;fill:#828282;padding-right:5px;vertical-align:text-top}.social-media-list li+li{padding-top:5px}.site-header{border-top:5px solid #424242;border-bottom:1px solid #e8e8e8;min-height:55.95px;position:relative}.site-title{font-size:26px;font-weight:300;line-height:54px;letter-spacing:-1px;margin-bottom:0;float:left}.site-title,.site-title:visited{color:#424242}.site-nav{float:right;line-height:54px}.site-nav .page-link{color:#111;line-height:1.5}.site-nav .page-link:not(:last-child){margin-right:20px}@media screen and (max-width:600px){.site-nav{position:absolute;top:9px;right:15px;background-color:#fdfdfd;border:1px solid #e8e8e8;border-radius:5px;text-align:right}.site-nav label[for="nav-trigger"]{display:block;float:right;width:36px;height:36px;z-index:2;cursor:pointer}.site-nav .menu-icon>svg{fill:#424242}.site-nav input~.trigger{clear:both;display:none}.site-nav input:checked~.trigger{display:block;padding-bottom:5px}.site-nav .page-link{display:block;padding:5px 10px;margin-left:20px}.site-nav .page-link:not(:last-child){margin-right:0}}.site-footer{border-top:1px solid #e8e8e8;padding:30px 0}.footer-heading{font-size:18px;margin-bottom:15px}.contact-list,.social-media-list{list-style:none;margin-left:0}.footer-col-wrapper{font-size:15px;color:#828282;margin-left:-15px}.footer-col{float:left;margin-bottom:15px;padding-left:15px}.footer-col-1{width:-webkit-calc(35% - (30px / 2));width:calc(35% - (30px / 2))}.footer-col-2{width:-webkit-calc(20% - (30px / 2));width:calc(20% - (30px / 2))}.footer-col-3{width:-webkit-calc(45% - (30px / 2));width:calc(45% - (30px / 2))}@media screen and (max-width:800px){.footer-col-1,.footer-col-2{width:-webkit-calc(50% - (30px / 2));width:calc(50% - (30px / 2))}.footer-col-3{width:-webkit-calc(100% - (30px / 2));width:calc(100% - (30px / 2))}}@media screen and (max-width:600px){.footer-col{float:none;width:-webkit-calc(100% - (30px / 2));width:calc(100% - (30px / 2))}}.page-content{padding:30px 0;flex:1}.post-meta{font-size:14px;color:#828282}.post-header{margin-bottom:30px}.post-title{font-size:42px;letter-spacing:-1px;line-height:1}@media screen and (max-width:800px){.post-title{font-size:36px}}.post-content{margin-bottom:30px}.post-content h2{font-size:32px}@media screen and (max-width:800px){.post-content h2{font-size:28px}}</style>
+<link type=application/atom+xml rel=alternate href=https://web.archive.org/web/20210201150634/https://pcwalton.github.io/feed.xml title=pcwalton>
+<style>#MathJax_Message{position:fixed;left:1px;bottom:2px;background-color:#E6E6E6;border:1px solid #959595;margin:0px;padding:2px 8px;z-index:102;color:black;font-size:80%;width:auto;white-space:nowrap}@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style><link type=image/x-icon rel="shortcut icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><style>.sf-hidden{display:none!important}</style><link rel=canonical href=https://web.archive.org/web/20210201150634/https://pcwalton.github.io/2017/02/14/pathfinder.html></head>
+<body huaban_collector_injected=true><div id=MathJax_Message style=display:none></div>
+<style class=sf-hidden>body{margin-top:0!important;padding-top:0!important}</style>
+<div id=wm-ipp-base lang=en style=display:block;direction:ltr><template shadowmode=closed><div id=wm-ipp style=position:fixed;left:0px;top:0px;right:0px;display:none>
+</div><style>.__wb_overlay{filter:alpha(opacity=60);opacity:.6;-moz-opacity:.6;opacity:.6;background-color:#000;position:fixed;width:100%;height:100%;top:0px;left:0px;padding:0px!important;border:0px!important;margin:0px!important;border-radius:0px!important;z-index:2147483643!important}#__wb_record_overlay_div{cursor:wait!important}.__wb_record_content{opacity:1;position:fixed;top:50%;left:50%;margin:0px!important;padding:0px!important;background-color:#fff!important;border-radius:8px;z-index:2147483644!important;box-shadow:0 0 30px 5px #000;-moz-box-shadow:0 0 30px 5px #000;-webkit-box-shadow:0 0 30px 5px #000}#__wb_record_content_loader{cursor:wait!important;padding-top:30px!important;margin-left:-287px!important;margin-top:-177px!important;width:574px!important;height:355px!important}#__wb_record_content_done{margin-left:-427px!important;margin-top:-177px!important;width:855px!important;height:355px!important}.__wb_record_content>*{margin:auto!important;display:block!important;text-align:center!important;font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif!important}.__wb_record_content>wb_h1{font-size:36px!important;color:#222!important;margin:0px 0px 0px 0px!important;padding:0px!important;line-height:2em;font-weight:normal!important;width:auto!important;height:auto!important}.__wb_record_content>wb_p{font-size:17px!important;color:#222!important;margin:8px 0px 8px 0px!important;padding:0px!important;line-height:2em}.__wb_record_content>#_wb_logo{margin-bottom:10px!important}.__wb_record_content>#_wb_spinner{margin-top:30px!important;margin-bottom:30px!important}.__wb_record_content>#_wb_curr_url{text-decoration:underline!important;font-weight:bold!important}#__wb_record_content_done>#__wb_link{font-size:20px!important;border:1px!important;border-color:#aaa!important;border-style:solid!important;padding:3px!important;text-align:center!important;width:80%!important;height:auto!important}#__wb_record_content_done>#__wb_link:focus{outline:0px!important;border-color:#428bca!important}#__wb_record_content_done>#__wb_donate_close{font-size:18px!important;width:auto!important;float:right;display:inline-block;margin:0px!important;padding:8px 8px 0px 0px!important}#__wb_donate_close>#__wb_record_done_close{cursor:pointer!important;display:inline-block;vertical-align:bottom!important}#__wb_record_content_done>#__wb_donate_close a{color:#428bca!important}#__wb_record_content_done>#__wb_donate_close a:link{color:#428bca!important;text-decoration:none!important;margin-right:16px!important}#__wb_record_content_done>#__wb_donate_close a:visited{color:#428bca!important}#__wb_record_content_done>#__wb_donate_close a:hover{color:#00b1f7!important}#__wb_spinningSquaresG{position:relative;width:240px;height:20px;padding:0px!important;margin:30px 0px 30px 160px!important;border:0px!important;border-radius:0px!important}.__wb_spinningSquaresG{margin:0px!important;padding:0px!important;border:0px!important;border-radius:0px!important;position:absolute;top:0;background-color:#000;width:22px;height:22px;-moz-animation-name:bounce_spinningSquaresG;-moz-animation-duration:1.9s;-moz-animation-iteration-count:infinite;-moz-animation-direction:linear;-moz-transform:scale(.3);-webkit-animation-name:bounce_spinningSquaresG;-webkit-animation-duration:1.9s;-webkit-animation-iteration-count:infinite;-webkit-animation-direction:linear;-webkit-transform:scale(.3);-ms-animation-name:bounce_spinningSquaresG;-ms-animation-duration:1.9s;-ms-animation-iteration-count:infinite;-ms-animation-direction:linear;-ms-transform:scale(.3);-o-animation-name:bounce_spinningSquaresG;-o-animation-duration:1.9s;-o-animation-iteration-count:infinite;-o-animation-direction:linear;-o-transform:scale(.3);animation-name:bounce_spinningSquaresG;animation-duration:1.9s;animation-iteration-count:infinite;animation-direction:linear;transform:scale(.3)}#__wb_spinningSquaresG_1{left:0;-moz-animation-delay:.76s;-webkit-animation-delay:.76s;-ms-animation-delay:.76s;-o-animation-delay:.76s;animation-delay:.76s}#__wb_spinningSquaresG_2{left:30px;-moz-animation-delay:.95s;-webkit-animation-delay:.95s;-ms-animation-delay:.95s;-o-animation-delay:.95s;animation-delay:.95s}#__wb_spinningSquaresG_3{left:60px;-moz-animation-delay:1.14s;-webkit-animation-delay:1.14s;-ms-animation-delay:1.14s;-o-animation-delay:1.14s;animation-delay:1.14s}#__wb_spinningSquaresG_4{left:90px;-moz-animation-delay:1.33s;-webkit-animation-delay:1.33s;-ms-animation-delay:1.33s;-o-animation-delay:1.33s;animation-delay:1.33s}#__wb_spinningSquaresG_5{left:120px;-moz-animation-delay:1.52s;-webkit-animation-delay:1.52s;-ms-animation-delay:1.52s;-o-animation-delay:1.52s;animation-delay:1.52s}#__wb_spinningSquaresG_6{left:150px;-moz-animation-delay:1.71s;-webkit-animation-delay:1.71s;-ms-animation-delay:1.71s;-o-animation-delay:1.71s;animation-delay:1.71s}#__wb_spinningSquaresG_7{left:180px;-moz-animation-delay:1.9s;-webkit-animation-delay:1.9s;-ms-animation-delay:1.9s;-o-animation-delay:1.9s;animation-delay:1.9s}#__wb_spinningSquaresG_8{left:210px;-moz-animation-delay:2.09s;-webkit-animation-delay:2.09s;-ms-animation-delay:2.09s;-o-animation-delay:2.09s;animation-delay:2.09s}@-moz-keyframes bounce_spinningSquaresG{0%{-moz-transform:scale(1);background-color:#000}100%{-moz-transform:scale(.3) rotate(90deg);background-color:#fff}}@-webkit-keyframes bounce_spinningSquaresG{0%{-webkit-transform:scale(1);background-color:#000}100%{-webkit-transform:scale(.3) rotate(90deg);background-color:#fff}}@-ms-keyframes bounce_spinningSquaresG{0%{-ms-transform:scale(1);background-color:#000}100%{-ms-transform:scale(.3) rotate(90deg);background-color:#fff}}@-o-keyframes bounce_spinningSquaresG{0%{-o-transform:scale(1);background-color:#000}100%{-o-transform:scale(.3) rotate(90deg);background-color:#fff}}@keyframes bounce_spinningSquaresG{0%{transform:scale(1);background-color:#000}100%{transform:scale(.3) rotate(90deg);background-color:#fff}}#wm-ipp-base{min-height:65px;padding:0;margin:0;border:0;background:none transparent}#wm-ipp{z-index:2147483647}#wm-ipp,#wm-ipp *{font-family:Lucida Grande,Helvetica,Arial,sans-serif;font-size:12px;line-height:1.2;letter-spacing:0;width:auto;height:auto;max-width:none;max-height:none;min-width:0!important;min-height:0;outline:0;float:none;text-align:left;border:0;color:#000;text-indent:0;position:initial;background:0}#wm-ipp div,#wm-ipp canvas{display:block}#wm-ipp div,#wm-ipp tr,#wm-ipp td,#wm-ipp a,#wm-ipp form{padding:0;margin:0;border:0;border-radius:0;background-color:transparent;background-image:none;height:auto}#wm-ipp table{border:0;border-collapse:collapse;margin:0;padding:0;width:auto;font-size:inherit}#wm-ipp form input{padding:1px!important;height:auto;display:inline;margin:0;color:#000;background:none #fff;border:1px solid #666}#wm-ipp form input[type=submit]{padding:0 8px!important;margin:1px 0 1px 5px!important;width:auto!important;border:1px solid #000!important;background:#fff!important;color:#000!important}#wm-ipp a{display:inline}#wm-ipp a:hover{text-decoration:underline}#wm-ipp a.wm-btn:hover{text-decoration:none;color:#ff0!important}#wm-ipp a.wm-btn:hover span{color:#ff0!important}#wm-ipp #wm-ipp-inside{margin:0 6px;border:5px solid #000;border-top:0;background-color:rgba(255,255,255,0.9);-moz-box-shadow:1px 1px 4px #333;-webkit-box-shadow:1px 1px 4px #333;box-shadow:1px 1px 4px #333;border-radius:0 0 8px 8px}#wm-ipp #wm-logo{padding:0 10px;vertical-align:middle;min-width:110px;width:15%}#wm-ipp table tr::before,#wm-ipp table tr::after{margin:0;height:auto}#wm-ipp table.c{vertical-align:top;margin-left:4px}#wm-ipp table.c td{border:none!important}#wm-ipp .c td.u{padding:3px 0!important;text-align:center}#wm-ipp .c td.n{padding:0 0 0 5px!important;vertical-align:bottom}#wm-ipp .c td.n a{text-decoration:none;color:#33f;font-weight:bold}#wm-ipp .c td.n td.b{padding:0 6px 0 0!important;text-align:right!important;overflow:visible;white-space:nowrap;color:#99a;vertical-align:middle}#wm-ipp .c td.n tr.y td.b{padding:0 6px 2px 0!important}#wm-ipp .c td.n td.c{background:#000;color:#ff0;font-weight:bold;padding:0!important;text-align:center}#wm-ipp.hi .c td.n td.c{color:#ec008c}#wm-ipp .c td.n td.f{padding:0 0 0 6px!important;text-align:left!important;overflow:visible;white-space:nowrap;color:#99a;vertical-align:middle}#wm-ipp .c td.n tr.m td{text-transform:uppercase;white-space:nowrap;padding:2px 0}#wm-ipp .c td.s{padding:0 5px 0 0!important;text-align:center;vertical-align:bottom}#wm-ipp #wm-nav-captures{white-space:nowrap}#wm-ipp .c td.s a.t{color:#33f;font-weight:bold;line-height:1.8}#wm-ipp .c td.s div.r{color:#666;font-size:9px;white-space:nowrap}#wm-ipp .c td.k{vertical-align:bottom;padding-bottom:2px}#wm-ipp .c td.s{padding:0 5px 2px 0!important}#wm-ipp td#displayMonthEl{padding:2px 0!important}#wm-ipp td#displayYearEl{padding:0 0 2px 0!important}div#wm-ipp-sparkline{position:relative;white-space:nowrap;background-color:#fff;cursor:pointer;line-height:.9}#sparklineImgId,#wm-sparkline-canvas{position:relative;z-index:9012;max-width:none}#wm-ipp-sparkline div.yt{position:absolute;z-index:9010!important;background-color:#ff0!important;top:0}#wm-ipp-sparkline div.mt{position:absolute;z-index:9013!important;background-color:#ec008c!important;top:0}#wm-ipp .r{position:relative}#wm-ipp .r a{color:#33f;border:0;position:relative;background-color:transparent;background-repeat:no-repeat!important;background-position:100% 100%!important;text-decoration:none}#wm-ipp #wm-capinfo{border-radius:0 0 4px 4px}#wm-ipp #wm-capinfo .c-logo{display:block;float:left;margin-right:3px;width:90px;min-height:90px;max-height:290px;border-radius:45px;overflow:hidden;background-position:50%;background-size:auto 90px;box-shadow:0 0 2px 2px rgba(208,208,208,128) inset}#wm-ipp #wm-capinfo .c-logo span{display:inline-block}#wm-ipp #wm-capinfo .c-logo img{height:90px;position:relative;left:-50%}#wm-ipp #wm-capinfo .wm-title{font-size:130%}#wm-ipp #wm-capinfo a.wm-selector{display:inline-block;color:#aaa;text-decoration:none!important;padding:2px 8px}#wm-ipp #wm-capinfo a.wm-selector.selected{background-color:#666}#wm-ipp #wm-capinfo a.wm-selector:hover{color:#fff}#wm-ipp #wm-capinfo.notice-only #wm-capinfo-collected-by,#wm-ipp #wm-capinfo.notice-only #wm-capinfo-timestamps{display:none}#wm-ipp #wm-capinfo #wm-capinfo-notice .wm-capinfo-content{background-color:#ff0;padding:5px;font-size:14px;text-align:center}#wm-ipp #wm-capinfo #wm-capinfo-notice .wm-capinfo-content *{font-size:14px;text-align:center}#wm-ipp #wm-expand{right:1px;bottom:-1px;color:#fff;background-color:#666!important;padding:0 5px 0 3px!important;border-radius:3px 3px 0 0!important}#wm-ipp #wm-expand span{color:#fff}#wm-ipp #wm-expand #wm-expand-icon{display:inline-block;transition:transform .5s;transform-origin:50% 45%}#wm-ipp #wm-expand.wm-open #wm-expand-icon{transform:rotate(180deg)}#wm-ipp #wmtb{text-align:right}#wm-ipp #wmtb #wmtbURL{width:calc(100% - 45px)}#wm-ipp #wm-graph-anchor{border-right:1px solid #ccc}html.wb-highlight{box-shadow:inset 0 0 0 3px #a50e3a!important}.wb-highlight{outline:3px solid #a50e3a!important}#wm-ipp-print{display:none!important}@media (min-width:946px){#wm-ipp #wm-graph-anchor{display:block!important}}@media (max-width:945px){#wm-ipp #wm-graph-anchor{display:none!important}#wm-ipp table.c{width:85%;width:calc(100% - 131px)}}@media (max-width:1118px){#wm-logo{display:none!important}}#wm-btns{white-space:nowrap}#wm-btns>#wm-save-snapshot-open{margin-right:7px;top:-6px}#wm-btns>#wm-sign-in{box-sizing:content-box;display:none;margin-right:7px;top:-8px;border:2px #000 solid;border-radius:14px;padding-right:2px;padding-bottom:2px;width:11px;height:11px}#wm-btns>#wm-sign-in>.iconochive-person{font-size:12.5px}#wm-save-snapshot-open>.iconochive-web{color:#000;font-size:160%}#wm-ipp #wm-share{display:flex;align-items:flex-end;justify-content:space-between}#wm-share>#wm-screenshot{display:inline-block;margin-right:3px;visibility:hidden}#wm-screenshot>.iconochive-image{color:#000;font-size:160%}#wm-share>#wm-video{display:inline-block;margin-right:3px;visibility:hidden}#wm-video>.iconochive-movies{color:#000;display:inline-block;font-size:150%;margin-bottom:2px}#wm-btns>#wm-save-snapshot-in-progress{display:none;font-size:160%;opacity:.5;position:relative;margin-right:7px;top:-5px}#wm-btns>#wm-save-snapshot-success{display:none;color:green;position:relative;top:-7px}#wm-btns>#wm-save-snapshot-fail{display:none;color:red;position:relative;top:-7px}.wm-icon-screen-shot{background:url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjQgMjAiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Im0wIDBoMjR2MjBoLTI0eiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Im0xOC41NzIxNTI1IDE1Ljg3MzEzMTRoLTIuMjEzNzUxdi0yLjE2MTAwNDNoMi4yMTM3NTF6bS0zLjI2NDc3MDMgMGgtMi4yMTQ5MDI2di0yLjE2MTAwNDNoMi4yMTQ5MDI2em0zLjEyNjU2OTItMTEuNTY5OTY0Mjl2NS44MjU0MDU5OSAxLjUyNTI3OTNoLTE2Ljg2NjI5MDQ1di0xLjUyNTI3OTMtNS44MjU0MDU5OXptLTYuNDc5MDk3MSAxMS41Njk5NjQyOWgtMTAuMzU0NDg1NzZ2LTIuMTE2MDg4OWgxMC4zNTQ0ODU3NnptLTExLjk1NDg1NDMtMTMuMDczMTMxNHY2Ljc0NDIxMjgzIDcuNzIyNDQ2MTdoMjB2LTcuNzIyNDQ2MTctNi43NDQyMTI4M3oiIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMCAxOC4wNjcpIi8+PHJlY3QgZmlsbD0iIzMzMyIgaGVpZ2h0PSIxMCIgcng9IjEiIHN0cm9rZT0iIzMzMyIgd2lkdGg9IjE0LjkwNiIgeD0iOCIgeT0iOSIvPjxjaXJjbGUgY3g9IjE1LjQ1MyIgY3k9IjE0IiBmaWxsPSIjZmZmIiByPSIzLjQ5MSIvPjxjaXJjbGUgY3g9IjE1LjQ1MyIgY3k9IjE0IiBmaWxsPSIjMzMzIiByPSIxLjYwNCIvPjwvZz48L3N2Zz4=) no-repeat!important;background-size:contain!important;width:22px!important;height:19px!important;display:inline-block}#donato{transition:height .5s;height:0;margin:0;padding:0}body.wm-modal{height:auto!important;overflow:hidden!important}#donato #donato-base{width:100%;height:100%;bottom:0;margin:0;padding:0;position:absolute;z-index:2147483639}body.wm-modal #donato #donato-base{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483640}.wb-autocomplete-suggestions{font-family:Lucida Grande,Helvetica,Arial,sans-serif;font-size:12px;text-align:left;cursor:default;border:1px solid #ccc;border-top:0;background:#fff;box-shadow:-1px 1px 3px rgba(0,0,0,.1);position:absolute;display:none;z-index:2147483647;max-height:254px;overflow:hidden;overflow-y:auto;box-sizing:border-box}.wb-autocomplete-suggestion{position:relative;padding:0 .6em;line-height:23px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:1.02em;color:#333}.wb-autocomplete-suggestion b{font-weight:bold}.wb-autocomplete-suggestion.selected{background:#f0f0f0}</style><style>[class^="iconochive-"],[class*=" iconochive-"]{font-family:'Iconochive-Regular'!important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.iconochive-Uplevel:before{content:"\21b5"}.iconochive-exit:before{content:"\1f6a3"}.iconochive-beta:before{content:"\3b2"}.iconochive-logo:before{content:"\1f3db"}.iconochive-audio:before{content:"\1f568"}.iconochive-movies:before{content:"\1f39e"}.iconochive-software:before{content:"\1f4be"}.iconochive-texts:before{content:"\1f56e"}.iconochive-etree:before{content:"\1f3a4"}.iconochive-image:before{content:"\1f5bc"}.iconochive-web:before{content:"\1f5d4"}.iconochive-collection:before{content:"\2211"}.iconochive-folder:before{content:"\1f4c2"}.iconochive-data:before{content:"\1f5c3"}.iconochive-tv:before{content:"\1f4fa"}.iconochive-article:before{content:"\1f5cf"}.iconochive-question:before{content:"\2370"}.iconochive-question-dark:before{content:"\3f"}.iconochive-info:before{content:"\69"}.iconochive-info-small:before{content:"\24d8"}.iconochive-comment:before{content:"\1f5e9"}.iconochive-comments:before{content:"\1f5ea"}.iconochive-person:before{content:"\1f464"}.iconochive-people:before{content:"\1f465"}.iconochive-eye:before{content:"\1f441"}.iconochive-rss:before{content:"\221e"}.iconochive-time:before{content:"\1f551"}.iconochive-quote:before{content:"\275d"}.iconochive-disc:before{content:"\1f4bf"}.iconochive-tv-commercial:before{content:"\1f4b0"}.iconochive-search:before{content:"\1f50d"}.iconochive-search-star:before{content:"\273d"}.iconochive-tiles:before{content:"\229e"}.iconochive-list:before{content:"\21f6"}.iconochive-list-bulleted:before{content:"\2317"}.iconochive-latest:before{content:"\2208"}.iconochive-left:before{content:"\2c2"}.iconochive-right:before{content:"\2c3"}.iconochive-left-solid:before{content:"\25c2"}.iconochive-right-solid:before{content:"\25b8"}.iconochive-up-solid:before{content:"\25b4"}.iconochive-down-solid:before{content:"\25be"}.iconochive-dot:before{content:"\23e4"}.iconochive-dots:before{content:"\25a6"}.iconochive-columns:before{content:"\25af"}.iconochive-sort:before{content:"\21d5"}.iconochive-atoz:before{content:"\1f524"}.iconochive-ztoa:before{content:"\1f525"}.iconochive-upload:before{content:"\1f4e4"}.iconochive-download:before{content:"\1f4e5"}.iconochive-favorite:before{content:"\2605"}.iconochive-heart:before{content:"\2665"}.iconochive-play:before{content:"\25b6"}.iconochive-play-framed:before{content:"\1f3ac"}.iconochive-fullscreen:before{content:"\26f6"}.iconochive-mute:before{content:"\1f507"}.iconochive-unmute:before{content:"\1f50a"}.iconochive-share:before{content:"\1f381"}.iconochive-edit:before{content:"\270e"}.iconochive-reedit:before{content:"\2710"}.iconochive-gear:before{content:"\2699"}.iconochive-remove-circle:before{content:"\274e"}.iconochive-plus-circle:before{content:"\1f5d6"}.iconochive-minus-circle:before{content:"\1f5d5"}.iconochive-x:before{content:"\1f5d9"}.iconochive-fork:before{content:"\22d4"}.iconochive-trash:before{content:"\1f5d1"}.iconochive-warning:before{content:"\26a0"}.iconochive-flash:before{content:"\1f5f2"}.iconochive-world:before{content:"\1f5fa"}.iconochive-lock:before{content:"\1f512"}.iconochive-unlock:before{content:"\1f513"}.iconochive-twitter:before{content:"\1f426"}.iconochive-facebook:before{content:"\66"}.iconochive-googleplus:before{content:"\67"}.iconochive-reddit:before{content:"\1f47d"}.iconochive-tumblr:before{content:"\54"}.iconochive-pinterest:before{content:"\1d4df"}.iconochive-popcorn:before{content:"\1f4a5"}.iconochive-email:before{content:"\1f4e7"}.iconochive-embed:before{content:"\1f517"}.iconochive-gamepad:before{content:"\1f579"}.iconochive-Zoom_In:before{content:"\2b"}.iconochive-Zoom_Out:before{content:"\2d"}.iconochive-RSS:before{content:"\1f4e8"}.iconochive-Light_Bulb:before{content:"\1f4a1"}.iconochive-Add:before{content:"\2295"}.iconochive-Tab_Activity:before{content:"\2318"}.iconochive-Forward:before{content:"\23e9"}.iconochive-Backward:before{content:"\23ea"}.iconochive-No_Audio:before{content:"\1f508"}.iconochive-Pause:before{content:"\23f8"}.iconochive-No_Favorite:before{content:"\2606"}.iconochive-Unike:before{content:"\2661"}.iconochive-Song:before{content:"\266b"}.iconochive-No_Flag:before{content:"\2690"}.iconochive-Flag:before{content:"\2691"}.iconochive-Done:before{content:"\2713"}.iconochive-Check:before{content:"\2714"}.iconochive-Refresh:before{content:"\27f3"}.iconochive-Headphones:before{content:"\1f3a7"}.iconochive-Chart:before{content:"\1f4c8"}.iconochive-Bookmark:before{content:"\1f4d1"}.iconochive-Documents:before{content:"\1f4da"}.iconochive-Newspaper:before{content:"\1f4f0"}.iconochive-Podcast:before{content:"\1f4f6"}.iconochive-Radio:before{content:"\1f4fb"}.iconochive-Cassette:before{content:"\1f4fc"}.iconochive-Shuffle:before{content:"\1f500"}.iconochive-Loop:before{content:"\1f501"}.iconochive-Low_Audio:before{content:"\1f509"}.iconochive-First:before{content:"\1f396"}.iconochive-Invisible:before{content:"\1f576"}.iconochive-Computer:before{content:"\1f5b3"}</style><div class="wb-autocomplete-suggestions sf-hidden" style=left:0px;top:5367px;width:0px></div></template>
+</div><div id=wm-ipp-print class=sf-hidden>The Wayback Machine - https://web.archive.org/web/20210201150634/https://pcwalton.github.io/2017/02/14/pathfinder.html</div>
+<div id=donato style=position:relative;width:100%>
+ <div id=donato-base>
+ <iframe id=donato-if scrolling=no frameborder=0 style=width:100%;height:100% sandbox="allow-popups allow-top-navigation allow-top-navigation-by-user-activation" srcdoc="<html>"></iframe>
+ </div>
+</div>
+<header class=site-header role=banner>
+ <div class=wrapper><a class=site-title rel=author href=https://web.archive.org/web/20210201150634/https://pcwalton.github.io/>pcwalton</a><nav class=site-nav>
+ <input type=checkbox id=nav-trigger class="nav-trigger sf-hidden">
+ <label for=nav-trigger>
+ <span class="menu-icon sf-hidden">
+ <svg viewBox="0 0 18 15" width=18px height=15px>
+ <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+ </svg>
+ </span>
+ </label>
+ <div class=trigger><a class=page-link href=https://web.archive.org/web/20210201150634/https://pcwalton.github.io/about/>About</a></div>
+ </nav></div>
+</header>
+<main class=page-content aria-label=Content>
+ <div class=wrapper>
+ <article class="post h-entry" itemscope itemtype=http://schema.org/BlogPosting>
+ <header class=post-header>
+ <h1 class="post-title p-name" itemprop="name headline">Pathfinder, a fast GPU-based font rasterizer in Rust</h1>
+ <p class=post-meta>
+ <time class=dt-published datetime=2017-02-14T11:03:00+00:00 itemprop=datePublished>Feb 14, 2017
+ </time></p>
+ </header>
+ <div class="post-content e-content" itemprop=articleBody>
+ <p>Ever since some initial discussions with <a href=https://web.archive.org/web/20210201150634/http://levien.com/>Raph Levien</a> (author of <code class=highlighter-rouge>font-rs</code>) at RustConf last
+September, I’ve been thinking about ways to improve vector graphics rendering using modern graphics
+hardware, specifically for fonts. These ideas began to come together in December, and over the past
+couple of months I’ve been working on actually putting them into a real, usable library. They’ve
+proved promising, and now I have some results to show.</p>
+<p>Today I’m pleased to announce <a href=https://web.archive.org/web/20210201150634/https://github.com/pcwalton/pathfinder>Pathfinder</a>, a Rust library for OpenType font rendering. The goal is
+nothing less than to be the fastest vector graphics renderer in existence, and the results so far
+are extremely encouraging. Not only is it very fast according to the traditional metric of raw
+rasterization performance, it’s <em>practical</em>, featuring very low setup time (end-to-end time
+superior to the best CPU rasterizers), best-in-class rasterization performance even at small glyph
+sizes, minimal memory consumption (both on CPU and GPU), compatibility with existing font formats,
+portability to most graphics hardware manufactured in the past five years (DirectX 10 level), and
+security/safety.</p>
+<h2 id=performance>Performance</h2>
+<p>To illustrate what it means to be both practical and fast, consider these two graphs:</p>
+<p><a href=https://web.archive.org/web/20210201150634/https://pcwalton.github.io/images/post-images/pathfinder-rasterize.svg><img alt="Rasterization performance" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></a></p>
+<p><a href=https://web.archive.org/web/20210201150634/https://pcwalton.github.io/images/post-images/pathfinder-setup.svg><img alt="Setup performance" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></a></p>
+<p>(Click each graph for a larger version.)</p>
+<p>The first graph is a comparison of Pathfinder with other rasterization algorithms with all vectors
+already prepared for rendering (and uploaded to the GPU, in the case of the GPU algorithms). The
+second graph is the total time taken to prepare and rasterize a glyph at a typical size, measured
+from the point right after loading the OTF file in memory to the completion of rasterization. Lower
+numbers are better. All times were measured on a Haswell Intel Iris Pro (mid-2015 MacBook Pro).</p>
+<p>From these graphs, we can see two major problems with existing GPU-based approaches:</p>
+<ol>
+ <li>
+ <p><em>Many algorithms aren’t that fast, especially at small sizes.</em> Algorithms aren’t fast just
+because they run on the GPU! In general, we want rendering on the GPU to be faster than
+rendering on the CPU; that’s often easier said than done, because modern CPUs are surprisingly
+speedy. (Note that, even if the GPU is somewhat slower at a task than the CPU, it may be a win for
+CPU-bound apps to offload some work; however, this makes the use of the algorithm highly
+situational.) It’s much better to have an algorithm that actually beats the CPU.</p>
+ </li>
+ <li>
+ <p><em>Long setup times can easily eliminate the speedup of algorithms in practice.</em> This is known as
+the “end-to-end” time, and real-world applications must carefully pay attention to it. One of
+the most common use cases for a font rasterizer is to open a font file, rasterize a character set
+from it (Latin-1, say) at one pixel size for later use, and throw away the file. With Web fonts now
+commonplace, this use case becomes even more important, because Web fonts are frequently rasterized
+once and then thrown away as the user navigates to a new page. Long setup times, whether the result
+of tessellation or more exotic approaches, are real problems for these scenarios, since what the
+user cares about is the document appearing quickly. Faster rasterization doesn’t help if it
+regresses that metric.</p>
+ </li>
+</ol>
+<p>(Of the two problems mentioned above, the second is often totally ignored in the copious literature
+on GPU-based vector rasterization. I’d like to see researchers start to pay attention to it. In
+most scenarios, we don’t have the luxury of inventing our own GPU-friendly vector format. We’re not
+going to get the world to move away from OpenType and SVG.)</p>
+<h2 id=vector-drawing-basics>Vector drawing basics</h2>
+<p>In order to understand the details of the algorithm, some basic knowledge of vector graphics is
+necessary. Feel free to skip this section if you’re already familiar with Bézier curves and fill
+rules.</p>
+<p>OpenType fonts are defined in terms of resolution-independent <a href=https://web.archive.org/web/20210201150634/https://en.wikipedia.org/wiki/B%C3%A9zier_curve>Bézier curves</a>. TrueType outlines
+contain lines and quadratic Béziers only, while OpenType outlines can contain lines, quadratic
+Béziers, and cubic Béziers. (Right now, Pathfinder only supports quadratic Béziers, but extending
+the algorithm to support cubic Béziers should be straightforward.)</p>
+<p>In order to fill vector paths, we need a <em>fill rule</em>. A fill rule is essentially a test that
+determines, for every point, whether that point is inside or outside the curve (and therefore
+whether it should be filled in). OpenType’s fill rule is the <em><a href=https://web.archive.org/web/20210201150634/https://en.wikipedia.org/wiki/Nonzero-rule>winding rule</a></em>, which can be
+expressed as follows:</p>
+<ol>
+ <li>
+ <p>Pick a point that we want to determine the color of. Call it P.</p>
+ </li>
+ <li>
+ <p>Choose any point outside the curve. (This is easy to determine since any point outside the
+bounding box of the curve is trivially outside the curve.) Call it Q.</p>
+ </li>
+ <li>
+ <p>Let the <em>winding number</em> be 0.</p>
+ </li>
+ <li>
+ <p>Trace a straight line from Q to P. Every time we cross a curve going clockwise, add 1 to the
+winding number. Every time we cross a curve going counterclockwise, subtract 1 from the winding
+number.</p>
+ </li>
+ <li>
+ <p>The point is inside the curve (and so should be filled) if and only if the winding number is not
+zero.</p>
+ </li>
+</ol>
+<h2 id=how-it-works-conceptually>How it works, conceptually</h2>
+<p>The basic algorithm that Pathfinder uses is the by-now-standard trapezoidal pixel coverage
+algorithm pioneered by Raph Levien’s libart (to the best of my knowledge). Variations of it are
+used in FreeType, <a href=https://web.archive.org/web/20210201150634/http://nothings.org/gamedev/rasterize/><code class=highlighter-rouge>stb_truetype</code> version 2.0 and up</a>, and <a href=https://web.archive.org/web/20210201150634/https://medium.com/@raphlinus/inside-the-fastest-font-renderer-in-the-world-75ae5270c445><code class=highlighter-rouge>font-rs</code></a>. These implementations
+differ as to whether they use sparse or dense representations for the coverage buffer. Following
+<code class=highlighter-rouge>font-rs</code>, and unlike FreeType and <code class=highlighter-rouge>stb_truetype</code>, Pathfinder uses a dense representation for
+coverage. As a result, <a href=https://web.archive.org/web/20210201150634/https://medium.com/@raphlinus/inside-the-fastest-font-renderer-in-the-world-75ae5270c445>Raph’s description of the algorithm</a> applies fairly well to Pathfinder as
+well.</p>
+<p>There are two phases to the algorithm: <em>drawing</em> and <em>accumulation</em>. During the draw phase,
+Pathfinder computes <em>coverage deltas</em> for every pixel touching (or immediately below) each curve.
+During the accumulation phase, the algorithm sweeps down each column of pixels, computing
+winding numbers (fractional winding numbers, since we’re antialiasing) and filling pixels
+appropriately.</p>
+<p>The most important concept to understand is that of the coverage delta. When drawing high-quality
+antialiased curves, we care not only about whether each pixel is inside or outside the curve but
+also <em>how much</em> of the pixel is inside or outside the curve. We treat each pixel that a curve
+passes through as a small square and compute how much of the square the curve occupies. Because we
+break down curves into small lines before rasterizing them, these coverage areas are always
+trapezoids or triangles, and so and so we can use trapezoidal area expressions to calculate them.
+The exact formulas involved are somewhat messy and involve several special cases; see <a href=https://web.archive.org/web/20210201150634/http://nothings.org/gamedev/rasterize/>Sean
+Barrett’s description of the <code class=highlighter-rouge>stb_truetype</code> algorithm</a> for the details.</p>
+<p>Rasterizers that calculate coverage in this way differ in whether they calculate winding numbers
+and fill at the same time they calculate coverage or whether they fill in a separate step after
+coverage calculation. Sparse implementations like FreeType and <code class=highlighter-rouge>stb_truetype</code> usually fill as they
+go, while dense implementations like <code class=highlighter-rouge>font-rs</code> and Pathfinder fill in a separate step. Filling in a
+separate step is attractive because it can be simplified to a <a href=https://web.archive.org/web/20210201150634/https://en.wikipedia.org/wiki/Prefix_sum>prefix sum</a> over each pixel column
+if we store the coverage for each pixel as <em>the difference between the coverage of the pixel and
+the coverage of the pixel above it</em>. In other words, instead of determining the area of each pixel
+that a curve covers, for each pixel we determine how much <em>additional</em> area the curve covers,
+relative to the coverage area of the immediately preceding pixel.</p>
+<p>This modification has the very attractive property that <em>all coverage deltas both inside and
+outside the curve are zero</em>, since points completely inside a curve contribute no <em>additional</em> area
+(except for the first pixel completely inside the curve). This property is key to Pathfinder’s
+performance relative to most vector texture algorithms. Calculating exact area coverage is slow,
+but calculating coverage deltas instead of absolute coverage essentially allows us to limit the
+expensive calculations to the <em>edges</em> of the curve, reducing the amount of work the GPU has to do
+to a fraction of what it would have to do otherwise.</p>
+<p>In order to fill the outline and generate the final glyph image, we simply have to sweep down each
+column of pixels, calculating the running total of area coverage and writing pixels according to
+the winding rule. The formula to determine the color of each pixel is simple and fast:
+<code class=highlighter-rouge>min(|coverage total so far|, 1.0)</code> (where 0.0 is a fully transparent pixel, 1.0 is a fully opaque
+pixel, and values in between are different shades). Importantly, all columns are completely
+independent and can be calculated in parallel.</p>
+<h2 id=implementation-details>Implementation details</h2>
+<p>With the advanced features in OpenGL 4.3, this algorithm can be straightforwardly adapted to the
+GPU.</p>
+<ol>
+ <li>
+ <p>As an initialization step, we create a <em>coverage buffer</em> to hold delta coverage values. This
+coverage buffer is a single-channel floating-point framebuffer. We always draw to the
+framebuffer with blending enabled (<code class=highlighter-rouge>GL_FUNC_ADD</code>, both source and destination factors set to
+<code class=highlighter-rouge>GL_ONE</code>).</p>
+ </li>
+ <li>
+ <p>We expand the TrueType outlines from the variable-length compressed <code class=highlighter-rouge>glyf</code> format inside the
+font to a fixed-length, but still compact, representation. This is necessary to be able to
+operate on vertices in parallel, since variable-length formats are inherently sequential. These
+outlines are then uploaded to the GPU.</p>
+ </li>
+ <li>
+ <p>Next, we draw each curve as a <em>patch</em>. In a tessellation-enabled drawing pipeline like the one
+that Pathfinder uses, rather than submitting triangles directly to the GPU, we submit abstract
+patches which are converted into triangles in hardware. We use indexed drawing (<code class=highlighter-rouge>glDrawElements</code>)
+to take advantage of the GPU’s <a href=https://web.archive.org/web/20210201150634/https://www.khronos.org/opengl/wiki/Post_Transform_Cache>post-transform cache</a>, since most vertices belong to two curves.</p>
+ </li>
+ <li>
+ <p>For each path segment that represents a Bézier curve, we tessellate the Bézier curve into a
+series of small lines on the GPU. Then we expand all lines out to screen-aligned quads
+encompassing their bounding boxes. (There is a complication here when these quads overlap; we may
+have to generate extra one-pixel-wide quads here and strip them out with backface culling. See the
+comments inside the tessellation control shader for details.)</p>
+ </li>
+ <li>
+ <p>In the fragment shader, we calculate trapezoidal coverage area for each pixel and write it to
+the coverage buffer. This completes the draw step.</p>
+ </li>
+ <li>
+ <p>To perform the accumulation step, we attach the coverage buffer and the destination texture to
+images. We then dispatch a simple compute shader with one invocation per pixel column. For each
+row, the shader reads from the coverage buffer and writes the total coverage so far to the
+destination texture. The <code class=highlighter-rouge>min(|coverage total so far, 1.0)</code> expression above need not be computed
+explicitly, because our unsigned normalized atlas texture stores colors in this way automatically.</p>
+ </li>
+</ol>
+<p>The performance characteristics of this approach are excellent. No CPU preprocessing is needed
+other than the conversion of the variable-length TrueType outline to a fixed-length format. The
+number of draw calls is minimal—any number of glyphs can be rasterized in one draw call, even from
+different fonts—and the depth and stencil buffers remain unused. Because the tessellation is
+performed on the fly instead of on the CPU, the amount of data uploaded to the GPU is minimal. Area
+coverage is essentially only calculated for pixels on the <em>edges</em> of the outlines, avoiding
+expensive fragment shader invocations for all the pixels inside each glyph. The final accumulation
+step has ideal characteristics for GPU compute, since branch divergence is nonexistent and cache
+locality is maximized. All pixels in the final buffer are only painted at most once, regardless of
+the number of curves present.</p>
+<h2 id=compatibility-concerns>Compatibility concerns</h2>
+<p>For any GPU code designed to be shipping to consumers, especially OpenGL 3.0 and up, compatibility
+and portability are always concerns. As Pathfinder is designed for OpenGL 4.3, released in 2012, it
+is no exception. Fortunately, the algorithm can be adapted in various ways depending on the
+available functionality.</p>
+<ul>
+ <li>
+ <p>When compute shaders are not available (OpenGL 4.2 or lower), Pathfinder uses OpenCL 1.2 instead.
+This is the case on the Mac, since Apple has not implemented any OpenGL features newer than
+OpenGL 4.2 (2011). The <a href=https://web.archive.org/web/20210201150634/https://github.com/pcwalton/compute-shader>compute-shader</a> crate abstracts over the subset of OpenGL and OpenCL
+necessary to access GPU compute functionality.</p>
+ </li>
+ <li>
+ <p>When tessellation shaders are not available (OpenGL 3.3 or lower), Pathfinder uses geometry
+shaders, available in OpenGL 3.2 and up.</p>
+ </li>
+</ul>
+<p>(Note that it should be possible to avoid both geometry shaders and tessellation shaders, at the
+cost of performing that work on the CPU. This turns out to be quite fast. However, since image
+load/store is a hard requirement, this seems pointless: both image load/store and geometry shaders
+were introduced in DirectX 10-level hardware.)</p>
+<p>Although these system requirements may seem high at first, the integrated graphics found in any
+Intel Sandy Bridge (2011) CPU or later meet them.</p>
+<h2 id=future-directions>Future directions</h2>
+<p>The immediate next step for Pathfinder is to integrate into WebRender as an optional accelerated
+path for applicable fonts on supported GPUs. Beyond that, there are several features that could
+be added to extend Pathfinder itself.</p>
+<ol>
+ <li>
+ <p><em>Support vector graphics outside the font setting.</em> As Pathfinder is a generic vector graphics
+rasterizer, it would be interesting to expose an API allowing it to be used as the backend for
+e.g. an SVG renderer. Rendering the entire SVG specification is outside of the scope of Pathfinder
+itself, but it could certainly be the path rendering component of a full SVG renderer.</p>
+ </li>
+ <li>
+ <p><em>Support CFF and CFF2 outlines.</em> These have been seen more and more over time, e.g. in Apple’s
+new San Francisco font. Adding this support involves both parsing and extracting the <a href=https://web.archive.org/web/20210201150634/https://www.microsoft.com/typography/otspec/cff2.htm>CFF2
+format</a> and adding support for cubic Bézier curves to Pathfinder.</p>
+ </li>
+ <li>
+ <p><em>Support WOFF and WOFF2.</em> In the case of WOFF2, this involves writing a parser for the
+transformed <code class=highlighter-rouge>glyf</code> table.</p>
+ </li>
+ <li>
+ <p><em>Support subpixel antialiasing.</em> This should be straightforward.</p>
+ </li>
+ <li>
+ <p><em>Support emoji</em>. The Microsoft <code class=highlighter-rouge>COLR</code> and Apple <code class=highlighter-rouge>sbix</code> extensions are straightforward, but the
+Google <code class=highlighter-rouge>SVG</code> table allows arbitrary SVGs to be embedded into a font. Full support for SVG is
+probably out of scope of Pathfinder, but perhaps the subset used in practice is small enough to
+support.</p>
+ </li>
+ <li>
+ <p><em>Optimize overlapping paths.</em> It would be desirable to avoid antialiasing edges that are covered
+by other paths. The fill rule makes this trickier than it initially sounds.</p>
+ </li>
+ <li>
+ <p><em>Support hinting.</em> This is low-priority since it’s effectively obsolete with high-quality
+antialiasing, subpixel AA, and high-density displays, but it might be useful to match the system
+rendering on Windows.</p>
+ </li>
+</ol>
+<h2 id=conclusion>Conclusion</h2>
+<p>Pathfinder is <a href=https://web.archive.org/web/20210201150634/https://github.com/pcwalton/pathfinder>available on GitHub</a> and should be easily buildable using the stable version of Rust
+and Cargo. Please feel free to check it out, build it, and report bugs! I’m especially interested
+in reports of poor performance, crashes, or rendering problems on a variety of hardware. As
+Pathfinder does use DirectX 10-level hardware features, some amount of driver pain is unavoidable.
+I’d like to shake these problems out as soon as possible.</p>
+<p>Finally, I’d like to extend a special thanks to Raph Levien for many fruitful discussions and
+ideas. This project wouldn’t have been possible without his insight and expertise.</p>
+ </div><a class="u-url sf-hidden" href=https://web.archive.org/web/20210201150634/https://pcwalton.github.io/2017/02/14/pathfinder.html hidden></a>
+</article>
+ </div>
+ </main><footer class="site-footer h-card">
+ <data class=u-url href=/></data>
+ <div class=wrapper>
+ <h2 class=footer-heading>pcwalton</h2>
+ <div class=footer-col-wrapper>
+ <div class="footer-col footer-col-1">
+ <ul class=contact-list>
+ <li class=p-name>pcwalton<li><a class=u-email href=https://web.archive.org/web/20210201150634/mailto:pcwalton@mimiga.net>pcwalton@mimiga.net</a></ul>
+ </div>
+ <div class="footer-col footer-col-2"><ul class=social-media-list><li><a href=https://web.archive.org/web/20210201150634/https://github.com/pcwalton><svg class=svg-icon><symbol id=github fill-rule=evenodd clip-rule=evenodd stroke-linejoin=round stroke-miterlimit=1.414><path d="M8 0C3.58 0 0 3.582 0 8c0 3.535 2.292 6.533 5.47 7.59.4.075.547-.172.547-.385 0-.19-.007-.693-.01-1.36-2.226.483-2.695-1.073-2.695-1.073-.364-.924-.89-1.17-.89-1.17-.725-.496.056-.486.056-.486.803.056 1.225.824 1.225.824.714 1.223 1.873.87 2.33.665.072-.517.278-.87.507-1.07-1.777-.2-3.644-.888-3.644-3.953 0-.873.31-1.587.823-2.147-.09-.202-.36-1.015.07-2.117 0 0 .67-.215 2.2.82.64-.178 1.32-.266 2-.27.68.004 1.36.092 2 .27 1.52-1.035 2.19-.82 2.19-.82.43 1.102.16 1.915.08 2.117.51.56.82 1.274.82 2.147 0 3.073-1.87 3.75-3.65 3.947.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.14.46.55.38C13.71 14.53 16 11.53 16 8c0-4.418-3.582-8-8-8"></path></symbol><use xlink:href=#github></use></svg> <span class=username>pcwalton</span></a><li><a href=https://web.archive.org/web/20210201150634/https://www.twitter.com/pcwalton><svg class=svg-icon><symbol id=twitter fill-rule=evenodd clip-rule=evenodd stroke-linejoin=round stroke-miterlimit=1.414><path d="M16 3.038c-.59.26-1.22.437-1.885.517.677-.407 1.198-1.05 1.443-1.816-.634.37-1.337.64-2.085.79-.598-.64-1.45-1.04-2.396-1.04-1.812 0-3.282 1.47-3.282 3.28 0 .26.03.51.085.75-2.728-.13-5.147-1.44-6.766-3.42C.83 2.58.67 3.14.67 3.75c0 1.14.58 2.143 1.46 2.732-.538-.017-1.045-.165-1.487-.41v.04c0 1.59 1.13 2.918 2.633 3.22-.276.074-.566.114-.865.114-.21 0-.41-.02-.61-.058.42 1.304 1.63 2.253 3.07 2.28-1.12.88-2.54 1.404-4.07 1.404-.26 0-.52-.015-.78-.045 1.46.93 3.18 1.474 5.04 1.474 6.04 0 9.34-5 9.34-9.33 0-.14 0-.28-.01-.42.64-.46 1.2-1.04 1.64-1.7z" fill-rule=nonzero></path></symbol><use xlink:href=#twitter></use></svg> <span class=username>pcwalton</span></a></ul>
+</div>
+ <div class="footer-col footer-col-3">
+ <p>Occasional notes on Rust, Servo, Firefox, etc.</p>
+ </div>
+ </div>
+ </div>
+</footer>
+<div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div><script data-template-shadow-root>(()=>{document.currentScript.remove();processNode(document);function processNode(node){node.querySelectorAll("template[shadowmode]").forEach(element=>{let shadowRoot = element.parentElement.shadowRoot;if (!shadowRoot) {try {shadowRoot=element.parentElement.attachShadow({mode:element.getAttribute("shadowmode"),delegatesFocus:Boolean(element.getAttribute("delegatesfocus"))});shadowRoot.innerHTML=element.innerHTML;element.remove()} catch (error) {} if (shadowRoot) {processNode(shadowRoot)}}})}})()</script>
