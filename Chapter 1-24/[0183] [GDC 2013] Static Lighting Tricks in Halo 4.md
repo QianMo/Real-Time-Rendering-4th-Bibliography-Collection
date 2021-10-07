@@ -1,0 +1,1 @@
+https://www.gdcvault.com/play/1017902/Static-Lighting-Tricks-in-Halo

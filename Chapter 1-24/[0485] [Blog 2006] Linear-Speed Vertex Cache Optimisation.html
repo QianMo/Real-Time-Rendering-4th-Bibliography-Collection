@@ -1,0 +1,996 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"> <html xmlns=http://www.w3.org/1999/xhtml xml:lang=en lang=en class=hb-loaded><!--
+ Page saved with SingleFile 
+ url: http://eelpi.gotdns.org/papers/fast_vert_cache_opt.html 
+ saved date: Sun Oct 03 2021 22:08:22 GMT+0800 (中国标准时间)
+--><meta charset=utf-8><title></title><style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style><link type=image/x-icon rel="shortcut icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><style>.sf-hidden{display:none!important}</style><link rel=canonical href=http://eelpi.gotdns.org/papers/fast_vert_cache_opt.html><meta http-equiv=content-security-policy content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:;"></head>
+<frameset huaban_collector_injected=true>
+<frame name=redir_frame frameborder=0 scrolling=auto noresize marginheight=0 marginwidth=0 sandbox="allow-popups allow-top-navigation allow-top-navigation-by-user-activation" src="data:text/html,<html><meta charset=utf-8>
+<title>Linear-Speed Vertex Cache Optimisation</title>
+<style><!--p.MsoNormal,li.MsoNormal{margin:0cm;margin-bottom:.0001pt;font-size:12.0pt;font-family:&quot;Times New Roman&quot;}h1{margin-top:12.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:0cm;page-break-after:avoid;font-size:16.0pt;font-family:Arial}h2{margin-top:12.0pt;margin-right:0cm;margin-bottom:3.0pt;margin-left:0cm;page-break-after:avoid;font-size:14.0pt;font-family:Arial;font-style:italic}a:link,span.MsoHyperlink{color:blue;text-decoration:underline}a:visited,span.MsoHyperlinkFollowed{color:%23606420;text-decoration:underline}@page Section1{size:595.3pt 841.9pt;margin:72.0pt 90.0pt 72.0pt 90.0pt}div.Section1{page:Section1}ul{margin-bottom:0cm}--></style>
+<meta http-equiv=content-security-policy content=&quot;default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:;&quot;></head>
+<body lang=EN-GB link=blue vlink=%23606420 marginwidth=0 marginheight=0>
+<div class=Section1>
+<h1>Linear-Speed Vertex Cache Optimisation</h1>
+<p class=MsoNormal>Tom Forsyth, RAD Game Tools: <a href=mailto:tom.forsyth@eelpi.gotdns.org>tom.forsyth@eelpi.gotdns.org</a></p>
+<p class=MsoNormal>28<sup>th</sup> September 2006</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>Introduction</h2>
+<p class=MsoNormal>This paper introduces an algorithm for optimising an indexed
+triangle list to be friendly to a wide variety of hardware vertex caches of
+unknown size. The method has the advantage of being universally good for a wide
+range of cache sizes and replacement policies, of running in linear (and fast) time
+and space proportional to the number of triangles in the mesh. It is also
+within a few percent performance of the best known alternative algorithms, and
+easy to understand and tweak if needed.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>Background</h2>
+<p class=MsoNormal>Indexed primitives have replaced strips and fans as the most
+common rendering primitive in graphics hardware today. When rendering each
+triangle, the vertices it uses must be processed (for example, transformed to
+screen space and lit in various ways) before rendering. Indexed rendering hardware
+typically uses a small cache of vertices to avoid re-processing vertices that
+are shared between recently-rendered triangles. Using a moderately-sized cache
+(anywhere between 12 and 24 vertices is common) reduces the load on the vertex
+processing pipeline far more than the older non-indexed strips and fans model –
+often halving the amount of work required per triangle.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>However, the vertex cache relies on the ordering of the
+triangles to be optimised for its characteristics. If the triangles are sent in
+a random order, the vertices almost always miss the cache and there is no
+benefit obtained. If triangles are sent in clusters so that each triangle is
+close to previously-rendered triangles, it is more likely that more of its
+vertices are still in the cache.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Thus, finding the correct order to render triangles in is
+important to reduce the work of the vertex processing pipeline. The fundamental
+problem is that meshes are typically two-dimensional surfaces, and caches are
+at their most efficient when streaming one-dimensional data. Thus the ideal ordering
+is far from obvious.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>[Hoppe] discussed an algorithm that optimised the order of
+triangles for a given cache of a certain size and replacement policy. This is
+useful for a hardware target that is fixed and known, such as a games console.
+However, if the hardware cache is a different size or type, the algorithm needs
+to be re-run for that new configuration.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>On many platforms, such as the PC or Macintosh, and also for
+shipping the same art for many different consoles, the exact size and type of
+the vertex cache is not known at authoring time, and frequently not even known
+at runtime, as the exact structures are often proprietary information. For this
+reason, [Bogomjakov] discusses a “universal rendering sequence”, a single
+sequence that is favourable to a wide range of cache sizes and types, and has
+no particular pathological weaknesses on any particular one of them.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The usual way to refer to the efficiency of a vertex cache
+is to divide the number of vertex-cache misses by the number of triangles in
+the mesh. This gives the average cache miss ratio (ACMR) – the average number
+of vertices that need to be processed per triangle.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>Outline</h2>
+<p class=MsoNormal>The algorithm presented here is based on a cache of vertices
+using a least recently used (LRU) replacement policy. Various “scores” are
+assigned to each vertex depending on its position within the LRU cache (i.e.
+how recently-used it is). Triangles are also assigned a score, which is the sum
+of the scores of the vertices it uses. When considering which triangle in the mesh
+to add to the sequence next, the triangle with the greatest score is added. The
+three vertices for the triangle are then moved or added to the top of the
+cache, and the other vertices are shuffled down. The algorithm is greedy and
+never backtracks or looks ahead at its choices of triangle.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Although most hardware uses FIFO-replacement caches for
+simplicity and speed, here we use an LRU-replacement cache. This cache is
+referred to as the “modelled cache”, as opposed to the real “hardware cache”
+that an actual graphics card has. The reason the modelled cache is LRU rather
+than FIFO is that the single sequence of triangles this algorithm generates is
+intended to be usable on a wide range of (usually unknown) hardware cache sizes
+and replacement policies, and modelling with a FIFO cache of the incorrect size
+causes either pathological “thrashing” of the real hardware cache, or
+under-utilisation. In practice, an LRU modelled cache produces a more
+consistent sequence, even if it does not match common hardware.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The modelled cache size chosen merely needs to be “big
+enough” to include all likely hardware caches. [Hoppe] shows that it is
+unlikely that any hardware will see any significant benefit from a cache larger
+than 32 entries, and so 32 was chosen as the modelled cache size here.
+Experiments were also performed with a 64-entry modelled cache, but no
+significant difference in eventual cache performance was found – the algorithm
+simply ran slower.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>As described, the algorithm is a greedy algorithm with no
+lookahead or backtracking. Once it has chosen to add a triangle to the
+rendering sequence, it keeps that decision. Although the choice of triangle
+affects future choices through the vertex and triangle scores, the current
+triangle is not chosen in order to influence those future choices. In this way,
+the algorithm remains very fast, and not only runs in linear time proportional
+to the number of triangles in the mesh, but the linear time is very fast. This
+speed is extremely helpful in authoring pipelines, where artists need to have
+fast, accurate previews of their models.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>It is also helpful for games that have dynamically generated
+content, such as joining together parts of bodies and faces to make composite
+characters – the resulting mesh should be optimised as a whole for the hardware
+vertex cache for maximum efficiency, but this cannot be performed until all the
+parts have been joined into a single mesh. In games such as RPGs or MMOs with a
+massive number of potential body-shapes, each specified dynamically, new meshes
+can appear every second, and algorithms that take significant processing time
+to optimise a mesh are counterproductive.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>Vertex Scores in Detail</h2>
+<p class=MsoNormal>The score of a given vertex indicates how likely a triangle
+using it will be added to the rendered list next. High scores make it more
+likely, low scores make it less. The score depends on a number of things.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The first is that the more recently the vertex was used, the
+higher its score. The score is calculated by taking the vertex’s position in
+the LRU cache as a fractional number between zero and one, with zero at the
+last (LRU) position and one in the first (MRU) position. This scaled position
+is then raised to a power greater than one. The value of the power was chosen
+by repeated simulation, and the value 1.5 seems to give good results. Using a
+power rather than a simple linear score seems to give a behaviour that is more
+scale-independent – a desired trait in an algorithm attempting to optimise for
+an unknown size of hardware cache.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The exception to this rule is that the most recent three
+vertices, i.e. those used by the most recently added triangle, have a fixed
+score. The reason they are position-independent is that the order in which
+those three vertices were used depends entirely upon the order they were
+specified in the most recent triangle, and that is subject to the whims of
+export pipelines and various other unpredictable factors. Note that the scores
+for the rest of the vertices in the cache is performed as if these first three
+were not there, i.e. the fourth vertex in the cache gets a “top” score of 1.0.
+The surprising twist is that the score the first three are fixed at was also
+found by experimentation to be best set to 0.75. This is lower than the score
+of the vertex after them in the cache!</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The reasoning for this is that if the three most-recent
+vertices get the highest score, the next triangle to be added is almost certain
+to be one that shares an edge (two of the vertices) of the most recently-added
+triangle. On the face of it, this sounds like exactly what we want. The problem
+is that because this algorithm has no look-ahead capability, it will first form
+a long thin strip through the mesh, and then the strip will turn back on itself
+for a long way, and then again. Although this sounds fairly good, it is only
+getting an ACMR of around 1.0 – one vertex per triangle – far worse than a good
+algorithm is capable of. By slightly discouraging immediate reuse of an edge,
+the algorithm is forced to look a little further away, and this seems to produce
+a more generally acceptable pattern that is not unlike the theorised ideal
+shape – a Hilbert curve. Here is a table showing how position in the first half
+of the 32-entry LRU cache corresponds to score:</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=146 style=width:109.45pt;margin-left:4.9pt;border-collapse:collapse;border:none>
+ <tbody><tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal><span style=font-size:10pt;font-family:Arial>LRU pos</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal><span style=font-size:10pt;font-family:Arial>Score</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.75</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>1</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.75</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>2</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.75</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>3</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>1.00</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>4</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.99</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>5</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.98</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>6</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.97</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>7</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.95</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>8</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.93</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>9</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.91</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>10</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.88</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>11</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.86</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>12</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.83</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>13</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.80</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>14</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.77</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.5pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>15</span></p>
+ </td>
+ <td width=73 nowrap valign=bottom style=&quot;width:54.95pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.73</span></p>
+ </td>
+ </tr>
+</table>
+<p><b>EMERGENCY EDIT</b>: Actually, the numbers in the table above are wrong! It's the right sort of shape, but I typed the Excel formula in badly, so the actual numbers aren't correct. However, the code listed below <b>is</b> correct, so keep using that.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Added to this vertex score is a boost to a vertex if its
+remaining valence is low. The remaining valence of a vertex is the number of
+triangles that use it that have not yet been drawn. A vertex with only one
+triangle left to be drawn gets the highest boost, and a vertex with a lot of
+triangles yet to be drawn gets a much lower boost. The increase in score is
+proportional to the number of triangles still remaining using it, raised to a
+negative fractional power (testing showed that -0.5 is most effective), and
+then scaled relative to the FIFO score. Again, testing showed that a scale of
+2.0 was most effective. Here is a table of vertices with reasonable valences
+and their score:</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=128 style=width:96pt;margin-left:4.9pt;border-collapse:collapse;border:none>
+ <tbody><tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal><span style=font-size:10pt;font-family:Arial>Valence</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal><span style=font-size:10pt;font-family:Arial>Score</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>1</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>2.00</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>2</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>1.41</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>3</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>1.15</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>4</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>1.00</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>5</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.89</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>6</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.82</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>7</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.76</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>8</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.71</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>9</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.67</span></p>
+ </td>
+ </tr>
+ <tr style=height:12.75pt>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>10</span></p>
+ </td>
+ <td width=64 nowrap valign=bottom style=&quot;width:48pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt;height:12.75pt&quot;>
+ <p class=MsoNormal align=right style=text-align:right><span style=font-size:10pt;font-family:Arial>0.63</span></p>
+ </td>
+ </tr>
+</table>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The reasoning behind rewarding low valence is that without
+it, the algorithm will still pick out the best path through a mesh, maintaining
+a low vertex/triangle ratio. The problem is that it will leave some lone or
+small clusters of triangles behind as it does so, because adding them is
+slightly less optimal than adding other triangles. By the time the mesh is 90%25
+done, all that remains are these little bits of “detritus” – isolated fragments
+that still need to be drawn. Although at this point the ACMR is still pleasingly
+low, adding these remaining fragments is very costly, because they are not
+close to each other, and so each incur costs of around 3 vertices per triangle.
+This can have a terrible effect on the ACMR for the mesh as a whole, and drives
+efficiency down again. Far better is to add these bits of detritus to the
+rendering order as the algorithm goes along. Adding them at the time is very
+slightly sub-optimal, but adding them later would be very costly. Boosting the
+score of a vertex with very few triangles remaining encourages the addition of
+the detritus at a sensible time.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Additionally, if the algorithm runs into a “dead end” part
+of the mesh, where there are no more nearby triangles to add (for example, at
+the end of a finger of a hand), it encourages the algorithm to start again at
+triangle that is near another “dead end”, such as the edge of a mesh, rather
+than start right in the middle of a patch and create an artificial dead end.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The two scores – that due to the FIFO position and the one
+due to remaining valence – are added together to find the total vertex score.
+To find each triangle’s score, the score for each of the three vertices is
+added together. And at each stage, the triangle with the highest score is added
+to the draw list, and the scores for the vertices are recalculated.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The full code for calculating the score of a vertex is as
+follows:</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;;color:blue'>const</span><span style='font-size:10pt;font-family:&quot;Courier New&quot;'> <span style=color:blue>float</span> FindVertexScore_CacheDecayPower
+= 1.5f;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;;color:blue'>const</span><span style='font-size:10pt;font-family:&quot;Courier New&quot;'> <span style=color:blue>float</span>
+FindVertexScore_LastTriScore = 0.75f;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;;color:blue'>const</span><span style='font-size:10pt;font-family:&quot;Courier New&quot;'> <span style=color:blue>float</span>
+FindVertexScore_ValenceBoostScale = 2.0f;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;;color:blue'>const</span><span style='font-size:10pt;font-family:&quot;Courier New&quot;'> <span style=color:blue>float</span>
+FindVertexScore_ValenceBoostPower = 0.5f;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;;color:blue'>float</span><span style='font-size:10pt;font-family:&quot;Courier New&quot;'> FindVertexScore ( vcache_vertex_data *VertexData )</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>{</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>if</span> (
+VertexData-&amp;gt;NumActiveTris == 0 )</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; {</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:green>// No tri needs
+this vertex!</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>return</span>
+-1.0f;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; }</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>float</span> Score =
+0.0f;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>int</span>
+CachePosition = VertexData-&amp;gt;CacheTag;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>if</span> (
+CachePosition &amp;lt; 0 )</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; {</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:green>// Vertex is not
+in FIFO cache - no score.</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; }</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>else</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; {</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>if</span> (
+CachePosition &amp;lt; 3 )</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; {</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:green>// This vertex
+was used in the last triangle,</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:green>// so it has a
+fixed score, whichever of the three</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:green>// it's in.
+Otherwise, you can get very different</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span style=color:green>// answers
+depending on whether you add</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:green>// the
+triangle 1,2,3 or 3,1,2 - which is silly.</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Score = FindVertexScore_LastTriScore;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; }</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>else</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; {</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; assert ( CachePosition &amp;lt;
+MaxSizeVertexCache );</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span style=color:green>// Points for
+being high in the cache.</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>const</span> <span style=color:blue>float</span> Scaler = 1.0f / ( MaxSizeVertexCache - 3 );</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Score = 1.0f - ( CachePosition - 3 ) *
+Scaler;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Score = powf ( Score,
+FindVertexScore_CacheDecayPower );</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; }</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp; &amp;nbsp;}</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:green>// Bonus points for
+having a low number of tris still to </span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:green>// use the vert, so we
+get rid of lone verts quickly.</span></span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;;color:blue'>&amp;nbsp;&amp;nbsp;&amp;nbsp; float</span><span style='font-size:10pt;font-family:&quot;Courier New&quot;'> ValenceBoost = powf (
+VertexData-&amp;gt;NumActiveTris,</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+-FindVertexScore_ValenceBoostPower );</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp; &amp;nbsp;Score += FindVertexScore_ValenceBoostScale *
+ValenceBoost;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>&amp;nbsp;&amp;nbsp;&amp;nbsp; <span style=color:blue>return</span> Score;</span></p>
+<p class=MsoNormal style=text-autospace:none><span style='font-size:10pt;font-family:&quot;Courier New&quot;'>}</span></p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>The Constants</h2>
+<p class=MsoNormal>The four constants used in the code above were determined by
+a process of guesswork, judgement, and a few days of brute-force annealing of
+each one with fairly typical data sets and the results sent through simulations
+of fairly typical hardware cache structures, taking the best aggregate scores.
+It is entirely possible that slightly better settings and values exist that
+have not been discovered yet. It is also entirely possible that using power
+functions for the scores is not the appropriate function, and that using other
+functions, or possibly fully custom look-up-tables, may yield better results.
+However, the results are fairly close to what is considered optimal, and it is
+likely that any remaining improvements are small. In summary, these values
+appear to be “good enough” for most purposes.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>As a side note, it is curious that the four constants are
+all so close to “normal” numbers. The values 1.5, 0.75, 2.0 and 0.5 seem almost
+boring. And yet the process of annealing did consider possible values for all
+of them that varied in 0.05 increments, out to a range of at least +/- 0.5 from
+their current settings. Nor were these the values selected using human
+judgement at the start of the annealing process (for example, the valence boost
+scale began far smaller than 2.0 – it is somewhat surprising it turned out to
+be so important). Nevertheless, these values consistently produced the best
+overall scores across the range of caches and meshes.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>Runtime Efficiency</h2>
+<p class=MsoNormal>The draw-ordering of the triangles is as given in the
+algorithm above. However, there are many ways to implement this algorithm that
+run slowly, and one of the key features of this algorithm is speed.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Unlike many conventional mesh topology algorithms, no edge
+data is kept, nor is any needed. This avoids the expense of finding edge data
+(typically somewhat laborious), and also the problems inherent in pathological
+meshes where a single edge is shared by many (which in typical algorithms means
+more than two!) triangles.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Instead, each vertex holds the following data:</p>
+<ul style=margin-top:0cm type=disc>
+ <li class=MsoNormal>Its position in the modelled cache (-1 if it is not in the
+ cache)</li>
+ <li class=MsoNormal>Its current score</li>
+ <li class=MsoNormal>The total number of triangles that use it</li>
+ <li class=MsoNormal>The number of triangles not yet added that use it</li>
+ <li class=MsoNormal>The list of triangle indices that use it</li>
+</ul>
+<p class=MsoNormal>Note that the total number of triangles using the vertex is
+not strictly necessary for the algorithm to run, but is useful for debugging.
+The list of triangle indices is always this length, but it is ordered so the
+triangle indices yet to be added are listed first, followed by the triangle
+indices that have already been added to the draw list.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Each triangle in the mesh also stores the following data:</p>
+<ul style=margin-top:0cm type=disc>
+ <li class=MsoNormal>Whether it has been added to the draw list or not</li>
+ <li class=MsoNormal>The triangle’s score (the sum of the scores of its
+ vertices)</li>
+ <li class=MsoNormal>The indices to the three vertices</li>
+</ul>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The other data structure is the FIFO cache itself, which is
+simply a list of vertex indices ordered from most recently used to least.
+Notionally this cache is 32 entries long, though for ease of implementation it
+actually grows to three entries longer.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Initialisation of the data is fairly straightforward, with
+two passes over the triangle data. The first simply increments the counter of
+the number of triangles that use each vertex, the second allocates the lists of
+triangles for each vertex and fills them in. After that, the score of each vertex
+is found using the above code, and then the score of each triangle is found by
+summing the scores of each vertex the triangle uses. These scores are simply
+cached values of the computed scores, and are updated when necessary as the
+algorithm runs.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Then comes the main body of the algorithm, which picks one
+triangle at a time to add to the list of drawn triangles, until there are no
+more triangles left to draw. Usually, the algorithm knows from the previous iteration
+which triangle has the highest score, and simply picks that one. In some cases,
+for example the first time the algorithm runs, it does not already know the
+best triangle, or the supposed best triangle has an unusually low score
+(implying that there may be others in the mesh that are better). In those rare
+circumstances, it runs through all the remaining triangles in the mesh
+searching for the best score.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>[<b>HINDSIGHT</b>: Actually, the &quot;unusually low score&quot; clause turns out to have almost no impact on the results. It was useful while I was developing the algorithm, but it turns out that for the final algorithm presented here, it happens for only three triangles in my entire set of test data, so it really has no significant effect on the efficiency.]</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The best triangle is then added to the draw list. For each
+vertex the triangle used, the valence of that vertex (the number of triangles
+not yet drawn that use it) is reduced by one, and the list of triangle indices in
+the vertex is updated appropriately.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The three vertices used by the triangle are either moved to
+the head of the LRU modelled cache, or added to the head if they were not
+already in it. The cache is temporarily grown in size by three vertices to
+include all vertices that were previously in the cache, and up to the three new
+ones of this triangle. Then the new positions of the vertices in the cache are
+updated, their corresponding scores are found using the code given above, and
+the scores of all their still-to-be-added triangles are also updated.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>As this is done, the score and index of the highest-scoring
+triangle so far are noted. Although only the triangles that use vertices
+currently in the cache are scanned for their score, this is a reasonable
+estimate of the best score of any triangle in the entire mesh. Debugging code
+that exhaustively checks whether this estimate is true found it to be false
+only a few times in all the testing done, and even then the score difference
+between the correct answer and the approximation was very small. In practice,
+this difference is unlikely to make any significant difference to the
+cache-performance, and hugely decreases the runtime cost of the algorithm.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Finally, the cache is shrunk back to its normal size, with
+up to three vertices falling out of it. Their cache positions have already been
+updated appropriately. The algorithm repeats until there are no triangles left
+to add.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Examining the above carefully, we can see that with a
+“normal” mesh where each vertex is used by around 6 triangles, the runtime
+speed and memory use of this algorithm is linearly proportional to the number
+of vertices in the mesh. This is considerably better than various look-ahead or
+hierarchical subdivision methods, or those that use complex topological
+information.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>Results</h2>
+<p class=MsoNormal>A variety of test meshes were used during the development of
+this algorithm. Results for four of them are shown here. Three of them are
+representative of typical interactive (i.e. games) meshes, and one is a more
+idealised mesh used for sanity-checking the algorithm. The results for the
+idealised mesh are still relevant for highly regular surfaces such as terrain
+height-fields or finely-tessellated models, but the results from it did not
+guide the direction of the algorithm significantly – far more importance was
+given to the more realistic meshes.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The meshes are as follows:</p>
+<ul style=margin-top:0cm type=disc>
+ <li class=MsoNormal>GrannyRocks: a mesh of a Granny in a rocking chair.
+ Available as part of the Granny Viewer (<a href=http://www.radgametools.com/gradown.htm>http://www.radgametools.com/gradown.htm</a>).
+ This version of the mesh was split into 30-bone chunks, a requirement that
+ is common for many PC and console games. Each chunk was less than 1000 triangles
+ in size, and each chunk was optimised individually, and each is submitted
+ as a separate rendering call. The ACMR is given for all the chunks as an
+ aggregate.</li>
+ <li class=MsoNormal>RaybackSplit: a bipedal dinosaur-type creature (available
+ as part of the Granny SDK). This has also been split into 30-bone chunks.
+ The chunks ranged from 500 to 1500 triangles in size.</li>
+ <li class=MsoNormal>RaybackWhole: the same dinosaur mesh, but this time not
+ split into chunks, just a single 5500-tri mesh with few texture seams.</li>
+ <li class=MsoNormal>Sphere: an icosahedron with each face tessellated into
+ 1024 triangles (32 on each side). 20480 triangles total, no textures, and
+ thus no seams.</li>
+</ul>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The algorithm was performed on each mesh using a modelled
+cache of 32 entries. 64 entries was also tried, but it appeared to make little
+difference to the output, it simply made the algorithm run slower. The single output
+was then fed to an idealised FIFO cache of various sizes, and the ACMR is shown
+in the table below. The 1024-entry FIFO cache is intended as an upper limit of
+the “perfect cache”, and indeed for a mesh with chunks fewer than 1024
+vertices, it does indeed represent that perfect value, whatever the rendering
+order. Real hardware typically has between 12 and 24 entries, with 32 regarded
+by many as the upper limit of a useful cache before the extra entries give
+diminishing returns on extra hardware area.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The 4-entry cache is intended to mimic an older piece of
+hardware that was designed with traditional triangle and quad strips in mind. An
+ACMR of 1.0 represents the best score traditional non-indexed strips can
+produce, and we can see that the results here are considerably worse than that.
+However, it was found that any attempt to increase the efficiency for this sort
+of hardware significantly hurt the efficiency of all the other cache sizes. As
+hardware like this is now considered so old and slow in other respects as to be
+irrelevant, the numbers are left here for illustration only. If this hardware
+is still a specific target for some reason (for example, some older and
+portable consoles still use non-indexed rendering), it is better to run one of
+the algorithms custom-designed for efficient stripping of non-indexed meshes.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style=border-collapse:collapse;border:none>
+ <tbody><tr>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>Hardware cache size</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>4</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>8</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>12</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>16</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>20</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>24</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>28</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>32</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border:solid windowtext 1pt;border-left:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>1024</p>
+ </td>
+ </tr>
+ <tr>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>GrannyRocks</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>1.556</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.908</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.820</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.797</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.781</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.776</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.771</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.765</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.732</p>
+ </td>
+ </tr>
+ <tr>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>RaybackSplit</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>1.559</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.893</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.791</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.769</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.755</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.747</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.738</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.730</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.695</p>
+ </td>
+ </tr>
+ <tr>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>RaybackWhole</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>1.596</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.874</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.756</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.727</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.713</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.703</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.691</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.682</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.647</p>
+ </td>
+ </tr>
+ <tr>
+ <td width=57 valign=top style=&quot;width:42.6pt;border:solid windowtext 1pt;border-top:0;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>Sphere</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>1.785</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.888</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.740</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.715</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.702</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.691</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.6pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.681</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.672</p>
+ </td>
+ <td width=57 valign=top style=&quot;width:42.65pt;border-top:0;border-left:0;border-bottom:solid windowtext 1pt;border-right:solid windowtext 1pt;padding:0cm 5.4pt 0cm 5.4pt&quot;>
+ <p class=MsoNormal>0.529</p>
+ </td>
+ </tr>
+</table>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Note that the ACMR consistently decreases as more entries
+are added to the cache. It is important to remember that the same rendering
+sequence was used for all the cache efficiency measurements – the algorithm was
+not re-run for each cache, and indeed has no idea what size of hardware cache
+it will be running on. As can be seen, the ACMRs consistently and smoothly
+decrease, with no preference shown to any particular cache size, and no
+pathological cases. This is in contrast to other algorithms that need to know
+their target cache size. If the guess is too large, the algorithm can thrash a
+smaller cache, leading to terrible performance, and if the guess is too small,
+the algorithm shows almost no advantage from the larger cache size.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>It is interesting to note that as predicted by Hoppe, a
+32-entry cache gets very close to the performance of the (impractically large)
+1024-entry cache. In most cases the improvement from 16 entries to 32 is as
+large as the improvement from 32 to 1024. It is reassuring to see that this
+algorithm produces an ordering that obtains something very close to this
+near-perfect ACMR.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>The exception is the extremely regular sphere tessellation,
+where there is a significant difference between 32 entries and 1024. This may
+be because the other test meshes simply do not have enough vertices to show the
+full benefit of the extra cache size (RaybackWhole is 5500 vertices in size,
+but has quite a few seams in it from texturing constraints), or because the
+extremely regular nature of the mesh allows the larger cache to work even
+better. It is believed from experience that most real-world game meshes do not
+share these characteristics. Although the perfect ACMR for an infinitely large
+plane of triangles and a perfect cache is 0.5 vertices per triangle, real
+meshes do not have this regularity, and contain many seams and edges and other
+discontinuities that limit how well any cache can possibly perform. Nevertheless,
+it would be useful to obtained results from some larger real-world meshes to
+check these assumptions.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>No apples-to-apples comparison with other vertex-cache
+methods has been made yet. Hopefully this will be done in future. However,
+eyeball comparison of the results in [Bogomjakov] for cache sizes of 32 entries
+and using the latter two meshes shows both algorithms to produce ACMRs
+somewhere around 0.68. The first two meshes shown here have mesh chunks much
+smaller than shown in the other papers referenced. Smaller chunks have more
+edges, and thus a worse best-possible-case (indeed, for GrannyRocks, the
+1024-entry cache can fit the whole of each mesh chunk, so no rendering sequence
+can possibly perform better than an ACMR of 0.732)</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>Future Work</h2>
+<p class=MsoNormal>Not much. The difference between the results in
+this algorithm, the perfect results of the 1024-entry cache, and the best
+results of [Hoppe] and [Bogomjakov] are very small in practice. Eyeball
+estimates are that the three algorithms running on the same hardware cache span
+an ACMR difference of 10%25 at most between best and worst. While optimising
+vertex cache use to a state better than a random ordering or that of simple
+triangle strips is important, at a certain point it is eclipsed by other
+factors in the rendering pipeline. A 10%25 difference in ACMR is typically going
+to be dwarfed by other independent factors such as triangle setup and fillrate,
+and uninteresting for most practical purposes.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>So this problem is pretty close to being “solved”. In fact 
+I think it was solved for known hardware by [Hoppe], and for
+unknown hardware by [Bogomjakov], with the one weakness of the latter being the
+complexity of implementation and the runtime and memory costs of the algorithm.
+This much simpler algorithm solves those problems. The extra speed improves
+artist iteration time, and also allows dynamically-generated data to be
+optimised on the fly.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Another interesting version is the K-Cache algorithm [Lin].
+This is a more generalised caching algorithm, but when applied to the problem of ACMR
+and tweaked a bit by <a href=http://www.dirtybitsoftware.com/>Jason Hughes</a>,
+the implementation seems to boil down to pretty much the same algorithm as outlined 
+here. Which is reassuring in a “convergent evolution” sort of way.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>Additional Notes</h2>
+<p class=MsoNormal>To fully optimise for rendering, there are two or three steps 
+to take in total. The first is the optimisation for the post-transform vertex cache, as 
+described above.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>Next, the order of the vertices in the vertex buffer is found. 
+Start with an empty vertex buffer. Scan through the triangles in the order found 
+above. Check whether each of the three vertices has been added to the VB yet. If not, 
+add them, and remember the remapping from the old index number to the new one. Keep 
+going until you run out of triangles. Finally, remap all the old indices to the new 
+ones, but do not change the order the triangles are rendered in. The vertices have 
+now been reordered so that when the graphics card renders the triangles, it will 
+read vertices in a mostly-linear fashion (it would be completely linear, except 
+for vertices that dropped out of the post-transform vertex cache). This reordering 
+of vertex data helps the pre-transform cache to use the memory bandwidth 
+effectively. This step can produce just as much of a speed improvement as the 
+reordering of the triangles, so although the algorithm is simple, it is important.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>An optional third step is to convert the indexed triangle list 
+that we have been using so far into some other format. The two sensible 
+alternatives are an indexed triangle strip, and an indexed triangle strip with restarts. 
+The difference between the two is that the latter has a special index number 
+(usually -1) that says the strip should be restarted, without the hack of inserting 
+degenerate triangles. There are plenty of tutorials available on how to do both 
+forms of strips but it is important to note that you <b>should not change the order 
+of the triangles!</b> You've already optimised for the vertex cache, and that is still 
+the most important thing. Choosing between these formats is simply a matter of 
+which one is best for your target hardware.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>In my experience, the theoretical win from indexed triangle 
+strips over lists is exactly that - theoretical. In practice on the Xbox1 (where the 
+advantage is clearly understood and documented) I have never seen a speed improvement 
+of strips with degenerates versus lists, though others claim a very slight improvement. 
+It seems not to be worth the extra hassle of dealing with indexed strips compared 
+to indexed lists. Depending on the mesh, one can give a slightly smaller index buffer 
+than the other, but the difference is fairly trivial, and it is very dependent on 
+the mesh chosen. Although strips use only one index per triangle instead of three, 
+you need to insert so many degenerate triangles that it all seems to cancel out 
+the advantages.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>However, indexed triangle strips with a restart index do seem 
+to produce significantly smaller index buffers. Instead of having to add degenerate 
+triangles, you simply add a -1 index and the strip restarts in the new place. 
+Tests on the platforms that support them (some consoles and DX10 cards) don't seem 
+to show a significant speed increase so far, but the smaller index-buffer size is 
+always useful.</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<h2>References</h2>
+<p class=MsoNormal>[Hoppe] “Optimization of mesh locality for transparent
+vertex caching.” Hugues Hoppe, ACM SIGGRAPH 1999, 269-276, <a href=http://research.microsoft.com/~hoppe/>http://research.microsoft.com/~hoppe/</a></p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>[Bogomjakov] “Universal rendering sequences for transparent
+vertex caching of progressive meshes” Alexander Bogomjakov, Craig Gotsman, Computer
+Graphics Forum 21(2):137-148, 2002, <a href=http://www.cs.technion.ac.il/~gotsman/publications.html>http://www.cs.technion.ac.il/~gotsman/publications.html</a>
+</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>[Lin] “An Improved Vertex Caching Scheme for 3D Mesh Rendering”
+Gang Lin, Thomas P.-Y. Yu, IEEE Transactions on Visualization and Computer Graphics
+Volume 12, Issue 4 (July 2006) <a href=http://www.ecse.rpi.edu/~lin/K-Cache-Reorder/>http://www.ecse.rpi.edu/~lin/K-Cache-Reorder/</a>
+</p>
+<h1>Implementations and Source Code</h1>
+<p class=MsoNormal>
+Apologies for not posting my own implementation, but it's part of 
+<a href=http://www.radgametools.com/granny.html>Granny3D</a>, so while I can talk about the algorithm, posting the actual source is not cool. However, others have cleanroomed versions and made them available. However <b>please note</b> I have not actually checked these for correctness or bugs!
+</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>
+Martin Storsjö has source of a very clean implementation of this algorithm as part of his Master's thesis <a href=http://www.martin.st/thesis/>Efficient Triangle Reordering for Improved Vertex Cache Utilisation in Realtime Rendering</a>, which is well worth a read. Thanks Martin!
+</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>
+Pat Wilson also has a good-looking version here: <a href=https://github.com/GarageGames/Torque3D/blob/master/Engine/source/gfx/util/triListOpt.h>triListOpt.h</a> and <a href=https://github.com/GarageGames/Torque3D/blob/master/Engine/source/gfx/util/triListOpt.cpp>triListOpt.cpp</a>. Thanks Pat!
+</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>
+Another good implementation in the source for Farbrausch's <a href=https://github.com/farbrausch/fr_public/blob/master/werkkzeug3/engine.cpp%23L298>Werkzeug3</a>. Thanks ryg!
+</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>
+Elegant standalone version by Adrian Stone. Bonus points for the &quot;namespace Forsyth&quot;: <a href=https://github.com/bkaradzic/bgfx/tree/master/3rdparty/forsyth-too>https://github.com/bkaradzic/bgfx/tree/master/3rdparty/forsyth-too</a>. Thanks to Branimir Karadžic.
+</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<p class=MsoNormal>&amp;nbsp;</p>
+<a href=http://tomforsyth1000.github.io/papers/papers.html>Back to all papers.</a>
+</div>
+"></frame>
+<noframes class=sf-hidden><body><p>Sorry, your browser does not support frames. Please go to <a href="http://tomforsyth1000.github.io/papers/fast_vert_cache_opt.html" target="_top">http://tomforsyth1000.github.io/papers/fast_vert_cache_opt.html</a>.</p><hr/><em>Powered by Dyn <a href="http://dyn.com/dns/webhop/">
+WebHop URL Forwarding Engine</a>. <a href="http://dyn.com/">Dyn</a></em></body></noframes>
+ <!--[if IE 6]>#HUABAN_WIDGETS .HUABAN-red-normal-icon-button, .HUABAN-red-large-icon-button, .HUABAN-red-small-icon-button, .HUABAN-white-normal-icon-button, .HUABAN-white-large-icon-button, .HUABAN-white-small-icon-button { background-image: url({{imgBase}}/widget_icons_ie6.png) <![endif]--></frameset>
