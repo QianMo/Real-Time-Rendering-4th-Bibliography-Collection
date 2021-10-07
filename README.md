@@ -1,8 +1,10 @@
 # <Real Time Rendering 4th> Bibliography Collection
 
+ 《Real-Time Rendering 4th》 (RTR4) 参考文献合集典藏。目前已收录超过2000份的 《Real-Time Rendering 4th》 (RTR4)参考文献。
+ 
  Collection of Real-Time Rendering 4th (RTR4) Bibliography.Currently,more than 2000 bibliography of Real-Time Rendering 4th (RTR4) have been included.
 
- 《Real-Time Rendering 4th》 (RTR4) 参考文献合集典藏。目前已收录超过2000份的 《Real-Time Rendering 4th》 (RTR4)参考文献。
+
 
 
 ![](RTR4-Cover.jpg)
