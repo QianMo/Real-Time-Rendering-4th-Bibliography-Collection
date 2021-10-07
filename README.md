@@ -1,6 +1,6 @@
 # <Real Time Rendering 4th> Bibliography Collection
 
- Collection of Real-Time Rendering 4th (RTR4) Bibliography.Currently,more than 2000 bibliographies of Real-Time Rendering 4th (RTR4) have been included.
+ Collection of Real-Time Rendering 4th (RTR4) Bibliography.Currently,more than 2000 bibliography of Real-Time Rendering 4th (RTR4) have been included.
 
  《Real-Time Rendering 4th》 (RTR4) 参考文献合集典藏。目前已收录超过2000份的 《Real-Time Rendering 4th》 (RTR4)参考文献。
 
@@ -41,7 +41,10 @@
 - [Appendices - Linear Algebra and Trigonometry](https://github.com/QianMo/Real-Time-Rendering-4th-Bibliography-Collection/tree/main/Appendices)
     - 14+ Files
 
+    <br>
 
+# References
+[1] [http://www.realtimerendering.com/refs.html](http://www.realtimerendering.com/refs.html)
 
 
 
