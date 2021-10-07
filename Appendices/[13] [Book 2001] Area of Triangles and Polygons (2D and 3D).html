@@ -1,0 +1,890 @@
+<html class=hb-loaded style><!--
+ Page saved with SingleFile 
+ url: https://web.archive.org/web/20061030122459/http://geometryalgorithms.com/Archive/algorithm_0101/ 
+ saved date: Fri Jul 23 2021 16:44:57 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<style>:root{--sf-img-3:url("data:image/gif;base64,R0lGODlhGQAFAPcAAAAAADMAAGYAAJkAAMwAAP8AAAAzADMzAGYzAJkzAMwzAP8zAABmADNmAGZmAJlmAMxmAP9mAACZADOZAGaZAJmZAMyZAP+ZAADMADPMAGbMAJnMAMzMAP/MAAD/ADP/AGb/AJn/AMz/AP//AAAAMzMAM2YAM5kAM8wAM/8AMwAzMzMzM2YzM5kzM8wzM/8zMwBmMzNmM2ZmM5lmM8xmM/9mMwCZMzOZM2aZM5mZM8yZM/+ZMwDMMzPMM2bMM5nMM8zMM//MMwD/MzP/M2b/M5n/M8z/M///MwAAZjMAZmYAZpkAZswAZv8AZgAzZjMzZmYzZpkzZswzZv8zZgBmZjNmZmZmZplmZsxmZv9mZgCZZjOZZmaZZpmZZsyZZv+ZZgDMZjPMZmbMZpnMZszMZv/MZgD/ZjP/Zmb/Zpn/Zsz/Zv//ZgAAmTMAmWYAmZkAmcwAmf8AmQAzmTMzmWYzmZkzmcwzmf8zmQBmmTNmmWZmmZlmmcxmmf9mmQCZmTOZmWaZmZmZmcyZmf+ZmQDMmTPMmWbMmZnMmczMmf/MmQD/mTP/mWb/mZn/mcz/mf//mQAAzDMAzGYAzJkAzMwAzP8AzAAzzDMzzGYzzJkzzMwzzP8zzABmzDNmzGZmzJlmzMxmzP9mzACZzDOZzGaZzJmZzMyZzP+ZzADMzDPMzGbMzJnMzMzMzP/MzAD/zDP/zGb/zJn/zMz/zP//zAAA/zMA/2YA/5kA/8wA//8A/wAz/zMz/2Yz/5kz/8wz//8z/wBm/zNm/2Zm/5lm/8xm//9m/wCZ/zOZ/2aZ/5mZ/8yZ//+Z/wDM/zPM/2bM/5nM/8zM///M/wD//zP//2b//5n//8z//////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAANcALAAAAAAZAAUAQAgVAK8JHEiwoMGDCBMqXMiwocOHBQMCADs=");--sf-img-4:url("data:image/gif;base64,R0lGODlhMgAFAPcAAAAAADMAAGYAAJkAAMwAAP8AAAAzADMzAGYzAJkzAMwzAP8zAABmADNmAGZmAJlmAMxmAP9mAACZADOZAGaZAJmZAMyZAP+ZAADMADPMAGbMAJnMAMzMAP/MAAD/ADP/AGb/AJn/AMz/AP//AAAAMzMAM2YAM5kAM8wAM/8AMwAzMzMzM2YzM5kzM8wzM/8zMwBmMzNmM2ZmM5lmM8xmM/9mMwCZMzOZM2aZM5mZM8yZM/+ZMwDMMzPMM2bMM5nMM8zMM//MMwD/MzP/M2b/M5n/M8z/M///MwAAZjMAZmYAZpkAZswAZv8AZgAzZjMzZmYzZpkzZswzZv8zZgBmZjNmZmZmZplmZsxmZv9mZgCZZjOZZmaZZpmZZsyZZv+ZZgDMZjPMZmbMZpnMZszMZv/MZgD/ZjP/Zmb/Zpn/Zsz/Zv//ZgAAmTMAmWYAmZkAmcwAmf8AmQAzmTMzmWYzmZkzmcwzmf8zmQBmmTNmmWZmmZlmmcxmmf9mmQCZmTOZmWaZmZmZmcyZmf+ZmQDMmTPMmWbMmZnMmczMmf/MmQD/mTP/mWb/mZn/mcz/mf//mQAAzDMAzGYAzJkAzMwAzP8AzAAzzDMzzGYzzJkzzMwzzP8zzABmzDNmzGZmzJlmzMxmzP9mzACZzDOZzGaZzJmZzMyZzP+ZzADMzDPMzGbMzJnMzMzMzP/MzAD/zDP/zGb/zJn/zMz/zP//zAAA/zMA/2YA/5kA/8wA//8A/wAz/zMz/2Yz/5kz/8wz//8z/wBm/zNm/2Zm/5lm/8xm//9m/wCZ/zOZ/2aZ/5mZ/8yZ//+Z/wDM/zPM/2bM/5nM/8zM///M/wD//zP//2b//5n//8z//////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAANcALAAAAAAyAAUAQAgbAK8JHEiwoMGDCBMqXMiwocOHECNKnEix4sSAADs=")}@-moz-keyframes bounce_spinningSquaresG{0%{-moz-transform:scale(1);background-color:#000}100%{-moz-transform:scale(.3) rotate(90deg);background-color:#fff}}@-webkit-keyframes bounce_spinningSquaresG{0%{-webkit-transform:scale(1);background-color:#000}100%{-webkit-transform:scale(.3) rotate(90deg);background-color:#fff}}@-ms-keyframes bounce_spinningSquaresG{0%{-ms-transform:scale(1);background-color:#000}100%{-ms-transform:scale(.3) rotate(90deg);background-color:#fff}}@-o-keyframes bounce_spinningSquaresG{0%{-o-transform:scale(1);background-color:#000}100%{-o-transform:scale(.3) rotate(90deg);background-color:#fff}}@keyframes bounce_spinningSquaresG{0%{transform:scale(1);background-color:#000}100%{transform:scale(.3) rotate(90deg);background-color:#fff}}#wm-ipp-base{min-height:65px;padding:0;margin:0;border:0;background:none transparent}#wm-ipp{z-index:2147483647}#wm-ipp{font-family:Lucida Grande,Helvetica,Arial,sans-serif;font-size:12px;line-height:1.2;letter-spacing:0;width:auto;height:auto;max-width:none;max-height:none;min-width:0!important;min-height:0;outline:0;float:none;text-align:left;border:0;color:#000;text-indent:0;background:0}#donato{transition:height .5s;height:0;margin:0;padding:0}#donato #donato-base{width:100%;height:100%;bottom:0;margin:0;padding:0;position:absolute;z-index:2147483639}</style>
+<meta http-equiv=Content-Language content=en-us>
+<meta http-equiv=reply-to content=webmaster@softsurfer.com>
+<title>Area of Triangles and Polygons in 2D and 3D</title>
+<meta name=language content=en-us>
+<meta name=description content="Algorithms for computing area of triangle and polygon in 2D and 3D">
+<meta name=keywords content="geometry, algorithm, C++, software, computational geometry, mathematics, Euclid, Euclidean, area, cross product, orientation, clockwise order, left-right parity, left side, right side, triangle, Heron, Heron's formula, quadrangle, quadrilateral, Brahmagupta, Brahmagupta's formula, polygon, 2D, 3D">
+<meta name=classification content=Internet>
+<meta name=distribution content=GLOBAL>
+<meta name=rating content="SAFE FOR KIDS">
+<meta name=copyright content="2001 SoftSurfer Company">
+<meta name=author content="Daniel Sunday">
+<meta name=robots content="INDEX, NOFOLLOW">
+<meta name=revisit-after content="30 days">
+<meta name=GENERATOR content="Microsoft FrontPage 5.0">
+<meta name=ProgId content=FrontPage.Editor.Document>
+<meta name="Microsoft Theme" content="geometry 011, default">
+<meta name="Microsoft Border" content=tb>
+<style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style><link type=image/x-icon rel="shortcut icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><style>.sf-hidden{display:none!important}</style><link rel=canonical href=https://web.archive.org/web/20061030122459/http://geometryalgorithms.com/Archive/algorithm_0101/></head>
+<body background="data:image/gif;base64,R0lGODlhdABuAPABAMz//////yH/C01TT0ZGSUNFOS4wDQAAAAFzUkdCAK7OHOkAIf8LTVNPRkZJQ0U5LjAYAAAADG1zT1BNU09GRklDRTkuMALxmbSWACH/C01TT0ZGSUNFOS4wGAAAAAxjbVBQSkNtcDA3MTICAAAIddtivwAsAAAAAHQAbgAAAv+Mj4mg7e8YnPTIit/NfPVvbGAmjlVpQmiqsaR7wrE8rXR4q3m7K3b+uwVlQ2KvUXQllUdf0/O0RKXTJcuawo602ymu6g1wQeNO2Rw+v7zqdbSNgc/e6TqYbafj93oz4A8YKDhIWGh4iJiouHhIlvckRxFZw9dn2TSpU4n5SGmSGdHJeUd6eQQaunkquloKybqDigQLRFvrOorbI+ukumsr5PsrfKs7bNpqXIx8/Eq8nMsc+xxMbWR9LQ0dzd1Ns8ELpfwthg0TLu48Xq3N3p79Du/drF5vP7+dHM9kzr/v/y8LGUYECxo8iLDRB3RUAgrs93AdOYny8Lm7p8/iRY2rFTNyPAdsosNPIUFCjIiR3keAKadRNPnySkmYLfOpvInT5cguJ3nGlPkTZU2RQmf1dHQU6U6lS9EkXfjUaVCfTaUOJXqVZlatHrvm3OhV51aWK4FOpVrWbFU3a9mmLRoWrKSEdOvavct0LNyvcm2K1UsyKgeG5QS7jdvXb+LFWBE3dswVcuS/bwO3jTNTLWDLm9FWzvsZNN/HoydTlqw5NNSzokuTRZ3adYICADs=" bgcolor=#FFFFFF text=#000000 link=#0000FF vlink=#B500B5 alink=#000066 huaban_collector_injected=true>
+<style class=sf-hidden>body{margin-top:0!important;padding-top:0!important}</style>
+<div id=wm-ipp-base lang=en style=display:block;direction:ltr><template shadowmode=closed><div id=wm-ipp style=position:fixed;left:0px;top:0px;right:0px;display:none>
+</div><style>.__wb_overlay{filter:alpha(opacity=60);opacity:.6;-moz-opacity:.6;opacity:.6;background-color:#000;position:fixed;width:100%;height:100%;top:0px;left:0px;padding:0px!important;border:0px!important;margin:0px!important;border-radius:0px!important;z-index:2147483643!important}#__wb_record_overlay_div{cursor:wait!important}.__wb_record_content{opacity:1;position:fixed;top:50%;left:50%;margin:0px!important;padding:0px!important;background-color:#fff!important;border-radius:8px;z-index:2147483644!important;box-shadow:0 0 30px 5px #000;-moz-box-shadow:0 0 30px 5px #000;-webkit-box-shadow:0 0 30px 5px #000}#__wb_record_content_loader{cursor:wait!important;padding-top:30px!important;margin-left:-287px!important;margin-top:-177px!important;width:574px!important;height:355px!important}#__wb_record_content_done{margin-left:-427px!important;margin-top:-177px!important;width:855px!important;height:355px!important}.__wb_record_content>*{margin:auto!important;display:block!important;text-align:center!important;font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif!important}.__wb_record_content>wb_h1{font-size:36px!important;color:#222!important;margin:0px 0px 0px 0px!important;padding:0px!important;line-height:2em;font-weight:normal!important;width:auto!important;height:auto!important}.__wb_record_content>wb_p{font-size:17px!important;color:#222!important;margin:8px 0px 8px 0px!important;padding:0px!important;line-height:2em}.__wb_record_content>#_wb_logo{margin-bottom:10px!important}.__wb_record_content>#_wb_spinner{margin-top:30px!important;margin-bottom:30px!important}.__wb_record_content>#_wb_curr_url{text-decoration:underline!important;font-weight:bold!important}#__wb_record_content_done>#__wb_link{font-size:20px!important;border:1px!important;border-color:#aaa!important;border-style:solid!important;padding:3px!important;text-align:center!important;width:80%!important;height:auto!important}#__wb_record_content_done>#__wb_link:focus{outline:0px!important;border-color:#428bca!important}#__wb_record_content_done>#__wb_donate_close{font-size:18px!important;width:auto!important;float:right;display:inline-block;margin:0px!important;padding:8px 8px 0px 0px!important}#__wb_donate_close>#__wb_record_done_close{cursor:pointer!important;display:inline-block;vertical-align:bottom!important}#__wb_record_content_done>#__wb_donate_close a{color:#428bca!important}#__wb_record_content_done>#__wb_donate_close a:link{color:#428bca!important;text-decoration:none!important;margin-right:16px!important}#__wb_record_content_done>#__wb_donate_close a:visited{color:#428bca!important}#__wb_record_content_done>#__wb_donate_close a:hover{color:#00b1f7!important}#__wb_spinningSquaresG{position:relative;width:240px;height:20px;padding:0px!important;margin:30px 0px 30px 160px!important;border:0px!important;border-radius:0px!important}.__wb_spinningSquaresG{margin:0px!important;padding:0px!important;border:0px!important;border-radius:0px!important;position:absolute;top:0;background-color:#000;width:22px;height:22px;-moz-animation-name:bounce_spinningSquaresG;-moz-animation-duration:1.9s;-moz-animation-iteration-count:infinite;-moz-animation-direction:linear;-moz-transform:scale(.3);-webkit-animation-name:bounce_spinningSquaresG;-webkit-animation-duration:1.9s;-webkit-animation-iteration-count:infinite;-webkit-animation-direction:linear;-webkit-transform:scale(.3);-ms-animation-name:bounce_spinningSquaresG;-ms-animation-duration:1.9s;-ms-animation-iteration-count:infinite;-ms-animation-direction:linear;-ms-transform:scale(.3);-o-animation-name:bounce_spinningSquaresG;-o-animation-duration:1.9s;-o-animation-iteration-count:infinite;-o-animation-direction:linear;-o-transform:scale(.3);animation-name:bounce_spinningSquaresG;animation-duration:1.9s;animation-iteration-count:infinite;animation-direction:linear;transform:scale(.3)}#__wb_spinningSquaresG_1{left:0;-moz-animation-delay:.76s;-webkit-animation-delay:.76s;-ms-animation-delay:.76s;-o-animation-delay:.76s;animation-delay:.76s}#__wb_spinningSquaresG_2{left:30px;-moz-animation-delay:.95s;-webkit-animation-delay:.95s;-ms-animation-delay:.95s;-o-animation-delay:.95s;animation-delay:.95s}#__wb_spinningSquaresG_3{left:60px;-moz-animation-delay:1.14s;-webkit-animation-delay:1.14s;-ms-animation-delay:1.14s;-o-animation-delay:1.14s;animation-delay:1.14s}#__wb_spinningSquaresG_4{left:90px;-moz-animation-delay:1.33s;-webkit-animation-delay:1.33s;-ms-animation-delay:1.33s;-o-animation-delay:1.33s;animation-delay:1.33s}#__wb_spinningSquaresG_5{left:120px;-moz-animation-delay:1.52s;-webkit-animation-delay:1.52s;-ms-animation-delay:1.52s;-o-animation-delay:1.52s;animation-delay:1.52s}#__wb_spinningSquaresG_6{left:150px;-moz-animation-delay:1.71s;-webkit-animation-delay:1.71s;-ms-animation-delay:1.71s;-o-animation-delay:1.71s;animation-delay:1.71s}#__wb_spinningSquaresG_7{left:180px;-moz-animation-delay:1.9s;-webkit-animation-delay:1.9s;-ms-animation-delay:1.9s;-o-animation-delay:1.9s;animation-delay:1.9s}#__wb_spinningSquaresG_8{left:210px;-moz-animation-delay:2.09s;-webkit-animation-delay:2.09s;-ms-animation-delay:2.09s;-o-animation-delay:2.09s;animation-delay:2.09s}@-moz-keyframes bounce_spinningSquaresG{0%{-moz-transform:scale(1);background-color:#000}100%{-moz-transform:scale(.3) rotate(90deg);background-color:#fff}}@-webkit-keyframes bounce_spinningSquaresG{0%{-webkit-transform:scale(1);background-color:#000}100%{-webkit-transform:scale(.3) rotate(90deg);background-color:#fff}}@-ms-keyframes bounce_spinningSquaresG{0%{-ms-transform:scale(1);background-color:#000}100%{-ms-transform:scale(.3) rotate(90deg);background-color:#fff}}@-o-keyframes bounce_spinningSquaresG{0%{-o-transform:scale(1);background-color:#000}100%{-o-transform:scale(.3) rotate(90deg);background-color:#fff}}@keyframes bounce_spinningSquaresG{0%{transform:scale(1);background-color:#000}100%{transform:scale(.3) rotate(90deg);background-color:#fff}}#wm-ipp-base{min-height:65px;padding:0;margin:0;border:0;background:none transparent}#wm-ipp{z-index:2147483647}#wm-ipp,#wm-ipp *{font-family:Lucida Grande,Helvetica,Arial,sans-serif;font-size:12px;line-height:1.2;letter-spacing:0;width:auto;height:auto;max-width:none;max-height:none;min-width:0!important;min-height:0;outline:0;float:none;text-align:left;border:0;color:#000;text-indent:0;position:initial;background:0}#wm-ipp div,#wm-ipp canvas{display:block}#wm-ipp div,#wm-ipp tr,#wm-ipp td,#wm-ipp a,#wm-ipp form{padding:0;margin:0;border:0;border-radius:0;background-color:transparent;background-image:none;height:auto}#wm-ipp table{border:0;border-collapse:collapse;margin:0;padding:0;width:auto;font-size:inherit}#wm-ipp form input{padding:1px!important;height:auto;display:inline;margin:0;color:#000;background:none #fff;border:1px solid #666}#wm-ipp form input[type=submit]{padding:0 8px!important;margin:1px 0 1px 5px!important;width:auto!important;border:1px solid #000!important;background:#fff!important;color:#000!important}#wm-ipp a{display:inline}#wm-ipp a:hover{text-decoration:underline}#wm-ipp a.wm-btn:hover{text-decoration:none;color:#ff0!important}#wm-ipp a.wm-btn:hover span{color:#ff0!important}#wm-ipp #wm-ipp-inside{margin:0 6px;border:5px solid #000;border-top:0;background-color:rgba(255,255,255,0.9);-moz-box-shadow:1px 1px 4px #333;-webkit-box-shadow:1px 1px 4px #333;box-shadow:1px 1px 4px #333;border-radius:0 0 8px 8px}#wm-ipp #wm-logo{padding:0 10px;vertical-align:middle;min-width:110px;width:15%}#wm-ipp table tr::before,#wm-ipp table tr::after{margin:0;height:auto}#wm-ipp table.c{vertical-align:top;margin-left:4px}#wm-ipp table.c td{border:none!important}#wm-ipp .c td.u{padding:3px 0!important;text-align:center}#wm-ipp .c td.n{padding:0 0 0 5px!important;vertical-align:bottom}#wm-ipp .c td.n a{text-decoration:none;color:#33f;font-weight:bold}#wm-ipp .c td.n td.b{padding:0 6px 0 0!important;text-align:right!important;overflow:visible;white-space:nowrap;color:#99a;vertical-align:middle}#wm-ipp .c td.n tr.y td.b{padding:0 6px 2px 0!important}#wm-ipp .c td.n td.c{background:#000;color:#ff0;font-weight:bold;padding:0!important;text-align:center}#wm-ipp.hi .c td.n td.c{color:#ec008c}#wm-ipp .c td.n td.f{padding:0 0 0 6px!important;text-align:left!important;overflow:visible;white-space:nowrap;color:#99a;vertical-align:middle}#wm-ipp .c td.n tr.m td{text-transform:uppercase;white-space:nowrap;padding:2px 0}#wm-ipp .c td.s{padding:0 5px 0 0!important;text-align:center;vertical-align:bottom}#wm-ipp #wm-nav-captures{white-space:nowrap}#wm-ipp .c td.s a.t{color:#33f;font-weight:bold;line-height:1.8}#wm-ipp .c td.s div.r{color:#666;font-size:9px;white-space:nowrap}#wm-ipp .c td.k{vertical-align:bottom;padding-bottom:2px}#wm-ipp .c td.s{padding:0 5px 2px 0!important}#wm-ipp td#displayMonthEl{padding:2px 0!important}#wm-ipp td#displayYearEl{padding:0 0 2px 0!important}div#wm-ipp-sparkline{position:relative;white-space:nowrap;background-color:#fff;cursor:pointer;line-height:.9}#sparklineImgId,#wm-sparkline-canvas{position:relative;z-index:9012;max-width:none}#wm-ipp-sparkline div.yt{position:absolute;z-index:9010!important;background-color:#ff0!important;top:0}#wm-ipp-sparkline div.mt{position:absolute;z-index:9013!important;background-color:#ec008c!important;top:0}#wm-ipp .r{position:relative}#wm-ipp .r a{color:#33f;border:0;position:relative;background-color:transparent;background-repeat:no-repeat!important;background-position:100% 100%!important;text-decoration:none}#wm-ipp #wm-capinfo{border-radius:0 0 4px 4px}#wm-ipp #wm-capinfo .c-logo{display:block;float:left;margin-right:3px;width:90px;min-height:90px;max-height:290px;border-radius:45px;overflow:hidden;background-position:50%;background-size:auto 90px;box-shadow:0 0 2px 2px rgba(208,208,208,128) inset}#wm-ipp #wm-capinfo .c-logo span{display:inline-block}#wm-ipp #wm-capinfo .c-logo img{height:90px;position:relative;left:-50%}#wm-ipp #wm-capinfo .wm-title{font-size:130%}#wm-ipp #wm-capinfo a.wm-selector{display:inline-block;color:#aaa;text-decoration:none!important;padding:2px 8px}#wm-ipp #wm-capinfo a.wm-selector.selected{background-color:#666}#wm-ipp #wm-capinfo a.wm-selector:hover{color:#fff}#wm-ipp #wm-capinfo.notice-only #wm-capinfo-collected-by,#wm-ipp #wm-capinfo.notice-only #wm-capinfo-timestamps{display:none}#wm-ipp #wm-capinfo #wm-capinfo-notice .wm-capinfo-content{background-color:#ff0;padding:5px;font-size:14px;text-align:center}#wm-ipp #wm-capinfo #wm-capinfo-notice .wm-capinfo-content *{font-size:14px;text-align:center}#wm-ipp #wm-expand{right:1px;bottom:-1px;color:#fff;background-color:#666!important;padding:0 5px 0 3px!important;border-radius:3px 3px 0 0!important}#wm-ipp #wm-expand span{color:#fff}#wm-ipp #wm-expand #wm-expand-icon{display:inline-block;transition:transform .5s;transform-origin:50% 45%}#wm-ipp #wm-expand.wm-open #wm-expand-icon{transform:rotate(180deg)}#wm-ipp #wmtb{text-align:right}#wm-ipp #wmtb #wmtbURL{width:calc(100% - 45px)}#wm-ipp #wm-graph-anchor{border-right:1px solid #ccc}html.wb-highlight{box-shadow:inset 0 0 0 3px #a50e3a!important}.wb-highlight{outline:3px solid #a50e3a!important}#wm-ipp-print{display:none!important}@media (min-width:946px){#wm-ipp #wm-graph-anchor{display:block!important}}@media (max-width:945px){#wm-ipp #wm-graph-anchor{display:none!important}#wm-ipp table.c{width:85%;width:calc(100% - 131px)}}@media (max-width:1118px){#wm-logo{display:none!important}}#wm-btns{white-space:nowrap}#wm-btns>#wm-save-snapshot-open{margin-right:7px;top:-6px}#wm-btns>#wm-sign-in{box-sizing:content-box;display:none;margin-right:7px;top:-8px;border:2px #000 solid;border-radius:14px;padding-right:2px;padding-bottom:2px;width:11px;height:11px}#wm-btns>#wm-sign-in>.iconochive-person{font-size:12.5px}#wm-save-snapshot-open>.iconochive-web{color:#000;font-size:160%}#wm-ipp #wm-share{display:flex;align-items:flex-end;justify-content:space-between}#wm-share>#wm-screenshot{display:inline-block;margin-right:3px;visibility:hidden}#wm-screenshot>.iconochive-image{color:#000;font-size:160%}#wm-share>#wm-video{display:inline-block;margin-right:3px;visibility:hidden}#wm-video>.iconochive-movies{color:#000;display:inline-block;font-size:150%;margin-bottom:2px}#wm-btns>#wm-save-snapshot-in-progress{display:none;font-size:160%;opacity:.5;position:relative;margin-right:7px;top:-5px}#wm-btns>#wm-save-snapshot-success{display:none;color:green;position:relative;top:-7px}#wm-btns>#wm-save-snapshot-fail{display:none;color:red;position:relative;top:-7px}.wm-icon-screen-shot{background:url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjQgMjAiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Im0wIDBoMjR2MjBoLTI0eiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Im0xOC41NzIxNTI1IDE1Ljg3MzEzMTRoLTIuMjEzNzUxdi0yLjE2MTAwNDNoMi4yMTM3NTF6bS0zLjI2NDc3MDMgMGgtMi4yMTQ5MDI2di0yLjE2MTAwNDNoMi4yMTQ5MDI2em0zLjEyNjU2OTItMTEuNTY5OTY0Mjl2NS44MjU0MDU5OSAxLjUyNTI3OTNoLTE2Ljg2NjI5MDQ1di0xLjUyNTI3OTMtNS44MjU0MDU5OXptLTYuNDc5MDk3MSAxMS41Njk5NjQyOWgtMTAuMzU0NDg1NzZ2LTIuMTE2MDg4OWgxMC4zNTQ0ODU3NnptLTExLjk1NDg1NDMtMTMuMDczMTMxNHY2Ljc0NDIxMjgzIDcuNzIyNDQ2MTdoMjB2LTcuNzIyNDQ2MTctNi43NDQyMTI4M3oiIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMCAxOC4wNjcpIi8+PHJlY3QgZmlsbD0iIzMzMyIgaGVpZ2h0PSIxMCIgcng9IjEiIHN0cm9rZT0iIzMzMyIgd2lkdGg9IjE0LjkwNiIgeD0iOCIgeT0iOSIvPjxjaXJjbGUgY3g9IjE1LjQ1MyIgY3k9IjE0IiBmaWxsPSIjZmZmIiByPSIzLjQ5MSIvPjxjaXJjbGUgY3g9IjE1LjQ1MyIgY3k9IjE0IiBmaWxsPSIjMzMzIiByPSIxLjYwNCIvPjwvZz48L3N2Zz4=) no-repeat!important;background-size:contain!important;width:22px!important;height:19px!important;display:inline-block}#donato{transition:height .5s;height:0;margin:0;padding:0}body.wm-modal{height:auto!important;overflow:hidden!important}#donato #donato-base{width:100%;height:100%;bottom:0;margin:0;padding:0;position:absolute;z-index:2147483639}body.wm-modal #donato #donato-base{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483640}.wb-autocomplete-suggestions{font-family:Lucida Grande,Helvetica,Arial,sans-serif;font-size:12px;text-align:left;cursor:default;border:1px solid #ccc;border-top:0;background:#fff;box-shadow:-1px 1px 3px rgba(0,0,0,.1);position:absolute;display:none;z-index:2147483647;max-height:254px;overflow:hidden;overflow-y:auto;box-sizing:border-box}.wb-autocomplete-suggestion{position:relative;padding:0 .6em;line-height:23px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:1.02em;color:#333}.wb-autocomplete-suggestion b{font-weight:bold}.wb-autocomplete-suggestion.selected{background:#f0f0f0}</style><style>[class^="iconochive-"],[class*=" iconochive-"]{font-family:'Iconochive-Regular'!important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.iconochive-Uplevel:before{content:"\21b5"}.iconochive-exit:before{content:"\1f6a3"}.iconochive-beta:before{content:"\3b2"}.iconochive-logo:before{content:"\1f3db"}.iconochive-audio:before{content:"\1f568"}.iconochive-movies:before{content:"\1f39e"}.iconochive-software:before{content:"\1f4be"}.iconochive-texts:before{content:"\1f56e"}.iconochive-etree:before{content:"\1f3a4"}.iconochive-image:before{content:"\1f5bc"}.iconochive-web:before{content:"\1f5d4"}.iconochive-collection:before{content:"\2211"}.iconochive-folder:before{content:"\1f4c2"}.iconochive-data:before{content:"\1f5c3"}.iconochive-tv:before{content:"\1f4fa"}.iconochive-article:before{content:"\1f5cf"}.iconochive-question:before{content:"\2370"}.iconochive-question-dark:before{content:"\3f"}.iconochive-info:before{content:"\69"}.iconochive-info-small:before{content:"\24d8"}.iconochive-comment:before{content:"\1f5e9"}.iconochive-comments:before{content:"\1f5ea"}.iconochive-person:before{content:"\1f464"}.iconochive-people:before{content:"\1f465"}.iconochive-eye:before{content:"\1f441"}.iconochive-rss:before{content:"\221e"}.iconochive-time:before{content:"\1f551"}.iconochive-quote:before{content:"\275d"}.iconochive-disc:before{content:"\1f4bf"}.iconochive-tv-commercial:before{content:"\1f4b0"}.iconochive-search:before{content:"\1f50d"}.iconochive-search-star:before{content:"\273d"}.iconochive-tiles:before{content:"\229e"}.iconochive-list:before{content:"\21f6"}.iconochive-list-bulleted:before{content:"\2317"}.iconochive-latest:before{content:"\2208"}.iconochive-left:before{content:"\2c2"}.iconochive-right:before{content:"\2c3"}.iconochive-left-solid:before{content:"\25c2"}.iconochive-right-solid:before{content:"\25b8"}.iconochive-up-solid:before{content:"\25b4"}.iconochive-down-solid:before{content:"\25be"}.iconochive-dot:before{content:"\23e4"}.iconochive-dots:before{content:"\25a6"}.iconochive-columns:before{content:"\25af"}.iconochive-sort:before{content:"\21d5"}.iconochive-atoz:before{content:"\1f524"}.iconochive-ztoa:before{content:"\1f525"}.iconochive-upload:before{content:"\1f4e4"}.iconochive-download:before{content:"\1f4e5"}.iconochive-favorite:before{content:"\2605"}.iconochive-heart:before{content:"\2665"}.iconochive-play:before{content:"\25b6"}.iconochive-play-framed:before{content:"\1f3ac"}.iconochive-fullscreen:before{content:"\26f6"}.iconochive-mute:before{content:"\1f507"}.iconochive-unmute:before{content:"\1f50a"}.iconochive-share:before{content:"\1f381"}.iconochive-edit:before{content:"\270e"}.iconochive-reedit:before{content:"\2710"}.iconochive-gear:before{content:"\2699"}.iconochive-remove-circle:before{content:"\274e"}.iconochive-plus-circle:before{content:"\1f5d6"}.iconochive-minus-circle:before{content:"\1f5d5"}.iconochive-x:before{content:"\1f5d9"}.iconochive-fork:before{content:"\22d4"}.iconochive-trash:before{content:"\1f5d1"}.iconochive-warning:before{content:"\26a0"}.iconochive-flash:before{content:"\1f5f2"}.iconochive-world:before{content:"\1f5fa"}.iconochive-lock:before{content:"\1f512"}.iconochive-unlock:before{content:"\1f513"}.iconochive-twitter:before{content:"\1f426"}.iconochive-facebook:before{content:"\66"}.iconochive-googleplus:before{content:"\67"}.iconochive-reddit:before{content:"\1f47d"}.iconochive-tumblr:before{content:"\54"}.iconochive-pinterest:before{content:"\1d4df"}.iconochive-popcorn:before{content:"\1f4a5"}.iconochive-email:before{content:"\1f4e7"}.iconochive-embed:before{content:"\1f517"}.iconochive-gamepad:before{content:"\1f579"}.iconochive-Zoom_In:before{content:"\2b"}.iconochive-Zoom_Out:before{content:"\2d"}.iconochive-RSS:before{content:"\1f4e8"}.iconochive-Light_Bulb:before{content:"\1f4a1"}.iconochive-Add:before{content:"\2295"}.iconochive-Tab_Activity:before{content:"\2318"}.iconochive-Forward:before{content:"\23e9"}.iconochive-Backward:before{content:"\23ea"}.iconochive-No_Audio:before{content:"\1f508"}.iconochive-Pause:before{content:"\23f8"}.iconochive-No_Favorite:before{content:"\2606"}.iconochive-Unike:before{content:"\2661"}.iconochive-Song:before{content:"\266b"}.iconochive-No_Flag:before{content:"\2690"}.iconochive-Flag:before{content:"\2691"}.iconochive-Done:before{content:"\2713"}.iconochive-Check:before{content:"\2714"}.iconochive-Refresh:before{content:"\27f3"}.iconochive-Headphones:before{content:"\1f3a7"}.iconochive-Chart:before{content:"\1f4c8"}.iconochive-Bookmark:before{content:"\1f4d1"}.iconochive-Documents:before{content:"\1f4da"}.iconochive-Newspaper:before{content:"\1f4f0"}.iconochive-Podcast:before{content:"\1f4f6"}.iconochive-Radio:before{content:"\1f4fb"}.iconochive-Cassette:before{content:"\1f4fc"}.iconochive-Shuffle:before{content:"\1f500"}.iconochive-Loop:before{content:"\1f501"}.iconochive-Low_Audio:before{content:"\1f509"}.iconochive-First:before{content:"\1f396"}.iconochive-Invisible:before{content:"\1f576"}.iconochive-Computer:before{content:"\1f5b3"}</style><div class="wb-autocomplete-suggestions sf-hidden" style=left:0px;top:0px;width:0px></div></template>
+</div><div id=wm-ipp-print class=sf-hidden>The Wayback Machine - https://web.archive.org/web/20061030122459/http://geometryalgorithms.com:80/Archive/algorithm_0101/</div>
+<div id=donato style=position:relative;width:100%>
+ <div id=donato-base>
+ <iframe id=donato-if scrolling=no frameborder=0 style=width:100%;height:100% sandbox="allow-popups allow-top-navigation allow-top-navigation-by-user-activation" srcdoc="<html>"></iframe>
+ </div>
+</div>
+<table border=0 cellpadding=0 cellspacing=0 width=100%><tbody><tr><td><font face="Times New Roman">
+<p align=left><font size=6><strong>
+<a href=https://web.archive.org/web/20061030122459/http://geometryalgorithms.com/index.html>
+<img border=0 src=data:image/png;base64,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 align=left hspace=30 width=85 height=70></a></strong></font><br>
+</p>
+</font></table><table dir=ltr border=0 cellpadding=0 cellspacing=0 width=100%><tbody><tr><td valign=top><font face="Times New Roman">
+<h1 align=center style=text-align:center><font face=Arial color=#660066><b><u><font color=#800080><br>
+Area of Triangles and Polygons (2D &amp; 3D)</font></u></b></font></h1>
+<div align=center>
+ <center>
+ <p align=center>by Dan Sunday</p>
+ </center>
+</div>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0>
+ <tbody><tr>
+ <td align=left><font face="Times New Roman"><b><font color=#800080><a href=#Triangles>Triangles</a></font></b></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><b><a href=#Ancient%20Triangles>Ancient 
+ Triangles</a></b></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><b><a href=#Modern%20Triangles>Modern 
+ Triangles</a></b></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><b><font color=#800080><a href=#Quadrilaterals>
+ Quadrilaterals</a></font></b></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><b><font color=#800080><a href=#Polygons>Polygons</a></font></b></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><b><a href=#2D%20Polygons>2D 
+ Polygons</a></b></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><b><a href=#3D%20Polygons>3D 
+ Planar Polygons</a></b></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><a href=#3D%20Standard%20Formula>The 
+ Standard Formula</a></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><a href=#3D%20Quadrilateral%20Formula>Quadrilateral 
+ Decomposition</a></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><a href=#3D%20Project%20to%202D>Projection 
+ to 2D</a></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><b><font color=#800080><a href=#Implementations>
+ Implementations</a></font></b></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><font color=#000080 face=Courier><a href=#isLeft()>isLeft()</a></font></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><font color=#000080 face=Courier><a href=#orientation2D_triangle()>orientation2D_Triangle()</a></font></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><font color=#000080 face=Courier><a href=#area2D_triangle()>area2D_Triangle()</a></font></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><font color=#000080 face=Courier><a href=#orientation2D_polygon()>orientation2D_Polygon()</a></font></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><font color=#000080 face=Courier><a href=#area2D_polygon()>area2D_polygon()</a></font></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><font size=2>
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="5"><rect fill-opacity="0"/></svg>' width=25 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-3)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"><font color=#000080 face=Courier><a href=#area3D_Polygon()>area3D_Polygon()</a></font></font></font></td>
+ </tr>
+ <tr>
+ <td align=left><font face="Times New Roman"><b><font color=#800080><a href=#References>References</a></font></b></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>Computing the area of a planar polygon is a basic 
+geometry calculation and can be found in many introductory texts.&nbsp; However, 
+there are several different methods for computing planar areas depending on the 
+information available.</p>
+<h2 align=left style=text-align:left><font face=Arial color=#660066><b><font color=#800080>
+<a name=Triangles></a>Triangles</font></b></font></h2>
+<h3 align=left style=text-align:left><font face=Arial color=#660066><b><a name="Ancient Triangles"></a>
+Ancient Triangles</b></font></h3>
+<p style=text-align:left>Before Pythagoras, the area of the parallelogram 
+(including the rectangle and the square)&nbsp; has been known to equal the 
+product of its base times its height.&nbsp; Further, two copies of the same 
+triangle paste together to form a parallelogram, and thus the area of a triangle 
+is half of its base <i><font color=#000000>b</font></i> times its height <i>
+<font color=#000000>h</font></i>.&nbsp; So, for these simple but commonly 
+occurring cases, we have:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td align=right><font face="Times New Roman"><b>Parallelogram:</b></font></td>
+ <td align=center><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=93 height=33></font></td>
+ <td align=center><font face="Times New Roman">
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td align=center><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=112 height=50></font></td>
+ </tr>
+ <tr>
+ <td align=right><font face="Times New Roman"><b>Triangle:</b></font></td>
+ <td align=center><font face="Times New Roman">
+ <img border=0 src=data:image/gif;base64,R0lGODlhZwAhAPAAAP///wAAACH5BAEAAAAALAAAAABnACEAAALhhI+py+0Po5y02ouz3rz7D4biSDoBdZYqaqXr27iMfNBbYCP4nE95X5uBgAYg8bFLJHlMz7F3NAFsz6Uu6pMKMSeq1Kr7EI3conJc/GEjaBwtBdZOz7GaWuHO5+s8l9+8Nmd2xTd1x+G2FZQGJyHzRmaHF5jxJjmIpAepmDa54mW4CGFJuEC1eaaZmKoX5iqIKSfaiWeKWkIKq8s5G1rrWXoT9/i3CLXKuDSsunepUXwFRkwp2xJCTRKXNQQzik3r1M1WJibuePG9lT6CvT6JbF44Hk9fb3+Pn6+/z9/vb1EAACH/C01hdGhUeXBlMDAx/wUBAAQARFNNVDQAABNXaW5BbGxCYXNpY0NvZGVQYWdlcwARBVRpbWVzIE5ldyBSb21hbgARA1N5bWJvbAARBUNvdXJpZXIgTmV3ABEETVQgRXh0cmEAEgAIIS9Fj0QvQVD0EA9HX0FQ8h8eQVD0FQ9BAPRF9CX0j0JfQQD0EA9DX0EA9I9F9CpfSPSPQQD0EA9A9I9Bf0j0EA9BKl9EX0X0X0X0X0EPDAEAAQABAgICAgACAAEBAQADAAEABAAACgEAAgCDQQADAAEDAAEAAgSFlANEAAIAligAAgCWKQAACQCgAgSGPQA9AwALAQALAQACAIgxAAABAAIAiDIAAA4ACgIAg2IAAgCDaAAAAAA7 width=105 height=33></font></td>
+ <td align=center><font face="Times New Roman"></font></td>
+ <td align=center><font face="Times New Roman"><img border=0 src=data:image/gif;base64,R0lGODlhdgBCAIAAAAAAAP///yH5BAkIAAEALAAAAAB2AEIAAAL/jI+pCWDegpOvzmthpRRz7IHaZ23TgqbSqbbuC8ctKzMQXef6vuA76+MJh0TYaFNMKpclRJAJjT1lHuc0is1er9luksvxig/g12laHg/TM+eMrY4rgGZ5FI7CI+1FfY/nx4eFwxYheOjGkBMoyEj2t4hY4/ioRCk5mQd4iVkHCdip2ZcChMfJxPlEo3cammj00+qK9voTmtpW2cDqOqpCV5UpeVn4EWjIhyt1RiTr2fxMB91LFV0r5CxWFny0lj33Jfwg+w2VVg5OLfo89q0MK4dsGS7VqL53f30rnuw7XY1I3rBImNDBy+fCzzuEuQD+41fQ4DqInSQqsqUOzEKGVw69MLKoQ+AdbBzROQIJSl/KlQyzoYyIjyVGjmRS7bqJM6fOnTx7+vwJVCTNoUR7vCxaD2lGpdSOMm2z6ynMmFLVyHNaNQzVrB4vco0j7atVlWK73JRaAAA7 width=118 height=66></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>However, except in special situations, finding the 
+height of a triangle at an arbitrary orientation usually requires also computing 
+the perpendicular distance of the top vertex from the base.</p>
+<p style=text-align:left>For example, if one knows the lengths of two sides,
+<i><font color=#000000>a</font></i> and <i><font color=#000000>b</font></i>, 
+of a triangle&nbsp; and also the angle <font color=#000000>
+<font face=Symbol>q</font><i> </i></font>between them, then Euclid says this 
+is enough to determine the triangle and its area.&nbsp; Using trigonometry, the 
+height of the triangle over the base <i><font color=#000000>b</font></i> is 
+given by <font color=#000000><i>h = a </i>sin <font face=Symbol>q</font></font>, 
+and thus the area is:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td><font face="Times New Roman"><img border=0 src=data:image/gif;base64,R0lGODlhjwAhAPAAAP///wAAACH5BAEAAAAALAAAAACPACEAAAL/hI+py+0Po5y02ouz3rz7D4biSJbmiaZnQLHqCytuG87xLT/2sW9B3wI6fpifcLg4GoRKSxPyTBAr06nEylNiEVtNFLmyfQGsXtOYHEO9qd24nGuUmR913LT9utzaJbBbFIEmRtY1mOVXSMcVNcMnhyhjZkSJxvDkyJjJEzloafi4tiR15PhndwnIuTrK5cpaZSpZqfraGpnEKNkmZXuruFuIO1ybVUl6iayM18vqrCi2J9s8nOwrnLucSEprqUl7TXht3DldjXm3Ta3L7qMaHb4+bZUHD7aOja++H/gLu0emHa555v4N8QatoJ9uCIs5STXH1DtgC49R4uaQChsQNqhwcOzoz4fHkfmogLRGEgfIk9lSeuzIsllMl/1oeDhG84aamTl7+vwJNKjQoUSLGj2KNKmBAgAh/wtNYXRoVHlwZTAwMf8FAQAEAERTTVQ0AAATV2luQWxsQmFzaWNDb2RlUGFnZXMAEQVUaW1lcyBOZXcgUm9tYW4AEQNTeW1ib2wAEQVDb3VyaWVyIE5ldwARBE1UIEV4dHJhABIACCEvRY9EL0FQ9BAPR19BUPIfHkFQ9BUPQQD0RfQl9I9CX0EA9BAPQ19BAPSPRfQqX0j0j0EA9BAPQPSPQX9I9BAPQSpfRF9F9F9F9F9BDwwBAAEAAQICAgIAAgABAQEAAwABAAQAAAoBAAIAg0EAAwABAwABAAIEhZQDRAACAJYoAAIAlikAAAkAoAIEhj0APQMACwEACQGgAQACAIgxAAABAAIAiDIlAAAACgIAg2EAAgCDYgACAoJzAAIAgmkAAgCCbgACBIS4A3EAAAA7 width=145 height=33></font></td>
+ <td><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td><font face="Times New Roman"><img border=0 src=data:image/gif;base64,R0lGODlheABYAIAAAAAAAP///yH5BAkIAAEALAAAAAB4AFgAAAL/jI+py8APo5y0Wujc3bx7rwHaR5bmNhrpybbtGsDuTFdyXOd6dMf9DmT9VMEibUg0KkvIQ3MJXTxV0yi06rRqMR3sVudFhL+zsdNMZp7QaZCwrWQrRPCgXFoH5+55/L7vwoch2EfIBUhiyIP4objISEVH1xA1CTgp8uNIsZmYYjn31dm1ApowylkHairWxlpZ2oN6MSth+oqTVzsohrtLu4WZmZSFiGsnfAtJfLnMrOpcrBt9Bk3d6np9mvZ7RNZ9BI6tTVlJfhh3/mgkDnQcqJ7q3jAcn/vn52N/7z332S7E0Q0YAF+UkUKw4JuF/hruo7KGnsOHzzjIyoTx3Tk2ihcnUqxow1fCj6fChEDokSRIdPykuVT5cl3FVQrtyNtWEiJMiTLHndG4U9ODmtbyhdrZyOhRpCBK9WSK4mfGqVSrWr2KNavWrVwxWiAKNazYsWTLmkUI1h7QsxbTqlvLlpbbt3M3ZoAbd5CwvI3+8W3a62/bnILl4iz81S/ixD4X2xqB13GkyGkKAAA7 width=120 height=88></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>Another frequently used computation is derived from 
+the fact that triangles with equal sides are congruent, and thus have the same 
+area.&nbsp; This observation from Euclid (~300 BC) culminated in Heron's formula 
+(~50 AD) for area as a function of the lengths of its three sides [Note: some 
+historians attribute this result to Archimedes (~250 BC)]; namely:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=256 height=70></font></td>
+ <td><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=120 height=88></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>where <font color=#000000><i>a</i>,<i>b</i>,<i>c</i></font> 
+are the lengths of the sides, and <i><font color=#000000>s</font></i> is the 
+semiperimeter.&nbsp; There are interesting algebraic variations of this formula; 
+such as:</p>
+<p align=center><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=280 height=43></p>
+<p align=left>which avoids calculating the 3 square roots to explicitly get 
+the lengths <font color=#000000><i>a</i>,<i>b</i>,<i>c </i></font>from the 
+triangle's vertex coordinates.&nbsp; Other variations on Heron's formula can be 
+found at Kevin Brown's <a href=https://web.archive.org/web/20061030122459/http://mathpages.com/home/kmath196.htm>Heron's 
+Formula</a> page and Eric Weisstein's
+<a href=https://web.archive.org/web/20061030122459/http://mathworld.wolfram.com/Triangle.html>Triangle</a> page.</p>
+<p align=left>The remaining classical triangle congruence is when two angles 
+and one side are known.&nbsp; Knowing two angles gives all three, so we can 
+assume the angles <font face=Symbol color=#000000>q</font><font color=#000000>
+</font>and <font face=Symbol color=#000000>j</font>&nbsp; are both adjacent 
+to the known base <i><font color=#000000>b</font></i>.&nbsp; Then the formula 
+for area is:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=200 height=61></font></td>
+ <td><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=120 height=92></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<h3 style=text-align:left><font face=Arial color=#660066><b><a name="Modern Triangles"></a>Modern Triangles</b></font></h3>
+<p style=text-align:left>More recently, starting in the 17-th century with 
+Descartes and Fermat, linear algebra produced new simple formulas for area.&nbsp; 
+In <i>3 dimensional space</i> (3D), the area of a parallelogram and triangle can 
+be expressed as the magnitude of the cross-product of two edge vectors, since
+<font color=#000000>|<b>v</b>×<b>w|</b> = <b>|v||w||</b>sin
+<font face=Symbol>q</font><b>|</b></font> where
+<font face=Symbol color=#000000>q</font>&nbsp; is the angle between the two 
+vectors <b><font color=#000000>v</font></b> and <b><font color=#000000>w</font></b>.&nbsp; 
+Thus for a 3D triangle with vertices <font color=#000000>V<sub>0</sub>V<sub>1</sub>V<sub>2</sub></font> 
+putting <font color=#000000><b>v</b>=V<sub>1</sub><font face=Symbol>-</font>V<sub>0</sub></font> 
+and <font color=#000000><b>w</b>=V<sub>2</sub><font face=Symbol>-</font>V<sub>0</sub></font>, 
+one gets:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=417>
+ <tbody><tr>
+ <td width=210><font face="Times New Roman"><img border=0 src=data:image/gif;base64,R0lGODlh9gBGAPAAAP///wAAACH5BAEAAAAALAAAAAD2AEYAAAL/hI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8dhENPyjduSjvKtjwuugBCixmhMJYVM0RJAfFYCyFrz+ok+qlmGtPTFihtURZmMDEe4L/X4baABn9Soe+u1wvdFqNkhx8Yh2Pd3ccfXZONzlgdl58FVd1aXwIgwGVhWGZfoaXnAmKTTiDmXmUnm+Mij1WnZGIv5Sev3GjqKu1CawQmKS5pnt1h5WZvYCquqq2zSSgmIpin3ewyHKroad7qBnWxKLey1+Wgbar1nzGxo2gzubSEazp5GPIf+dt/Ovr9+xHsLmDZz4Lbpw3fFlb9zZrJ1YzgLlsKIBVnxQ5jDF6tY/6e8lQJ45GJADN+qYayFiGIkkUNOWgO5YwZLFSld3oBZpObAkSx02tQTDwShnj+PpfT566ALpEWXBo00aaaSpigpMJ1wlSTVrVy7ev0KNqzYsWTLmj2LNq3atWzbun0LN67cuXTrqs1qlwTehHnzcVUqJuteMDur7jLp96GniUYFDSYc8hNjo9oeQ9ZKCzDlw9uAfdQYL6rnnCRJiTZ4NdVoQOrQsZHH+d/kXTVhSw092x1Pw/Qaxv73O9oh37dDBx9omShngMyhFu+3+xlxlR2arynp2hFIXni5YwXsUDdB59TRlJfhsd5ySBCrYyfdW3zn9lnesz7vktg4+oOCfe4XN507ycmyg3026Ucbf+9gs99u5hVWToIOLojKg+PdpyAfHkWEEzlOzFMggPLpklxnbnykyIZTzJdga72AaFGD1XCzn239EQQadCUqsR2LEi704owy0hfej7cIVlIa+CHDH4JDTjiFOkqeJ52Fz4UI0ZRQShbfMks+lSWEhXh5ZUxhBrdjSzPeUaJ/ZQaI1WWEpEkTPWzKaaRVR+EJJ509/HanXgr6hMiObpbnpzPIWcUnYmCusWUvg74ZGE8ustZmj4pdl2N9syU6gmqIprOShmJiBGpfK26VqqpxsuoqFq3GSmuttt6Ka666ilAAACH/C01hdGhUeXBlMDAx/wUBAAQARFNNVDQAABNXaW5BbGxCYXNpY0NvZGVQYWdlcwARBVRpbWVzIE5ldyBSb21hbgARA1N5bWJvbAARBUNvdXJpZXIgTmV3ABEETVQgRXh0cmEAEgAIIS9Fj0QvQVD0EA9HX0FQ8h8eQVD0FQ9BAPRF9CX0j0JfQQD0EA9DX0EA9I9F9CpfSPSPQQD0EA9A9I9Bf0j0EA9BKl9EX0X0X0X0X0EPDAEAAQABAgICAgACAAEBAQADAAEABAAACgQAAQEBAAIAg0EAAwABAwABAAIEhZQDRAACAJYoAAIAlikAAAkAoAIEhj0APQoDAAsBAAsBAAIAiDEAAAEAAv8AiDIAAAAKAwAEAwABAAIAh3YAAgSG1wC0AgCHdwAAAgCWB+wCAJYI7AAAAQACAIEgAAIAgSAAAgCBIAACAIEgAAIAgSAAAgCBIAACAIEgAAIAgSAAAgSGPQA9AwALAQALAQACAIgxAAABAAIAiDIAAAAKAwAEAwABAAMAAQMACQCgAQAKAgKCVgADABsAAAkBoAEAAgCIMQAAAQEACQCgAgSGEiItCgICglYAAwAbAAAJAaABAAIAiDAAAAEBAAAKAgCWKAACAJYpAAACBIbXALQDAAEDAAkAoAEACgIAglYAAwAbAAAJAaABAAIAiDIAAAEBAAkAoAIEhhIiLQo0AgCCVgADABsAAAkBoAEAAgCIMAAAAQEAAAoCAJYoAAIAlikAAAACAJYH7AIAlgjsAAAAAAA7 width=246 height=70></font></td>
+ <td width=50><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td width=142><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhoABzAIAAAAAAAP///yH5BAkIAAEALAAAAACgAHMAAAL/jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fy/AL2ndwAzfe4YusJaUHg8Bgr5pBM127ZjKqUhqf0WqIGrNhuSMn1ijvgsdkTDJ/XljTix4473NWDWo6v3rf5/nu/5ydYN1j4ZojIl1j4FLhopuP4iCQ5KaZjKRe5VZlJuUnoiRUJpygaRVpqetqUCtTJmoS5ABvrxBlYazt12KC7e6KrBXzbRpyE8XtMpqG8uwk9DJUhvfxqBSfpTGv9kF1Uuc3d7euGo/1FznCOuzoOIp7Jzu5LUm39jZ6l/od97z4i3qJS/wRKMIgojCOEBxk+a+GQVcQJEz1VPMgPwkWK/hsTEsn4bkZHQSMrlMRz0mTKNStNZmxpTB3MmPhGzWzl5eYRndSI8exp62czoTCINjtldENSXijl+fnXZymagYakpquKNZFVZgO3Ap3k9ULYgE1FjcWI9Oych5CAqTXi89IyqDze8nprN8UsJnn17t3ZzdWQvn5JDU6FOLHixYwbO36cGCQRwZJlGF4Hyo6qfqr+vtxMSxpd0HSPgcYccs4dwsgoiG6YurLLaRHUsK49y3Mwha55M6JSGp5v2L1+Y6txXKUdrWWcJO+9nPmOn3TaTH9ED/mqWtXbkQxu77oejqae5zm9QoswLuZRgg9PWyP76E/5Hg0lW+l9gPnFF+6/zdJ//Sn13jUDHohgggouyGCDLBQAADs=" width=160 height=115></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>In <i>2 dimensional space</i> (2D), a vector can be 
+viewed as embedded in 3D by adding a third component which is set = 0.&nbsp; 
+This lets one take the cross-product of 2D vectors, and use it to compute area.&nbsp; 
+Given a triangle with vertices <font color=#000000>V<sub><i>i</i></sub>=(<i>x<sub>i</sub>,y</i><sub><i>i</i></sub>)=(<i>x<sub>i</sub>,y<sub>i</sub></i>,0)
+</font>for <font color=#000000><i>i</i>=0,2,</font> we can compute that:</p>
+<p align=center><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=405 height=70></p>
+<p style=text-align:left>And the absolute value of the third z-component is 
+twice the absolute area of the triangle.&nbsp; However, it is useful to not take 
+the absolute value here, and instead let the area be a signed quantity.</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=378 height=160></font></td>
+ <td><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhoABzAIAAAAAAAP///yH5BAkIAAEALAAAAACgAHMAAAL/jI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fy/AL2ndwAzfe4YusJaUHg8Bgr5pBM127ZjKqUhqf0WqIGrNhuSMn1ijvgsdkTDJ/XljTix4473NWDWo6v3rf5/nu/5ydYN1j4ZojIl1j4FLhopuP4iCQ5CVlp2dWImRnFxdl5pAYa6rNAWioTqJVK+YDauoIJG4vCSVtLQsqa69TWm4SBC7wxPEx8cbyljCzBrNis+/EcfQpCXW0ngp3NbedNDH6YrSE+Tv5ri55ua97pzgA/KW+9PgdDb5gfv9/X3/BPTsB49rSZKjhwTkJNTBZecfiqmxSIriZSPIjlIhEx1BqDjelY4wyveXFAThEYyqSwd/5Ubhvk8hqjRDE51CxGc+aikWtuTvPHEo/PLyhL8XwYa2i9pJB6KTXo9OnTFEOnnvQksSG6o/jsmYwENqzYsWTLmj2L9mzBtWyBRMoBx60OuFzbfrtTN+43uxN43cLLty/gCH4D9zVyGIphwmF2NV7s7LFgxZBfWYFVpjJjqJMJaYZAp80OqyVHnwNt+u7nU6mXTb7MebUeyqjPkdYkObJt2aDLxeaNeKVn4EuT/SZ+PDE05H+O6WUOPbr06dSrrygAADs=" width=160 height=115></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>This formula for area is a very efficient 
+computation with no roots or trigonometric functions involved - just 2 
+multiplications and 5 additions, and possibly 1 division by 2 (which can 
+sometimes be avoided).</p>
+<p style=text-align:left>Note that the signed area will be <i>positive</i> if
+<font color=#000000>V<sub>0</sub>V<sub>1</sub>V<sub>2&nbsp; </sub></font>are 
+oriented counterclockwise around the triangle, and will be <i>negative</i> if 
+the triangle is oriented clockwise; and so, this area computation can be used to 
+test for a triangle's orientation.&nbsp; The signed area can also be used to 
+test whether the point <font color=#000000>V<sub>2 </sub></font>is to the left 
+(positive) or the right (negative) of the directed line segment
+<font color=#000000>V<sub>0</sub>V<sub>1&nbsp; </sub></font>.&nbsp; So this is 
+a very useful primitive, and it's great to have such an efficient formula for 
+it.</p>
+<h2 style=text-align:left><font face=Arial color=#660066><b><font color=#800080><a name=Quadrilaterals>
+</a>Quadrilaterals</font></b></font></h2>
+<p style=text-align:left>The Greeks singled out certain quadrilaterals (also 
+called quadrangles) for special treatment, including the square, the rectangle, 
+the parallelogram, and the trapezium.&nbsp; Then, given an arbitrary 
+quadrilateral, they showed how to construct a parallelogram&nbsp; [Euclid, Book 
+I, Prop 45] or square [Euclid, Book II, Prop 14] with an equal area.&nbsp; And 
+the area of a parallelogram was equal to its base times its height.&nbsp; But 
+there was no general formula for the quadrilateral's area.</p>
+<p style=text-align:left>An extension of Heron's triangle area formula to 
+quadrilaterals was discovered by the Hindu geometer Brahmagupta (~620 AD) 
+[Coxeter,1967, Section 3.2].&nbsp; However, it only works for <b><i>cyclic 
+quadrilaterals</i></b> where all four vertices lie on the same circle.&nbsp; For 
+a cyclic quadrilateral <b><font face=Symbol>Q</font></b>, let the lengths of 
+the four sides be a, b, c, d, and the semiperimeter be s=(a+b+c+d)/2.&nbsp; 
+Then, the area of <b><font face=Symbol>Q</font></b> is given by:</p>
+<p align=center><img border=0 src="data:image/gif;base64,R0lGODlhIgEjAPAAAP///wAAACH5BAEAAAAALAAAAAAiASMAAAL/hI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNdWgOf6zvf+DwwKh8Si8YhMDm2pAPMJjUo5zqn1aq1StCgc9gumcbeqcfiMNpkPu8V6ZH7DHfKMNyGvg/Jdrf6xFjh2h/DXMdjyZngR6MbS2FSIQcgWB1m4aMeVuafAWaGI54IYKQoKEOcmiPd5g/lCSdnJQCjb5Nc66fnplMraIJtLVgm7KQyRhzuqXPo6UTVoaeA3Ha0mqdqrkYNqOp3drcvtreh1jDrOpg5+rkP7vE78iz4ebAk0jO5IbxcvbwvNloR01gQGFFbrl8FqCKmpGuhP37w2EuXBYUauX0SJ/wA3wsNGbOE3Rt6qVQSJsKQzQCBNTlxnr4Sxd7t8eFLJ8RImmzdb6hMYjhVPn7tOEqXXo+fIh4B4zFtZFGqImTRJHr0DtJ1Sk0CDumpq9ChEsWG3ei1rUJrQHx9dMv3qEWs5jRvNJdMFtmtXlmT3nj2bdt/TbcGkBk1p0VnhpXAZc/X1d2zdXpARl01s1nFWa1G3MV5s0TLWklQjRyiN8qnlyA5D49XGGlg6pBiz6T2nunO32TfscnZLuR3v0Jv4aQrsdrdfsMYHe96AW6naRKjL1LaO+VH05FY/jNZdBnwX5+MNh/ewnM52UVkTVW1Gdk5m+IeeTx3ukUSd9ciAnTEX/N8s3d2XRoEGnrAagQcuyCB6jcnXYIQSTkhhhRZeiGGGGm7IYYcefghiiCKOWEMBACH/C01hdGhUeXBlMDAx/wUBAAQARFNNVDQAABNXaW5BbGxCYXNpY0NvZGVQYWdlcwARBVRpbWVzIE5ldyBSb21hbgARA1N5bWJvbAARBUNvdXJpZXIgTmV3ABEETVQgRXh0cmEAEgAIIS9Fj0QvQVD0EA9HX0FQ8h8eQVD0FQ9BAPRF9CX0j0JfQQD0EA9DX0EA9I9F9CpfSPSPQQD0EA9A9I9Bf0j0EA9BKl9EX0X0X0X0X0EPDAEAAQABAgICAgACAAEBAQADAAEABAAACgEAAgCDQQADAAEDAAEAAgSFmANRAAIAligAAgCWKQAACQDAAgSGPQA9CgMACgAAAQACAIIoAAIAg3MAAgSGEmEiLQIAg2EAAgCCKQACAIIoAAIAg3MAAgSGEiItAgCDYgACAIIpAAIAgigAAgCDcwACBIYSIi0CAINjAAIAgikAAgCCKAACAINzAAIEhhIiLQIAg2QAAgCCKQAACwEBAAAAADs=" width=290 height=35></p>
+<p align=left>which is an amazing symmetric formula.&nbsp; If one side is zero 
+length, say d=0, then we have a triangle (which is always cyclic) and this 
+formula reduces to Heron's one.</p>
+<p style=text-align:left>In modern linear algebra, as already noted, the area 
+of a <i><b>planar parallelogram</b></i> is the magnitude of the cross product of 
+two adjacent edge vectors.&nbsp; So, for any 3D planar parallelogram
+<font color=#000000>V<sub>0</sub>V<sub>1</sub>V<sub>2</sub>V<sub>3</sub></font>, 
+we have:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td width=11><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhKgEkAPAAAP///wAAACH5BAEAAAAALAAAAAAqASQAAAL/hI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zntBD4T9PsMgprhBGpQ55sWJc0KfxmRHOb1lI1sbsysBVx3iB7IsQyvUsa9vbI0vx+xDXZhgf7GB/tm/4NeHIEhYaAe4driUyDCoUfSI2AiwWCH4J+lYp1lpaWmBadiZd3bppijVQGmXGrhKWml21zrnugYZ2xULIaXLwWoLS0jxg6r4OoyLvLyZTCYH9Zv7DB3q3Eyd7Ug8YVyK3a0sDp43ux1O5ZkunEEqpqmKyC57dUwW6d2+zr6LNb4v0L9etOrx4lcryUCC5sghZJYQ2EJ8Ea3Vm5cOTDyK/xUzhtmDKdiQgxvtOeQobg/AghAvngvIbd9BhPDyoazZkV4xRjeJ2OSiyldPEJJwwszGZyjDoxhdKn15hOe4KSFBNS3DS1qWoviqUv0J1Z8oQ+fQDNL4zVtaoJCkDmOJzGxQgWVHnFWbs2HFmevkOnXmFyvIqsv43iW6lq1elRTh0hWct2NSqIy2RrJcCvMonfoeZnTcKVhTmeVQVja5mS7Tv075PgRbmvVo2GQTCnXnFqDsUyk9IvXXW2Hw0lrjfeIyvNoWaRb1nrwU2aFjl7RXr0JeDbdt5ag770YXhnf2a7nDi6j+XfdHuzlNSYRu/XmvqLHVecYeorpr1faJSHR2Dwx86cnXnIDRmRcfeAHCREuD50nmnBz4YQUfJwruRGBM+bXXVn9vBDSRhEAJRuJ+ld2j3YGZ2TVNiiNOd8tJMA4Ix4UGJtjGFUHIU2OPNvoIJIZBAjnjkHQYiWSSSi7JZJNOPglllFJOSWWVVl6J5ZQFAAAh/wtNYXRoVHlwZTAwMf8FAQAEAERTTVQ0AAATV2luQWxsQmFzaWNDb2RlUGFnZXMAEQVUaW1lcyBOZXcgUm9tYW4AEQNTeW1ib2wAEQVDb3VyaWVyIE5ldwARBE1UIEV4dHJhABIACCEvRY9EL0FQ9BAPR19BUPIfHkFQ9BUPQQD0RfQl9I9CX0EA9BAPQ19BAPSPRfQqX0j0j0EA9BAPQPSPQX9I9BAPQSpfRF9F9F9F9F9BDwwBAAEAAQICAgIAAgABAQEAAwABAAQAAAoBAAIAg0EAAwABAwABAAIAglYAAwAbAAALAQACAIgwAAABAQAKAgCCVgADABsAAAsBAAIAiDEAAAEBAAoCAILmVgADABsAAAsBAAIAiDIAAAEBAAoCAIJWAAMAGwAACwEAAgCIMwAAAQEAAAoCAJYoAAIAlikAAAIEhj0APQMABAMAAQADAAEDAAEAAgCCVgADABsAAAsBAAIAiDEAAAEBAAoCBIYSIi0CAIJWAAMAGwAACwEAAgCIMAAAAQEAAAoCAJYoAAIAlikAAAIEhtcAtAMAAQMAAQACAIJWAAMAGwAACwEAAgCIMwAAAQEACgIEhhIiLQIAglYAAwAbAAALAQACAIgwAAABAQAACgIAligAAgCWKQAAAAIAlgfsAgCWCOwAAAAAOw==" width=298 height=36></font></td>
+ <td width=54><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td width=45><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhyAB+ALMAAAAAAIAAAACAAICAAAAAgIAAgACAgICAgMDAwP8AAAD/AP//AAAA//8A/wD//////yH5BAkIAA8ALAAAAADIAH4AAAT+8MlJq7046827/2AojmRpnmiqrmzrvnAsz3Rt33iu73zv/8CgcEgsGo/IHmDJrDCXyejkCaVQiU1LVcp9ZJ2A49baLXvDWuR4au6uJWhxuu2eq+Nwuhvvja75emJ8gEVbhIFGhlyKiFKMfnGHjUOPkH2TjmGShZpgm5g5UJ9Yg2ygQW9nozqpeadAb5GcGKuvNK2ui7W2PruovEm+v8BybcLENcc8T8iFuc3QL1fGVNXW19jZ2tvc3d7YxF/RMcqQuOMp5XfM6DDqidXt0q/g8i3vlPX2Kvic8fv8wk0DeKKfHHYETRhMNGWhPYdYErKASEliwHAWLwKjCJDjsIz+BZF5fCgSJIqRP1C2U6nEZEiMLkmwXBazxMwdN6HlDFVTZsmeIXbiEPpzI9CgRY96IGqDKS+nt5SCgDqD6imr5KR+wOpOaweu87xyAOuCLCKzE8WOTarWztO2GtCukEuHbjq4GeyexHtB70u+TtgC9qsQsFtbhBcJHrwYb2KfhsnAjHzJKOVniC9Xfqv58QjPwRo7Ft0WNNLOpNWanqp5c+bLq7e2jr0U9WTKtL/atqz1U+61XsVJ5t0boSniUq0d5ywW3O8N36JLn069ur7WZ69hx6Sc1kA4xqV9V3WueXjvhMpPTKXevC/2odJjPwZ/qPztIgA51Y//cylW//ViN1WA9gUmYFCyLJPggQMuF5+DDI61IIAQRghdJ71gaOFWGmJ2S4fgPZcdGBQa6NqG4B2WDH8eohhLicOJSI8QE6IYF40V2qgiTS3qaGJKOfoYIo3tCWnkkUgmqeSSTDbZXwQAOw==" width=200 height=126></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>In 2D, with vertices <font color=#000000>V<sub><i>i</i></sub>=(<i>x<sub>i</sub>,y</i><sub><i>i</i></sub>)=(<i>x<sub>i</sub>,y<sub>i</sub></i>,0)
+</font>for <font color=#000000><i>i</i>=0,3,</font> this becomes:</p>
+<p align=center><img border=0 src="data:image/gif;base64,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AAALAQACAIgxAAABAQAKAgSGEiItAgCDeQADABsAAAsBAAIAiDAAAAEBAAAKAgCWKAACAJYpAAAAAQADAAEDAAEAAgCDeAADABsAAAsBAAIAiDMAAAEBAAoCBIYSIi0CAIN4AAMAGwAACwEAAgCIMAAAAQEAAAoCAJYoAAIAlikAAAABAAMAAQMAAQACAIN5AAMAGwAACwEAAgCIMwAA/wEBAAoCBIYSIi0CAIN5AAMAGwAACwEAAgCIMAAAAQEAAAoCAJYoAAIAlikAAAAAAAIAlgfsAgCWCOwAAAEACQCgAgCBIAACAIEgAAIAgSAAAgCBIAACAIEgAAIAgSAAAgCBIAACAIEgAAIEhj0APQoDAAEDAAEAAgCDeAADABsAAAsBAAIAiDEAAAEBAAoCBIYSIi0CAIN4AAMAGwAACwEAAgCIMAAAAQEAAAoCAJYoAAIAlikAAAMAAQMAAQACAIN5AAMAGwAACwEAAgCIMwAAAQEACgIEhhIiLQIAg3kAAwAbAAALAQACAIgwAAABAQAACgIAligAAgCWKQAAApYEhhIiLQMAAQMAAQACAIN4AAMAGwAACwEAAgCIMwAAAQEACgIEhhIiLQIAg3gAAwAbAAALAQACAIgwAAABAQAACgIAligAAgCWKQAAAwABAwABAAIAg3kAAwAbAAALAQACAIgxAAABAQAKAgSGEiItAgCDeQADABsAAAsBAAIAiDAAAAEBAAAKAgCWKAACAJYpAAAAAAAAOw==" width=365 height=100></p>
+<p style=text-align:left>which is again a <i>signed</i> area just as we had 
+for triangles.</p>
+<p style=text-align:left>Next, for an <i><b>arbitrary quadrilateral</b></i>, 
+one can compute its area using a parallelogram discovered by Pierre Varignon 
+(first published in 1731).&nbsp; It is amazing that the Greeks missed Varignon's 
+simple result which was discovered 2000 years after Euclid!&nbsp; Given any 
+quadrilateral, one can take the midpoints of its 4 edges to get 4 vertices which 
+form a new quadrilateral.&nbsp; It is then easy to show that this midpoint 
+quadrilateral is always a parallelogram, called the "Varignon parallelogram", 
+and that its area is exactly one-half the area of the original quadrilateral 
+[Coxeter,1967, Section 3.1].&nbsp; So, for a quadrilateral <b>
+<font face=Symbol>Q</font></b>=<font color=#000000>V<sub>0</sub>V<sub>1</sub>V<sub>2</sub>V<sub>3</sub></font>, 
+let this parallelogram have midpoint vertices <font color=#000000>M<sub>0</sub>M<sub>1</sub>M<sub>2</sub>M<sub>3</sub></font> 
+as shown in the diagram:</p>
+<p align=center><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=300 height=216></p>
+<p style=text-align:left>From elementary geometry, we know that in triangle
+<font color=#000000>V<sub>0</sub>V<sub>1</sub>V<sub>2</sub></font> the 
+midpoint line <font color=#000000>M<sub>0</sub>M<sub>1</sub></font> is 
+parallel to the base <font color=#000000>V<sub>0</sub>V<sub>2</sub></font>.&nbsp; 
+In triangle <font color=#000000>V<sub>0</sub>V<sub>1</sub>V<sub>2</sub>V<sub>3</sub></font>, 
+the line <font color=#000000>M<sub>3</sub>M<sub>2</sub></font> is parallel to 
+that same base <font color=#000000>V<sub>0</sub>V<sub>2</sub></font>.&nbsp; 
+Thus, <font color=#000000>M<sub>0</sub>M<sub>1</sub></font> and
+<font color=#000000>M<sub>3</sub>M<sub>2</sub></font> are parallel to each 
+other.&nbsp; Similarly, <font color=#000000>M<sub>0</sub>M<sub>3</sub></font> 
+and <font color=#000000>M<sub>1</sub>M<sub>2</sub></font> are parallel, which 
+shows that <font color=#000000>M<sub>0</sub>M<sub>1</sub>M<sub>2</sub>M<sub>3</sub></font> 
+is a parallelogram.&nbsp; The area relation is also easy to demonstrate, and we 
+can compute the quadrilateral's area as:</p>
+<p align=center><img border=0 src="data:image/gif;base64,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" width=425 height=166></p>
+<p style=text-align:left>which equals one-half the magnitude of the 
+cross-product of the two diagonals of the quadrilateral.&nbsp; This result was 
+noted by [Van Gelder,1995] who used a different proof..&nbsp; This formula holds 
+for any 3D planar quadrilateral.&nbsp; When restricted to 2D with
+<font color=#000000>V<sub><i>i</i></sub>=(<i>x<sub>i</sub>,y</i><sub><i>i</i></sub>),</font> 
+it becomes a formula for a <i>signed</i> area: </p>
+<p align=center><img border=0 src="data:image/gif;base64,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AgCWKQAAAAEAAwABAwABAAIAg3kAAwAbAAALAQACAIgyAAABAQAKAgSGEiItAgCDeQADABsAAAsBAAIAiDAAAAEBAAAKAgCWKAACAJYpAAAAAQADAAEDAAEAAgCDeAADABsAAAsBAAIAiDMAAAEBAAoCBIYSIi0CAIN4AAMAGwAACwEAAgCIMQAAAQEAAAoCAJYoAAIAlikAAAABAAMAAQMAAQACAIN5AAMAGwAACwEAAgD/iDMAAAEBAAoCBIYSIi0CAIN5AAMAGwAACwEAAgCIMQAAAQEAAAoCAJYoAAIAlikAAAAAAAIAlgfsAgCWCOwAAAEACQCgAgCBIAACAIEgAAIAgSAAAgCBIAACAIEgAAIAgSAAAgCBIAACAIEgAAIAgSAAAgCBIAACBIY9AD0KAwABAwABAAIAg3gAAwAbAAALAQACAIgyAAABAQAKAgSGEiItAgCDeAADABsAAAsBAAIAiDAAAAEBAAAKAgCWKAACAJYpAAADAAEDAAEAAgCDeQADABsAAAsBAAIAiDMAAAEBAAoCBIYSIi0CAIN5AAMAGwAACwEAAgCIMQAAAQEApAAKAgCWKAACAJYpAAACBIYSIi0DAAEDAAEAAgCDeAADABsAAAsBAAIAiDMAAAEBAAoCBIYSIi0CAIN4AAMAGwAACwEAAgCIMQAAAQEAAAoCAJYoAAIAlikAAAMAAQMAAQACAIN5AAMAGwAACwEAAgCIMgAAAQEACgIEhhIiLQIAg3kAAwAbAAALAQACAIgwAAABAQAACgIAligAAgCWKQAAAAAAADs=" width=376 height=100></p>
+<p style=text-align:left>This formula for an arbitrary quadrilateral is just 
+as efficient as the one for an arbitrary triangle, using only 2 multiplications 
+and 5 additions.&nbsp; For simple quadrilaterals, the area is positive when the 
+vertices are oriented counterclockwise, and negative when they are clockwise.&nbsp; 
+However, it also works for nonsimple quadrilaterals and is equal to the 
+difference in area of the two regions the quadrilateral bounds.&nbsp; For 
+example, in the following diagram where I is the self-intersection point of a 
+nonsimple quadrilateral <b><font face=Symbol>Q</font></b>=<font color=#000000>V<sub>0</sub>V<sub>1</sub>V<sub>2</sub>V<sub>3</sub></font>, 
+we have:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td width=11><font face="Times New Roman"><img border=0 src="data:image/gif;base64,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" width=281 height=66></font></td>
+ <td width=52><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td width=47><font face="Times New Roman"><img border=0 src=data:image/gif;base64,R0lGODlhyACRALMAAAAAAIAAAACAAICAAAAAgIAAgACAgICAgMDAwP8AAAD/AP//AAAA//8A/wD//////yH5BAkIAA8ALAAAAADIAJEAAAT+8MlJq7046827/2AojmRpnmiqrmzrvnAsz3Rt33iu73zv/8CgcEgsGo/I5ATAbFqaAKV0mmFWo9Ss9mG9YLdgZbfyDZuP5eV5bRxL0uy4z82V24Fu+H1vG+v5gDNff4GFLlaEhooqiF50i5Ahj3VvkZaSiZSXmxuTFJmcoZ2ipJKlpx6gqKWqq6JYg56ullBlUbWzs2m4ua8ata29ccG8woHBn1DGe8iOTstrzb/K0FvSHcDVYjXF2kLXJt3ePOAp4uN9Qecn2WTPveUw6yOysqfxNO30f/iK/TfzMEz6589MQDVPxhHs8e7JLnSawtjj8hDiQoCt8kCMOGWiO4T+Gy/G8OgFZEgx5Rpt/IQGn0p3IgHFDEdwoEljM/exmJjzTs9UMe399EluqECjdpAm+6F0WJ+mvyzmgzpKqjyqHLBGO6T1KElhC7+ufKEvIbuuY5dW1ZkWD6hrYtsKUoUsrty5qbChvevoQyK7fKeC0AM4sGC/Hw23aQZrr+JpIgo/fjr41mQkXzVeLuLR5uYhQgk5/vzmXGfSScSORp14MGt1KV8zdClbh2SztQ+vWM339trcO4fyDql0uDffkYHT3GEc7N7mrpAzUp7VOPRQ0g9Rd5h6e+mO1LOnqy0ex3Wf57OiLk9uM/s5j9/jCSz/m9z6RNK3pEWck37YpPy7NxsqAuaAHxgFcpMgN9EtCNA9Dhr4SoTMbXLgMZFcaAiFfnGoTiEaZsgHMCSWaOKJKKao4oostkiNdzDGKOM3pjXESI0hVlNPTzvOSJFAeJXko2cyEDmkkIIgOWRFulXi4xJMBnnTkixRNuWMfpg3yJO4UbUll0th9RKY3xFWpGUOeZgUYcKZ6SSMnrSJpJrD8CNllRyB2dWXZL4poZ9k7nnlk4ICqmd7hhKaozN9Nuroo5BGKumklIYQAQA7 width=200 height=145></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p>&nbsp; </p>
+<h2 style=text-align:left><font face=Arial color=#660066><b><font color=#800080><a name=Polygons></a>
+Polygons</font></b></font></h2>
+<h3 style=text-align:left><font face=Arial color=#660066><b><a name="2D Polygons"></a>2D Polygons</b></font></h3>
+<p style=text-align:left>A 2D polygon can be decomposed into triangles.&nbsp; 
+For computing area, there is a very easy decomposition method for <b><i>simple 
+polygons</i></b> (i.e. ones without self intersections).&nbsp; Let a polygon <b>
+<font face=Symbol color=#000000>W</font></b> be defined by its vertices
+<font color=#000000>V<sub><i>i</i></sub>=(<i>x<sub>i</sub>,y</i><sub><i>i</i></sub>)
+</font>for <font color=#000000><i>i</i>=0,<i>n</i></font> with
+<font color=#000000>V<sub><i>n</i></sub><i>=</i>V<sub>0</sub></font>.&nbsp; 
+Also, let <font color=#000000>P</font> be any point; and for each edge
+<font color=#000000>V<sub><i>i</i></sub>V<sub><i>i</i>+1</sub></font> of <b>
+<font face=Symbol color=#000000>W</font></b>, form the triangle <b>
+<font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>i</i></sub>=</font><b><font face=Symbol color=#000000>D</font></b><font color=#000000>PV<sub><i>i</i></sub>V<sub><i>i</i>+1</sub></font>.&nbsp; 
+Then, the area of <b><font face=Symbol color=#000000>W</font></b> is equal 
+to the sum of the <i>signed</i> areas of all the triangles <b>
+<font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>i</i>
+</sub></font>for<font face=Courier> </font><font color=#000000><i>i</i>=0,<i>n-</i>1</font>; 
+and we have:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=279>
+ <tbody><tr>
+ <td width=148><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=181 height=86></font></td>
+ <td width=58><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td width=60><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=240 height=170></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>Notice that, for a counterclockwise oriented 
+polygon, when the point&nbsp; <font color=#000000>P</font> is on the "inside" 
+left side of an edge <font color=#000000>V<sub><i>i</i></sub>V<sub><i>i</i>+1</sub></font>, 
+then the area of <b><font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>i</i></sub></font> 
+is positive; whereas, when&nbsp; <font color=#000000>P</font> is on the 
+"outside" right side of an edge <font color=#000000>V<sub><i>i</i></sub>V<sub><i>i</i>+1</sub></font>, 
+then <b><font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>i</i></sub></font> 
+has a negative area.&nbsp; If instead the polygon is oriented clockwise, then 
+the signs are reversed, and inside triangles become negative.</p>
+<p style=text-align:left>For example, in the above diagram, the triangles <b>
+<font face=Symbol color=#000000>D</font></b><font color=#000000><sub>2</sub>=</font><b><font face=Symbol color=#000000>D</font></b><font color=#000000>PV<sub>2</sub>V<sub>3</sub></font> 
+and <b><font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>n</i>-1</sub>=</font><b><font face=Symbol color=#000000>D</font></b><font color=#000000>PV<sub><i>n</i>-1</sub>V<sub><i>n</i></sub></font> 
+have positive area, and contribute positively to the total area of polygon <b>
+<font face=Symbol color=#000000>W</font></b>.&nbsp; However, as one easily 
+observes, only part of <b><font face=Symbol color=#000000>D</font></b><font color=#000000><sub>2</sub></font> 
+and <b><font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>n</i>-1</sub></font> 
+are actually inside <b><font face=Symbol color=#000000>W</font></b> and 
+there is a part of each triangle that is also exterior.&nbsp; On the other hand, 
+the triangles <b><font face=Symbol color=#000000>D</font></b><font color=#000000><sub>0</sub></font> 
+and <b><font face=Symbol color=#000000>D</font></b><font color=#000000><sub>1</sub></font> 
+have negative area and this cancels out the exterior excesses of positive area 
+triangles.&nbsp; In the final analysis, exterior areas all get cancelled, and 
+one is left with exactly the area of the polygon <b>
+<font face=Symbol color=#000000>W</font></b>.</p>
+<p style=text-align:left>One can make the formula more explicit by picking a 
+specific point&nbsp; P<i> </i>and expanding the terms.&nbsp; By selecting P<i>=</i>(0,0), 
+the area of each triangle reduces to 2<i>A</i>(<b><font face=Symbol>D</font></b><sub><i>i</i></sub>) 
+= (<i>x<sub>i</sub>y</i><sub><i>i</i>+1</sub><font face=Symbol>-</font><i>x</i><sub><i>i</i>+1</sub><i>y<sub>i</sub></i>).&nbsp; 
+This yields:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=279>
+ <tbody><tr>
+ <td width=148><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=288 height=206></font></td>
+ <td width=58><font face="Times New Roman"><img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td width=60><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=240 height=163></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left><br>
+A little algebra shows that the second and third summations are equal to the 
+first [Sunday, 2002].&nbsp; For a polygon with <font color=#000000><i>n</i></font> vertices, 
+the first summation uses <font color=#000000>2<i>n</i></font> multiplications 
+and (<font color=#000000>2<i>n</i>-1)</font> additions; the second uses
+<font color=#000000><i>n</i></font> multiplications and (<font color=#000000>3<i>n</i>-1)</font> 
+additions; and the third uses only <font color=#000000><i>n</i></font> 
+multiplications and (<font color=#000000>2<i>n</i>-1)</font> additions.&nbsp; 
+So, the third is preferred for efficiency, but to avoid any overhead from 
+computing the index <font color=#000000><i>i</i>(mod <i>n</i>), </font>one 
+must extend the polygon array up to <font color=#000000>V<sub><i>n</i>+1</sub>=V<sub>1</sub></font>.
+</p>
+<p style=text-align:left>This computation gives a&nbsp; <i>signed</i> area 
+for a polygon; and, similar to the signed area of a triangle,&nbsp; is <i>
+positive</i> when the vertices are oriented counterclockwise around the polygon, 
+and <i>negative</i> when oriented clockwise.&nbsp; So, this computation can be 
+used to test for a polygon's global orientation.&nbsp; However, there are other 
+more efficient algorithms for determining polygon orientation.&nbsp; The easiest 
+is to find the rightmost lowest vertex of the polygon, and then test the 
+orientation of the entering and leaving edges at this vertex.&nbsp; This test 
+can be made by checking if the end vertex of the leaving edge is to the left of 
+the entering edge, which means that the orientation is counterclockwise.</p>
+<h3 style=text-align:left><font face=Arial color=#660066><b><a name="3D Polygons"></a>3D Planar Polygons</b></font></h3>
+<p align=left>An important generalization is for planar polygons embedded in 
+3D space [Goldman, 1994].&nbsp; We have already shown that the area of a 3D 
+triangle <b><font face=Symbol color=#000000>D</font></b>=<font color=#000000>V<sub>0</sub>V<sub>1</sub>V<sub>2</sub></font>&nbsp; 
+is given by half the magnitude of the cross product of two of its edge vectors; 
+namely, <font color=#000000>½ |V<sub>0</sub>V<sub>1 </sub>× V<sub>0</sub>V<sub>2</sub>|.</font></p>
+<h4 align=left style=text-align:left><font face=Arial color=#660066><b><a name="3D Standard Formula"></a>
+The Standard Formula</b></font></h4>
+<p align=left>There is a classic standard formula for the area of a 3D polygon 
+[Goldman, 1994] that extends the cross-product formula for a triangle.&nbsp; It 
+can be derived from Stokes Theorem.&nbsp; However, we show here how to derive it 
+from a 3D triangular decomposition that is geometrically more intuitive.</p>
+<p style=text-align:left><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" align=left width=300 height=191>A 
+general 3D planar polygon <b><font face=Symbol color=#000000>W</font></b> 
+has vertices <font color=#000000>V<sub><i>i</i></sub>=(<i>x<sub>i</sub>,y<sub>i</sub>,z<sub>i</sub></i>)
+</font>for <font color=#000000><i>i</i>=0,<i>n</i></font>, with
+<font color=#000000>V<sub><i>n</i></sub><i>=</i>V<sub>0</sub></font>.&nbsp; 
+All the vertices lie on the same 3D plane <font color=#000000 face=Symbol>
+<b>p</b></font> which has a <i><b>unit normal</b></i> vector <b>
+<font color=#000000>n</font></b>.&nbsp; Now, the same as in the 2D case,&nbsp; 
+let <font color=#000000>P</font> be any 3D point (not generally on the plane
+<b><font face=Symbol color=#000000>p</font></b>); and for each edge
+<font color=#000000><b>e</b><sub><i>i</i></sub>=V<sub><i>i</i></sub>V<sub><i>i</i>+1</sub></font> 
+of <b><font face=Symbol color=#000000>W</font></b>, form the 3D triangle <b>
+<font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>i</i></sub>=</font><b><font face=Symbol color=#000000>D</font></b><font color=#000000>PV<sub><i>i</i></sub>V<sub><i>i</i>+1</sub></font>.&nbsp; 
+We would like to relate the sum of the areas of all these triangles to the area 
+of the polygon <b><font face=Symbol color=#000000>W</font></b> in the plane
+<b><font face=Symbol color=#000000>p</font></b>.&nbsp; But what we have is a 
+pyramidal cone with <font color=#000000>P</font> as an apex over the polygon
+<b><font face=Symbol color=#000000>W</font></b> as a base.&nbsp; We need to 
+project the triangular sides of this cone onto the plane <b>
+<font face=Symbol color=#000000>p</font></b> of the base polygon, and 
+compute signed areas of the projected triangles.&nbsp; If we can do this, then 
+the sum of the projected areas will equal the total area of the planar polygon.</p>
+<p style=text-align:left>
+<img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" align=right width=300 height=203>To achieve this, start by 
+associating to each triangle <b><font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>i</i></sub></font> 
+an area vector <b><font face=Symbol color=#000000>a</font></b><font color=#000000><sub><i>i</i></sub>=½(PV<sub><i>i</i></sub> 
+× PV<sub><i>i</i>+1</sub>), </font>perpendicular to <b>
+<font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>i</i></sub>,
+</font>whose magnitude we know is equal to that triangle's area.&nbsp; Next, 
+drop a perpendicular from <font color=#000000>P</font> to a point
+<font color=#000000>P<sub>0</sub></font> on <b>
+<font face=Symbol color=#000000>p</font></b>, and consider the projected 
+triangle <b><font face=Symbol color=#000000>T</font></b><font color=#000000><sub><i>i</i></sub>=</font><b><font face=Symbol color=#000000>D</font></b><font color=#000000>P<sub>0</sub>V<sub><i>i</i></sub>V<sub><i>i</i>+1</sub></font>.&nbsp; 
+Drop a perpendicular <font color=#000000>P<sub>0</sub>B<sub><i>i</i></sub></font> 
+from <font color=#000000>P<sub>0</sub></font> to <font color=#000000>B<sub><i>i</i></sub></font> 
+on the edge <font color=#000000><b>e</b><sub><i>i</i></sub>=V<sub><i>i</i></sub>V<sub><i>i</i>+1</sub></font>.&nbsp; 
+Since <font color=#000000>PP<sub>0</sub></font> is also perpendicular to
+<font color=#000000><b>e</b><sub><i>i</i></sub></font>, the three points
+<font color=#000000>PP<sub>0</sub>B<sub><i>i</i></sub></font> define a plane 
+normal to <font color=#000000><b>e</b><sub><i>i</i></sub></font>, and
+<font color=#000000>PB<sub><i>i</i></sub></font> is a perpendicular from
+<font color=#000000>P</font> to the edge <font color=#000000><b>e</b><sub><i>i</i></sub></font>.&nbsp; 
+Thus, <font color=#000000>|PB<sub><i>i</i></sub>|</font> is the height of <b>
+<font face=Symbol color=#000000>D</font></b><font color=#000000><sub><i>i</i></sub></font>, 
+and <font color=#000000>|P<sub>0</sub>B<sub><i>i</i></sub>|</font> is the 
+height of <b><font face=Symbol color=#000000>T</font></b><font color=#000000><sub><i>i</i></sub></font>.&nbsp; 
+Further, the angle between these two altitudes =
+<font face=Symbol color=#000000>q</font> = the angle between <b>
+<font color=#000000>n</font></b> and <b><font face=Symbol color=#000000>a</font></b><font color=#000000><sub>i</sub></font> 
+since a 90° rotation results in congruence.&nbsp; This gives:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td align=left><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=626 height=33></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>This <i>signed</i> area computation is positive if&nbsp; 
+the vertices of <b><font face=Symbol color=#000000>T</font></b><font color=#000000><sub><i>i</i></sub></font> 
+are oriented counterclockwise when we look at the plane <b>
+<font face=Symbol color=#000000>p</font></b> from the side pointed to by <b>
+<font color=#000000>n</font></b>.&nbsp; The same as in the 2D case, we can now 
+add together the signed areas of all the triangles <b>
+<font face=Symbol color=#000000>T</font></b><font color=#000000><sub><i>i</i></sub></font> 
+to get the area of the polygon <b><font face=Symbol color=#000000>W</font></b>.&nbsp; 
+Writing this down, we have:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=400 height=56></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p align=left>Finally, by selecting&nbsp; <font color=#000000>P=(0,0,0)</font>, 
+we have <font color=#000000>PV<sub><i>i</i></sub>=V<sub><i>i</i></sub></font> 
+and this yields the simple formula:</p>
+</font><div align=center><font face="Times New Roman">
+ </font><center><font face="Times New Roman">
+ </font><table border=0 width=130>
+ <tbody><tr>
+ <td align=left><font face="Times New Roman"><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=208 height=56></font></td>
+ <td align=left><font face="Times New Roman">
+ <img border=0 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="5"><rect fill-opacity="0"/></svg>' width=50 height=5 style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-4)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important"></font></td>
+ <td align=left><font face="Times New Roman"><img border=0 src=data:image/gif;base64,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 width=300 height=191></font></td>
+ </tr>
+ </table><font face="Times New Roman">
+ </font></center><font face="Times New Roman">
+</font></div><font face="Times New Roman">
+<p style=text-align:left>which uses 6<i>n</i>+3 multiplications and 4<i>n</i>+2 
+additions</p>
+<p style=text-align:left>Similar to the 2D case, this is a <i>signed</i> area 
+which is positive when the vertices are oriented counterclockwise around the 
+polygon when viewed&nbsp; from the side of <b>
+<font face=Symbol color=#000000>p</font></b> pointed to by <b>
+<font color=#000000>n</font></b>.&nbsp;</p>
+<h4 style=text-align:left><font face=Arial color=#660066><b><a name="3D Quadrilateral Formula"></a>
+Quadrilateral Decomposition</b></font></h4>
+<p style=text-align:left>[Van Gelder, 1995] has shown how to significantly 
+speed up this computation by using a decomposition into quadrilaterals instead 
+of triangles.&nbsp; He first noted that the area of a 3D planar quadrilateral
+<font color=#000000><font face=Symbol><b>Q</b></font>=V<sub>0</sub>V<sub>1</sub>V<sub>2</sub>V<sub>3</sub></font> 
+can be computed in terms of the cross-product of its diagonals; that is:</p>
+<p align=center><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=278 height=36></p>
+<p style=text-align:left>which reduces four expensive cross-product 
+computations to just one!</p>
+<p style=text-align:left>Then, any large polygon <b>
+<font face=Symbol color=#000000>W</font></b> with <font color=#000000>n&gt;4</font> 
+vertices can be decomposed into quadrilaterals formed by <font color=#000000>V<sub>0</sub></font> 
+and three other sequential vertices <font color=#000000>V<sub>2<i>i</i><font face=Symbol>-</font>1</sub></font>,
+<font color=#000000>V<sub>2<i>i</i></sub></font>, and <font color=#000000>V<sub>2<i>i</i>+1</sub></font> 
+for <font color=#000000><i>i</i>=1,<i>h</i></font> where <font color=#000000>
+<i>h</i>=</font> the greatest integer <font color=#000000><font face=Symbol>
+£</font>(<i>n</i><font face=Symbol>-</font>1)/2</font>.&nbsp; For
+<font color=#000000><i>n</i></font> odd, the decomposition ends with a 
+triangle.&nbsp; This gives:</p>
+<p align=center><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=556 height=60></p>
+<p style=text-align:left>where <font color=#000000><i>k</i>=0</font> for
+<font color=#000000><i>n</i></font> odd, and <font color=#000000><i>k</i>=<i>n</i></font>-<font color=#000000>1</font> 
+for <i><font color=#000000>n</font></i> even.&nbsp; This formula reduces the 
+number of expensive cross-products by a factor of two (replacing them with 
+vector subtractions).&nbsp; In total there are 3<i>n</i>+3 multiplications and 5<i>n</i>+1 
+additions making this formula roughly twice as fast as the classic standard one.&nbsp;
+</p>
+<p style=text-align:left>[Van Gelder, 1995] also states that this method can 
+be applied to 2D polygons, but he does not write down the details.&nbsp; Working 
+this out produces a formula that uses <i>n</i> multiplications and 3<i>n</i>-1 
+additions, which is not as fast as the prior formulas we have given.&nbsp; We 
+simply note this here, and do not pursue it further.</p>
+<h4 style=text-align:left><font face=Arial color=#660066><b><a name="3D Project to 2D"></a>Projection to 2D</b></font></h4>
+<p style=text-align:left>One can speed up the computation of 3D planar 
+polygon area by projecting the polygon onto a 2D plane [Snyder &amp; Barr, 1987].&nbsp; 
+Then, the area can be computed in 2D using our fastest formula, and the 3D area 
+is recovered using an area scaling factor.&nbsp; This method is implemented by 
+projecting onto an axis-aligned plane by ignoring one of the three coordinates.&nbsp; 
+To avoid degeneracy and optimize robustness, we look at the plane's normal 
+vector <b>n</b> (see Algorithm 4
+<a href=https://web.archive.org/web/20061030122459/http://geometryalgorithms.com/Archive/algorithm_0104/algorithm_0104.htm#Planes>About Planes</a>), and 
+choose the component with the greatest absolute as the one to ignore.&nbsp; Let 
+Proj<i><sub>c</sub></i>() be the projection that ignores the coordinate <i>c</i> 
+= <i>x</i>, <i>y</i>, or <i>z</i>.&nbsp; Then, the ratio of areas for the 
+projected polygon Proj<i><sub>c</sub></i>(<b><font face=Symbol color=#000000>W</font></b>) 
+and original planar polygon <b><font face=Symbol color=#000000>W</font></b> 
+with normal <b>n </b>= (n<sub><i>x</i></sub>,n<i><sub>y</sub></i>,n<i><sub>z</sub></i>) 
+is:</p>
+<p style=text-align:center><img border=0 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width=330 height=65></p>
+<p style=text-align:left>Thus, the 3D planar area can be recovered by a 
+single extra multiplication, and in total this algorithm uses <i>n</i>+5 
+multiplications, 2<i>n</i>+1 additions, 1 square root (when <b>n</b> is not a 
+unit normal), plus a small overhead choosing the coordinate to ignore.&nbsp; 
+This is a very significant improvement of the classic standard formula, 
+achieving almost a 6 times speed-up.&nbsp; We give an efficient&nbsp; 
+implementation below in the routine <u><font face=Courier>
+<a href=#area3D_Polygon()>area3D_Polygon()</a></font></u>.</p>
+<h2 style=text-align:left><font face=Arial color=#660066><b><font color=#800080><a name=Implementations>
+</a><br>
+Implementations</font></b></font></h2>
+<p style=text-align:left>Here are some sample "C++" implementations of these 
+formulas as algorithms.&nbsp; We just give the 2D case with integer coordinates, 
+and use the simplest structures for a point, a triangle, and a polygon which may 
+differ in your application.&nbsp;&nbsp;&nbsp; We represent a polygon as an array 
+of points, but it is often more convenient to have it as a linked list of 
+vertices (to allow insertion or deletion during drawing operations), and the 
+polygon routines can be easily modified to scan through the linked list&nbsp; 
+(see [O'Rourke, 1998] for an example of this approach).</p>
+<p style=text-align:left><font face=Courier>// Copyright 2000, softSurfer (www.softsurfer.com)<br>
+// This code may be freely used and modified for any purpose<br>
+// providing that this copyright notice is included with it.<br>
+// SoftSurfer makes no warranty for this code, and cannot be held<br>
+// liable for any real or imagined damage resulting from its use.<br>
+// Users of this code must verify correctness for their application.<br>
+</font></p>
+<p style=text-align:left><font face=Courier>// a <b>Point</b> (or vector) 
+is defined by its coordinates<br>
+typedef struct {int x, y, z;} Point;&nbsp;&nbsp;&nbsp; // exclude z for 2D<br>
+// a <b>Triangle</b> is given by three points: Point V0, V1, V2 <br>
+// a <b>Polygon</b> is given by:<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int n = number of vertex points<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Point* V[] = an array of points 
+with V[n]=V[0], V[n+1]=V[1]<br>
+</font></p>
+<p style=text-align:left><font face=Courier>// Note: for efficiency 
+low-level functions are declared to be inline.</font></p>
+<p style=text-align:left><font face=Courier>//<a name=isLeft()></a> <b>
+isLeft():</b> tests if a point is Left|On|Right of an infinite line.<br>
+//&nbsp;&nbsp;&nbsp; Input:&nbsp; three points P0, P1, and P2<br>
+//&nbsp;&nbsp;&nbsp; Return: &gt;0 for P2 left of the line through P0 and P1<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =0 for P2 
+on the line<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;0 for P2 
+right of the line<br>
+inline int<br>
+isLeft( Point P0, Point P1, Point P2 )<br>
+{<br>
+&nbsp;&nbsp;&nbsp; return ( (P1.x - P0.x) * (P2.y - P0.y)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - (P2.x - 
+P0.x) * (P1.y - P0.y) );<br>
+}<br>
+//===================================================================</font></p>
+<p style=text-align:left><font face=Courier>//<a name=orientation2D_triangle()></a>
+<b>orientation2D_Triangle()</b>: test the orientation of a triangle<br>
+//&nbsp;&nbsp;&nbsp; Input:&nbsp; three vertex points V0, V1, V2<br>
+//&nbsp;&nbsp;&nbsp; Return: &gt;0 for counterclockwise <br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =0 for none 
+(degenerate)<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;0 for 
+clockwise<br>
+inline int<br>
+orientation2D_Triangle( Point V0, Point V1, Point V2 )<br>
+{<br>
+&nbsp;&nbsp;&nbsp; return isLeft(V0, V1, V2);<br>
+}<br>
+//===================================================================</font></p>
+<p style=text-align:left><font face=Courier>//<a name=area2D_triangle()></a>
+<b>area2D_Triangle():</b> compute the area of a triangle<br>
+//&nbsp;&nbsp;&nbsp; Input:&nbsp; three vertex points V0, V1, V2<br>
+//&nbsp;&nbsp;&nbsp; Return: the (float) area of T<br>
+inline float<br>
+area2D_Triangle( Point V0, Point V1, Point V2 )<br>
+{<br>
+&nbsp;&nbsp;&nbsp; return (float)isLeft(V0, V1, V2) / 2.0;<br>
+}<br>
+//===================================================================</font></p>
+<p style=text-align:left><font face=Courier>//<a name=orientation2D_polygon()></a>
+<b>orientation2D_Polygon(): </b>tests the orientation of a simple polygon<br>
+//&nbsp;&nbsp;&nbsp; Input:&nbsp; int n = the number of vertices in the polygon<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Point* V = 
+an array of n+1 vertices with V[n]=V[0]<br>
+//&nbsp;&nbsp;&nbsp; Return: &gt;0 for counterclockwise <br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =0 for none 
+(degenerate)<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;0 for 
+clockwise<br>
+//&nbsp;&nbsp;&nbsp; Note: this algorithm is faster than computing the signed 
+area.<br>
+int<br>
+orientation2D_Polygon( int n, Point* V )<br>
+{<br>
+&nbsp;&nbsp;&nbsp; // first find rightmost lowest vertex of the polygon<br>
+&nbsp;&nbsp;&nbsp; int rmin = 0;<br>
+&nbsp;&nbsp;&nbsp; int xmin = V[0].x;<br>
+&nbsp;&nbsp;&nbsp; int ymin = V[0].y;<br>
+<br>
+&nbsp;&nbsp;&nbsp; for (int i=1; i&lt;n; i++) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (V[i].y &gt; ymin)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; continue;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (V[i].y == ymin) {&nbsp;&nbsp;&nbsp; 
+// just as low<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (V[i].x &lt; 
+xmin)&nbsp;&nbsp; // and to left<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+continue;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rmin = i;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+// a new rightmost lowest vertex<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xmin = V[i].x;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ymin = V[i].y;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; // test orientation at this rmin vertex<br>
+&nbsp;&nbsp;&nbsp; // ccw &lt;=&gt; the edge leaving is left of the entering edge<br>
+&nbsp;&nbsp;&nbsp; if (rmin == 0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return isLeft( V[n-1], V[0], V[1] );<br>
+&nbsp;&nbsp;&nbsp; else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return isLeft( V[rmin-1], V[rmin], 
+V[rmin+1] );<br>
+}</font><font color=#000080 face=Courier><br>
+</font><font face=Courier>
+//===================================================================</font></p>
+<p style=text-align:left><font face=Courier>//<a name=area2D_polygon()></a>
+<b>area2D_Polygon(): </b>computes the area of a 2D polygon<br>
+//&nbsp;&nbsp;&nbsp; Input:&nbsp; int n = the number of vertices in the polygon<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Point* V = 
+an array of n+2 vertices <br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+with V[n]=V[0] and V[n+1]=V[1]<br>
+//&nbsp;&nbsp;&nbsp; Return: the (float) area of the polygon<br>
+float<br>
+area2D_Polygon( int n, Point* V )<br>
+{<br>
+&nbsp;&nbsp;&nbsp; float area = 0;<br>
+&nbsp;&nbsp;&nbsp; int&nbsp;&nbsp; i, j, k;&nbsp;&nbsp;&nbsp;&nbsp; // indices<br>
+<br>
+&nbsp;&nbsp;&nbsp; for (i=1, j=2, k=0; i&lt;=n; i++, j++, k++) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; area += V[i].x * (V[j].y - V[k].y);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; return area / 2.0;<br>
+}<br>
+//===================================================================</font></p>
+<p style=text-align:left><font face=Courier>//<a name=area3D_Polygon()></a>
+<b>area3D_Polygon(): </b>computes the area of a 3D planar polygon<br>
+//&nbsp;&nbsp;&nbsp; Input:&nbsp; int n = the number of vertices in the polygon<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Point* V = 
+an array of n+2 vertices in a plane<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+with V[n]=V[0] and V[n+1]=V[1]<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Point N =
+<b>unit normal</b> vector of the polygon's plane<br>
+//&nbsp;&nbsp;&nbsp; Return: the (float) area of the polygon<br>
+float<br>
+area3D_Polygon( int n, Point* V, Point N )<br>
+{<br>
+&nbsp;&nbsp;&nbsp; float area = 0;<br>
+&nbsp;&nbsp;&nbsp; float an, ax, ay, az;&nbsp; // abs value of normal and its 
+coords<br>
+&nbsp;&nbsp;&nbsp; int&nbsp;&nbsp; coord;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+// coord to ignore: 1=x, 2=y, 3=z<br>
+&nbsp;&nbsp;&nbsp; int&nbsp;&nbsp; i, j, k;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+// loop indices<br>
+<br>
+&nbsp;&nbsp;&nbsp; // select largest abs coordinate to ignore for projection<br>
+&nbsp;&nbsp;&nbsp; ax = (N.x&gt;0 ? N.x : -N.x);&nbsp;&nbsp;&nbsp;&nbsp; // abs x-coord<br>
+&nbsp;&nbsp;&nbsp; ay = (N.y&gt;0 ? N.y : -N.y);&nbsp;&nbsp;&nbsp;&nbsp; // abs y-coord<br>
+&nbsp;&nbsp;&nbsp; az = (N.z&gt;0 ? N.z : -N.z);&nbsp;&nbsp;&nbsp;&nbsp; // abs z-coord<br>
+<br>
+&nbsp;&nbsp;&nbsp; coord = 3;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+// ignore z-coord<br>
+&nbsp;&nbsp;&nbsp; if (ax &gt; ay) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (ax &gt; az) coord = 1;&nbsp;&nbsp;&nbsp; 
+// ignore x-coord<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; else if (ay &gt; az) coord = 2;&nbsp;&nbsp; // ignore y-coord<br>
+<br>
+&nbsp;&nbsp;&nbsp; // compute area of the 2D projection<br>
+&nbsp;&nbsp;&nbsp; for (i=1, j=2, k=0; i&lt;=n; i++, j++, k++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; switch (coord) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 1:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; area += (V[i].y 
+* (V[j].z - V[k].z));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; continue;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 2:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; area += (V[i].x 
+* (V[j].z - V[k].z));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; continue;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 3:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; area += (V[i].x 
+* (V[j].y - V[k].y));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; continue;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp;&nbsp; // scale to get area before projection<br>
+&nbsp;&nbsp;&nbsp; an = sqrt( ax*ax + ay*ay + az*az);&nbsp; // length of normal 
+vector<br>
+&nbsp;&nbsp;&nbsp; switch (coord) {<br>
+&nbsp;&nbsp;&nbsp; case 1:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; area *= (an / (2*ax));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+&nbsp;&nbsp;&nbsp; case 2:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; area *= (an / (2*ay));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+&nbsp;&nbsp;&nbsp; case 3:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; area *= (an / (2*az));<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; return area;<br>
+}<br>
+//===================================================================</font></p>
+<h2 style=text-align:left><font face=Arial color=#660066><b><font color=#800080><a name=References></a>
+<br>
+References</font></b></font></h2>
+<p style=text-align:left><font size=2>Kevin Brown,
+<a href=https://web.archive.org/web/20061030122459/http://mathpages.com/home/kmath196.htm><u>MathPages : Heron's Formula</u></a></font></p>
+<p style=text-align:left><font size=2>Donald Coxeter &amp; Samuel Greitzer,
+</font><u>
+<a href=https://web.archive.org/web/20061030122459/http://www.amazon.com/exec/obidos/ASIN/0883856190/softsurfergeomet>
+<font size=2>Geometry Revisited</font></a></u><font size=2> (1967)</font></p>
+<p style=text-align:left><font size=2>Ronald Goldman, "Area of Planar 
+Polygons and Volume of Polyhedra" in
+<a href=https://web.archive.org/web/20061030122459/http://www.amazon.com/exec/obidos/ASIN/0120644819/softsurfergeomet><u>
+Graphics Gems II</u></a> (1994)</font></p>
+<p style=text-align:left><font size=2>Joseph O'Rourke,
+<a href=https://web.archive.org/web/20061030122459/http://www.amazon.com/exec/obidos/ASIN/0521649765/softsurfergeomet><u>
+Computational Geometry in C (2nd Edition)</u></a>, Section 1.3 "Area of a 
+Polygon" (1998)</font></p>
+<p style=text-align:left><font size=2>J.P. Snyder and A.H. Barr, "Ray 
+Tracing Complex Models Containing Surface Tessellations", ACM Comp Graphics 21, 
+(1987)</font></p>
+<p style=text-align:left><font size=2>Dan Sunday, "<a href=https://web.archive.org/web/20061030122459/http://www.acm.org/jgt/papers/Sunday02/>Fast 
+Polygon Area and Newell Normal Computation</a>", journal of graphics tools (<i><b>jgt</b></i>) 
+Vol 7(2), (2002)</font></p>
+<p style=text-align:left><font size=2>Allen Van Gelder, "Efficient 
+Computation of Polygon Area and Polyhedron Volume" in <u>
+<a href=https://web.archive.org/web/20061030122459/http://www.amazon.com/exec/obidos/ASIN/0125434553/softsurfergeomet>
+Graphics Gems V</a></u> (1995)</font></p>
+<p style=text-align:left><font size=2>Eric Weisstein,
+<a href=https://web.archive.org/web/20061030122459/http://mathworld.wolfram.com/Triangle.html><u>MathWorld Site: Triangle</u></a> 
+or in <u>
+<a href=https://web.archive.org/web/20061030122459/http://www.amazon.com/exec/obidos/ASIN/0849396409/softsurfergeomet>The 
+CRC Concise Encyclopedia of Mathematics</a></u> (1998)</font></p>
+&nbsp;</font></table><table border=0 cellpadding=0 cellspacing=0 width=100%><tbody><tr><td><font face="Times New Roman">
+<p align=center><img src=data:image/gif;base64,R0lGODlhWAIKAHcAACH/C01TT0ZGSUNFOS4wDQAAAAFzUkdCAK7OHOkAIf8LTVNPRkZJQ0U5LjAYAAAADG1zT1BNU09GRklDRTkuMAr/QjykACH/C01TT0ZGSUNFOS4wGAAAAAxjbVBQSkNtcDA3MTICAAAIddtivwAh+QQBAAAAACwAAAAAWAIKAIPAwMAzZv+Zmf/MzP9mmf+ZzP9mZv//////zP/M//8BAgMBAgMBAgMBAgMBAgMBAgME/xDISau9OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru987/9AGKIQMCQyAU+ys+Q0N09NFKmsMq1OLFQr5VKv4Gx4O+6Wv+I0WW1mo9fwdrxiCAiOm8NgQAj4B3KBb4IYU4Veh2eJbotzjYQXhpGIkxR8BgSAE5IWnBWeFKCblJ2kn6ahqKOKlYytjq8WA352AgN4EgMCBH20fgSwpazCrsTBp8PIxcrHqcnOy9BxvXbSkMbXzNnWg92P3rHg2OLa5NzfFAXUfpgCtgMF7kW+Ar729/j5+vv8/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKRFiPVp9dBTRJ0MOHlsZw6JtAihwXkuTIciVRnjy3clU0l81gAqAGTKY5mylZmtypkqfOnkB/CsXZUoIoo6Zm/dqDK8OBituI+pQalOpQpM+sasX6kmtMr1HBDtIVINNVAEfRqhKbc6varGyLvu0692vdsHfJ+RGAwEXav2vzto07lXBVw2cBwxUsVzFdx3Yh45V8E7FbyoMZF9Z8OIjnz6BDix5NurTp0x8iAAA7 width=600 height=10></p>
+<p align=center><font size=1 face=Arial color=#C0C0C0>Copyright © 
+2001-2004 softSurfer.&nbsp; All rights reserved.<br>
+Email comments and suggestions to </font>
+<font size=1 face=Arial color=#008080>
+<a href=https://web.archive.org/web/20061030122459/mailto:feedback@softsurfer.com><font color=#808080>
+feedback@softsurfer.com</font></a></font></p>
+</font></table>
+<div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div><script data-template-shadow-root>(()=>{document.currentScript.remove();processNode(document);function processNode(node){node.querySelectorAll("template[shadowmode]").forEach(element=>{let shadowRoot = element.parentElement.shadowRoot;if (!shadowRoot) {try {shadowRoot=element.parentElement.attachShadow({mode:element.getAttribute("shadowmode"),delegatesFocus:Boolean(element.getAttribute("delegatesfocus"))});shadowRoot.innerHTML=element.innerHTML;element.remove()} catch (error) {} if (shadowRoot) {processNode(shadowRoot)}}})}})()</script>
