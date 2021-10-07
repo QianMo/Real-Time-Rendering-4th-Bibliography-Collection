@@ -1,0 +1,102 @@
+<html class=hb-loaded><!--
+ Page saved with SingleFile 
+ url: https://www.tantalon.com/pete/cppopt/main.htm 
+ saved date: Sat Jul 10 2021 00:40:27 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<title>C++ Optimization Strategies and Techniques</title>
+<meta name=keywords content="C C++ optimize optimization efficient efficiency template STL standard template library">
+<style>@keyframes caretBlink{from{opacity:1.0}to{opacity:0.0}}@keyframes rotateSpinner{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style><link type=image/x-icon rel="shortcut icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><style>.sf-hidden{display:none!important}</style><link rel=canonical href=https://www.tantalon.com/pete/cppopt/main.htm></head>
+<body link=#0000ff vlink=#800080 huaban_collector_injected=true>
+<font face=Arial size=5><p align=CENTER>C++ Optimization Strategies and Techniques</p>
+</font><font face=Arial size=4><b></b></font><p align=CENTER><font face=Arial size=4><b>&nbsp;</b></font><a href=mailto:PKIsensee[RemoveThisPartOfTheAddress]@msn.com><font face=Arial size=4><b>Pete Isensee</b></font></a></p>
+<font face=Arial><b><p>Introduction</p></b><dir><b>
+</b><dir><b>
+</b><p>"<i>More computing sins are committed in the name of efficiency (without necessarily achieving it) than for any other single reason - including blind stupidity.</i>"</p><dir>
+<dir>
+<p>- W.A. Wulf</p></dir>
+</dir>
+<p>"<i>On the other hand, we cannot ignore efficiency</i>."</p><dir>
+<dir>
+<p>- Jon Bentley </p></dir>
+</dir>
+</dir>
+</dir>
+<p>Many software engineers recommend what I call the "procrastination approach" to optimization. Delay optimization as much as possible, and don't do it if you can avoid it. I agree with the basic premise. Optimizing too early or too often is not a good approach to engineering. Better to have a program that <i>runs</i> than a fast program that crashes. On the other hand, you're not likely to write a successful app these days without doing optimization at some point in the process. Your compiler can help you, but you as a programmer understand more about your application than the compiler. As Michael Abrash puts it, the best compiler is "between your ears."</p>
+<p>There are many levels of optimization, but I'm going to focus on one in particular: C++ optimizations. Some of these techniques apply to other languages as well - like Java - but most are specific to C++. I'll also cover how to configure your compiler for maximum C++ efficiency.</p>
+<b><p>Preliminaries</p></b>
+<p><i>I originally wrote this document in 1998. A lot has changed since then, though many of the techniques listed are still relevant and valuable depending on your platform and compiler. As always, never accept optimization techniques at face value. Measure, measure, measure.</i></p>
+</font><p><font face=Arial>All of the examples are in C++. The code is designed to compile with any standard ANSI C++ - compliant compiler. Some of the more complex techniques involve templates and the Standard Template Library. I used </font><a href=http://msdn.microsoft.com/visualc><font face=Arial>Microsoft Visual C++ 6.0</font></a><font face=Arial> for the example programs, targeting PCs running Microsoft Windows 95/98 or NT.</font></p><font face=Arial>
+</font><p><font face=Arial>Except where noted, all benchmarks and profiling were done on a </font><a href=http://developer.intel.com/><font face=Arial>Pentium II</font></a><font face=Arial> - 400MHz Dell Dimension XPS400 running NT 4.00.1381. Most profiling runs were done with compiler optimizations disabled to prevent any compiler-specific options influencing the results.</font></p><font face=Arial>
+<p>All performance graphs show relative performance. If the unoptimized run takes 200mS and the optimized run takes 100mS, the optimized run will be shown as twice as tall as the unoptimized run (i.e. twice as fast). In other words, <b><i>taller is better</i></b>.</p>
+<p>Most code examples use the following C++ objects for comparison</p>
+<ul>
+<b><li>int </li>
+</b><li><b>string</b> (standard C++ basic_string&lt;char&gt; class with an average of 32 characters per string) </li>
+<b></b><li><b>complex</b> (standard C++ complex&lt;double&gt; class containing two double values) </li>
+<b></b><li><b>bitmap</b> (bitmap class with expensive default and copy ctor; average of 10000 pixels)</ul>
+</font><p><a href=https://www.tantalon.com/pete/cppopt/general.htm><font face=Arial><b>General Strategies</b></font></a></p>
+<font face=Arial><p>There's a right way and a wrong way to do optimization. Here's some strategies common to all programming endeavors that work and don't work.</p>
+</font><ul><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/general.htm#BadOptimizationStrategies><font face=Arial>Optimization Strategies that Bomb</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/general.htm#GoodOptimizationStrategies><font face=Arial>Optimization Strategies that Work</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/general.htm#Swapping><font face=Arial>Example of Selecting the Proper Algorithm</font></a><font face=Arial> </font></ul><font face=Arial>
+</font><p><a href=https://www.tantalon.com/pete/cppopt/design.htm><font face=Arial><b>C++ Design Considerations</b></font></a></p>
+<font face=Arial><p>When you start working on your next app and begin to think about coding conventions, compilers, libraries, and general C++ issues, there are many factors to consider. In this section I weigh performance issues involved with C++ design considerations.</p>
+</font><ul><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/design.htm#STLContainers><font face=Arial>Take advantage of STL containers</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/design.htm#PreferReferencesInsteadOfPointers><font face=Arial>Consider using references instead of pointers</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/design.htm#TwoPhaseConstruction><font face=Arial>Consider two-phase construction</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/design.htm#ExceptionHandling><font face=Arial>Limit exception handling</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/design.htm#RTTI><font face=Arial>Avoid Runtime Type Identification</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/design.htm#StdioVsIOStream><font face=Arial>Prefer stdio to iostream</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/design.htm#AlternativeLibraries><font face=Arial>Evaluate alternative libraries</font></a></ul>
+<p><a href=https://www.tantalon.com/pete/cppopt/asyougo.htm><font face=Arial><b>C++ Optimizations You Can Do "As You Go"</b></font></a></p>
+<font face=Arial><p>Defy the software engineering mantra of "optimization procrastination." These techniques can be added to your code today! In general, these methods not only make your code more efficient, but increase readability and maintainability, too.</p>
+</font><ul><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/asyougo.htm#PassClassParametersByReference><font face=Arial>Pass class parameters by reference</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/asyougo.htm#PostponeVariableDeclaration><font face=Arial>Postpone variable declaration as long as possible</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/asyougo.htm#PreferInitialization><font face=Arial>Prefer initialization over assignment</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/asyougo.htm#UseConstructorInitializationLists><font face=Arial>Use constructor initialization lists</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/asyougo.htm#PreferOperatorEquals><font face=Arial>Prefer <i>operator=</i> over <i>operator</i> alone</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/asyougo.htm#UsePrefixOperators><font face=Arial>Use prefix operators</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/asyougo.htm#UseExplicitConstructors><font face=Arial>Use explicit constructors</font></a> </ul>
+<p><a href=https://www.tantalon.com/pete/cppopt/final.htm><font face=Arial><b>Final Optimizations</b></font></a></p>
+<font face=Arial><p>Your app is up and running. The data structures are ideal, the algorithms sublime, the code elegant, but the program - well, it's not quite living up to its potential. Time to get drastic, and with drastic measures, there are tradeoffs to consider. These optimizations are going to make your code less modular, harder to understand, and more difficult to maintain. They may cause unexpected side effects like code bloat. Your compiler may not even be able to handle some of the more advanced template-based techniques. Proceed with caution. Arm yourself with a good profiler.</p>
+</font><ul><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/final.htm#InlineFunctions><font face=Arial>Inline functions</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/final.htm#AvoidTemporaries><font face=Arial>Avoid temporary objects: the return value optimization</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/final.htm#AvoidVirtualFunctions><font face=Arial>Be aware of the cost of virtual functions</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/final.htm#ReturnObjectsViaReferenceParameters><font face=Arial>Return objects via reference parameters</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/final.htm#PerClassAllocation><font face=Arial>Consider per-class allocation</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/final.htm#STLAllocators><font face=Arial>Consider STL container allocators</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/final.htm#EmptyMemberOptimization><font face=Arial>The "empty member" optimization</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/final.htm#TemplateMetaprogramming><font face=Arial>Template metaprogramming</font></a> </li>
+<li><a href=https://www.tantalon.com/pete/cppopt/final.htm#CopyOnWrite><font face=Arial>Copy on write</font></a></ul>
+<p><a href=https://www.tantalon.com/pete/cppopt/compiler.htm><font face=Arial><b>Compiler Optimizations</b></font></a></p>
+<font face=Arial><p>A good compiler can have a huge effect on code performance. Most PC compilers are good, but not great, at optimization. Be aware that sometimes the compiler won't perform optimizations even though it can. The compiler assigns a higher priority to producing consistent and correct code than optimizing performance. Be thankful for small favors.</p>
+</font><ul><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/compiler.htm#CLanguage><font face=Arial>C language settings</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/compiler.htm#CppLanguage><font face=Arial>C++ language settings</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/compiler.htm#Ultimate><font face=Arial>The "ultimate" compiler settings</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/compiler.htm#NoVTable><font face=Arial>Use the novtable option for abstract classes</font></a><font face=Arial> (Microsoft Visual C++) </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/compiler.htm#NoThrow><font face=Arial>Indicate functions that don't throw exceptions</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/compiler.htm#FastCall><font face=Arial>Use the fastcall calling convention</font></a><font face=Arial> (Microsoft Visual C++) </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/compiler.htm#UnsafeOptimizations><font face=Arial>Warning: Unsafe optimizations</font></a></ul>
+<p><a href=https://www.tantalon.com/pete/cppopt/appendix.htm><font face=Arial><b>Appendices</b></font></a></p>
+<ul>
+<li><a href=https://www.tantalon.com/pete/cppopt/appendix.htm#AppendixA><font face=Arial>STL Container efficiency table</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/appendix.htm#AppendixB_RelativeCosts><font face=Arial>Relative costs of common programming operations</font></a><font face=Arial> </font></li><font face=Arial>
+</font><li><a href=https://www.tantalon.com/pete/cppopt/appendix.htm#AppendixC><font face=Arial>C code tuning and C++ efficiency resources</font></a></ul>
+<font face=Arial><b><p>The Author</p></b><p>
+Pete Isensee has worked on products ranging from database software to Internet 
+applications to games. He's even done all three simultaneously, creating multiplayer 
+Internet games at <a href=http://www.flipside.com/>WON.net</a> and Emerald City 
+Technologies. Pete has his degree in Computer Engineering. He's been programming in 
+C since 1986 and in C++ since 1993, focusing on class design, templates, robustness 
+and optimization technology.
+</p>
+</font><p><font face=Arial>Email </font><a href=mailto:PKIsensee[RemoveThisPartOfTheAddress]@msn.com><font face=Arial>Pete</font></a><font face=Arial> </font></p><font face=Arial>
+</font><p><font face=Arial>Pete's homepage is </font><a href=http://www.tantalon.com/><font face=Arial>www.tantalon.com</font></a></p>
+<font face=Arial><b><p>Acknowledgments</p>
+</b><p>Special thanks to Brian Fiete, Melanie McClaire, Brian Ruud, the WON Viper and Titan teams, the HyperBole X-Files engineering team, my favorite gurus Steve McConnell and Scott Meyers, and my favorite girls Kristi, Ali and Tayla.</p></font>
+<div id=HUABAN_WIDGETS><div class=HUABAN-f-button style=display:none>采集</div><style class=sf-hidden>#HUABAN_WIDGETS{font-family:"helvetica neue",arial,sans-serif;color:#444;font-size:14px}#HUABAN_WIDGETS *{box-sizing:content-box}#HUABAN_WIDGETS .HUABAN-f-button{position:absolute;z-index:9999999999998;box-shadow:0 0 0 2px rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:white;cursor:pointer;padding:0 12px;height:30px;line-height:30px;border-radius:2px;font-size:14px}#HUABAN_WIDGETS .HUABAN-f-button:hover{background-color:#999;background-color:rgba(0,0,0,.5)}#HUABAN_WIDGETS .HUABAN-f-button:active{background-color:rgba(0,0,0,.6)}<!--</style></div>
